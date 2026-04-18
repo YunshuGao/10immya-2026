@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L02 · Your First HTML Page | 10 Multimedia T2</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <a href="../index.html" class="site-brand">10 Multimedia · 2026</a>
+    <nav class="site-nav">
+      <a href="../term1.html">Term 1</a>
+      <a href="../term2.html">Term 2</a>
+    </nav>
+  </div>
+</header>
+
+<section class="lesson-head">
+  <div class="container">
+    <span class="lesson-pill">Week 1 · Lesson 02</span>
+    <h1>Your First HTML Page</h1>
+    <p class="lesson-meta">Week 1 · 75 minutes · Year 10 Industrial Technology — Multimedia</p>
+    <div class="outcomes"><span class="outcome-tag">IND5-3</span><span class="outcome-tag">IND5-5</span><span class="outcome-tag">IND5-6</span></div>
+  </div>
+</section>
+
+<main class="container">
+
+  <div class="grid grid-2">
+    <div class="card">
+      <h3 style="color:#0f766e;margin-top:0;">Learning intentions</h3>
+      <ul><li>I can open VS Code and create a new HTML file.</li><li>I can write the basic HTML document structure from memory.</li><li>I can preview my HTML file live in Chrome using Live Server.</li></ul>
+    </div>
+    <div class="card">
+      <h3 style="color:#1f3a68;margin-top:0;">Success criteria</h3>
+      <ul><li>My file has a valid DOCTYPE, html, head, body structure.</li><li>My file has a <code>&lt;title&gt;</code> I chose, not 'Document'.</li><li>My page displays my name as an <code>&lt;h1&gt;</code> and one paragraph about me.</li></ul>
+    </div>
+  </div>
+
+  <section class="lesson-section">
+    <h2><span class="section-badge" style="background:#8b5cf6;">Do Now · 5 min</span></h2>
+    
+<p>A Word document and a webpage look similar on screen. But they are built differently. What do you think is different about how they are stored on a computer?</p>
+<div class="worksheet">
+  <p>A Word document is a _____________ file.</p>
+  <p>A webpage is a _____________ file.</p>
+  <p>Hint: try opening both with the "open as text" option and see what happens.</p>
+</div>
+
+  </section>
+
+  <section class="lesson-section">
+    <h2><span class="section-badge">I Do · ~10 min</span> Teacher demonstration</h2>
+    
+<p>Teacher demonstrates, live in VS Code:</p>
+<ol>
+  <li>Open VS Code</li>
+  <li>File → Open Folder → create <code>Y10-MULTI-T2</code> in OneDrive</li>
+  <li>File → New File → save as <code>hello.html</code></li>
+  <li>Type <code>!</code> then press <kbd>Tab</kbd> — Emmet expands to a full HTML starter</li>
+  <li>Right-click → "Open with Live Server"</li>
+  <li>Type inside <code>&lt;body&gt;</code>, save, watch the browser refresh</li>
+</ol>
+<p>Starting HTML (what <code>!</code> Tab expands to):</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;Document&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<div class="callout warn">
+  <strong>Teacher notice:</strong> change <code>&lt;title&gt;Document&lt;/title&gt;</code> to something real. That Document default is the #1 giveaway that someone rushed.
+</div>
+
+  </section>
+
+  <section class="lesson-section">
+    <h2><span class="section-badge" style="background:#3730a3;">We Do · ~15 min</span> Guided build</h2>
+    
+<p>Add these lines together inside <code>&lt;body&gt;</code>:</p>
+<pre><code>&lt;h1&gt;Hello, I am [your name]&lt;/h1&gt;
+&lt;p&gt;This is my first real webpage. I am a Year 10 student at Arthur Phillip High School.&lt;/p&gt;
+&lt;p&gt;I am learning HTML in my Multimedia class.&lt;/p&gt;</code></pre>
+<p>Save with <kbd>Ctrl</kbd>+<kbd>S</kbd>. Watch Chrome refresh automatically. If it does not refresh, check Live Server is running (bottom right of VS Code should say "Port: 5500").</p>
+
+  </section>
+
+  <section class="lesson-section">
+    <h2><span class="section-badge" style="background:#92400e;">You Do · ~35 min</span> Independent practice</h2>
+    
+<p>Build your own <code>hello.html</code> page. Requirements:</p>
+<ol>
+  <li>A meaningful title (something like "Yunshu's First Webpage")</li>
+  <li>An <code>&lt;h1&gt;</code> with your name</li>
+  <li>Two paragraphs about you — your year, your hobbies, what you want to build this term</li>
+  <li>Take a screenshot of the browser showing your rendered page</li>
+  <li>Save the HTML file and the screenshot to OneDrive</li>
+</ol>
+<p><strong>When you finish:</strong> open the exemplar <a href="../exemplars/02-first-page.html" target="_blank">first-page.html</a> and view source (right-click → View Page Source).</p>
+
+  </section>
+
+  <section class="lesson-section">
+    <h2>Differentiation</h2>
+    <div class="tier-grid">
+      <div class="tier support">
+        <h4>Support</h4>
+        <p>Teacher or paired peer opens VS Code and creates the file together. A pre-written starter file is available at exemplars/02-first-page.html — copy the structure and replace content only.</p>
+      </div>
+      <div class="tier core">
+        <h4>Core</h4>
+        <p>Complete the task independently.</p>
+      </div>
+      <div class="tier extension">
+        <h4>Extension</h4>
+        <p>Add a third HTML tag you research on MDN (examples: blockquote, mark, small, time). Explain in a comment what your new tag does and when to use it.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="lesson-section">
+    <h2><span class="section-badge" style="background:#10b981;">Exit Ticket · 5 min</span></h2>
+    
+<div class="worksheet">
+  <h3>Exit ticket</h3>
+  <p><strong>1. Which goes inside the head and which inside the body?</strong></p>
+  <p>a) &lt;title&gt; — head / body &nbsp;&nbsp; b) &lt;h1&gt; — head / body &nbsp;&nbsp; c) &lt;meta&gt; — head / body &nbsp;&nbsp; d) &lt;p&gt; — head / body</p>
+  <p><strong>2. What does DOCTYPE do?</strong></p>
+  <p>____________________________________________________</p>
+  <p><strong>3. Paste the URL of your saved OneDrive file or attach your screenshot to Google Classroom.</strong></p>
+</div>
+
+  </section>
+
+  <section class="lesson-section">
+    <h2>Resources for this lesson</h2>
+    <ul><li><a href="../exemplars/02-first-page.html" target="_blank" rel="noopener">Exemplar: first HTML page</a></li><li><a href="https://code.visualstudio.com/" target="_blank" rel="noopener">Download VS Code</a></li><li><a href="https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer" target="_blank" rel="noopener">Live Server extension</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML/Getting_started" target="_blank" rel="noopener">MDN: Getting started with HTML</a></li></ul>
+  </section>
+
+  <nav class="lesson-nav">
+    <a class="prev" href="l01.html">Previous lesson</a>
+    <a class="next" href="l03.html">Next lesson</a>
+  </nav>
+
+</main>
+
+<footer class="site-footer">
+  <p><strong>10 Multimedia · Term 2 · L02</strong> · Arthur Phillip High School</p>
+</footer>
+
+</body>
+</html>

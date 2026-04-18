@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L01 · What is a Website? Anatomy of the Web | 10 Multimedia T2</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <a href="../index.html" class="site-brand">10 Multimedia · 2026</a>
+    <nav class="site-nav">
+      <a href="../term1.html">Term 1</a>
+      <a href="../term2.html">Term 2</a>
+    </nav>
+  </div>
+</header>
+
+<section class="lesson-head">
+  <div class="container">
+    <span class="lesson-pill">Week 1 · Lesson 01</span>
+    <h1>What is a Website? Anatomy of the Web</h1>
+    <p class="lesson-meta">Week 1 · 75 minutes · Year 10 Industrial Technology — Multimedia</p>
+    <div class="outcomes"><span class="outcome-tag">IND5-1</span><span class="outcome-tag">IND5-3</span><span class="outcome-tag">IND5-5</span><span class="outcome-tag">IND5-9</span><span class="outcome-tag">IND5-10</span></div>
+  </div>
+</section>
+
+<main class="container">
+
+  <div class="grid grid-2">
+    <div class="card">
+      <h3 style="color:#0f766e;margin-top:0;">Learning intentions</h3>
+      <ul><li>I can describe how a website reaches my screen when I type a URL.</li><li>I can identify the three languages of the web (HTML, CSS, JavaScript) and what each one does.</li><li>I can use Chrome DevTools Inspect Element to see the code behind any webpage.</li></ul>
+    </div>
+    <div class="card">
+      <h3 style="color:#1f3a68;margin-top:0;">Success criteria</h3>
+      <ul><li>I can label 5 parts of a webpage (header, navigation, main content, footer, image).</li><li>I can open DevTools on any site and find the <code>&lt;h1&gt;</code> tag.</li><li>I can explain the difference between HTML, CSS, and JavaScript in one sentence each.</li></ul>
+    </div>
+  </div>
+
+  <section class="lesson-section">
+    <h2><span class="section-badge" style="background:#8b5cf6;">Do Now · 5 min</span></h2>
+    
+<p>Open these three websites in three tabs:</p>
+<ul>
+  <li><a href="https://apple.com" target="_blank">apple.com</a></li>
+  <li><a href="https://en.wikipedia.org" target="_blank">wikipedia.org</a></li>
+  <li><a href="https://tiktok.com" target="_blank">tiktok.com</a></li>
+</ul>
+<p>Spend 2 minutes looking at them. In your notebook (or the worksheet zone below), write 3 things that are <em>different</em> between them, and 3 things that are the <em>same</em>.</p>
+<div class="worksheet">
+  <h3>Worksheet zone</h3>
+  <p><strong>Different:</strong></p>
+  <p>1. _____________________________________________<br>2. _____________________________________________<br>3. _____________________________________________</p>
+  <p><strong>Same:</strong></p>
+  <p>1. _____________________________________________<br>2. _____________________________________________<br>3. _____________________________________________</p>
+</div>
+
+  </section>
+
+  <section class="lesson-section">
+    <h2><span class="section-badge">I Do · ~10 min</span> Teacher demonstration</h2>
+    
+<p>Teacher traces the journey from typing <code>apple.com</code> to seeing the page render:</p>
+<ol>
+  <li><strong>You type a URL.</strong> The browser asks DNS (the phonebook of the internet) "where is apple.com?"</li>
+  <li><strong>DNS replies with an IP address</strong> (a phone number, like 17.253.144.10).</li>
+  <li><strong>Your browser sends a request</strong> to that address: "please send me the homepage."</li>
+  <li><strong>Apple's server responds</strong> with a bundle of files: HTML, CSS, JavaScript, images.</li>
+  <li><strong>Your browser renders</strong> those files into the page you see.</li>
+</ol>
+<div class="callout info">
+  <strong>Key idea:</strong> a website is just <em>text files</em> that a computer sends to your computer. That's it. There is no magic. You can read every website's source code.
+</div>
+<p>Teacher then opens DevTools (F12 or right-click → Inspect) on apple.com and shows:</p>
+<ul>
+  <li>The <strong>Elements tab</strong> — this is the HTML (structure)</li>
+  <li>The <strong>Styles panel</strong> — this is the CSS (presentation)</li>
+  <li>The <strong>Console</strong> — this is where JavaScript talks</li>
+</ul>
+<div class="callout">
+  <strong>The three languages:</strong><br>
+  <code>HTML</code> = <strong>content and structure</strong> (the skeleton)<br>
+  <code>CSS</code> = <strong>presentation and style</strong> (the skin and clothes)<br>
+  <code>JavaScript</code> = <strong>behaviour and interactivity</strong> (what happens when you click)
+</div>
+
+  </section>
+
+  <section class="lesson-section">
+    <h2><span class="section-badge" style="background:#3730a3;">We Do · ~15 min</span> Guided build</h2>
+    
+<p>Together, open <a href="https://en.wikipedia.org/wiki/Web_design" target="_blank">en.wikipedia.org/wiki/Web_design</a> and use Inspect Element to find:</p>
+<ol>
+  <li>The page's single <code>&lt;h1&gt;</code> heading</li>
+  <li>The <code>&lt;nav&gt;</code> element at the top</li>
+  <li>One <code>&lt;img&gt;</code> element — note its <code>src</code> and <code>alt</code> attributes</li>
+  <li>The first <code>&lt;p&gt;</code> paragraph</li>
+</ol>
+<p>Class discussion: what are these tags called and what do they do?</p>
+<pre><code>&lt;h1&gt;Web design&lt;/h1&gt;
+&lt;p&gt;Web design encompasses many different skills...&lt;/p&gt;
+&lt;img src="..." alt="Screenshot of a browser"&gt;</code></pre>
+
+  </section>
+
+  <section class="lesson-section">
+    <h2><span class="section-badge" style="background:#92400e;">You Do · ~35 min</span> Independent practice</h2>
+    
+<p>Pick any website you visit often (YouTube, a game site, a shop, your school site). Use DevTools to find and note down:</p>
+<ol>
+  <li>The main <code>&lt;h1&gt;</code> — write down what it says</li>
+  <li>Count how many <code>&lt;a&gt;</code> (link) tags you can find in the navigation</li>
+  <li>Find one image and write down its <code>alt</code> text (or note if it has no alt)</li>
+  <li>Take a screenshot of the Elements panel showing any HTML tag you recognise</li>
+</ol>
+<p>Save your screenshot to OneDrive in a folder called <code>Y10-MULTI-T2/L01</code>.</p>
+<p><strong>Launch the exemplar</strong> if you finish early: <a href="../exemplars/01-anatomy.html" target="_blank">anatomy of a webpage</a>.</p>
+
+  </section>
+
+  <section class="lesson-section">
+    <h2>Differentiation</h2>
+    <div class="tier-grid">
+      <div class="tier support">
+        <h4>Support</h4>
+        <p>Teacher opens DevTools with the student on the first site. Provide a labelled screenshot of DevTools highlighting Elements / Styles / Console panels. Task reduced to just identifying h1 and one img.</p>
+      </div>
+      <div class="tier core">
+        <h4>Core</h4>
+        <p>Complete the full task as written. Submit screenshot + written answers.</p>
+      </div>
+      <div class="tier extension">
+        <h4>Extension</h4>
+        <p>On any site, find one CSS property that is unusual or creative and write a sentence about what it does. Bonus: open view-source: in the URL bar and copy 5 lines of HTML you recognise.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="lesson-section">
+    <h2><span class="section-badge" style="background:#10b981;">Exit Ticket · 5 min</span></h2>
+    
+<div class="worksheet">
+  <h3>Exit ticket</h3>
+  <p><strong>1. Label the 5 parts of a webpage you see on screen:</strong></p>
+  <p>Header, ______, ______, ______, Footer</p>
+  <p><strong>2. Finish the sentence in one line:</strong></p>
+  <p>"HTML gives a webpage its _______________________________"</p>
+  <p>"CSS gives a webpage its _______________________________"</p>
+  <p>"JavaScript gives a webpage its _______________________________"</p>
+</div>
+
+  </section>
+
+  <section class="lesson-section">
+    <h2>Resources for this lesson</h2>
+    <ul><li><a href="../exemplars/01-anatomy.html" target="_blank" rel="noopener">Exemplar: Anatomy of a webpage</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/How_the_Web_works" target="_blank" rel="noopener">MDN: How the Web Works</a></li><li><a href="https://developer.chrome.com/docs/devtools/overview" target="_blank" rel="noopener">Chrome DevTools overview</a></li></ul>
+  </section>
+
+  <nav class="lesson-nav">
+    <a class="prev disabled" href="#">Previous lesson</a>
+    <a class="next" href="l02.html">Next lesson</a>
+  </nav>
+
+</main>
+
+<footer class="site-footer">
+  <p><strong>10 Multimedia · Term 2 · L01</strong> · Arthur Phillip High School</p>
+</footer>
+
+</body>
+</html>

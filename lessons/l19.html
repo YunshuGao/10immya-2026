@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L19 · Accessibility and Performance Audit | 10 Multimedia T2</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <a href="../index.html" class="site-brand">10 Multimedia · 2026</a>
+    <nav class="site-nav">
+      <a href="../term1.html">Term 1</a>
+      <a href="../term2.html">Term 2</a>
+    </nav>
+  </div>
+</header>
+
+<section class="lesson-head">
+  <div class="container">
+    <span class="lesson-pill">Week 10 · Lesson 19</span>
+    <h1>Accessibility and Performance Audit</h1>
+    <p class="lesson-meta">Week 10 · 75 minutes · Year 10 Industrial Technology — Multimedia</p>
+    <div class="outcomes"><span class="outcome-tag">IND5-2</span><span class="outcome-tag">IND5-8</span><span class="outcome-tag">IND5-10</span></div>
+  </div>
+</section>
+
+<main class="container">
+
+  <div class="grid grid-2">
+    <div class="card">
+      <h3 style="color:#0f766e;margin-top:0;">Learning intentions</h3>
+      <ul><li>I can run a Lighthouse audit on my portfolio.</li><li>I can interpret accessibility and performance scores.</li><li>I can fix common accessibility issues.</li></ul>
+    </div>
+    <div class="card">
+      <h3 style="color:#1f3a68;margin-top:0;">Success criteria</h3>
+      <ul><li>I have run Lighthouse on my portfolio and saved the report.</li><li>My accessibility score is 90+.</li><li>I have fixed at least 5 issues identified in the audit.</li></ul>
+    </div>
+  </div>
+
+  <section class="lesson-section">
+    <h2><span class="section-badge" style="background:#8b5cf6;">Do Now · 5 min</span></h2>
+    
+<p>Run Lighthouse on any popular website: right-click → Inspect → Lighthouse tab → Analyze page load. Scores out of 100 across Performance, Accessibility, Best Practices, SEO.</p>
+<p>Notice: even big sites often have accessibility issues. Today you make your portfolio better than many commercial sites.</p>
+
+  </section>
+
+  <section class="lesson-section">
+    <h2><span class="section-badge">I Do · ~10 min</span> Teacher demonstration</h2>
+    
+<p>Teacher runs Lighthouse on exemplar portfolio. Walks through common issues and fixes:</p>
+<ol>
+  <li><strong>Images without alt text</strong> - add descriptive alt attribute</li>
+  <li><strong>Low colour contrast</strong> - check in WebAIM, adjust palette</li>
+  <li><strong>Headings out of order</strong> (h1 → h3 skipping h2) - fix heading hierarchy</li>
+  <li><strong>Form inputs without labels</strong> - add <code>&lt;label for="..."&gt;</code></li>
+  <li><strong>Links without text</strong> (<code>&lt;a href="x"&gt;&lt;img&gt;&lt;/a&gt;</code>) - add alt to the image or aria-label to the link</li>
+  <li><strong>No lang attribute on html</strong> - add <code>&lt;html lang="en-AU"&gt;</code></li>
+  <li><strong>No meta description</strong> - add <code>&lt;meta name="description"&gt;</code></li>
+</ol>
+<p>Also install WAVE browser extension and run on exemplar.</p>
+
+  </section>
+
+  <section class="lesson-section">
+    <h2><span class="section-badge" style="background:#3730a3;">We Do · ~15 min</span> Guided build</h2>
+    
+<p>Together, test an exemplar page in DevTools with keyboard only (no mouse!):</p>
+<ol>
+  <li>Tab through every focusable element</li>
+  <li>Is the focus indicator visible?</li>
+  <li>Can you reach every link and button?</li>
+  <li>Is the order logical?</li>
+</ol>
+<p>Fix any focus issues with CSS <code>:focus-visible</code>.</p>
+
+  </section>
+
+  <section class="lesson-section">
+    <h2><span class="section-badge" style="background:#92400e;">You Do · ~35 min</span> Independent practice</h2>
+    
+<p>Audit your own portfolio:</p>
+<ol>
+  <li>Run Lighthouse in Chrome DevTools</li>
+  <li>Screenshot the scores</li>
+  <li>Work through the Accessibility and Best Practices lists</li>
+  <li>Fix the top 5+ issues</li>
+  <li>Re-run Lighthouse until accessibility is 90+</li>
+  <li>Also run WAVE extension and fix any errors</li>
+  <li>Test keyboard navigation on every page</li>
+</ol>
+<p>This is the prep work for Assessment 2 submission tomorrow.</p>
+
+  </section>
+
+  <section class="lesson-section">
+    <h2>Differentiation</h2>
+    <div class="tier-grid">
+      <div class="tier support">
+        <h4>Support</h4>
+        <p>Teacher runs Lighthouse with student, works through fixes one-by-one.</p>
+      </div>
+      <div class="tier core">
+        <h4>Core</h4>
+        <p>Independent audit and fix.</p>
+      </div>
+      <div class="tier extension">
+        <h4>Extension</h4>
+        <p>Also run the WAVE tool and document each fix with before/after in an audit log.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="lesson-section">
+    <h2><span class="section-badge" style="background:#10b981;">Exit Ticket · 5 min</span></h2>
+    
+<div class="worksheet">
+  <h3>Exit ticket</h3>
+  <p><strong>Your Lighthouse Accessibility score:</strong> _____ /100</p>
+  <p><strong>Top 3 fixes you made today:</strong></p>
+  <p>1. __________________________</p>
+  <p>2. __________________________</p>
+  <p>3. __________________________</p>
+  <p><strong>Save your Lighthouse screenshot — you need it for Assessment 2.</strong></p>
+</div>
+
+  </section>
+
+  <section class="lesson-section">
+    <h2>Resources for this lesson</h2>
+    <ul><li><a href="https://wave.webaim.org/extension/" target="_blank" rel="noopener">WAVE browser extension</a></li><li><a href="https://developer.chrome.com/docs/lighthouse/overview" target="_blank" rel="noopener">Lighthouse overview</a></li><li><a href="https://webaim.org/resources/contrastchecker/" target="_blank" rel="noopener">WebAIM Contrast Checker</a></li></ul>
+  </section>
+
+  <nav class="lesson-nav">
+    <a class="prev" href="l18.html">Previous lesson</a>
+    <a class="next" href="l20.html">Next lesson</a>
+  </nav>
+
+</main>
+
+<footer class="site-footer">
+  <p><strong>10 Multimedia · Term 2 · L19</strong> · Arthur Phillip High School</p>
+</footer>
+
+</body>
+</html>

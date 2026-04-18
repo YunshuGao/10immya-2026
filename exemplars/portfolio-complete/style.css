@@ -1,0 +1,157 @@
+/* Complete portfolio - full stylesheet demonstrating all Term 2 skills */
+:root {
+  --c-navy: #1f3a68;
+  --c-teal: #14b8a6;
+  --c-bg: #fafbfc;
+  --c-text: #1a202c;
+  --c-text-soft: #4a5568;
+  --c-border: #e4e7ec;
+  --c-surface: #ffffff;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  color: var(--c-text);
+  background: var(--c-bg);
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+a { color: var(--c-navy); font-weight: 500; }
+
+.container { max-width: 1100px; margin: 0 auto; padding: 2rem 1.25rem; }
+
+/* ---- Site header ---- */
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background: var(--c-surface);
+  border-bottom: 1px solid var(--c-border);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.site-header .brand { font-weight: 700; color: var(--c-navy); text-decoration: none; font-size: 1.1rem; }
+.site-header nav { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+.site-header nav a { color: var(--c-text-soft); text-decoration: none; }
+.site-header nav a:hover { color: var(--c-navy); }
+
+/* ---- Hero ---- */
+.hero {
+  background: linear-gradient(135deg, var(--c-navy), #2e5b9e);
+  color: white;
+  padding: clamp(3rem, 8vw, 6rem) 1.5rem;
+  text-align: center;
+}
+.hero-inner { max-width: 800px; margin: 0 auto; }
+.hero h1 { color: white; font-size: clamp(2rem, 5vw, 3.5rem); margin: 0 0 1rem; }
+.hero .tagline { font-size: 1.15rem; opacity: 0.9; margin-bottom: 2rem; }
+
+/* ---- Buttons ---- */
+.btn {
+  display: inline-block;
+  padding: 0.8rem 1.75rem;
+  background: var(--c-teal);
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.btn:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(20, 184, 166, 0.35); }
+
+/* ---- About preview section (home page) ---- */
+.about-preview {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 3rem 1.25rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+@media (min-width: 768px) {
+  .about-preview { grid-template-columns: 2fr 1fr; }
+}
+
+.placeholder {
+  background: repeating-linear-gradient(45deg, #e4e7ec, #e4e7ec 10px, #f3f4f6 10px, #f3f4f6 20px);
+  border-radius: 12px;
+  min-height: 180px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--c-text-soft);
+  font-weight: 500;
+}
+
+/* ---- Grid of cards ---- */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+@media (min-width: 640px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1024px) {
+  .grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* ---- Project card ---- */
+.project-card {
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.project-card:hover { transform: translateY(-4px); box-shadow: 0 10px 24px rgba(0,0,0,0.1); }
+.project-card .placeholder { border-radius: 0; min-height: 160px; }
+.project-card .body { padding: 1.25rem; }
+.project-card h3 { margin-top: 0; color: var(--c-navy); }
+
+/* ---- Headings ---- */
+h1, h2 { color: var(--c-navy); line-height: 1.2; }
+h1 { font-size: 2.2rem; }
+h2 { font-size: 1.6rem; margin-top: 2.5rem; }
+h3 { font-size: 1.2rem; color: var(--c-navy); }
+
+/* ---- Forms ---- */
+.field { margin-bottom: 1rem; }
+.field label { display: block; font-weight: 600; margin-bottom: 0.3rem; color: var(--c-navy); }
+.field input, .field textarea, .field select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid var(--c-border);
+  border-radius: 6px;
+  font: inherit;
+  transition: border-color 0.15s ease;
+}
+.field input:focus, .field textarea:focus, .field select:focus {
+  outline: none;
+  border-color: var(--c-teal);
+}
+
+/* ---- Footer ---- */
+.site-footer {
+  background: var(--c-navy);
+  color: #cbd5e1;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  margin-top: 3rem;
+}
+.site-footer a { color: #93c5fd; }
+
+/* ---- Accessibility: reduced motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.01s !important; transition: none !important; }
+}

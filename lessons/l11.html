@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L11 · Typography on the Web | 10 Multimedia T2</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <a href="../index.html" class="site-brand">10 Multimedia · 2026</a>
+    <nav class="site-nav">
+      <a href="../term1.html">Term 1</a>
+      <a href="../term2.html">Term 2</a>
+    </nav>
+  </div>
+</header>
+
+<section class="lesson-head">
+  <div class="container">
+    <span class="lesson-pill">Week 6 · Lesson 11</span>
+    <h1>Typography on the Web</h1>
+    <p class="lesson-meta">Week 6 · 75 minutes · Year 10 Industrial Technology — Multimedia</p>
+    <div class="outcomes"><span class="outcome-tag">IND5-2</span><span class="outcome-tag">IND5-4</span><span class="outcome-tag">IND5-5</span></div>
+  </div>
+</section>
+
+<main class="container">
+
+  <div class="grid grid-2">
+    <div class="card">
+      <h3 style="color:#0f766e;margin-top:0;">Learning intentions</h3>
+      <ul><li>I can import a Google Font and use it in my CSS.</li><li>I can set a consistent type scale for headings and body.</li><li>I can make text readable with line-height and line-length.</li></ul>
+    </div>
+    <div class="card">
+      <h3 style="color:#1f3a68;margin-top:0;">Success criteria</h3>
+      <ul><li>I have imported one Google Font and used it in my CSS.</li><li>My headings (h1, h2, h3) have a clear size hierarchy.</li><li>My body text has line-height 1.5-1.7 and line-length 60-75 characters.</li></ul>
+    </div>
+  </div>
+
+  <section class="lesson-section">
+    <h2><span class="section-badge" style="background:#8b5cf6;">Do Now · 5 min</span></h2>
+    
+<p>Read two news articles — one with comfortable typography, one that feels 'off'. What makes the readable one readable?</p>
+<p>Hint: it's not just the font. It's also:</p>
+<ul>
+  <li>How big is the text?</li>
+  <li>How much space between lines?</li>
+  <li>How wide is the column? (Too narrow = choppy. Too wide = eye strain.)</li>
+</ul>
+
+  </section>
+
+  <section class="lesson-section">
+    <h2><span class="section-badge">I Do · ~10 min</span> Teacher demonstration</h2>
+    
+<p>Teacher demonstrates importing a Google Font:</p>
+<pre><code>&lt;!-- in the head of HTML --&gt;
+&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
+&lt;link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"&gt;</code></pre>
+<pre><code>body {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  max-width: 65ch;    /* 65 characters wide is optimal for reading */
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+h1 { font-size: 2.5rem; font-weight: 700; line-height: 1.2; }
+h2 { font-size: 1.75rem; font-weight: 600; }
+h3 { font-size: 1.25rem; font-weight: 600; }</code></pre>
+<div class="callout info">
+  <strong>The industry rules of readable type:</strong>
+  <ol>
+    <li>Body text: 16px minimum (larger is often better)</li>
+    <li>Line-height: 1.5-1.7 for body (not too tight, not too loose)</li>
+    <li>Line length: 60-75 characters per line (use <code>max-width: 65ch</code>)</li>
+    <li>Only 2 fonts max (one heading, one body — or the same font at different weights)</li>
+  </ol>
+</div>
+
+  </section>
+
+  <section class="lesson-section">
+    <h2><span class="section-badge" style="background:#3730a3;">We Do · ~15 min</span> Guided build</h2>
+    
+<p>Together, pair Inter (sans-serif) with Playfair Display (serif) for a classic editorial look:</p>
+<pre><code>&lt;link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet"&gt;</code></pre>
+<pre><code>body { font-family: 'Inter', sans-serif; }
+h1, h2, h3 { font-family: 'Playfair Display', serif; }</code></pre>
+<p>Discuss: when does this pairing work? When does a single-font approach work better?</p>
+
+  </section>
+
+  <section class="lesson-section">
+    <h2><span class="section-badge" style="background:#92400e;">You Do · ~35 min</span> Independent practice</h2>
+    
+<p>Update your portfolio styles.css to use typography thoughtfully:</p>
+<ol>
+  <li>Choose ONE font for body (sans-serif recommended for UI)</li>
+  <li>Choose ONE font for headings (can be the same, or a contrasting serif)</li>
+  <li>Set a type scale: h1 is biggest, h2 medium, h3 smaller, body is 16-18px</li>
+  <li>Set <code>line-height: 1.6</code> on body</li>
+  <li>Set <code>max-width: 65ch</code> on a reading container</li>
+  <li>Test on your phone — is it readable?</li>
+</ol>
+<p>Submit a "type spec" screenshot: your h1, h2, h3, and body paragraph with font names labelled.</p>
+
+  </section>
+
+  <section class="lesson-section">
+    <h2>Differentiation</h2>
+    <div class="tier-grid">
+      <div class="tier support">
+        <h4>Support</h4>
+        <p>3 pre-selected font pairings provided. Student picks one and applies.</p>
+      </div>
+      <div class="tier core">
+        <h4>Core</h4>
+        <p>Choose fonts from Google Fonts independently.</p>
+      </div>
+      <div class="tier extension">
+        <h4>Extension</h4>
+        <p>Create a full type scale using a ratio (e.g. 1.25, 1.5). Research 'modular scale' on type-scale.com.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="lesson-section">
+    <h2><span class="section-badge" style="background:#10b981;">Exit Ticket · 5 min</span></h2>
+    
+<div class="worksheet">
+  <h3>Exit ticket</h3>
+  <p><strong>1. What is the optimal line length for readable text?</strong></p>
+  <p>a) 20-30 chars &nbsp; b) 60-75 chars &nbsp; c) 100+ chars</p>
+  <p><strong>2. What is the minimum recommended body font size?</strong> ___________</p>
+  <p><strong>3. Your font choices for portfolio:</strong></p>
+  <p>Body: _______________ Heading: _______________</p>
+</div>
+
+  </section>
+
+  <section class="lesson-section">
+    <h2>Resources for this lesson</h2>
+    <ul><li><a href="https://fonts.google.com" target="_blank" rel="noopener">Google Fonts</a></li><li><a href="https://type-scale.com/" target="_blank" rel="noopener">Type Scale generator</a></li><li><a href="https://fontpair.co/" target="_blank" rel="noopener">Fontpair - curated pairings</a></li></ul>
+  </section>
+
+  <nav class="lesson-nav">
+    <a class="prev" href="l10.html">Previous lesson</a>
+    <a class="next" href="l12.html">Next lesson</a>
+  </nav>
+
+</main>
+
+<footer class="site-footer">
+  <p><strong>10 Multimedia · Term 2 · L11</strong> · Arthur Phillip High School</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Semantic HTML Exemplar</title>
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 700px; margin: 2rem auto; padding: 1rem; line-height: 1.6; }
+  header, nav, main, section, article, aside, footer { display: block; padding: 1rem; margin: 1rem 0; border: 2px dashed #cbd5e1; border-radius: 8px; }
+  header { background: #eff6ff; }
+  nav { background: #f0fdfa; }
+  main { background: white; }
+  section { background: #fafbfc; }
+  article { background: #fff7ed; }
+  aside { background: #fef3c7; }
+  footer { background: #1f3a68; color: white; }
+  .tag { font-family: Consolas, monospace; font-size: 0.8rem; background: rgba(0,0,0,0.06); padding: 2px 6px; border-radius: 3px; }
+</style>
+</head>
+<body>
+  <header>
+    <span class="tag">&lt;header&gt;</span>
+    <h1>My Blog</h1>
+    <p>The outer intro to the whole page.</p>
+  </header>
+
+  <nav>
+    <span class="tag">&lt;nav&gt;</span>
+    <a href="#">Home</a> &middot;
+    <a href="#">Posts</a> &middot;
+    <a href="#">About</a>
+  </nav>
+
+  <main>
+    <span class="tag">&lt;main&gt;</span> (only one per page — the unique content)
+
+    <section>
+      <span class="tag">&lt;section&gt;</span>
+      <h2>Latest posts</h2>
+
+      <article>
+        <span class="tag">&lt;article&gt;</span>
+        <h3>Why semantic HTML matters</h3>
+        <p>When you use &lt;header&gt;, &lt;nav&gt;, &lt;main&gt;, you give meaning to structure. Screen readers announce sections. Search engines understand hierarchy.</p>
+      </article>
+
+      <article>
+        <span class="tag">&lt;article&gt;</span>
+        <h3>Another post</h3>
+        <p>Self-contained content goes in &lt;article&gt;.</p>
+      </article>
+    </section>
+
+    <aside>
+      <span class="tag">&lt;aside&gt;</span>
+      <p>Related but secondary content (sidebar, author bio, etc).</p>
+    </aside>
+  </main>
+
+  <footer>
+    <span class="tag">&lt;footer&gt;</span>
+    <p>&copy; 2026 My Blog. Footer content.</p>
+  </footer>
+</body>
+</html>

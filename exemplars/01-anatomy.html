@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anatomy of a webpage · Lesson 1 Exemplar</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: system-ui, sans-serif;
+    color: #1a202c; background: #fafbfc; line-height: 1.6;
+  }
+  .exemplar-note {
+    background: #fef3c7; border-left: 4px solid #f59e0b;
+    padding: 0.75rem 1rem; margin: 1rem; font-size: 0.9rem;
+  }
+  header { background: #1f3a68; color: white; padding: 1rem 2rem; }
+  header h1 { margin: 0; font-size: 1.5rem; }
+  nav { background: #2e5b9e; padding: 0.5rem 2rem; }
+  nav a { color: white; margin-right: 1.5rem; text-decoration: none; }
+  main { padding: 2rem; max-width: 800px; margin: 0 auto; }
+  article { margin-bottom: 2rem; }
+  footer { background: #1a202c; color: #cbd5e1; padding: 2rem; text-align: center; }
+</style>
+</head>
+<body>
+  <div class="exemplar-note">
+    <strong>L01 exemplar.</strong> Right-click and View Source to see how each part of this page is coded.
+    The file has HEADER, NAV, MAIN (with two ARTICLEs), and FOOTER — the 5 parts of most webpages.
+  </div>
+
+  <header>
+    <h1>Anatomy of a Webpage</h1>
+  </header>
+
+  <nav>
+    <a href="#intro">Intro</a>
+    <a href="#parts">Parts</a>
+    <a href="#try">Try it</a>
+  </nav>
+
+  <main>
+    <article id="intro">
+      <h2>Intro</h2>
+      <p>Every webpage is made of text files (HTML, CSS, JavaScript) that your browser reads and renders. There is no magic — just files and instructions.</p>
+    </article>
+
+    <article id="parts">
+      <h2>5 parts of most webpages</h2>
+      <ol>
+        <li><strong>Header</strong> — site title, sometimes logo</li>
+        <li><strong>Navigation</strong> — links to other pages</li>
+        <li><strong>Main content</strong> — the unique stuff of this page</li>
+        <li><strong>Sidebar or aside</strong> — secondary related content (optional)</li>
+        <li><strong>Footer</strong> — copyright, credits, extra links</li>
+      </ol>
+    </article>
+
+    <article id="try">
+      <h2>Try it yourself</h2>
+      <p>Right-click anywhere on this page and choose <em>Inspect</em>. The panel that opens is DevTools. Look at the HTML on the left and the CSS on the right. That is literally how this page is made.</p>
+    </article>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Ms Yunshu Gao · Year 10 Multimedia · Arthur Phillip High School</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L14 · Responsive Images, Units, and Viewport | 10 Multimedia T2</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <a href="../index.html" class="site-brand">10 Multimedia · 2026</a>
+    <nav class="site-nav">
+      <a href="../term1.html">Term 1</a>
+      <a href="../term2.html">Term 2</a>
+    </nav>
+  </div>
+</header>
+
+<section class="lesson-head">
+  <div class="container">
+    <span class="lesson-pill">Week 7 · Lesson 14</span>
+    <h1>Responsive Images, Units, and Viewport</h1>
+    <p class="lesson-meta">Week 7 · 75 minutes · Year 10 Industrial Technology — Multimedia</p>
+    <div class="outcomes"><span class="outcome-tag">IND5-2</span><span class="outcome-tag">IND5-3</span><span class="outcome-tag">IND5-4</span></div>
+  </div>
+</section>
+
+<main class="container">
+
+  <div class="grid grid-2">
+    <div class="card">
+      <h3 style="color:#0f766e;margin-top:0;">Learning intentions</h3>
+      <ul><li>I can use the viewport meta tag and explain what it does.</li><li>I can choose between px, rem, em, %, and vw appropriately.</li><li>I can make images scale with the page.</li></ul>
+    </div>
+    <div class="card">
+      <h3 style="color:#1f3a68;margin-top:0;">Success criteria</h3>
+      <ul><li>My images never exceed their container (<code>max-width: 100%</code>).</li><li>My typography uses rem units, not px.</li><li>I can explain when to use each CSS unit type.</li></ul>
+    </div>
+  </div>
+
+  <section class="lesson-section">
+    <h2><span class="section-badge" style="background:#8b5cf6;">Do Now · 5 min</span></h2>
+    
+<p>Open a webpage on your phone. Tap a button. Is it the right size for your finger? Too small = frustrating. Too big = ugly.</p>
+<p>Today we learn to write CSS that adapts to whoever is reading it — not the screen we designed for.</p>
+
+  </section>
+
+  <section class="lesson-section">
+    <h2><span class="section-badge">I Do · ~10 min</span> Teacher demonstration</h2>
+    
+<p><strong>The viewport meta tag</strong> tells the phone browser NOT to pretend to be a desktop:</p>
+<pre><code>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</code></pre>
+<p>Without this, a phone renders the page at desktop width and shrinks it to fit, making everything tiny and unreadable. Every HTML page you build needs this tag.</p>
+<p><strong>CSS units:</strong></p>
+<pre><code>px     /* absolute pixels - good for fine details like 1px borders */
+rem    /* relative to root font size - use for font-size, spacing */
+em     /* relative to parent - use inside components */
+%      /* percentage of parent - use for widths */
+vw     /* viewport width - use for hero sections */
+vh     /* viewport height */
+ch     /* width of '0' character - use for line-length (65ch) */</code></pre>
+<div class="callout info">
+  <strong>Rule of thumb for Year 10:</strong>
+  <ul>
+    <li><code>rem</code> for font-size and spacing (margin, padding)</li>
+    <li><code>%</code> or no-unit for widths inside containers</li>
+    <li><code>px</code> only for borders and fixed details</li>
+    <li><code>ch</code> for text column widths</li>
+  </ul>
+</div>
+<p><strong>Responsive images:</strong></p>
+<pre><code>img {
+  max-width: 100%;    /* never wider than parent */
+  height: auto;       /* maintain aspect ratio */
+}</code></pre>
+
+  </section>
+
+  <section class="lesson-section">
+    <h2><span class="section-badge" style="background:#3730a3;">We Do · ~15 min</span> Guided build</h2>
+    
+<p>Together, take a fixed-width design and make it fluid:</p>
+<pre><code>/* BEFORE - breaks on phone */
+.hero { width: 1200px; padding: 48px; font-size: 32px; }
+
+/* AFTER - fluid */
+.hero {
+  width: 100%;
+  max-width: 1200px;
+  padding: 3rem 1.5rem;
+  font-size: 2rem;
+}</code></pre>
+<p>Discuss: what's the difference between <code>width</code> and <code>max-width</code>?</p>
+
+  </section>
+
+  <section class="lesson-section">
+    <h2><span class="section-badge" style="background:#92400e;">You Do · ~35 min</span> Independent practice</h2>
+    
+<p>Audit your portfolio for responsive issues:</p>
+<ol>
+  <li>Add viewport meta to every HTML file if not already there</li>
+  <li>Find every <code>width: Xpx</code> and replace with either <code>max-width</code> or a %</li>
+  <li>Convert all font-sizes from px to rem</li>
+  <li>Add <code>max-width: 100%; height: auto;</code> to every <code>img</code></li>
+  <li>Test at 320px in DevTools — anything overflow horizontally?</li>
+  <li>Fix all horizontal scroll issues</li>
+</ol>
+
+  </section>
+
+  <section class="lesson-section">
+    <h2>Differentiation</h2>
+    <div class="tier-grid">
+      <div class="tier support">
+        <h4>Support</h4>
+        <p>Checklist with code snippets to paste. Student identifies which of their existing rules to replace.</p>
+      </div>
+      <div class="tier core">
+        <h4>Core</h4>
+        <p>Full audit and fix.</p>
+      </div>
+      <div class="tier extension">
+        <h4>Extension</h4>
+        <p>Use <code>clamp()</code> for fluid typography: <code>font-size: clamp(1rem, 2vw, 1.5rem)</code>. Explain what each value does in a comment.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="lesson-section">
+    <h2><span class="section-badge" style="background:#10b981;">Exit Ticket · 5 min</span></h2>
+    
+<div class="worksheet">
+  <h3>Exit ticket</h3>
+  <p><strong>1. What does the viewport meta tag do?</strong></p>
+  <p>____________________________________________________</p>
+  <p><strong>2. Which unit should you use for font-size?</strong> a) px &nbsp; b) rem &nbsp; c) % &nbsp; d) vw</p>
+  <p><strong>3. What two CSS lines make an image responsive?</strong></p>
+  <p><code>______________________________</code></p>
+  <p><code>______________________________</code></p>
+</div>
+
+  </section>
+
+  <section class="lesson-section">
+    <h2>Resources for this lesson</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images" target="_blank" rel="noopener">MDN: Responsive images</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Values_and_units" target="_blank" rel="noopener">MDN: CSS values and units</a></li></ul>
+  </section>
+
+  <nav class="lesson-nav">
+    <a class="prev" href="l13.html">Previous lesson</a>
+    <a class="next" href="l15.html">Next lesson</a>
+  </nav>
+
+</main>
+
+<footer class="site-footer">
+  <p><strong>10 Multimedia · Term 2 · L14</strong> · Arthur Phillip High School</p>
+</footer>
+
+</body>
+</html>

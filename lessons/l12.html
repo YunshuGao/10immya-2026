@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L12 · Colour, Contrast, and Accessibility (WCAG) | 10 Multimedia T2</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <a href="../index.html" class="site-brand">10 Multimedia · 2026</a>
+    <nav class="site-nav">
+      <a href="../term1.html">Term 1</a>
+      <a href="../term2.html">Term 2</a>
+    </nav>
+  </div>
+</header>
+
+<section class="lesson-head">
+  <div class="container">
+    <span class="lesson-pill">Week 6 · Lesson 12</span>
+    <h1>Colour, Contrast, and Accessibility (WCAG)</h1>
+    <p class="lesson-meta">Week 6 · 75 minutes · Year 10 Industrial Technology — Multimedia</p>
+    <div class="outcomes"><span class="outcome-tag">IND5-2</span><span class="outcome-tag">IND5-4</span><span class="outcome-tag">IND5-8</span><span class="outcome-tag">IND5-10</span></div>
+  </div>
+</section>
+
+<main class="container">
+
+  <div class="grid grid-2">
+    <div class="card">
+      <h3 style="color:#0f766e;margin-top:0;">Learning intentions</h3>
+      <ul><li>I can create a colour palette for my portfolio.</li><li>I can verify my colours meet WCAG AA contrast (4.5:1 for body text).</li><li>I can use hex, rgb, and hsl colour values in CSS.</li></ul>
+    </div>
+    <div class="card">
+      <h3 style="color:#1f3a68;margin-top:0;">Success criteria</h3>
+      <ul><li>I have a documented palette of 3-5 colours with hex codes.</li><li>Every text/background pair passes WCAG AA (4.5:1 contrast).</li><li>I have tested my palette in WebAIM Contrast Checker.</li></ul>
+    </div>
+  </div>
+
+  <section class="lesson-section">
+    <h2><span class="section-badge" style="background:#8b5cf6;">Do Now · 5 min</span></h2>
+    
+<p>Look at these pairs and predict which ones you can read outside in sunlight:</p>
+<ol>
+  <li>Black text on white background</li>
+  <li>Grey (#888) text on white background</li>
+  <li>Light yellow text on white background</li>
+  <li>Dark blue text on light blue background</li>
+</ol>
+<p>Only #1 and #4 have a chance. WCAG measures this with a contrast ratio. Today we learn the rules.</p>
+
+  </section>
+
+  <section class="lesson-section">
+    <h2><span class="section-badge">I Do · ~10 min</span> Teacher demonstration</h2>
+    
+<p>Teacher explains WCAG (Web Content Accessibility Guidelines):</p>
+<div class="callout">
+  <strong>WCAG 2.2 AA contrast requirements (industry standard, legally required in many countries):</strong>
+  <ul>
+    <li>Body text: <strong>at least 4.5:1</strong> contrast ratio</li>
+    <li>Large text (18pt+): at least 3:1</li>
+    <li>UI components (buttons, form fields): at least 3:1</li>
+  </ul>
+</div>
+<p>Teacher opens <a href="https://webaim.org/resources/contrastchecker/" target="_blank">WebAIM Contrast Checker</a> and tests:</p>
+<pre><code>Foreground: #333333
+Background: #ffffff
+Ratio: 12.63:1  ✓ AAA
+
+Foreground: #888888
+Background: #ffffff
+Ratio: 3.54:1   ✗ Fails AA for body text</code></pre>
+<p>Colour systems in CSS:</p>
+<pre><code>color: #1f3a68;                /* hex - most common */
+color: rgb(31, 58, 104);       /* red, green, blue 0-255 */
+color: hsl(220, 54%, 26%);     /* hue, saturation, lightness */</code></pre>
+
+  </section>
+
+  <section class="lesson-section">
+    <h2><span class="section-badge" style="background:#3730a3;">We Do · ~15 min</span> Guided build</h2>
+    
+<p>Together, build a palette in <a href="https://coolors.co" target="_blank">Coolors</a>:</p>
+<ol>
+  <li>Press Space to generate random palette</li>
+  <li>Lock the colours you like, regenerate until you're happy</li>
+  <li>Copy hex codes</li>
+  <li>Test each text/background combination in WebAIM Contrast Checker</li>
+</ol>
+<p>Class discussion: which palette works for a calm, professional portfolio? Which works for a loud, creative one?</p>
+
+  </section>
+
+  <section class="lesson-section">
+    <h2><span class="section-badge" style="background:#92400e;">You Do · ~35 min</span> Independent practice</h2>
+    
+<p>Design your portfolio palette. Create a spec sheet (in HTML or a doc):</p>
+<ol>
+  <li>Pick 3-5 colours: one primary, one accent, one text, one background, optional support</li>
+  <li>Record hex codes</li>
+  <li>Test every text/background combination in WebAIM Contrast Checker</li>
+  <li>Record the contrast ratio for each</li>
+  <li>Flag any failing combinations — choose replacements</li>
+</ol>
+<p>Apply your palette to your portfolio styles.css (update from L11's work).</p>
+
+  </section>
+
+  <section class="lesson-section">
+    <h2>Differentiation</h2>
+    <div class="tier-grid">
+      <div class="tier support">
+        <h4>Support</h4>
+        <p>3 curated accessible palettes provided. Pick one and document the contrast ratios.</p>
+      </div>
+      <div class="tier core">
+        <h4>Core</h4>
+        <p>Build your own palette from scratch.</p>
+      </div>
+      <div class="tier extension">
+        <h4>Extension</h4>
+        <p>Add a dark mode palette — same hierarchy, inverted lightness — and use <code>prefers-color-scheme</code> media query.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="lesson-section">
+    <h2><span class="section-badge" style="background:#10b981;">Exit Ticket · 5 min</span></h2>
+    
+<div class="worksheet">
+  <h3>Exit ticket</h3>
+  <p><strong>1. What is the WCAG AA contrast ratio for body text?</strong> _______ : 1</p>
+  <p><strong>2. Your palette:</strong></p>
+  <p>Primary: #________ Contrast with BG: _____:1</p>
+  <p>Background: #________</p>
+  <p>Text: #________ Contrast with BG: _____:1</p>
+  <p>Accent: #________ Contrast with BG: _____:1</p>
+</div>
+
+  </section>
+
+  <section class="lesson-section">
+    <h2>Resources for this lesson</h2>
+    <ul><li><a href="https://webaim.org/resources/contrastchecker/" target="_blank" rel="noopener">WebAIM Contrast Checker</a></li><li><a href="https://coolors.co" target="_blank" rel="noopener">Coolors palette generator</a></li><li><a href="https://www.w3.org/TR/WCAG22/" target="_blank" rel="noopener">WCAG 2.2 standard</a></li></ul>
+  </section>
+
+  <nav class="lesson-nav">
+    <a class="prev" href="l11.html">Previous lesson</a>
+    <a class="next" href="l13.html">Next lesson</a>
+  </nav>
+
+</main>
+
+<footer class="site-footer">
+  <p><strong>10 Multimedia · Term 2 · L12</strong> · Arthur Phillip High School</p>
+</footer>
+
+</body>
+</html>

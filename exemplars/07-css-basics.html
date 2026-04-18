@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CSS Selectors Demo · Lesson 7</title>
+<style>
+  /* ELEMENT SELECTOR - applies to all p tags */
+  body {
+    font-family: system-ui, sans-serif;
+    background: #fafbfc;
+    color: #1a202c;
+    margin: 0;
+    padding: 2rem;
+    line-height: 1.6;
+  }
+  h1 { color: #1f3a68; }
+  p { margin: 1rem 0; }
+
+  /* CLASS SELECTOR - .highlight */
+  .highlight {
+    background: #fef3c7;
+    padding: 4px 8px;
+    border-radius: 4px;
+  }
+
+  /* CLASS SELECTOR - .card */
+  .card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    margin: 1rem 0;
+  }
+
+  /* ID SELECTOR - #intro (only ONE element with this id) */
+  #intro {
+    background: linear-gradient(135deg, #1f3a68, #2e5b9e);
+    color: white;
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+  }
+  #intro h1 { color: white; margin: 0; }
+
+  /* PSEUDO-CLASS - :hover (Extension) */
+  a { color: #2e5b9e; font-weight: 500; }
+  a:hover { color: #1f3a68; background: #f0fdfa; }
+</style>
+</head>
+<body>
+
+<div id="intro">
+  <h1>CSS Selectors Demo</h1>
+  <p>One id, three classes, element selectors — all in one page.</p>
+</div>
+
+<div class="card">
+  <h2>Element selector</h2>
+  <p>This paragraph is styled by the <code>p</code> element selector — along with every other p on this page.</p>
+</div>
+
+<div class="card">
+  <h2>Class selector</h2>
+  <p>This sentence has a <span class="highlight">highlighted phrase</span> because of <code>.highlight</code>.</p>
+  <p>The <code>.card</code> class is used on every card on this page.</p>
+</div>
+
+<div class="card">
+  <h2>Try it</h2>
+  <p>Right-click → View Source. Compare the HTML on top with the CSS in the style tag.</p>
+  <p>Check out <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_selectors">MDN's selectors reference</a> for every selector type.</p>
+</div>
+
+</body>
+</html>

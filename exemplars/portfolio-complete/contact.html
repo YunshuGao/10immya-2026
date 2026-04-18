@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact · Yunshu Gao</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header">
+  <a href="index.html" class="brand">Yunshu Gao</a>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="projects.html">Projects</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<main class="container" style="max-width:600px;">
+  <h1>Contact</h1>
+  <p>I'd love to hear from fellow teachers, students, or parents. Drop me a note.</p>
+
+  <form>
+    <div class="field">
+      <label for="name">Your name</label>
+      <input type="text" id="name" name="name" required>
+    </div>
+    <div class="field">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required>
+    </div>
+    <div class="field">
+      <label for="role">You are a</label>
+      <select id="role" name="role">
+        <option>Teacher</option>
+        <option>Student</option>
+        <option>Parent</option>
+        <option>Other</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="message">Message</label>
+      <textarea id="message" name="message" rows="5" required></textarea>
+    </div>
+    <button type="submit" class="btn">Send message</button>
+  </form>
+</main>
+
+<footer class="site-footer">
+  <p>&copy; 2026 Yunshu Gao · Arthur Phillip High School</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L18 · Contact Forms and Footer | 10 Multimedia T2</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <a href="../index.html" class="site-brand">10 Multimedia · 2026</a>
+    <nav class="site-nav">
+      <a href="../term1.html">Term 1</a>
+      <a href="../term2.html">Term 2</a>
+    </nav>
+  </div>
+</header>
+
+<section class="lesson-head">
+  <div class="container">
+    <span class="lesson-pill">Week 9 · Lesson 18</span>
+    <h1>Contact Forms and Footer</h1>
+    <p class="lesson-meta">Week 9 · 75 minutes · Year 10 Industrial Technology — Multimedia</p>
+    <div class="outcomes"><span class="outcome-tag">IND5-2</span><span class="outcome-tag">IND5-3</span><span class="outcome-tag">IND5-5</span><span class="outcome-tag">IND5-7</span></div>
+  </div>
+</section>
+
+<main class="container">
+
+  <div class="grid grid-2">
+    <div class="card">
+      <h3 style="color:#0f766e;margin-top:0;">Learning intentions</h3>
+      <ul><li>I can build an accessible HTML form.</li><li>I can use HTML5 input types and validation.</li><li>I can connect a form to Formspree for a real submission.</li></ul>
+    </div>
+    <div class="card">
+      <h3 style="color:#1f3a68;margin-top:0;">Success criteria</h3>
+      <ul><li>My portfolio has a working contact form.</li><li>Every input has a label element linked by <code>for</code> and <code>id</code>.</li><li>Submitting the form sends a real email (via Formspree free tier).</li></ul>
+    </div>
+  </div>
+
+  <section class="lesson-section">
+    <h2><span class="section-badge" style="background:#8b5cf6;">Do Now · 5 min</span></h2>
+    
+<p>Fill out one good form (e.g. your school enrolment) and one annoying form. What made one smooth and the other frustrating?</p>
+<p>Common issues: unclear labels, no error messages, no keyboard support, tiny touch targets, no way to recover if you mess up.</p>
+
+  </section>
+
+  <section class="lesson-section">
+    <h2><span class="section-badge">I Do · ~10 min</span> Teacher demonstration</h2>
+    
+<p>Teacher builds an accessible form:</p>
+<pre><code>&lt;form action="https://formspree.io/f/YOUR_ID" method="POST"&gt;
+  &lt;div class="field"&gt;
+    &lt;label for="name"&gt;Your name&lt;/label&gt;
+    &lt;input type="text" id="name" name="name" required&gt;
+  &lt;/div&gt;
+
+  &lt;div class="field"&gt;
+    &lt;label for="email"&gt;Email&lt;/label&gt;
+    &lt;input type="email" id="email" name="email" required&gt;
+  &lt;/div&gt;
+
+  &lt;div class="field"&gt;
+    &lt;label for="message"&gt;Message&lt;/label&gt;
+    &lt;textarea id="message" name="message" rows="5" required&gt;&lt;/textarea&gt;
+  &lt;/div&gt;
+
+  &lt;button type="submit" class="btn"&gt;Send message&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+<div class="callout info">
+  <strong>Accessible form rules:</strong>
+  <ul>
+    <li>Every input has a <code>&lt;label for="..."&gt;</code> linked to the input's <code>id</code></li>
+    <li>Use the right <code>type</code>: email, tel, url, number (triggers right keyboard on mobile)</li>
+    <li>Use <code>required</code> for required fields (free HTML5 validation)</li>
+    <li>Don't hide labels — visible labels help everyone</li>
+  </ul>
+</div>
+<p>Then setup Formspree (free tier, 50 submissions/month):</p>
+<ol>
+  <li>Go to <a href="https://formspree.io">formspree.io</a> and create a free account</li>
+  <li>Create a form. Get your endpoint URL</li>
+  <li>Paste the URL into your form's <code>action</code> attribute</li>
+</ol>
+
+  </section>
+
+  <section class="lesson-section">
+    <h2><span class="section-badge" style="background:#3730a3;">We Do · ~15 min</span> Guided build</h2>
+    
+<p>Together, style the form to match portfolio colours:</p>
+<pre><code>.field { margin-bottom: 1rem; }
+.field label { display: block; font-weight: 600; margin-bottom: 0.3rem; }
+.field input, .field textarea {
+  width: 100%;
+  padding: 0.7rem;
+  border: 2px solid #e4e7ec;
+  border-radius: 6px;
+  font: inherit;
+}
+.field input:focus, .field textarea:focus {
+  outline: none;
+  border-color: #1f3a68;
+}</code></pre>
+
+  </section>
+
+  <section class="lesson-section">
+    <h2><span class="section-badge" style="background:#92400e;">You Do · ~35 min</span> Independent practice</h2>
+    
+<p>Add a contact section (or a dedicated contact.html page) to your portfolio:</p>
+<ol>
+  <li>Build the form with name, email, message fields</li>
+  <li>Every field has a label, correct input type, and required where appropriate</li>
+  <li>Sign up for Formspree if you want a real working form</li>
+  <li>OR use <code>mailto:</code> action if you prefer: <code>&lt;form action="mailto:you@school.nsw.edu.au" method="POST"&gt;</code></li>
+  <li>Build a proper footer: your name, year, copyright, links to projects</li>
+  <li>Test the form submits something</li>
+</ol>
+
+  </section>
+
+  <section class="lesson-section">
+    <h2>Differentiation</h2>
+    <div class="tier-grid">
+      <div class="tier support">
+        <h4>Support</h4>
+        <p>Pre-built form HTML provided. Student swaps in Formspree URL or mailto.</p>
+      </div>
+      <div class="tier core">
+        <h4>Core</h4>
+        <p>Build and style form from scratch.</p>
+      </div>
+      <div class="tier extension">
+        <h4>Extension</h4>
+        <p>Add HTML5 pattern validation (e.g. phone number regex) and <code>:invalid</code> CSS styling for user feedback.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="lesson-section">
+    <h2><span class="section-badge" style="background:#10b981;">Exit Ticket · 5 min</span></h2>
+    
+<div class="worksheet">
+  <h3>Exit ticket</h3>
+  <p><strong>1. Why does every input need a label?</strong></p>
+  <p>____________________________________________________</p>
+  <p><strong>2. Test your form by sending yourself a message. Did it work?</strong></p>
+  <p>Yes / No — if no, what went wrong?</p>
+  <p>____________________________________________________</p>
+</div>
+
+  </section>
+
+  <section class="lesson-section">
+    <h2>Resources for this lesson</h2>
+    <ul><li><a href="https://formspree.io" target="_blank" rel="noopener">Formspree (free tier)</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Learn/Forms" target="_blank" rel="noopener">MDN: Forms accessibility</a></li></ul>
+  </section>
+
+  <nav class="lesson-nav">
+    <a class="prev" href="l17.html">Previous lesson</a>
+    <a class="next" href="l19.html">Next lesson</a>
+  </nav>
+
+</main>
+
+<footer class="site-footer">
+  <p><strong>10 Multimedia · Term 2 · L18</strong> · Arthur Phillip High School</p>
+</footer>
+
+</body>
+</html>

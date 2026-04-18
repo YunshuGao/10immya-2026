@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Box Model Visual · Lesson 8</title>
+<style>
+  body { font-family: system-ui, sans-serif; background: #e4e7ec; padding: 2rem; margin: 0; }
+  h1 { color: #1f3a68; text-align: center; }
+
+  .margin-zone {
+    background: #fbbf24;
+    padding: 40px;
+    margin: 2rem auto;
+    max-width: 500px;
+    text-align: center;
+    border-radius: 8px;
+  }
+  .margin-zone::before { content: "margin (40px, yellow)"; display: block; font-size: 0.85rem; font-weight: 700; color: #78350f; margin-bottom: 10px; }
+
+  .border-zone {
+    background: #fbbf24;
+    border: 20px solid #dc2626;
+    padding: 0;
+  }
+  .border-zone::before { content: "border (20px, red)"; display: block; background: #dc2626; color: white; padding: 6px; font-size: 0.85rem; font-weight: 700; }
+
+  .padding-zone {
+    background: #4ade80;
+    padding: 30px;
+  }
+  .padding-zone::before { content: "padding (30px, green)"; display: block; font-size: 0.85rem; font-weight: 700; color: #064e3b; margin-bottom: 10px; }
+
+  .content-zone {
+    background: #3b82f6;
+    color: white;
+    padding: 1.5rem;
+    border-radius: 6px;
+    font-weight: 600;
+  }
+</style>
+</head>
+<body>
+  <h1>The Box Model, Visualised</h1>
+  <p style="text-align:center;">Every HTML element is a box. The box has 4 layers. Hover any layer to see what each CSS property controls.</p>
+
+  <div class="margin-zone">
+    <div class="border-zone">
+      <div class="padding-zone">
+        <div class="content-zone">
+          CONTENT (blue)<br>
+          This is the actual content of the element.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width: 700px; margin: 0 auto; background: white; padding: 1.5rem; border-radius: 10px;">
+    <h2>In CSS this is:</h2>
+    <pre style="background: #0d1117; color: #e6edf3; padding: 1rem; border-radius: 6px; overflow-x: auto;">.example {
+  margin: 40px;
+  border: 20px solid red;
+  padding: 30px;
+  background: blue;
+  color: white;
+}</pre>
+    <p><strong>Memory aid:</strong> padding = space <em>inside</em> the border. margin = space <em>outside</em> the border.</p>
+  </div>
+</body>
+</html>
