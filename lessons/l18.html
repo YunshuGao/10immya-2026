@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>L18 · Contact Forms and Footer | 10 Multimedia T2</title>
+<title>L18 · Contact Forms — Accessible, Validated, Working | 10 Multimedia T2</title>
 <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
@@ -14,6 +14,7 @@
     <nav class="site-nav">
       <a href="../term1.html">Term 1</a>
       <a href="../term2.html">Term 2</a>
+      <a href="../references.html">References</a>
     </nav>
   </div>
 </header>
@@ -21,7 +22,7 @@
 <section class="lesson-head">
   <div class="container">
     <span class="lesson-pill">Week 9 · Lesson 18</span>
-    <h1>Contact Forms and Footer</h1>
+    <h1>Contact Forms — Accessible, Validated, Working</h1>
     <p class="lesson-meta">Week 9 · 75 minutes · Year 10 Industrial Technology — Multimedia</p>
     <div class="outcomes"><span class="outcome-tag">IND5-2</span><span class="outcome-tag">IND5-3</span><span class="outcome-tag">IND5-5</span><span class="outcome-tag">IND5-7</span></div>
   </div>
@@ -32,78 +33,142 @@
   <div class="grid grid-2">
     <div class="card">
       <h3 style="color:#0f766e;margin-top:0;">Learning intentions</h3>
-      <ul><li>I can build an accessible HTML form.</li><li>I can use HTML5 input types and validation.</li><li>I can connect a form to Formspree for a real submission.</li></ul>
+      <ul><li>I can build an accessible HTML form using label/input pairing correctly.</li><li>I can use HTML5 input types (email, tel, url, number) for appropriate data.</li><li>I can group related fields with <fieldset> and <legend>.</li><li>I can connect a form to Formspree for a real submission.</li></ul>
     </div>
     <div class="card">
       <h3 style="color:#1f3a68;margin-top:0;">Success criteria</h3>
-      <ul><li>My portfolio has a working contact form.</li><li>Every input has a label element linked by <code>for</code> and <code>id</code>.</li><li>Submitting the form sends a real email (via Formspree free tier).</li></ul>
+      <ul><li>My portfolio has a working contact form.</li><li>Every input has a <label> element linked by for/id.</li><li>At least one input uses an HTML5 type (email, tel, url, or number).</li><li>Related fields are grouped inside <fieldset> with a <legend>.</li></ul>
     </div>
   </div>
 
   <section class="lesson-section">
     <h2><span class="section-badge" style="background:#8b5cf6;">Do Now · 5 min</span></h2>
     
-<p>Fill out one good form (e.g. your school enrolment) and one annoying form. What made one smooth and the other frustrating?</p>
-<p>Common issues: unclear labels, no error messages, no keyboard support, tiny touch targets, no way to recover if you mess up.</p>
+<p>Fill out a good form and a bad form in your head. What makes one feel right and the other frustrating?</p>
+<p>Common form crimes:</p>
+<ul>
+  <li>No label (just a placeholder that vanishes when you type)</li>
+  <li>Email input that's type="text" (no keyboard optimisation on phones)</li>
+  <li>No indication of what's required until you fail to submit</li>
+  <li>Tiny touch targets (frustrating on phones)</li>
+</ul>
 
   </section>
 
   <section class="lesson-section">
     <h2><span class="section-badge">I Do · ~10 min</span> Teacher demonstration</h2>
     
-<p>Teacher builds an accessible form:</p>
+<h3>Step 1 — The form skeleton</h3>
 <pre><code>&lt;form action="https://formspree.io/f/YOUR_ID" method="POST"&gt;
-  &lt;div class="field"&gt;
-    &lt;label for="name"&gt;Your name&lt;/label&gt;
-    &lt;input type="text" id="name" name="name" required&gt;
-  &lt;/div&gt;
-
-  &lt;div class="field"&gt;
-    &lt;label for="email"&gt;Email&lt;/label&gt;
-    &lt;input type="email" id="email" name="email" required&gt;
-  &lt;/div&gt;
-
-  &lt;div class="field"&gt;
-    &lt;label for="message"&gt;Message&lt;/label&gt;
-    &lt;textarea id="message" name="message" rows="5" required&gt;&lt;/textarea&gt;
-  &lt;/div&gt;
-
-  &lt;button type="submit" class="btn"&gt;Send message&lt;/button&gt;
+  ... inputs go here ...
+  &lt;button type="submit"&gt;Send&lt;/button&gt;
 &lt;/form&gt;</code></pre>
-<div class="callout info">
-  <strong>Accessible form rules:</strong>
-  <ul>
-    <li>Every input has a <code>&lt;label for="..."&gt;</code> linked to the input's <code>id</code></li>
-    <li>Use the right <code>type</code>: email, tel, url, number (triggers right keyboard on mobile)</li>
-    <li>Use <code>required</code> for required fields (free HTML5 validation)</li>
-    <li>Don't hide labels — visible labels help everyone</li>
-  </ul>
+<ul>
+  <li><code>action</code> = where the form data gets sent</li>
+  <li><code>method="POST"</code> = standard for submitting new data (GET for search)</li>
+</ul>
+
+<h3>Step 2 — Every input needs a label (this is non-negotiable for accessibility)</h3>
+<pre><code>&lt;!-- PATTERN 1: label + input linked by for/id --&gt;
+&lt;label for="email-field"&gt;Email address&lt;/label&gt;
+&lt;input type="email" id="email-field" name="email" required&gt;
+
+&lt;!-- PATTERN 2: label wraps the input (no for/id needed) --&gt;
+&lt;label&gt;
+  Full name
+  &lt;input type="text" name="name" required&gt;
+&lt;/label&gt;</code></pre>
+<div class="callout warn">
+  <strong>Why this matters:</strong> a screen reader user tabs through the form. When they reach the email input, the screen reader announces the label. Without a linked label, they hear "edit text" — completely useless.
 </div>
-<p>Then setup Formspree (free tier, 50 submissions/month):</p>
-<ol>
-  <li>Go to <a href="https://formspree.io">formspree.io</a> and create a free account</li>
-  <li>Create a form. Get your endpoint URL</li>
-  <li>Paste the URL into your form's <code>action</code> attribute</li>
-</ol>
+
+<h3>Step 3 — HTML5 input types (use the right one!)</h3>
+<pre><code>type="text"       /* generic single-line */
+type="email"      /* triggers email keyboard on phone, validates @ */
+type="tel"        /* triggers phone number keyboard on phone */
+type="url"        /* validates URL format */
+type="number"     /* numeric only, with up/down arrows */
+type="date"       /* opens a calendar picker */
+type="color"      /* opens a colour picker */
+type="range"      /* slider */
+type="password"   /* masks input */
+type="file"       /* file picker */
+type="hidden"     /* not visible, used for tracking */</code></pre>
+
+<h3>Step 4 — Text areas, selects, radios, checkboxes</h3>
+<pre><code>&lt;!-- Multi-line text --&gt;
+&lt;label for="message"&gt;Your message&lt;/label&gt;
+&lt;textarea id="message" name="message" rows="5" required&gt;&lt;/textarea&gt;
+
+&lt;!-- Dropdown --&gt;
+&lt;label for="topic"&gt;Topic&lt;/label&gt;
+&lt;select id="topic" name="topic"&gt;
+  &lt;option value="question"&gt;A question&lt;/option&gt;
+  &lt;option value="feedback"&gt;Feedback&lt;/option&gt;
+  &lt;option value="work"&gt;Work experience&lt;/option&gt;
+&lt;/select&gt;
+
+&lt;!-- Radio (one choice) --&gt;
+&lt;fieldset&gt;
+  &lt;legend&gt;How did you find me?&lt;/legend&gt;
+  &lt;label&gt;&lt;input type="radio" name="source" value="google"&gt; Google&lt;/label&gt;
+  &lt;label&gt;&lt;input type="radio" name="source" value="friend"&gt; Friend&lt;/label&gt;
+  &lt;label&gt;&lt;input type="radio" name="source" value="school"&gt; School&lt;/label&gt;
+&lt;/fieldset&gt;
+
+&lt;!-- Checkbox (multiple choices) --&gt;
+&lt;fieldset&gt;
+  &lt;legend&gt;Interests&lt;/legend&gt;
+  &lt;label&gt;&lt;input type="checkbox" name="interests" value="design"&gt; Design&lt;/label&gt;
+  &lt;label&gt;&lt;input type="checkbox" name="interests" value="code"&gt; Coding&lt;/label&gt;
+&lt;/fieldset&gt;</code></pre>
+
+<h3>Step 5 — Fieldset and legend group related fields</h3>
+<p><code>&lt;fieldset&gt;</code> with <code>&lt;legend&gt;</code> tells a screen reader "these fields belong together". The legend is announced before each field in the group.</p>
+
+<h3>Step 6 — HTML5 validation (free, built into the browser)</h3>
+<pre><code>&lt;input type="email" name="email" required&gt;
+&lt;input type="text" name="username" required minlength="3" maxlength="20"&gt;
+&lt;input type="number" name="age" min="13" max="120"&gt;
+&lt;input type="tel" name="phone" pattern="[0-9]{10}"&gt;
+&lt;input type="text" name="title" placeholder="e.g. Year 10 student" disabled&gt;</code></pre>
+<ul>
+  <li><code>required</code> — can't submit without a value</li>
+  <li><code>placeholder</code> — hint text that vanishes on typing (NOT a replacement for label)</li>
+  <li><code>disabled</code> — can't interact</li>
+  <li><code>min / max / minlength / maxlength / pattern</code> — constraint validation</li>
+</ul>
 
   </section>
 
   <section class="lesson-section">
     <h2><span class="section-badge" style="background:#3730a3;">We Do · ~15 min</span> Guided build</h2>
     
-<p>Together, style the form to match portfolio colours:</p>
-<pre><code>.field { margin-bottom: 1rem; }
-.field label { display: block; font-weight: 600; margin-bottom: 0.3rem; }
-.field input, .field textarea {
+<p>Style the form to match your portfolio:</p>
+<pre><code>form { max-width: 500px; margin: 0 auto; }
+fieldset { border: 1px solid #e4e7ec; border-radius: 8px; padding: 1rem; margin-bottom: 1rem; }
+legend { font-weight: 700; padding: 0 0.5rem; }
+
+label { display: block; font-weight: 600; margin-bottom: 0.3rem; }
+input, textarea, select {
   width: 100%;
   padding: 0.7rem;
   border: 2px solid #e4e7ec;
   border-radius: 6px;
   font: inherit;
 }
-.field input:focus, .field textarea:focus {
+input:focus, textarea:focus, select:focus {
   outline: none;
   border-color: #1f3a68;
+}
+
+button[type="submit"] {
+  background: #1f3a68;
+  color: white;
+  border: 0;
+  padding: 0.8rem 1.5rem;
+  border-radius: 6px;
+  cursor: pointer;
 }</code></pre>
 
   </section>
@@ -111,15 +176,22 @@
   <section class="lesson-section">
     <h2><span class="section-badge" style="background:#92400e;">You Do · ~35 min</span> Independent practice</h2>
     
-<p>Add a contact section (or a dedicated contact.html page) to your portfolio:</p>
+<p>Add a contact section (or contact.html page) to your portfolio:</p>
 <ol>
-  <li>Build the form with name, email, message fields</li>
-  <li>Every field has a label, correct input type, and required where appropriate</li>
-  <li>Sign up for Formspree if you want a real working form</li>
-  <li>OR use <code>mailto:</code> action if you prefer: <code>&lt;form action="mailto:you@school.nsw.edu.au" method="POST"&gt;</code></li>
-  <li>Build a proper footer: your name, year, copyright, links to projects</li>
-  <li>Test the form submits something</li>
+  <li>Wrap everything in a <code>&lt;form&gt;</code> with action (Formspree or mailto:).</li>
+  <li>Include at least: Name (text), Email (type="email"), Message (textarea).</li>
+  <li>Every field has a linked <code>&lt;label&gt;</code>.</li>
+  <li>Use <code>&lt;fieldset&gt;</code>+<code>&lt;legend&gt;</code> to group at least one set of related fields.</li>
+  <li>Use <code>required</code> on at least one field.</li>
+  <li>Style the form to match your portfolio palette and fonts.</li>
+  <li>Test: submit the form; does anything happen?</li>
+  <li>Build a proper footer for the page.</li>
 </ol>
+<p><strong>Free services for real submissions (no backend needed):</strong></p>
+<ul>
+  <li><a href="https://formspree.io" target="_blank">Formspree.io</a> — free tier (50 submissions/month)</li>
+  <li><code>action="mailto:you@school.nsw.edu.au"</code> — simplest fallback (opens email client)</li>
+</ul>
 
   </section>
 
@@ -128,15 +200,15 @@
     <div class="tier-grid">
       <div class="tier support">
         <h4>Support</h4>
-        <p>Pre-built form HTML provided. Student swaps in Formspree URL or mailto.</p>
+        <p>Pre-built form HTML with comments; student swaps in Formspree URL and styles it.</p>
       </div>
       <div class="tier core">
         <h4>Core</h4>
-        <p>Build and style form from scratch.</p>
+        <p>Build from scratch using all 3 semantic grouping elements (label/fieldset/legend).</p>
       </div>
       <div class="tier extension">
         <h4>Extension</h4>
-        <p>Add HTML5 pattern validation (e.g. phone number regex) and <code>:invalid</code> CSS styling for user feedback.</p>
+        <p>Add HTML5 pattern validation with a regex (e.g. phone number pattern). Use <code>:invalid</code> CSS pseudo-class to style fields that fail validation.</p>
       </div>
     </div>
   </section>
@@ -147,18 +219,30 @@
 <div class="worksheet">
   <h3>Exit ticket</h3>
   <p><strong>1. Why does every input need a label?</strong></p>
-  <p>____________________________________________________</p>
-  <p><strong>2. Test your form by sending yourself a message. Did it work?</strong></p>
-  <p>Yes / No — if no, what went wrong?</p>
-  <p>____________________________________________________</p>
+  <p>_______________________________________________________</p>
+  <p><strong>2. What's the correct input type for each?</strong></p>
+  <p>Email: _________ &nbsp; Phone: _________ &nbsp; Age: _________</p>
+  <p><strong>3. Which tag groups related fields?</strong> _______</p>
+  <p><strong>4. Paste the HTML of your favourite input from today's work:</strong></p>
+  <p>_______________________________________________________</p>
 </div>
 
   </section>
 
   <section class="lesson-section">
     <h2>Resources for this lesson</h2>
-    <ul><li><a href="https://formspree.io" target="_blank" rel="noopener">Formspree (free tier)</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Learn/Forms" target="_blank" rel="noopener">MDN: Forms accessibility</a></li></ul>
+    <ul><li><a href="https://formspree.io" target="_blank" rel="noopener">Formspree (free tier)</a></li><li><a href="https://learn.shayhowe.com/html-css/building-forms/" target="_blank" rel="noopener">Shay Howe Ch 10: Building Forms (full chapter)</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Learn/Forms" target="_blank" rel="noopener">MDN: Forms — accessibility and input types</a></li></ul>
   </section>
+
+
+  <section class="lesson-section" style="background:#fef3c7;border-color:#f59e0b;">
+    <h2 style="color:#92400e;">📚 Deeper Reading</h2>
+    <p style="color:#78350f;font-size:.95em;">External references drawn from Shay Howe's "Learn to Code HTML & CSS" and University of Michigan's "Web Design for Everybody" Coursera specialization. All credit to original authors.</p>
+    <ul style="list-style:none;padding-left:0;">
+      <li><a href="https://learn.shayhowe.com/html-css/building-forms/" target="_blank" rel="noopener"><strong>Shay Howe · Ch 10: Building Forms</strong></a><br><span style="color:#4a5568;font-size:.9em;">Comprehensive form guide — all input types, fieldset/legend, validation attributes.</span></li><li><a href="https://developer.mozilla.org/en-US/docs/Learn/Forms" target="_blank" rel="noopener"><strong>MDN · Forms and accessibility</strong></a><br><span style="color:#4a5568;font-size:.9em;">Authoritative reference for accessible form design.</span></li><li><a href="https://formspree.io" target="_blank" rel="noopener"><strong>Formspree.io (free tier)</strong></a><br><span style="color:#4a5568;font-size:.9em;">Serverless form submission — works for static sites like GitHub Pages.</span></li>
+    </ul>
+  </section>
+
 
   <nav class="lesson-nav">
     <a class="prev" href="l17.html">Previous lesson</a>

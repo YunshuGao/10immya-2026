@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>L07 · CSS Basics — Selectors, Colours, Text | 10 Multimedia T2</title>
+<title>L07 · CSS Basics — Selectors, Cascade, Specificity | 10 Multimedia T2</title>
 <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
@@ -14,6 +14,7 @@
     <nav class="site-nav">
       <a href="../term1.html">Term 1</a>
       <a href="../term2.html">Term 2</a>
+      <a href="../references.html">References</a>
     </nav>
   </div>
 </header>
@@ -21,7 +22,7 @@
 <section class="lesson-head">
   <div class="container">
     <span class="lesson-pill">Week 4 · Lesson 07</span>
-    <h1>CSS Basics — Selectors, Colours, Text</h1>
+    <h1>CSS Basics — Selectors, Cascade, Specificity</h1>
     <p class="lesson-meta">Week 4 · 75 minutes · Year 10 Industrial Technology — Multimedia</p>
     <div class="outcomes"><span class="outcome-tag">IND5-2</span><span class="outcome-tag">IND5-3</span><span class="outcome-tag">IND5-4</span></div>
   </div>
@@ -32,87 +33,95 @@
   <div class="grid grid-2">
     <div class="card">
       <h3 style="color:#0f766e;margin-top:0;">Learning intentions</h3>
-      <ul><li>I can link an external CSS stylesheet to an HTML file.</li><li>I can use element, class, and id selectors.</li><li>I can change colour, background, and text styles with CSS.</li></ul>
+      <ul><li>I can link an external CSS stylesheet to an HTML file.</li><li>I can use element, class, and id selectors — and explain which one wins when they conflict.</li><li>I can read the specificity weight of a selector (like 0-1-0).</li><li>I can use hex, rgb, and hsl colour values in CSS.</li></ul>
     </div>
     <div class="card">
       <h3 style="color:#1f3a68;margin-top:0;">Success criteria</h3>
-      <ul><li>My HTML has <code>&lt;link rel="stylesheet" href="styles.css"&gt;</code>.</li><li>My CSS file uses at least 3 selector types (element, class, id).</li><li>My page has a chosen colour palette — not black text on white default.</li></ul>
+      <ul><li>My HTML has <code>&lt;link rel="stylesheet" href="styles.css"&gt;</code> in the head.</li><li>My CSS file uses all 3 selector types (element, class, id) at least once each.</li><li>I can state the specificity weight of any selector in 0-0-0 notation.</li><li>My page has a chosen colour palette written in hex codes.</li></ul>
     </div>
   </div>
 
   <section class="lesson-section">
     <h2><span class="section-badge" style="background:#8b5cf6;">Do Now · 5 min</span></h2>
     
-<p>Open your most recent HTML page. Right now it probably looks like a 1995 website — plain text, blue links, no style. That is about to change.</p>
-<p>In your head: imagine your page with:</p>
+<p>Last lesson your HTML page looked like 1995. Today that ends.</p>
+<p>Open your most recent HTML file. In your head, imagine it with:</p>
 <ul>
   <li>A soft background colour</li>
-  <li>A different font for headings</li>
-  <li>Larger, more breathing-room text</li>
+  <li>A different font for headings vs body</li>
+  <li>More spacing so it breathes</li>
 </ul>
+<p><strong>Prediction:</strong> If I write two CSS rules for the same element — which one wins?</p>
 
   </section>
 
   <section class="lesson-section">
     <h2><span class="section-badge">I Do · ~10 min</span> Teacher demonstration</h2>
     
-<p>Teacher creates a <code>styles.css</code> file in the same folder and links it:</p>
-<pre><code>&lt;!-- inside head of HTML --&gt;
+<h3>Step 1 — Link a stylesheet</h3>
+<pre><code>&lt;!-- inside the HTML head --&gt;
 &lt;link rel="stylesheet" href="styles.css"&gt;</code></pre>
-<p>Then writes first CSS rules:</p>
-<pre><code>/* Element selector - affects all p tags */
+
+<h3>Step 2 — The 3 selector types (every CSS selector is one of these)</h3>
+<pre><code>/* TYPE selector — affects every p tag on the page */
 p {
   color: #333;
   font-size: 18px;
   line-height: 1.6;
 }
 
-/* Class selector - only elements with class="highlight" */
+/* CLASS selector — only elements with class="highlight" */
 .highlight {
-  background-color: yellow;
+  background-color: #fef3c7;
   padding: 4px 8px;
+  border-radius: 4px;
 }
 
-/* ID selector - only the one element with id="main-title" */
+/* ID selector — only the ONE element with id="main-title" */
 #main-title {
   color: #1f3a68;
   font-size: 48px;
 }</code></pre>
-<p>Apply in HTML:</p>
-<pre><code>&lt;h1 id="main-title"&gt;My Website&lt;/h1&gt;
-&lt;p class="highlight"&gt;This paragraph is highlighted.&lt;/p&gt;
-&lt;p&gt;This paragraph is not.&lt;/p&gt;</code></pre>
+
+<h3>Step 3 — When two rules conflict, specificity decides the winner</h3>
 <div class="callout info">
-  <strong>Three selector types:</strong>
+  <strong>Specificity weight notation (read left to right, IDs–Classes–Elements):</strong>
   <ul>
-    <li><code>p</code> — element selector (all p tags)</li>
-    <li><code>.name</code> — class selector (elements with that class)</li>
-    <li><code>#name</code> — id selector (the ONE element with that id)</li>
+    <li><code>p</code> = <code>0-0-1</code> (one element)</li>
+    <li><code>.highlight</code> = <code>0-1-0</code> (one class)</li>
+    <li><code>#main-title</code> = <code>1-0-0</code> (one id)</li>
+    <li><code>article p.intro</code> = <code>0-1-2</code> (two elements + one class)</li>
   </ul>
+  Higher wins. <code>1-0-0</code> beats <code>0-1-0</code> beats <code>0-0-1</code>, regardless of which comes first.
 </div>
+
+<h3>Step 4 — The cascade (when specificity ties)</h3>
+<p>If specificity is equal, the LAST rule in the stylesheet wins. That's why it's called "Cascading Style Sheets" — rules flow top to bottom.</p>
+<pre><code>p { color: orange; }   /* loses */
+p { color: green; }    /* wins — declared later with equal specificity */</code></pre>
+
+<div class="callout warn">
+  <strong>The "avoid IDs in CSS" rule:</strong> because <code>#id</code> specificity (1-0-0) beats every class combination, professionals avoid styling by id. Use classes for style, ids for same-page anchors only.
+</div>
+
+<h3>Step 5 — Colour formats you'll actually use</h3>
+<pre><code>color: #1f3a68;                /* hex - most common */
+color: rgb(31, 58, 104);       /* red, green, blue 0-255 */
+color: rgba(31, 58, 104, 0.8); /* same + alpha (transparency) */
+color: hsl(220, 54%, 26%);     /* hue, saturation, lightness */</code></pre>
 
   </section>
 
   <section class="lesson-section">
     <h2><span class="section-badge" style="background:#3730a3;">We Do · ~15 min</span> Guided build</h2>
     
-<p>Together, style a sample paragraph block with:</p>
+<p>Together on the exemplar page, we'll:</p>
 <ol>
-  <li>Dark grey background on the body</li>
-  <li>Off-white text colour</li>
-  <li>A heading in one accent colour (your choice from the palette)</li>
-  <li>Change the font using <code>font-family: Georgia, serif;</code></li>
+  <li>Write <code>p { color: red; }</code> — watch all p go red.</li>
+  <li>Add <code>&lt;p class="note"&gt;...&lt;/p&gt;</code> and write <code>.note { color: blue; }</code> — prediction: which p goes blue?</li>
+  <li>Add <code>#important { color: orange; }</code> to one specific p — prediction: which colour wins?</li>
+  <li>DevTools Styles panel: see CROSSED-OUT rules — that's specificity losing in real time.</li>
 </ol>
-<pre><code>body {
-  background-color: #1a202c;
-  color: #f7fafc;
-  font-family: Georgia, serif;
-  padding: 2rem;
-}
-
-h1 {
-  color: #f59e0b;
-}</code></pre>
 
   </section>
 
@@ -120,17 +129,20 @@ h1 {
     <h2><span class="section-badge" style="background:#92400e;">You Do · ~35 min</span> Independent practice</h2>
     
 <p>Open your L04 semantic HTML file. Create <code>styles.css</code> in the same folder. Link it.</p>
-<p>Apply at least 8 CSS rules including:</p>
+<p>Apply at least <strong>10 CSS rules</strong> including:</p>
 <ol>
-  <li>A body background colour</li>
-  <li>A text colour on the body</li>
-  <li>A font-family (try Georgia, Arial, or Verdana)</li>
-  <li>Heading styles for h1, h2</li>
-  <li>Link colour and hover colour</li>
-  <li>A class selector (e.g. <code>.intro</code>) styled differently</li>
+  <li>A body background colour (hex)</li>
+  <li>A body text colour (hex)</li>
+  <li>font-family on body (with fallback: <code>'Inter', sans-serif</code>)</li>
+  <li>Heading styles for h1 AND h2 (different sizes)</li>
+  <li>Link colour AND hover colour</li>
+  <li>A class selector (e.g. <code>.intro</code>) that overrides the body colour</li>
   <li>An id selector (e.g. <code>#profile-photo</code>) styled differently</li>
-  <li>At least one rule for <code>ul</code> or <code>li</code></li>
+  <li>A rule for <code>ul</code> or <code>li</code></li>
+  <li>A rule using rgba() with transparency</li>
+  <li>A comment explaining one of your decisions</li>
 </ol>
+<p><strong>Extension:</strong> Write a rule that you expect to LOSE due to specificity — then confirm in DevTools that it's crossed out.</p>
 
   </section>
 
@@ -139,15 +151,15 @@ h1 {
     <div class="tier-grid">
       <div class="tier support">
         <h4>Support</h4>
-        <p>Provided HTML and an empty styles.css with commented TODOs. Student fills in colour values and font choices.</p>
+        <p>Empty styles.css with 10 commented TODOs provided; student fills in values only.</p>
       </div>
       <div class="tier core">
         <h4>Core</h4>
-        <p>Complete the 8-rule stylesheet from scratch.</p>
+        <p>10-rule stylesheet from scratch using all 3 selector types.</p>
       </div>
       <div class="tier extension">
         <h4>Extension</h4>
-        <p>Research and use one CSS pseudo-class (like <code>:hover</code>, <code>:first-child</code>, <code>:nth-child(even)</code>). Explain in a comment what it does.</p>
+        <p>Research <code>:hover</code>, <code>:first-child</code>, <code>:nth-child(even)</code> pseudo-classes on MDN. Use one with a comment explaining specificity impact (pseudo-classes add <code>0-1-0</code>).</p>
       </div>
     </div>
   </section>
@@ -157,17 +169,33 @@ h1 {
     
 <div class="worksheet">
   <h3>Exit ticket</h3>
-  <p><strong>1. What character starts a class selector?</strong> ___ &nbsp;&nbsp; <strong>And an id selector?</strong> ___</p>
-  <p><strong>2. Paste your favourite CSS rule from today's work:</strong></p>
-  <p>____________________________________________________</p>
+  <p><strong>1. What specificity weight is each of these?</strong></p>
+  <p>a) <code>article</code> = ____-____-____</p>
+  <p>b) <code>.hero</code> = ____-____-____</p>
+  <p>c) <code>#logo</code> = ____-____-____</p>
+  <p>d) <code>nav a.active</code> = ____-____-____</p>
+  <p><strong>2. Two rules both apply. Rule A: <code>.text { color: red; }</code>. Rule B: <code>p { color: blue; }</code>. Which wins? Why?</strong></p>
+  <p>_______________________________________________________</p>
+  <p><strong>3. Paste your favourite CSS rule from today:</strong></p>
+  <p>_______________________________________________________</p>
 </div>
 
   </section>
 
   <section class="lesson-section">
     <h2>Resources for this lesson</h2>
-    <ul><li><a href="../exemplars/07-css-basics.html" target="_blank" rel="noopener">Exemplar: CSS selectors demo</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Learn/CSS/First_steps" target="_blank" rel="noopener">MDN: CSS first steps</a></li><li><a href="https://htmlcolorcodes.com/" target="_blank" rel="noopener">CSS colour picker (hex/rgb/hsl)</a></li></ul>
+    <ul><li><a href="../exemplars/07-css-basics.html" target="_blank" rel="noopener">Exemplar: CSS selectors demo</a></li><li><a href="https://learn.shayhowe.com/html-css/getting-to-know-css/" target="_blank" rel="noopener">Shay Howe Ch 3: Getting to Know CSS (full chapter)</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity" target="_blank" rel="noopener">MDN: Specificity</a></li><li><a href="https://htmlcolorcodes.com/" target="_blank" rel="noopener">CSS colour picker</a></li></ul>
   </section>
+
+
+  <section class="lesson-section" style="background:#fef3c7;border-color:#f59e0b;">
+    <h2 style="color:#92400e;">📚 Deeper Reading</h2>
+    <p style="color:#78350f;font-size:.95em;">External references drawn from Shay Howe's "Learn to Code HTML & CSS" and University of Michigan's "Web Design for Everybody" Coursera specialization. All credit to original authors.</p>
+    <ul style="list-style:none;padding-left:0;">
+      <li><a href="https://learn.shayhowe.com/html-css/getting-to-know-css/" target="_blank" rel="noopener"><strong>Shay Howe · Ch 3: Getting to Know CSS</strong></a><br><span style="color:#4a5568;font-size:.9em;">Cascade, specificity, combining selectors (right-to-left reading), colour values.</span></li><li><a href="https://www.coursera.org/learn/introcss" target="_blank" rel="noopener"><strong>UMich CSS3 · M1: Introduction to CSS3</strong></a><br><span style="color:#4a5568;font-size:.9em;">Separation of content and style with 15 videos + 8 readings.</span></li>
+    </ul>
+  </section>
+
 
   <nav class="lesson-nav">
     <a class="prev" href="l06.html">Previous lesson</a>

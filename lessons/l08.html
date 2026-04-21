@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>L08 · The Box Model — Padding, Margin, Border | 10 Multimedia T2</title>
+<title>L08 · The Box Model — Display, Padding, Margin, Border | 10 Multimedia T2</title>
 <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
@@ -14,6 +14,7 @@
     <nav class="site-nav">
       <a href="../term1.html">Term 1</a>
       <a href="../term2.html">Term 2</a>
+      <a href="../references.html">References</a>
     </nav>
   </div>
 </header>
@@ -21,7 +22,7 @@
 <section class="lesson-head">
   <div class="container">
     <span class="lesson-pill">Week 4 · Lesson 08</span>
-    <h1>The Box Model — Padding, Margin, Border</h1>
+    <h1>The Box Model — Display, Padding, Margin, Border</h1>
     <p class="lesson-meta">Week 4 · 75 minutes · Year 10 Industrial Technology — Multimedia</p>
     <div class="outcomes"><span class="outcome-tag">IND5-2</span><span class="outcome-tag">IND5-3</span></div>
   </div>
@@ -32,89 +33,127 @@
   <div class="grid grid-2">
     <div class="card">
       <h3 style="color:#0f766e;margin-top:0;">Learning intentions</h3>
-      <ul><li>I can describe the box model (content, padding, border, margin).</li><li>I can use padding and margin to create breathing room.</li><li>I can inspect the box model of any element in DevTools.</li></ul>
+      <ul><li>I can describe the 4 layers of the box model in order.</li><li>I can use the display property (block, inline, inline-block) correctly.</li><li>I can use padding, margin, border shorthand and longhand forms.</li><li>I can apply box-sizing: border-box for predictable layout maths.</li></ul>
     </div>
     <div class="card">
       <h3 style="color:#1f3a68;margin-top:0;">Success criteria</h3>
-      <ul><li>My page uses both padding AND margin somewhere intentionally.</li><li>At least one element has a visible border.</li><li>I can open DevTools and see the coloured box model layers.</li></ul>
+      <ul><li>My page uses padding AND margin AND border intentionally.</li><li>At least one element has border-radius rounded corners.</li><li>I have added <code>* { box-sizing: border-box; }</code> to my stylesheet.</li><li>I can open DevTools and see the 4 coloured box model layers.</li></ul>
     </div>
   </div>
 
   <section class="lesson-section">
     <h2><span class="section-badge" style="background:#8b5cf6;">Do Now · 5 min</span></h2>
     
-<p>Every element on a webpage — every single one — is a box. Including the text you are reading right now. Including the image above. Including the button you will click.</p>
-<p>Open any website in DevTools, click the Select Element arrow (top-left of DevTools), hover any text or image. See the coloured layers around it? Those are the box model.</p>
+<p>Every HTML element is a rectangular box. Every single one. Including the text you're reading. Including this page. Including the button you'll click later.</p>
+<p>Open any website in DevTools. Click the Select Element arrow (top-left of DevTools). Hover text or an image. See the coloured layers? <strong>That's the box model.</strong></p>
 
   </section>
 
   <section class="lesson-section">
     <h2><span class="section-badge">I Do · ~10 min</span> Teacher demonstration</h2>
     
-<p>Teacher opens DevTools on a sample page and explains the layers from inside out:</p>
-<pre><code>+----------------- MARGIN (outside) -----------------+
-|                                                     |
-|   +------------- BORDER ---------------+             |
-|   |                                     |            |
-|   |  +------ PADDING (inside) ----+     |            |
-|   |  |                             |    |            |
-|   |  |       CONTENT               |    |            |
-|   |  |   (text, image, etc)        |    |            |
-|   |  +-----------------------------+    |            |
-|   +-------------------------------------+            |
-|                                                     |
-+-----------------------------------------------------+</code></pre>
-<p>In CSS:</p>
-<pre><code>.card {
-  padding: 20px;        /* space INSIDE the border */
-  border: 2px solid #1f3a68;
-  margin: 40px;         /* space OUTSIDE the border */
-  background-color: white;
-}</code></pre>
-<div class="callout warn">
-  <strong>Padding vs margin — the one rule that confuses everyone:</strong>
-  <ul>
-    <li><strong>Padding</strong> = space between content and border (inside the element)</li>
-    <li><strong>Margin</strong> = space between this element and the next one (outside the element)</li>
-  </ul>
+<h3>Step 1 — The 4 layers (inside to out)</h3>
+<pre><code>+---------- MARGIN (outside, transparent) ----------+
+|                                                    |
+|   +------ BORDER (the line around the box) ----+   |
+|   |                                             |  |
+|   |   +-- PADDING (inside, same colour as bg) -+|  |
+|   |   |                                        ||  |
+|   |   |          CONTENT                       ||  |
+|   |   |       (text, image, etc)               ||  |
+|   |   +----------------------------------------+|  |
+|   +---------------------------------------------+  |
+|                                                    |
++----------------------------------------------------+</code></pre>
+
+<div class="callout info">
+  <strong>Memory aid:</strong> padding = space <em>inside</em> the border. margin = space <em>outside</em> the border.
 </div>
-<p>Teacher shows the shorthand:</p>
-<pre><code>padding: 10px;                  /* all 4 sides */
-padding: 10px 20px;             /* top/bottom, left/right */
-padding: 10px 20px 30px 40px;   /* top, right, bottom, left (clockwise) */</code></pre>
+
+<h3>Step 2 — The display property controls how boxes behave</h3>
+<pre><code>display: block;          /* takes full width, starts new line */
+display: inline;         /* only content width, flows in text */
+display: inline-block;   /* flows in text BUT accepts width/height */
+display: none;           /* completely hidden, takes no space */</code></pre>
+
+<h3>Step 3 — Shorthand for margin/padding (clockwise!)</h3>
+<pre><code>/* 1 value: all 4 sides */
+padding: 20px;
+
+/* 2 values: top/bottom, left/right */
+padding: 10px 20px;
+
+/* 3 values: top, left/right, bottom */
+padding: 10px 20px 30px;
+
+/* 4 values: top, right, bottom, left — CLOCKWISE */
+padding: 10px 20px 30px 40px;
+
+/* Longhand for one side only */
+padding-top: 10px;
+margin-left: 24px;</code></pre>
+
+<h3>Step 4 — Border: width style colour</h3>
+<pre><code>/* Shorthand — width, style, colour */
+border: 2px solid #1f3a68;
+
+/* Border styles: solid, dashed, dotted, double, none */
+border: 1px dashed #888;
+
+/* Rounded corners */
+border-radius: 8px;           /* all 4 corners */
+border-radius: 8px 20px;      /* top-left/bottom-right, top-right/bottom-left */
+border-radius: 50%;           /* perfect circle (if width = height) */</code></pre>
+
+<h3>Step 5 — box-sizing: border-box (the one CSS rule professionals always add)</h3>
+<p>By default, width + padding + border = bigger than you asked for. Example:</p>
+<pre><code>.card { width: 400px; padding: 20px; border: 2px solid; }
+/* Actual rendered width: 400 + 20 + 20 + 2 + 2 = 444px */</code></pre>
+<p>With <code>box-sizing: border-box</code>, the width INCLUDES padding and border:</p>
+<pre><code>* { box-sizing: border-box; }   /* apply to every element */
+
+.card { width: 400px; padding: 20px; border: 2px solid; }
+/* Actual rendered width: 400px. Much easier maths. */</code></pre>
+
+<div class="callout success">
+  <strong>Industry best practice:</strong> add <code>* { box-sizing: border-box; }</code> as the first rule of every stylesheet you write. Every professional frontend developer does this.
+</div>
 
   </section>
 
   <section class="lesson-section">
     <h2><span class="section-badge" style="background:#3730a3;">We Do · ~15 min</span> Guided build</h2>
     
-<p>Build a "card" together:</p>
+<p>Together, build a card component:</p>
 <pre><code>&lt;article class="card"&gt;
   &lt;h3&gt;My first card&lt;/h3&gt;
   &lt;p&gt;This is the card content.&lt;/p&gt;
 &lt;/article&gt;</code></pre>
-<pre><code>.card {
+<pre><code>* { box-sizing: border-box; }
+
+.card {
   background: white;
-  padding: 24px;
+  padding: 24px;                  /* space INSIDE */
   border: 1px solid #e4e7ec;
   border-radius: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 20px;             /* space OUTSIDE to next card */
   max-width: 400px;
 }</code></pre>
-<p>Now duplicate the article 3 times. See how the margin between cards works?</p>
+<p>Then duplicate the article 3 times and watch margin-bottom separate them. Inspect in DevTools — see the orange margin and green padding layers?</p>
 
   </section>
 
   <section class="lesson-section">
     <h2><span class="section-badge" style="background:#92400e;">You Do · ~35 min</span> Independent practice</h2>
     
-<p>Go back to your styled page from L07 and add the box model to it:</p>
+<p>Go back to your L07 styled page. Add box model to it:</p>
 <ol>
-  <li>Add padding inside your <code>body</code> (try <code>2rem</code> or <code>32px</code>)</li>
-  <li>Add a max-width to your main content area so it doesn't stretch too wide on a big screen</li>
-  <li>Turn one element (a section, a heading, an article) into a "card" with background, padding, border, and margin</li>
-  <li>Use <code>border-radius</code> to round corners</li>
-  <li>Inspect in DevTools — see the coloured box model layers</li>
+  <li>Add <code>* { box-sizing: border-box; }</code> at the top of your styles.css.</li>
+  <li>Add padding inside body (try <code>2rem</code>).</li>
+  <li>Add max-width to main content (e.g. <code>max-width: 800px; margin: 0 auto;</code>).</li>
+  <li>Turn at least one element into a "card" with background, padding, border, margin-bottom, border-radius.</li>
+  <li>Use both shorthand AND longhand margin/padding somewhere in your CSS.</li>
+  <li>Inspect in DevTools — confirm you can see the 4 coloured box model layers.</li>
 </ol>
 
   </section>
@@ -124,15 +163,15 @@ padding: 10px 20px 30px 40px;   /* top, right, bottom, left (clockwise) */</code
     <div class="tier-grid">
       <div class="tier support">
         <h4>Support</h4>
-        <p>Provided HTML with a card structure. Student fills in padding, border, and margin values until it looks good.</p>
+        <p>Provided HTML with card structure + commented CSS with TODOs for padding/border/margin values.</p>
       </div>
       <div class="tier core">
         <h4>Core</h4>
-        <p>Complete the task from scratch on own file.</p>
+        <p>Complete from scratch on your own file.</p>
       </div>
       <div class="tier extension">
         <h4>Extension</h4>
-        <p>Add <code>box-sizing: border-box;</code> to a universal selector and explain in a comment how it changes the box model maths.</p>
+        <p>Research CSS logical properties (<code>margin-block</code>, <code>padding-inline</code>) on MDN. Explain how they differ from physical properties (top/right/bottom/left).</p>
       </div>
     </div>
   </section>
@@ -142,18 +181,32 @@ padding: 10px 20px 30px 40px;   /* top, right, bottom, left (clockwise) */</code
     
 <div class="worksheet">
   <h3>Exit ticket</h3>
-  <p><strong>1. Draw and label the 4 layers of the box model in order from inside to out:</strong></p>
-  <p>Content → __________ → __________ → __________</p>
-  <p><strong>2. Which property creates space INSIDE an element?</strong> ___________</p>
-  <p><strong>3. Which property creates space OUTSIDE an element?</strong> ___________</p>
+  <p><strong>1. Order the 4 layers inside to out:</strong></p>
+  <p>Content → ________ → ________ → ________</p>
+  <p><strong>2. Which property creates space INSIDE an element?</strong> _______</p>
+  <p><strong>3. Which property creates space OUTSIDE an element?</strong> _______</p>
+  <p><strong>4. What does <code>box-sizing: border-box</code> change?</strong></p>
+  <p>_____________________________________________</p>
+  <p><strong>5. Paste your favourite border-radius value:</strong></p>
+  <p>_____________________________________________</p>
 </div>
 
   </section>
 
   <section class="lesson-section">
     <h2>Resources for this lesson</h2>
-    <ul><li><a href="../exemplars/08-box-model.html" target="_blank" rel="noopener">Exemplar: Box model visual</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model" target="_blank" rel="noopener">MDN: The box model</a></li></ul>
+    <ul><li><a href="../exemplars/08-box-model.html" target="_blank" rel="noopener">Exemplar: Box model visual</a></li><li><a href="https://learn.shayhowe.com/html-css/opening-the-box-model/" target="_blank" rel="noopener">Shay Howe Ch 4: Opening the Box Model (full chapter)</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model" target="_blank" rel="noopener">MDN: The box model</a></li><li><a href="https://css-tricks.com/box-sizing/" target="_blank" rel="noopener">CSS Tricks: box-sizing</a></li></ul>
   </section>
+
+
+  <section class="lesson-section" style="background:#fef3c7;border-color:#f59e0b;">
+    <h2 style="color:#92400e;">📚 Deeper Reading</h2>
+    <p style="color:#78350f;font-size:.95em;">External references drawn from Shay Howe's "Learn to Code HTML & CSS" and University of Michigan's "Web Design for Everybody" Coursera specialization. All credit to original authors.</p>
+    <ul style="list-style:none;padding-left:0;">
+      <li><a href="https://learn.shayhowe.com/html-css/opening-the-box-model/" target="_blank" rel="noopener"><strong>Shay Howe · Ch 4: Opening the Box Model</strong></a><br><span style="color:#4a5568;font-size:.9em;">Display values, box model math, margin/padding shorthand, box-sizing:border-box.</span></li><li><a href="https://www.coursera.org/learn/introcss" target="_blank" rel="noopener"><strong>UMich CSS3 · M3: The Box Model</strong></a><br><span style="color:#4a5568;font-size:.9em;">Borders, padding, margin + positioning.</span></li>
+    </ul>
+  </section>
+
 
   <nav class="lesson-nav">
     <a class="prev" href="l07.html">Previous lesson</a>

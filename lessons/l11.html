@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>L11 · Typography on the Web | 10 Multimedia T2</title>
+<title>L11 · Typography on the Web — Fonts, Hierarchy, Readability | 10 Multimedia T2</title>
 <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
@@ -14,6 +14,7 @@
     <nav class="site-nav">
       <a href="../term1.html">Term 1</a>
       <a href="../term2.html">Term 2</a>
+      <a href="../references.html">References</a>
     </nav>
   </div>
 </header>
@@ -21,7 +22,7 @@
 <section class="lesson-head">
   <div class="container">
     <span class="lesson-pill">Week 6 · Lesson 11</span>
-    <h1>Typography on the Web</h1>
+    <h1>Typography on the Web — Fonts, Hierarchy, Readability</h1>
     <p class="lesson-meta">Week 6 · 75 minutes · Year 10 Industrial Technology — Multimedia</p>
     <div class="outcomes"><span class="outcome-tag">IND5-2</span><span class="outcome-tag">IND5-4</span><span class="outcome-tag">IND5-5</span></div>
   </div>
@@ -32,23 +33,24 @@
   <div class="grid grid-2">
     <div class="card">
       <h3 style="color:#0f766e;margin-top:0;">Learning intentions</h3>
-      <ul><li>I can import a Google Font and use it in my CSS.</li><li>I can set a consistent type scale for headings and body.</li><li>I can make text readable with line-height and line-length.</li></ul>
+      <ul><li>I can explain the difference between a typeface and a font.</li><li>I can import a Google Font and use @font-face correctly.</li><li>I can set a consistent type scale with font-size, line-height, font-weight.</li><li>I can use <cite>, <q>, and <blockquote> semantic elements for attributed text.</li></ul>
     </div>
     <div class="card">
       <h3 style="color:#1f3a68;margin-top:0;">Success criteria</h3>
-      <ul><li>I have imported one Google Font and used it in my CSS.</li><li>My headings (h1, h2, h3) have a clear size hierarchy.</li><li>My body text has line-height 1.5-1.7 and line-length 60-75 characters.</li></ul>
+      <ul><li>I have imported one Google Font via link.</li><li>My headings (h1, h2, h3) have clear size hierarchy.</li><li>My body text has line-height 1.5-1.7 and max-width around 65ch.</li><li>I have used at least one of <cite>, <q>, or <blockquote> semantic elements.</li></ul>
     </div>
   </div>
 
   <section class="lesson-section">
     <h2><span class="section-badge" style="background:#8b5cf6;">Do Now · 5 min</span></h2>
     
-<p>Read two news articles — one with comfortable typography, one that feels 'off'. What makes the readable one readable?</p>
-<p>Hint: it's not just the font. It's also:</p>
+<p>Pick two news articles — one pleasant to read, one that feels "off". What's different?</p>
+<p>Hint: it's rarely the font itself. It's:</p>
 <ul>
-  <li>How big is the text?</li>
-  <li>How much space between lines?</li>
-  <li>How wide is the column? (Too narrow = choppy. Too wide = eye strain.)</li>
+  <li>Font <strong>size</strong> (too small = squint)</li>
+  <li><strong>Line-height</strong> (too tight = claustrophobic)</li>
+  <li><strong>Line length</strong> (too wide = eye strain)</li>
+  <li>Contrast (light grey on white = fail WCAG)</li>
 </ul>
 
   </section>
@@ -56,59 +58,103 @@
   <section class="lesson-section">
     <h2><span class="section-badge">I Do · ~10 min</span> Teacher demonstration</h2>
     
-<p>Teacher demonstrates importing a Google Font:</p>
-<pre><code>&lt;!-- in the head of HTML --&gt;
+<h3>Step 1 — Typeface vs font (the distinction designers care about)</h3>
+<p><strong>Typeface</strong> = the artistic design of letterforms (Helvetica, Georgia). <strong>Font</strong> = the file that delivers it (Helvetica.ttf, Georgia.woff2). Professionals say "I chose the typeface Inter" not "I chose the font Inter" — but "font-family" in CSS is named from the old typesetting world.</p>
+
+<h3>Step 2 — Importing Google Fonts</h3>
+<pre><code>&lt;!-- inside the HTML head --&gt;
 &lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
 &lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
 &lt;link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"&gt;</code></pre>
+
+<h3>Step 3 — The font-family stack (ALWAYS include fallbacks)</h3>
 <pre><code>body {
-  font-family: 'Inter', system-ui, sans-serif;
-  font-size: 16px;
-  line-height: 1.6;
-  max-width: 65ch;    /* 65 characters wide is optimal for reading */
-  margin: 0 auto;
-  padding: 2rem;
+  /* First choice, then fallbacks, then generic keyword */
+  font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}</code></pre>
+<p>If Inter fails to load, the browser tries each next one. The last one is a generic keyword (<code>serif</code>, <code>sans-serif</code>, <code>monospace</code>, <code>cursive</code>) which always works.</p>
+
+<h3>Step 4 — The full font property list</h3>
+<pre><code>body {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;              /* or 1rem */
+  font-weight: 400;              /* normal = 400, bold = 700 */
+  font-style: normal;            /* normal | italic | oblique */
+  line-height: 1.6;              /* 1.5-1.7 is readable for body */
+  letter-spacing: 0;
 }
 
 h1 { font-size: 2.5rem; font-weight: 700; line-height: 1.2; }
 h2 { font-size: 1.75rem; font-weight: 600; }
 h3 { font-size: 1.25rem; font-weight: 600; }</code></pre>
-<div class="callout info">
-  <strong>The industry rules of readable type:</strong>
-  <ol>
-    <li>Body text: 16px minimum (larger is often better)</li>
-    <li>Line-height: 1.5-1.7 for body (not too tight, not too loose)</li>
-    <li>Line length: 60-75 characters per line (use <code>max-width: 65ch</code>)</li>
-    <li>Only 2 fonts max (one heading, one body — or the same font at different weights)</li>
-  </ol>
+
+<h3>Step 5 — Shorthand font property (must be in this order)</h3>
+<pre><code>/* style variant weight size/line-height family */
+html {
+  font: italic small-caps bold 14px/22px 'Inter', Helvetica, sans-serif;
+}</code></pre>
+<p>Only <code>font-size</code> and <code>font-family</code> are required in shorthand.</p>
+
+<h3>Step 6 — @font-face for custom typefaces you host</h3>
+<pre><code>@font-face {
+  font-family: 'MyCustomFont';
+  src: url('fonts/MyCustomFont.woff2') format('woff2'),
+       url('fonts/MyCustomFont.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+body { font-family: 'MyCustomFont', sans-serif; }</code></pre>
+<div class="callout warn">
+  <strong>Licensing warning:</strong> typefaces are creative work. Check the licence before hosting. Use Google Fonts (free, open licence) or Adobe Fonts (subscription) unless you're sure.
 </div>
+
+<h3>Step 7 — Semantic elements for text (use these!)</h3>
+<pre><code>&lt;p&gt;The book &lt;cite&gt;Design of Everyday Things&lt;/cite&gt; changed my thinking.&lt;/p&gt;
+
+&lt;p&gt;Steve Jobs said, &lt;q&gt;Design is not just what it looks like.&lt;/q&gt;&lt;/p&gt;
+
+&lt;blockquote cite="https://fortune.com/..."&gt;
+  &lt;p&gt;In most people's vocabularies, design means veneer...&lt;/p&gt;
+  &lt;p&gt;&lt;cite&gt;— Steve Jobs&lt;/cite&gt;&lt;/p&gt;
+&lt;/blockquote&gt;</code></pre>
+<p>These aren't about how the text looks. They're about what the text MEANS to a screen reader, a search engine, or a citation-indexing tool.</p>
+
+<h3>Industry readability rules (ship these in your portfolio)</h3>
+<ol>
+  <li>Body text: 16px minimum (18-20px often better on modern screens)</li>
+  <li>Line-height: 1.5-1.7 for body, 1.2-1.3 for headings</li>
+  <li>Line length: 60-75 characters — use <code>max-width: 65ch</code></li>
+  <li>Maximum 2 typefaces (one body, one heading — or one typeface at different weights)</li>
+</ol>
 
   </section>
 
   <section class="lesson-section">
     <h2><span class="section-badge" style="background:#3730a3;">We Do · ~15 min</span> Guided build</h2>
     
-<p>Together, pair Inter (sans-serif) with Playfair Display (serif) for a classic editorial look:</p>
+<p>Pair Inter (sans-serif for UI) with Playfair Display (serif for headings) — classic editorial combo:</p>
 <pre><code>&lt;link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet"&gt;</code></pre>
 <pre><code>body { font-family: 'Inter', sans-serif; }
-h1, h2, h3 { font-family: 'Playfair Display', serif; }</code></pre>
-<p>Discuss: when does this pairing work? When does a single-font approach work better?</p>
+h1, h2, h3 { font-family: 'Playfair Display', Georgia, serif; }</code></pre>
+<p>Class discussion: when does this pairing work? When is it overkill? (Answer: it works for content-rich portfolios, news sites, editorial work. It's overkill for utilitarian dashboards.)</p>
 
   </section>
 
   <section class="lesson-section">
     <h2><span class="section-badge" style="background:#92400e;">You Do · ~35 min</span> Independent practice</h2>
     
-<p>Update your portfolio styles.css to use typography thoughtfully:</p>
+<p>Update your portfolio styles.css with thoughtful typography:</p>
 <ol>
-  <li>Choose ONE font for body (sans-serif recommended for UI)</li>
-  <li>Choose ONE font for headings (can be the same, or a contrasting serif)</li>
-  <li>Set a type scale: h1 is biggest, h2 medium, h3 smaller, body is 16-18px</li>
+  <li>Pick ONE font for body (<a href="https://fonts.google.com" target="_blank">Google Fonts</a>)</li>
+  <li>Pick ONE font for headings (can be same family at different weight)</li>
+  <li>Set a type scale: h1 biggest, h2 medium, h3 smaller, body 16-18px</li>
   <li>Set <code>line-height: 1.6</code> on body</li>
-  <li>Set <code>max-width: 65ch</code> on a reading container</li>
-  <li>Test on your phone — is it readable?</li>
+  <li>Set <code>max-width: 65ch</code> on your main reading container</li>
+  <li>Use at least one of <code>&lt;cite&gt;</code>, <code>&lt;q&gt;</code>, or <code>&lt;blockquote&gt;</code> in your About section</li>
+  <li>Test on your phone: is it readable?</li>
 </ol>
-<p>Submit a "type spec" screenshot: your h1, h2, h3, and body paragraph with font names labelled.</p>
+<p>Submit a "type spec" screenshot labelling h1, h2, h3, body and naming the font.</p>
 
   </section>
 
@@ -117,15 +163,15 @@ h1, h2, h3 { font-family: 'Playfair Display', serif; }</code></pre>
     <div class="tier-grid">
       <div class="tier support">
         <h4>Support</h4>
-        <p>3 pre-selected font pairings provided. Student picks one and applies.</p>
+        <p>3 pre-selected font pairings provided (e.g. Inter + Playfair Display, Poppins alone, Roboto Slab + Roboto). Pick one and apply.</p>
       </div>
       <div class="tier core">
         <h4>Core</h4>
-        <p>Choose fonts from Google Fonts independently.</p>
+        <p>Choose fonts from Google Fonts independently with written reasoning.</p>
       </div>
       <div class="tier extension">
         <h4>Extension</h4>
-        <p>Create a full type scale using a ratio (e.g. 1.25, 1.5). Research 'modular scale' on type-scale.com.</p>
+        <p>Create a modular type scale using a ratio (1.25 = major third, 1.5 = perfect fifth). Use type-scale.com and generate a full scale. Apply using rem units.</p>
       </div>
     </div>
   </section>
@@ -135,19 +181,32 @@ h1, h2, h3 { font-family: 'Playfair Display', serif; }</code></pre>
     
 <div class="worksheet">
   <h3>Exit ticket</h3>
-  <p><strong>1. What is the optimal line length for readable text?</strong></p>
-  <p>a) 20-30 chars &nbsp; b) 60-75 chars &nbsp; c) 100+ chars</p>
-  <p><strong>2. What is the minimum recommended body font size?</strong> ___________</p>
-  <p><strong>3. Your font choices for portfolio:</strong></p>
-  <p>Body: _______________ Heading: _______________</p>
+  <p><strong>1. What's the difference between a typeface and a font?</strong></p>
+  <p>_______________________________________________________</p>
+  <p><strong>2. What's the optimal line length for readable text?</strong></p>
+  <p>a) 20-30 chars &nbsp;&nbsp; b) 60-75 chars &nbsp;&nbsp; c) 100+ chars</p>
+  <p><strong>3. Your portfolio font choices:</strong></p>
+  <p>Body font: _______________</p>
+  <p>Heading font: _______________</p>
+  <p><strong>4. Bonus: which semantic element did you use today — cite / q / blockquote?</strong></p>
 </div>
 
   </section>
 
   <section class="lesson-section">
     <h2>Resources for this lesson</h2>
-    <ul><li><a href="https://fonts.google.com" target="_blank" rel="noopener">Google Fonts</a></li><li><a href="https://type-scale.com/" target="_blank" rel="noopener">Type Scale generator</a></li><li><a href="https://fontpair.co/" target="_blank" rel="noopener">Fontpair - curated pairings</a></li></ul>
+    <ul><li><a href="https://fonts.google.com" target="_blank" rel="noopener">Google Fonts</a></li><li><a href="https://learn.shayhowe.com/html-css/working-with-typography/" target="_blank" rel="noopener">Shay Howe Ch 6: Working with Typography (full chapter)</a></li><li><a href="https://type-scale.com/" target="_blank" rel="noopener">Type Scale generator</a></li><li><a href="https://fontpair.co/" target="_blank" rel="noopener">Fontpair — curated pairings</a></li></ul>
   </section>
+
+
+  <section class="lesson-section" style="background:#fef3c7;border-color:#f59e0b;">
+    <h2 style="color:#92400e;">📚 Deeper Reading</h2>
+    <p style="color:#78350f;font-size:.95em;">External references drawn from Shay Howe's "Learn to Code HTML & CSS" and University of Michigan's "Web Design for Everybody" Coursera specialization. All credit to original authors.</p>
+    <ul style="list-style:none;padding-left:0;">
+      <li><a href="https://learn.shayhowe.com/html-css/working-with-typography/" target="_blank" rel="noopener"><strong>Shay Howe · Ch 6: Working with Typography</strong></a><br><span style="color:#4a5568;font-size:.9em;">Typeface vs font, all font properties, shorthand rules, @font-face, cite/q/blockquote.</span></li><li><a href="https://www.coursera.org/learn/introcss" target="_blank" rel="noopener"><strong>UMich CSS3 · M1: Colors and Fonts</strong></a><br><span style="color:#4a5568;font-size:.9em;">Building block of styling — fonts and colours approach.</span></li><li><a href="https://fonts.google.com" target="_blank" rel="noopener"><strong>Google Fonts</strong></a><br><span style="color:#4a5568;font-size:.9em;">Free web fonts with built-in @font-face inclusion. Preview before committing.</span></li>
+    </ul>
+  </section>
+
 
   <nav class="lesson-nav">
     <a class="prev" href="l10.html">Previous lesson</a>
