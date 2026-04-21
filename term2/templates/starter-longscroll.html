@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>[YOUR NAME] · Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ═══════════════════════════════════════════════════════
+       SUPPORT TIER STARTER — LONG-SCROLL ONE-PAGER
+       Modern single-page portfolio with sticky nav + sections.
+       Fill in the TODO markers.
+       ═══════════════════════════════════════════════════════ */
+
+    :root {
+      --navy: #1f3a68;
+      --teal: #14b8a6;
+      --bg: #fafbfc;
+      --text: #1a202c;
+      --text-soft: #4a5568;
+      --border: #e4e7ec;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
+
+    /* ─── Sticky nav ─── */
+    nav.top {
+      position: sticky; top: 0; z-index: 100;
+      background: white;
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 1.5rem;
+    }
+    nav.top .inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    nav.top .brand { font-weight: 700; color: var(--navy); }
+    nav.top ul { list-style: none; display: flex; gap: 1.5rem; }
+    nav.top a { color: var(--text-soft); text-decoration: none; }
+    nav.top a:hover { color: var(--navy); }
+
+    /* ─── Hero ─── */
+    .hero {
+      background: linear-gradient(135deg, var(--navy), #2e5b9e);
+      color: white;
+      padding: 6rem 1.5rem;
+      text-align: center;
+    }
+    .hero h1 { font-size: clamp(2rem, 5vw, 3.5rem); margin-bottom: 1rem; }
+    .hero p { font-size: 1.2rem; opacity: 0.9; max-width: 600px; margin: 0 auto; }
+    .btn {
+      display: inline-block;
+      padding: 0.8rem 1.75rem;
+      background: var(--teal);
+      color: white;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      margin-top: 1.5rem;
+      transition: transform 0.2s ease;
+    }
+    .btn:hover { transform: translateY(-2px); }
+
+    /* ─── Sections ─── */
+    section { padding: 4rem 0; }
+    section h2 { font-size: 2rem; margin-bottom: 1.5rem; color: var(--navy); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      align-items: center;
+    }
+    @media (min-width: 768px) {
+      .about-grid { grid-template-columns: 2fr 1fr; }
+    }
+    .about-img {
+      background: linear-gradient(135deg, #e4e7ec, #cbd5e0);
+      min-height: 220px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-soft);
+    }
+
+    /* ─── Projects ─── */
+    .projects {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    @media (min-width: 640px) { .projects { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1024px) { .projects { grid-template-columns: repeat(3, 1fr); } }
+
+    .project-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+    }
+    .project-card .placeholder {
+      background: linear-gradient(135deg, #e4e7ec, #cbd5e0);
+      min-height: 160px;
+    }
+    .project-card .body { padding: 1.25rem; }
+    .project-card h3 { margin-bottom: 0.5rem; color: var(--navy); }
+
+    /* ─── Contact form ─── */
+    form { max-width: 500px; }
+    .field { margin-bottom: 1rem; }
+    .field label { display: block; font-weight: 600; margin-bottom: 0.3rem; }
+    .field input, .field textarea {
+      width: 100%;
+      padding: 0.7rem;
+      border: 2px solid var(--border);
+      border-radius: 6px;
+      font: inherit;
+    }
+    .field input:focus, .field textarea:focus {
+      outline: none;
+      border-color: var(--teal);
+    }
+
+    /* ─── Footer ─── */
+    footer {
+      padding: 2rem 1.5rem;
+      background: var(--navy);
+      color: #cbd5e1;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+    footer a { color: #93c5fd; }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="top">
+    <div class="inner">
+      <!-- TODO: Your name -->
+      <a class="brand" href="#top">[Your Name]</a>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="hero" id="top">
+    <div class="container">
+      <!-- TODO: h1 with your name -->
+      <h1>Hi, I'm [Your Name].</h1>
+      <!-- TODO: one-line tagline about you -->
+      <p>Year 10 Multimedia student at Arthur Phillip HS.</p>
+      <a href="#projects" class="btn">See my work ↓</a>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="container">
+      <h2>About me</h2>
+      <div class="about-grid">
+        <div>
+          <!-- TODO: Paragraph 1 about you -->
+          <p>Paragraph 1: who you are, what you're about.</p>
+          <!-- TODO: Paragraph 2 — interests, skills -->
+          <p style="margin-top: 1rem;">Paragraph 2: your interests and current learning.</p>
+        </div>
+        <div class="about-img">Your photo here</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="container">
+      <h2>Projects &amp; interests</h2>
+      <div class="projects">
+        <!-- TODO: Replace 3 cards with your actual projects -->
+        <article class="project-card">
+          <div class="placeholder"></div>
+          <div class="body">
+            <h3>Project 1 title</h3>
+            <p>Short description. What is it? What makes it interesting?</p>
+          </div>
+        </article>
+        <article class="project-card">
+          <div class="placeholder"></div>
+          <div class="body">
+            <h3>Project 2 title</h3>
+            <p>Short description.</p>
+          </div>
+        </article>
+        <article class="project-card">
+          <div class="placeholder"></div>
+          <div class="body">
+            <h3>Project 3 title</h3>
+            <p>Short description.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <h2>Get in touch</h2>
+      <!-- TODO: Update action URL to your Formspree endpoint OR use mailto: -->
+      <form action="mailto:[email protected]" method="POST">
+        <div class="field">
+          <label for="name">Your name</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        <div class="field">
+          <label for="email">Your email</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="field">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="4" required></textarea>
+        </div>
+        <button type="submit" class="btn">Send</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 [Your Name] · Year 10 Multimedia · Arthur Phillip HS</p>
+  </footer>
+
+</body>
+</html>

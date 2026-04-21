@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>[YOUR NAME] · Gallery Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ═══════════════════════════════════════════════════════
+       SUPPORT TIER STARTER — GALLERY STYLE
+       For students whose portfolio is image-heavy (art, photos, crafts).
+       Fill in the TODO markers.
+       ═══════════════════════════════════════════════════════ */
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0e0e0e;
+      color: #e5e5e5;
+      line-height: 1.6;
+    }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+
+    header {
+      padding: 4rem 2rem;
+      text-align: center;
+      border-bottom: 1px solid #333;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      color: #ffd700;
+      margin-bottom: 0.5rem;
+    }
+
+    .tagline { color: #aaa; font-size: 1.1rem; }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      padding: 1rem;
+      background: #1a1a1a;
+    }
+    nav a { color: #ddd; text-decoration: none; }
+    nav a:hover { color: #ffd700; }
+
+    section { padding: 3rem 0; }
+    section h2 {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      color: #ffd700;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+    @media (min-width: 640px) {
+      .gallery { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 1024px) {
+      .gallery { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    .item {
+      background: #1a1a1a;
+      border-radius: 8px;
+      overflow: hidden;
+      transition: transform 0.2s ease;
+    }
+    .item:hover { transform: translateY(-4px); }
+    .item .placeholder {
+      background: linear-gradient(135deg, #333, #555);
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #888;
+      font-style: italic;
+    }
+    .item .body { padding: 1rem; }
+    .item h3 { font-size: 1.1rem; margin-bottom: 0.3rem; color: #ffd700; }
+    .item p { color: #aaa; font-size: 0.9rem; }
+
+    footer {
+      padding: 2rem;
+      text-align: center;
+      background: #1a1a1a;
+      color: #888;
+      margin-top: 3rem;
+    }
+
+    a { color: #ffd700; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#about">About</a>
+    <a href="#work">Work</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <header>
+    <!-- TODO: Replace with your name -->
+    <h1>[YOUR NAME]</h1>
+    <!-- TODO: 1-line creative tagline -->
+    <p class="tagline">Visual artist · Year 10 · Sydney</p>
+  </header>
+
+  <main class="container">
+
+    <section id="about">
+      <h2>About</h2>
+      <!-- TODO: 2-3 sentences about your creative practice -->
+      <p>Describe your creative interests — what you make, why you make it, what inspires you.</p>
+    </section>
+
+    <section id="work">
+      <h2>Gallery</h2>
+      <div class="gallery">
+        <!-- TODO: Replace .placeholder with <img src="your-image.jpg" alt="..."> for each item -->
+        <div class="item">
+          <div class="placeholder">your image</div>
+          <div class="body">
+            <h3>Piece 1 title</h3>
+            <p>Short description.</p>
+          </div>
+        </div>
+        <div class="item">
+          <div class="placeholder">your image</div>
+          <div class="body">
+            <h3>Piece 2 title</h3>
+            <p>Short description.</p>
+          </div>
+        </div>
+        <div class="item">
+          <div class="placeholder">your image</div>
+          <div class="body">
+            <h3>Piece 3 title</h3>
+            <p>Short description.</p>
+          </div>
+        </div>
+        <div class="item">
+          <div class="placeholder">your image</div>
+          <div class="body">
+            <h3>Piece 4 title</h3>
+            <p>Short description.</p>
+          </div>
+        </div>
+        <div class="item">
+          <div class="placeholder">your image</div>
+          <div class="body">
+            <h3>Piece 5 title</h3>
+            <p>Short description.</p>
+          </div>
+        </div>
+        <div class="item">
+          <div class="placeholder">your image</div>
+          <div class="body">
+            <h3>Piece 6 title</h3>
+            <p>Short description.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>Get in touch</h2>
+      <!-- TODO: your contact info -->
+      <p>Email: <a href="mailto:[email protected]">[email protected]</a></p>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2026 [YOUR NAME] · Year 10 Multimedia · APHS</p>
+  </footer>
+
+</body>
+</html>
