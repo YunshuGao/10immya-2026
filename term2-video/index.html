@@ -1,0 +1,2455 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Adobe Express Mini-Projects — Year 10 Multimedia</title>
+  <meta name="description" content="22 Adobe Express mini-projects for Year 10 Multimedia. Visual UI diagrams, keyboard shortcuts, check-yourself Q&A, print-ready.">
+  <style>
+:root {
+  --navy: #0F172A;
+  --navy-light: #1E293B;
+  --neon: #4ADE80;
+  --blue: #38BDF8;
+  --purple: #A78BFA;
+  --amber: #FBBF24;
+  --pink: #F472B6;
+  --white: #F1F5F9;
+  --muted: #94A3B8;
+  --border: #334155;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--navy);
+  color: var(--white);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+.app { display: grid; grid-template-columns: 320px 1fr; min-height: 100vh; }
+
+.sidebar {
+  background: linear-gradient(180deg, #0B1222 0%, #0F172A 100%);
+  border-right: 1px solid var(--border);
+  padding: 1.5rem 1rem;
+  position: sticky; top: 0; height: 100vh;
+  overflow-y: auto;
+}
+
+.main { padding: 2rem 3rem; max-width: 960px; margin: 0 auto; }
+
+/* Sidebar */
+.sidebar-header {
+  padding: 0 0.5rem 1rem 0.5rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 1rem;
+}
+.sidebar-title {
+  font-size: 0.85rem; font-weight: 700; color: var(--neon);
+  text-transform: uppercase; letter-spacing: 0.1em;
+}
+.sidebar-subtitle { font-size: 1rem; font-weight: 600; color: var(--white); margin-top: 0.3rem; }
+
+.progress-wrapper {
+  margin-top: 0.8rem; background: var(--navy-light);
+  border-radius: 999px; height: 6px; overflow: hidden;
+}
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--neon), var(--blue));
+  width: 0%; transition: width 0.3s ease;
+}
+.progress-text { font-size: 0.75rem; color: var(--muted); margin-top: 0.4rem; }
+
+.nav-section-label {
+  font-size: 0.7rem; font-weight: 700; color: var(--amber);
+  text-transform: uppercase; letter-spacing: 0.1em;
+  padding: 0.8rem 0.6rem 0.4rem 0.6rem;
+}
+
+.nav-list { list-style: none; padding: 0; margin-bottom: 0.5rem; }
+
+.nav-link {
+  display: flex; align-items: center; gap: 0.7rem;
+  padding: 0.55rem 0.6rem; border-radius: 6px;
+  text-decoration: none; color: var(--white);
+  transition: all 0.15s;
+  margin-bottom: 0.15rem;
+  font-size: 0.85rem;
+}
+.nav-link:hover { background: var(--navy-light); color: var(--neon); }
+.nav-link.active {
+  background: var(--navy-light); color: var(--neon);
+  border-left: 3px solid var(--neon);
+  padding-left: calc(0.6rem - 3px);
+}
+
+.nav-num {
+  font-family: ui-monospace, monospace; font-size: 0.7rem;
+  color: var(--amber); font-weight: 700; min-width: 36px;
+}
+.nav-title { flex: 1; font-size: 0.82rem; line-height: 1.3; }
+.nav-check { font-weight: 700; color: var(--neon); opacity: 0; transition: opacity 0.2s; }
+.nav-link.done .nav-check { opacity: 1; }
+.nav-link.done { opacity: 0.6; }
+
+/* Hero */
+.hero {
+  margin-bottom: 2rem; padding: 2rem;
+  background: linear-gradient(135deg, rgba(74,222,128,0.08) 0%, rgba(56,189,248,0.08) 100%);
+  border-radius: 16px; border: 1px solid var(--border);
+}
+.hero h1 {
+  font-size: 2.2rem; font-weight: 800; color: var(--neon);
+  letter-spacing: -0.02em; line-height: 1.15;
+}
+.hero .subtitle { color: var(--blue); margin-top: 0.5rem; font-size: 1.1rem; }
+.hero .meta { color: var(--muted); font-size: 0.9rem; margin-top: 1rem; }
+.hero-how {
+  margin-top: 1.5rem; padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  color: var(--white); font-size: 0.95rem;
+}
+.hero-keys {
+  margin-top: 1rem; font-size: 0.85rem; color: var(--muted);
+}
+.hero-keys kbd {
+  background: var(--navy-light); padding: 0.1rem 0.4rem;
+  border-radius: 4px; border: 1px solid var(--border);
+  font-family: ui-monospace, monospace; font-size: 0.8rem;
+  color: var(--amber);
+}
+
+/* Reference section */
+.reference {
+  background: var(--navy-light);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2rem;
+  margin-bottom: 3rem;
+}
+.reference h2 {
+  font-size: 1.6rem; color: var(--amber);
+  margin-bottom: 0.3rem;
+}
+.reference .subhead { color: var(--muted); margin-bottom: 1.5rem; }
+.ref-tabs {
+  display: flex; gap: 0.5rem; margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border); padding-bottom: 0.8rem;
+  flex-wrap: wrap;
+}
+.ref-tab {
+  padding: 0.5rem 1rem; border-radius: 6px;
+  background: transparent; border: 1px solid var(--border);
+  color: var(--muted); cursor: pointer;
+  font-family: inherit; font-size: 0.9rem; font-weight: 600;
+  transition: all 0.15s;
+}
+.ref-tab:hover { border-color: var(--neon); color: var(--neon); }
+.ref-tab.active { background: var(--neon); color: var(--navy); border-color: var(--neon); }
+
+.ref-pane { display: none; }
+.ref-pane.active { display: block; }
+
+.ui-diagram {
+  width: 100%; height: auto;
+  max-height: 500px;
+  background: var(--navy);
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  margin: 1rem 0;
+}
+.ref-caption {
+  color: var(--muted); font-size: 0.85rem;
+  font-style: italic; margin-top: 0.5rem;
+}
+
+.ref-table {
+  width: 100%; border-collapse: collapse; margin: 1rem 0;
+  font-size: 0.9rem;
+}
+.ref-table th, .ref-table td {
+  padding: 0.6rem 0.8rem; text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+.ref-table th {
+  background: var(--navy); color: var(--amber);
+  font-size: 0.8rem; text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.ref-table td.kbd {
+  font-family: ui-monospace, monospace;
+  color: var(--blue); font-weight: 700;
+  white-space: nowrap; min-width: 150px;
+}
+.ref-table td.ctx {
+  color: var(--purple); font-size: 0.75rem;
+  text-transform: uppercase; letter-spacing: 0.05em;
+}
+.ref-table.recipes td.recipe-task {
+  font-weight: 700; color: var(--neon); min-width: 200px;
+}
+
+.glossary { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem 2rem; }
+.gloss-item { padding: 0.6rem 0; border-bottom: 1px dashed rgba(255,255,255,0.08); }
+.gloss-item dt {
+  font-weight: 700; color: var(--blue); font-size: 0.95rem;
+  margin-bottom: 0.2rem;
+}
+.gloss-item dd { color: var(--white); font-size: 0.85rem; }
+
+/* Exercise */
+.exercise {
+  background: var(--navy-light); border: 1px solid var(--border);
+  border-radius: 16px; padding: 2rem; margin-bottom: 2rem;
+  scroll-margin-top: 1rem;
+}
+.exercise-header {
+  display: grid; grid-template-columns: auto 1fr auto;
+  gap: 1.2rem; align-items: center;
+  margin-bottom: 1.2rem; padding-bottom: 1.2rem;
+  border-bottom: 1px solid var(--border);
+}
+.exercise-number {
+  font-family: ui-monospace, monospace; font-size: 2rem;
+  font-weight: 800; color: var(--neon); line-height: 1;
+}
+.exercise-titles h2 { font-size: 1.5rem; color: var(--white); line-height: 1.2; margin-bottom: 0.4rem; }
+.exercise-meta { display: flex; gap: 0.5rem; }
+.meta-pill {
+  display: inline-block; padding: 0.25rem 0.7rem;
+  border-radius: 999px; font-size: 0.75rem;
+  font-weight: 700; border: 1px solid var(--border);
+}
+.meta-pill.lesson { background: rgba(56,189,248,0.15); color: var(--blue); border-color: rgba(56,189,248,0.3); }
+.meta-pill.time { background: rgba(251,191,36,0.15); color: var(--amber); border-color: rgba(251,191,36,0.3); }
+
+.complete-btn {
+  background: transparent; border: 2px solid var(--border);
+  color: var(--muted); padding: 0.6rem 1.2rem;
+  border-radius: 8px; font-weight: 700; font-size: 0.85rem;
+  cursor: pointer; transition: all 0.2s;
+  font-family: inherit;
+}
+.complete-btn:hover { border-color: var(--neon); color: var(--neon); }
+.complete-btn .btn-checked { display: none; }
+.complete-btn.done {
+  background: rgba(74,222,128,0.15); border-color: var(--neon); color: var(--neon);
+}
+.complete-btn.done .btn-unchecked { display: none; }
+.complete-btn.done .btn-checked { display: inline; }
+
+.exercise-intro {
+  color: var(--muted); font-style: italic;
+  font-size: 1rem; margin-bottom: 1.5rem;
+}
+.section-head {
+  color: var(--blue); font-size: 1rem;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  margin: 1.5rem 0 0.8rem 0; font-weight: 700;
+}
+
+/* Steps */
+.steps { list-style: none; padding: 0; margin: 0 0 1.5rem 0; }
+.steps li {
+  display: grid; grid-template-columns: 36px 1fr;
+  gap: 0.8rem; align-items: flex-start;
+  padding: 0.6rem 0;
+  border-bottom: 1px dashed rgba(255,255,255,0.08);
+}
+.steps li:last-child { border-bottom: none; }
+.step-num {
+  background: var(--blue); color: var(--navy);
+  width: 28px; height: 28px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 0.85rem;
+  font-family: ui-monospace, monospace;
+}
+.step-text { color: var(--white); line-height: 1.5; }
+
+/* Callouts */
+.callout {
+  border-radius: 10px; padding: 1rem 1.2rem;
+  margin: 1rem 0; border-left: 4px solid var(--border);
+}
+.callout-label {
+  font-weight: 800; font-size: 0.8rem;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  margin-bottom: 0.4rem;
+}
+.callout-body { color: var(--white); font-size: 0.95rem; line-height: 1.55; }
+.callout-goal { background: rgba(251,191,36,0.1); border-left-color: var(--amber); }
+.callout-goal .callout-label { color: var(--amber); }
+.callout-tip { background: rgba(74,222,128,0.1); border-left-color: var(--neon); }
+.callout-tip .callout-label { color: var(--neon); }
+.callout-stuck { background: rgba(244,114,182,0.1); border-left-color: var(--pink); }
+.callout-stuck .callout-label { color: var(--pink); }
+.callout-output { background: rgba(56,189,248,0.1); border-left-color: var(--blue); }
+.callout-output .callout-label { color: var(--blue); }
+
+/* Check yourself */
+.check-wrap {
+  background: rgba(167, 139, 250, 0.08);
+  border: 1px solid rgba(167, 139, 250, 0.25);
+  border-radius: 10px;
+  padding: 0.5rem 1rem;
+}
+.check-item {
+  padding: 0.6rem 0;
+  border-bottom: 1px dashed rgba(167, 139, 250, 0.2);
+}
+.check-item:last-child { border-bottom: none; }
+.check-q {
+  cursor: pointer; color: var(--purple);
+  font-weight: 600; font-size: 0.95rem;
+  list-style: none;
+  padding-left: 1.2rem; position: relative;
+}
+.check-q::-webkit-details-marker { display: none; }
+.check-q::before {
+  content: "▶"; position: absolute; left: 0;
+  transition: transform 0.2s;
+  font-size: 0.7rem; top: 0.3rem;
+  color: var(--purple);
+}
+details[open] .check-q::before { transform: rotate(90deg); }
+.check-a {
+  color: var(--white); font-size: 0.92rem;
+  padding: 0.6rem 0 0.3rem 1.2rem;
+  line-height: 1.5;
+  border-left: 2px solid var(--purple);
+  margin-left: 0.3rem; padding-left: 0.8rem;
+  margin-top: 0.5rem;
+}
+
+/* Exercise nav */
+.exercise-nav {
+  display: flex; justify-content: space-between;
+  margin-top: 2rem; padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+.exercise-nav a {
+  color: var(--muted); text-decoration: none;
+  font-size: 0.9rem; font-weight: 600;
+  padding: 0.5rem 1rem; border-radius: 6px;
+  transition: all 0.15s;
+}
+.exercise-nav a:hover { background: var(--navy); color: var(--neon); }
+
+/* Footer */
+.footer {
+  margin-top: 3rem; padding: 2rem 0;
+  border-top: 1px solid var(--border);
+  text-align: center; color: var(--muted); font-size: 0.85rem;
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+  .app { grid-template-columns: 1fr; }
+  .sidebar {
+    position: static; height: auto; max-height: none;
+    border-right: none; border-bottom: 1px solid var(--border);
+  }
+  .main { padding: 1.5rem 1rem; }
+  .hero h1 { font-size: 1.6rem; }
+  .exercise { padding: 1.2rem; }
+  .exercise-header { grid-template-columns: auto 1fr; grid-template-rows: auto auto; }
+  .complete-btn { grid-column: 1 / -1; margin-top: 0.8rem; }
+  .exercise-number { font-size: 1.5rem; }
+  .exercise-titles h2 { font-size: 1.2rem; }
+  .glossary { grid-template-columns: 1fr; }
+}
+
+a:focus, button:focus { outline: 2px solid var(--neon); outline-offset: 2px; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+  html { scroll-behavior: auto; }
+}
+
+/* ===== PRINT ===== */
+@media print {
+  body { background: white; color: black; }
+  .sidebar, .exercise-nav, .complete-btn, .hero-keys, .ref-tabs, .footer { display: none !important; }
+  .app { display: block; }
+  .main { padding: 0; max-width: none; }
+  .hero, .reference, .exercise {
+    background: white; color: black;
+    border: 1px solid #999; box-shadow: none;
+    page-break-inside: avoid; page-break-after: always;
+  }
+  .hero h1, .reference h2, .exercise-number { color: #0F172A; }
+  .exercise-titles h2 { color: #0F172A; }
+  .meta-pill { background: #eee; color: #333; border-color: #999; }
+  .callout { background: #f7f7f7; border-left-color: #333; color: #000; }
+  .callout-label { color: #000; }
+  .callout-body { color: #000; }
+  .step-num { background: #333; color: white; }
+  .step-text { color: #000; }
+  .section-head { color: #000; }
+  .check-wrap { background: #f7f7f7; border: 1px solid #999; }
+  .check-q { color: #000; }
+  details[open] .check-a { color: #000; }
+  .ref-pane { display: block !important; page-break-before: always; }
+  .ref-table th, .ref-table td { border-bottom: 1px solid #ccc; color: #000; }
+  .ref-table th { background: #eee; color: #000; }
+  .ui-diagram { max-height: none; background: white; }
+  h1, h2, h3 { color: #0F172A !important; }
+}
+</style>
+</head>
+<body id="top">
+  <div class="app">
+
+    <nav class="sidebar" aria-label="Navigation">
+      <div class="sidebar-header">
+        <div class="sidebar-title">🎬 Y10 Multimedia</div>
+        <div class="sidebar-subtitle">Adobe Express Mini-Projects</div>
+        <div class="progress-wrapper"><div class="progress-bar" id="progress-bar"></div></div>
+        <div class="progress-text" id="progress-text">0 of 22 complete</div>
+      </div>
+
+      <div class="nav-section-label">Reference</div>
+      <ul class="nav-list">
+        <li><a href="#reference" class="nav-link"><span class="nav-num">REF</span><span class="nav-title">Quick reference</span></a></li>
+      </ul>
+
+      <div class="nav-section-label">Exercises</div>
+      <ul class="nav-list">
+        
+    <li>
+      <a href="#mp01" data-mp="01" class="nav-link">
+        <span class="nav-num">MP01</span>
+        <span class="nav-title">Your Adobe Express Identity Card</span>
+        <span class="nav-check" aria-hidden="true">✓</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="#mp02" data-mp="02" class="nav-link">
+        <span class="nav-num">MP02</span>
+        <span class="nav-title">Genre Mood Board</span>
+        <span class="nav-check" aria-hidden="true">✓</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="#mp03" data-mp="03" class="nav-link">
+        <span class="nav-num">MP03</span>
+        <span class="nav-title">Hook Thumbnail A/B/C Test</span>
+        <span class="nav-check" aria-hidden="true">✓</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="#mp04" data-mp="04" class="nav-link">
+        <span class="nav-num">MP04</span>
+        <span class="nav-title">Pre-Production Project Dashboard</span>
+        <span class="nav-check" aria-hidden="true">✓</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="#mp05" data-mp="05" class="nav-link">
+        <span class="nav-num">MP05</span>
+        <span class="nav-title">Storyboard Template Hunt</span>
+        <span class="nav-check" aria-hidden="true">✓</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="#mp06" data-mp="06" class="nav-link">
+        <span class="nav-num">MP06</span>
+        <span class="nav-title">Your 8-Frame Storyboard (Task 2a MAIN WORK)</span>
+        <span class="nav-check" aria-hidden="true">✓</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="#mp07" data-mp="07" class="nav-link">
+        <span class="nav-num">MP07</span>
+        <span class="nav-title">Title Card Design Sprint</span>
+        <span class="nav-check" aria-hidden="true">✓</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="#mp08" data-mp="08" class="nav-link">
+        <span class="nav-num">MP08</span>
+        <span class="nav-title">Script Formatted for Filming</span>
+        <span class="nav-check" aria-hidden="true">✓</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="#mp09" data-mp="09" class="nav-link">
+        <span class="nav-num">MP09</span>
+        <span class="nav-title">Visual Shot List with Reference Images</span>
+        <span class="nav-check" aria-hidden="true">✓</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="#mp10" data-mp="10" class="nav-link">
+        <span class="nav-num">MP10</span>
+        <span class="nav-title">Task 2a Pitch Reel — Record &amp; Edit</span>
+        <span class="nav-check" aria-hidden="true">✓</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="#mp11" data-mp="11" class="nav-link">
+        <span class="nav-num">MP11</span>
+        <span class="nav-title">Phone Capabilities Infographic</span>
+        <span class="nav-check" aria-hidden="true">✓</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="#mp12" data-mp="12" class="nav-link">
+        <span class="nav-num">MP12</span>
+        <span class="nav-title">Before/After Lighting Demo</span>
+        <span class="nav-check" aria-hidden="true">✓</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="#mp13" data-mp="13" class="nav-link">
+        <span class="nav-num">MP13</span>
+        <span class="nav-title">Location Shoot — Import &amp; Organise</span>
+        <span class="nav-check" aria-hidden="true">✓</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="#mp14" data-mp="14" class="nav-link">
+        <span class="nav-num">MP14</span>
+        <span class="nav-title">B-Roll Catalogue Page</span>
+        <span class="nav-check" aria-hidden="true">✓</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="#mp15" data-mp="15" class="nav-link">
+        <span class="nav-num">MP15</span>
+        <span class="nav-title">Cut Order Experiment</span>
+        <span class="nav-check" aria-hidden="true">✓</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="#mp16" data-mp="16" class="nav-link">
+        <span class="nav-num">MP16</span>
+        <span class="nav-title">Task 2b Rough Cut Assembly</span>
+        <span class="nav-check" aria-hidden="true">✓</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="#mp17" data-mp="17" class="nav-link">
+        <span class="nav-num">MP17</span>
+        <span class="nav-title">Transition Pacing Pass</span>
+        <span class="nav-check" aria-hidden="true">✓</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="#mp18" data-mp="18" class="nav-link">
+        <span class="nav-num">MP18</span>
+        <span class="nav-title">Text Overlay + Music Bed</span>
+        <span class="nav-check" aria-hidden="true">✓</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="#mp19" data-mp="19" class="nav-link">
+        <span class="nav-num">MP19</span>
+        <span class="nav-title">Accessibility Caption Pass</span>
+        <span class="nav-check" aria-hidden="true">✓</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="#mp20" data-mp="20" class="nav-link">
+        <span class="nav-num">MP20</span>
+        <span class="nav-title">Thumbnail + Design Polish</span>
+        <span class="nav-check" aria-hidden="true">✓</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="#mp21" data-mp="21" class="nav-link">
+        <span class="nav-num">MP21</span>
+        <span class="nav-title">Peer Review Version — Annotated Export</span>
+        <span class="nav-check" aria-hidden="true">✓</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="#mp22" data-mp="22" class="nav-link">
+        <span class="nav-num">MP22</span>
+        <span class="nav-title">Final Export + Task 2b Submission</span>
+        <span class="nav-check" aria-hidden="true">✓</span>
+      </a>
+    </li>
+      </ul>
+    </nav>
+
+    <main class="main">
+      <section class="hero">
+        <h1>Adobe Express Mini-Projects</h1>
+        <div class="subtitle">22 projects across 22 lessons — your guided tour of Adobe Express.</div>
+        <div class="meta">Year 10 Multimedia  •  Short-Form Video Unit  •  Ms Gao  •  APHS</div>
+        <div class="hero-how">
+          <strong>How this works:</strong> Every lesson you build a small Adobe Express project.
+          Each takes 10–20 minutes. Click <em>Mark complete</em> to tick off each one — your
+          progress saves automatically on this device. By the end of the unit you'll have 22 projects
+          in your Classroom folder — a full portfolio of Adobe Express skills.
+        </div>
+        <div class="hero-keys">
+          ⌨️  Tip: press <kbd>←</kbd> and <kbd>→</kbd> to jump between exercises.
+          Press <kbd>Ctrl+P</kbd> to print any single exercise cleanly.
+        </div>
+      </section>
+
+      <section class="reference" id="reference">
+        <h2>📖 Quick Reference</h2>
+        <div class="subhead">Look things up fast — UI layout, shortcuts, common tasks, and a glossary.</div>
+
+        <div class="ref-tabs" role="tablist">
+          <button class="ref-tab active" data-pane="layout" type="button">Layout</button>
+          <button class="ref-tab" data-pane="video" type="button">Video editor</button>
+          <button class="ref-tab" data-pane="shortcuts" type="button">Shortcuts</button>
+          <button class="ref-tab" data-pane="recipes" type="button">Common tasks</button>
+          <button class="ref-tab" data-pane="glossary" type="button">Glossary</button>
+        </div>
+
+        <div class="ref-pane active" id="pane-layout">
+          <h3 class="section-head">Adobe Express — main editor layout</h3>
+          
+<svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg" role="img"
+     aria-labelledby="layout-title" class="ui-diagram">
+  <title id="layout-title">Adobe Express main UI layout</title>
+  <style>
+    .panel { fill: #1E293B; stroke: #334155; stroke-width: 1; }
+    .label { fill: #F1F5F9; font-family: Calibri, sans-serif; font-size: 14px; font-weight: 600; }
+    .small { fill: #94A3B8; font-family: Calibri, sans-serif; font-size: 11px; }
+    .accent { fill: #4ADE80; }
+    .canvas { fill: #0B1222; stroke: #334155; }
+    .hot { fill: #38BDF8; font-family: Calibri, sans-serif; font-size: 11px; font-weight: 700; }
+  </style>
+  <!-- App background -->
+  <rect x="0" y="0" width="800" height="450" fill="#0F172A"/>
+  <!-- Top toolbar -->
+  <rect x="0" y="0" width="800" height="50" class="panel"/>
+  <text x="15" y="30" class="label">☰  Adobe Express</text>
+  <text x="300" y="30" class="small">My untitled project</text>
+  <rect x="640" y="10" width="70" height="30" fill="#4ADE80" rx="6"/>
+  <text x="648" y="30" fill="#0F172A" font-family="Calibri" font-size="13" font-weight="700">Share</text>
+  <rect x="720" y="10" width="70" height="30" fill="#38BDF8" rx="6"/>
+  <text x="720" y="30" fill="#0F172A" font-family="Calibri" font-size="13" font-weight="700"> Download</text>
+  <!-- Left panel -->
+  <rect x="0" y="50" width="80" height="400" class="panel"/>
+  <text x="10" y="75" class="hot">Text</text>
+  <text x="10" y="105" class="hot">Photos</text>
+  <text x="10" y="135" class="hot">Videos</text>
+  <text x="10" y="165" class="hot">Music</text>
+  <text x="10" y="195" class="hot">Shapes</text>
+  <text x="10" y="225" class="hot">Icons</text>
+  <text x="10" y="255" class="hot">Design</text>
+  <text x="10" y="285" class="hot">  Assets</text>
+  <text x="10" y="315" class="hot">Upload</text>
+  <!-- Canvas area -->
+  <rect x="100" y="80" width="500" height="320" class="canvas"/>
+  <text x="320" y="235" class="small" text-anchor="middle">YOUR CANVAS</text>
+  <text x="320" y="255" class="small" text-anchor="middle" fill="#64748B">(drag text, images, shapes here)</text>
+  <!-- Right panel -->
+  <rect x="620" y="50" width="180" height="400" class="panel"/>
+  <text x="630" y="75" class="label">Properties</text>
+  <text x="630" y="100" class="small">Size, colour, font,</text>
+  <text x="630" y="115" class="small">alignment, effects</text>
+  <text x="630" y="145" class="small">(changes based on</text>
+  <text x="630" y="160" class="small">what you selected)</text>
+  <!-- Bottom: Pages / Timeline -->
+  <rect x="100" y="410" width="500" height="40" class="panel"/>
+  <rect x="110" y="420" width="60" height="20" fill="#334155" rx="4"/>
+  <text x="140" y="434" class="small" text-anchor="middle">Page 1</text>
+  <rect x="180" y="420" width="60" height="20" fill="#1E293B" stroke="#334155" rx="4"/>
+  <text x="210" y="434" class="small" text-anchor="middle">+ Add</text>
+  <!-- Labels/callouts -->
+  <line x1="80" y1="140" x2="105" y2="140" stroke="#38BDF8" stroke-width="2"/>
+  <text x="83" y="45" class="hot">LEFT PANEL → all assets</text>
+  <line x1="620" y1="140" x2="600" y2="140" stroke="#38BDF8" stroke-width="2"/>
+  <text x="510" y="45" class="hot">RIGHT → edit selected thing</text>
+  <text x="200" y="420" class="small" fill="#4ADE80">↓ Bottom = Pages (or Timeline for video)</text>
+  <text x="400" y="45" class="hot">TOP → Share & Download</text>
+</svg>
+
+          <p class="ref-caption">Top toolbar → sharing &amp; download.  Left panel → assets to add.  Right panel → edit whatever you selected.  Bottom → pages (or timeline for video).</p>
+        </div>
+
+        <div class="ref-pane" id="pane-video">
+          <h3 class="section-head">Video editor — timeline view</h3>
+          
+<svg viewBox="0 0 800 380" xmlns="http://www.w3.org/2000/svg" role="img"
+     aria-labelledby="video-title" class="ui-diagram">
+  <title id="video-title">Adobe Express video editor timeline</title>
+  <style>
+    .panel { fill: #1E293B; stroke: #334155; stroke-width: 1; }
+    .label { fill: #F1F5F9; font-family: Calibri, sans-serif; font-size: 14px; font-weight: 600; }
+    .small { fill: #94A3B8; font-family: Calibri, sans-serif; font-size: 11px; }
+    .clip { fill: #38BDF8; stroke: #0F172A; stroke-width: 2; }
+    .broll { fill: #A78BFA; stroke: #0F172A; stroke-width: 2; }
+    .music { fill: #4ADE80; stroke: #0F172A; stroke-width: 2; }
+    .captions { fill: #FBBF24; stroke: #0F172A; stroke-width: 2; }
+    .hot { fill: #38BDF8; font-family: Calibri, sans-serif; font-size: 11px; font-weight: 700; }
+  </style>
+  <rect x="0" y="0" width="800" height="380" fill="#0F172A"/>
+  <!-- Preview area -->
+  <rect x="20" y="20" width="440" height="240" class="canvas" fill="#0B1222" stroke="#334155"/>
+  <text x="240" y="145" class="small" text-anchor="middle" fill="#64748B">PREVIEW</text>
+  <!-- Play controls -->
+  <circle cx="240" cy="275" r="15" fill="#4ADE80"/>
+  <polygon points="236,270 236,282 247,276" fill="#0F172A"/>
+  <text x="240" y="310" class="small" text-anchor="middle">Space = play / pause</text>
+  <!-- Right info panel -->
+  <rect x="480" y="20" width="300" height="240" class="panel"/>
+  <text x="495" y="45" class="label">Clip properties</text>
+  <text x="495" y="70" class="small">Speed, volume, crop,</text>
+  <text x="495" y="85" class="small">filters, effects, colour</text>
+  <rect x="495" y="100" width="270" height="30" fill="#334155" rx="4"/>
+  <text x="510" y="120" class="small">Volume:  [==========      ] 70%</text>
+  <rect x="495" y="145" width="270" height="30" fill="#334155" rx="4"/>
+  <text x="510" y="165" class="small">Speed:    1.0x (normal)</text>
+  <text x="495" y="210" class="hot">Select a clip to edit it here</text>
+  <!-- Timeline -->
+  <text x="20" y="340" class="label">TIMELINE</text>
+  <rect x="100" y="325" width="680" height="22" class="clip"/>
+  <rect x="100" y="325" width="120" height="22" fill="#38BDF8"/>
+  <rect x="220" y="325" width="150" height="22" fill="#0EA5E9"/>
+  <rect x="370" y="325" width="100" height="22" fill="#38BDF8"/>
+  <rect x="470" y="325" width="140" height="22" fill="#0EA5E9"/>
+  <rect x="610" y="325" width="170" height="22" fill="#38BDF8"/>
+  <text x="155" y="340" class="small" text-anchor="middle" fill="#0F172A">Clip 1</text>
+  <text x="290" y="340" class="small" text-anchor="middle" fill="#0F172A">Clip 2</text>
+  <text x="415" y="340" class="small" text-anchor="middle" fill="#0F172A">3</text>
+  <text x="530" y="340" class="small" text-anchor="middle" fill="#0F172A">Clip 4</text>
+  <text x="690" y="340" class="small" text-anchor="middle" fill="#0F172A">Clip 5</text>
+  <!-- Music track -->
+  <rect x="100" y="352" width="680" height="14" class="music"/>
+  <text x="20" y="364" class="small">♪ Music</text>
+  <!-- Captions track -->
+  <rect x="100" y="368" width="680" height="10" class="captions"/>
+  <text x="20" y="378" class="small">CC Captions</text>
+  <!-- Annotations -->
+  <text x="290" y="321" class="hot" text-anchor="middle">Drag handles → trim</text>
+  <line x1="220" y1="323" x2="220" y2="347" stroke="#F472B6" stroke-width="2"/>
+  <circle cx="220" cy="335" r="4" fill="#F472B6"/>
+  <text x="20" y="295" class="label">Your edit</text>
+</svg>
+
+          <p class="ref-caption">Preview on the left. Properties of the selected clip on the right. Timeline at the bottom — drag yellow handles to trim, click between clips to add transitions. Music and captions sit on their own tracks underneath.</p>
+        </div>
+
+        <div class="ref-pane" id="pane-shortcuts">
+          <h3 class="section-head">Keyboard shortcuts</h3>
+          
+<table class="ref-table">
+  <thead><tr><th>Shortcut</th><th>Does</th><th>Where</th></tr></thead>
+  <tbody><tr><td class="kbd">Ctrl + Z  /  ⌘ Z</td><td>Undo (use this a LOT)</td><td class="ctx">all</td></tr><tr><td class="kbd">Ctrl + Y  /  ⌘ ⇧ Z</td><td>Redo</td><td class="ctx">all</td></tr><tr><td class="kbd">Ctrl + S  /  ⌘ S</td><td>Force save (Adobe Express also auto-saves)</td><td class="ctx">all</td></tr><tr><td class="kbd">Ctrl + C / V</td><td>Copy / paste selected element</td><td class="ctx">all</td></tr><tr><td class="kbd">Ctrl + D  /  ⌘ D</td><td>Duplicate selected</td><td class="ctx">all</td></tr><tr><td class="kbd">Delete / Backspace</td><td>Remove selected element or clip</td><td class="ctx">all</td></tr><tr><td class="kbd">Arrow keys</td><td>Nudge selected element 1 pixel</td><td class="ctx">design</td></tr><tr><td class="kbd">Shift + Arrow</td><td>Nudge 10 pixels at a time</td><td class="ctx">design</td></tr><tr><td class="kbd">Shift + drag</td><td>Constrain proportions when resizing</td><td class="ctx">design</td></tr><tr><td class="kbd">Alt + drag</td><td>Duplicate element by dragging a copy</td><td class="ctx">design</td></tr><tr><td class="kbd">Space</td><td>Play / pause preview</td><td class="ctx">video</td></tr><tr><td class="kbd">J / K / L</td><td>Rewind / pause / fast-forward</td><td class="ctx">video</td></tr><tr><td class="kbd">+  /  −</td><td>Zoom in / out on canvas</td><td class="ctx">all</td></tr><tr><td class="kbd">F</td><td>Fit canvas to screen</td><td class="ctx">all</td></tr><tr><td class="kbd">T</td><td>Add text element</td><td class="ctx">design</td></tr></tbody>
+</table>
+
+          <p class="ref-caption">'all' = works everywhere. 'design' = when editing a canvas. 'video' = video timeline.</p>
+        </div>
+
+        <div class="ref-pane" id="pane-recipes">
+          <h3 class="section-head">Common tasks — 1-line how-tos</h3>
+          
+<table class="ref-table recipes">
+  <thead><tr><th>To do this…</th><th>…click this</th></tr></thead>
+  <tbody><tr><td class="recipe-task">Add text</td><td class="recipe-how">Click &#x27;Text&#x27; in the left panel → click &#x27;Add text&#x27; → type → format with top toolbar.</td></tr><tr><td class="recipe-task">Add an image</td><td class="recipe-how">Click &#x27;Photos&#x27; in the left panel → search a word → drag image onto canvas.</td></tr><tr><td class="recipe-task">Add a video clip</td><td class="recipe-how">Click &#x27;Upload&#x27; → choose file from your phone/computer → drag to timeline.</td></tr><tr><td class="recipe-task">Trim a video clip</td><td class="recipe-how">Click the clip on the timeline → drag the yellow handles at either end.</td></tr><tr><td class="recipe-task">Add a transition</td><td class="recipe-how">Click the small &#x27;+&#x27; between two clips on the timeline → choose a transition.</td></tr><tr><td class="recipe-task">Add music</td><td class="recipe-how">Click &#x27;Music&#x27; in the left panel → browse → drag track onto music timeline.</td></tr><tr><td class="recipe-task">Generate captions</td><td class="recipe-how">Click &#x27;Captions&#x27; → &#x27;Auto-caption&#x27; → wait → review EVERY caption for errors.</td></tr><tr><td class="recipe-task">Add a new page</td><td class="recipe-how">Click &#x27;Pages&#x27; at the bottom → &#x27;+&#x27; to add, or right-click a page → Duplicate.</td></tr><tr><td class="recipe-task">Change canvas size</td><td class="recipe-how">Click &#x27;Resize&#x27; near the top → pick a preset or custom dimensions.</td></tr><tr><td class="recipe-task">Apply a colour palette</td><td class="recipe-how">Click &#x27;Design Assets&#x27; → &#x27;Colour palettes&#x27; → pick → auto-applies to your design.</td></tr><tr><td class="recipe-task">Export / Download a video</td><td class="recipe-how">Click &#x27;Download&#x27; top right → &#x27;Video&#x27; → MP4 → Quality: 1080p.</td></tr><tr><td class="recipe-task">Export / Download an image</td><td class="recipe-how">Click &#x27;Download&#x27; top right → &#x27;PNG&#x27; or &#x27;JPG&#x27; → High quality.</td></tr><tr><td class="recipe-task">Share a link</td><td class="recipe-how">Click &#x27;Share&#x27; top right → copy link. Good for teacher review without exporting.</td></tr><tr><td class="recipe-task">Rename a project</td><td class="recipe-how">Click the project title (top-left, says &#x27;Untitled&#x27;) → type new name.</td></tr></tbody>
+</table>
+
+        </div>
+
+        <div class="ref-pane" id="pane-glossary">
+          <h3 class="section-head">Glossary</h3>
+          <p class="ref-caption" style="margin-top:0;">The words you'll hear all unit. Come back here when one trips you up.</p>
+          <dl class="glossary"><div class="gloss-item"><dt>Aspect ratio</dt><dd>The shape of your video (square 1:1, vertical 9:16, horizontal 16:9).</dd></div><div class="gloss-item"><dt>Asset</dt><dd>Any element you add — image, video clip, text, shape, audio.</dd></div><div class="gloss-item"><dt>Auto-caption</dt><dd>Adobe Express AI that listens to your video and generates captions. Always check accuracy.</dd></div><div class="gloss-item"><dt>B-roll</dt><dd>Supporting footage (not the main subject speaking) that covers edits and extends narrative.</dd></div><div class="gloss-item"><dt>Canvas</dt><dd>The main working area where you design — the &#x27;page&#x27; you see in the editor.</dd></div><div class="gloss-item"><dt>Clip</dt><dd>A single piece of video footage on the timeline.</dd></div><div class="gloss-item"><dt>Crop</dt><dd>Cut away edges of a photo/video to change framing.</dd></div><div class="gloss-item"><dt>Duplicate</dt><dd>Make a copy of a layer, page, or clip. Shortcut: Ctrl+D / Cmd+D.</dd></div><div class="gloss-item"><dt>Export</dt><dd>Save your finished project as a file (PNG, JPG, PDF, MP4).</dd></div><div class="gloss-item"><dt>Frame rate (fps)</dt><dd>Frames per second. 30fps = standard, 60fps = smoother motion.</dd></div><div class="gloss-item"><dt>Hook</dt><dd>The first 3 seconds of your video that earns the next 57.</dd></div><div class="gloss-item"><dt>Layer</dt><dd>An individual element stacked on your canvas (text, image, shape).</dd></div><div class="gloss-item"><dt>Mood board</dt><dd>A visual collection of images and words capturing the vibe of your project.</dd></div><div class="gloss-item"><dt>MP4</dt><dd>The video file format you export — works everywhere.</dd></div><div class="gloss-item"><dt>Page</dt><dd>In multi-page docs, each page is a design frame. In video, the &#x27;scene&#x27; concept.</dd></div><div class="gloss-item"><dt>Remix</dt><dd>Duplicate a template or project and modify it.</dd></div><div class="gloss-item"><dt>Resolution</dt><dd>Pixel count — 1080p = 1920×1080 = standard. 4K = higher detail.</dd></div><div class="gloss-item"><dt>Rough cut</dt><dd>First-pass edit: clips in order, no polish. Structure first, polish later.</dd></div><div class="gloss-item"><dt>Royalty-free</dt><dd>Music / images you can use without paying. Adobe Stock has a big free library.</dd></div><div class="gloss-item"><dt>Shot list</dt><dd>A pre-production list of every shot you plan to film — type, angle, movement.</dd></div><div class="gloss-item"><dt>Stock</dt><dd>Free images, videos, music from Adobe&#x27;s library. Search in the left panel.</dd></div><div class="gloss-item"><dt>Storyboard</dt><dd>Visual sequence of your video shot-by-shot, usually 6–12 frames.</dd></div><div class="gloss-item"><dt>Template</dt><dd>A pre-designed project you remix with your own content.</dd></div><div class="gloss-item"><dt>Timeline</dt><dd>Horizontal bar at the bottom of the video editor where clips live.</dd></div><div class="gloss-item"><dt>Transition</dt><dd>Effect between two clips. 90% of the time: use &#x27;hard cut&#x27; (no transition) or &#x27;Fade&#x27;.</dd></div><div class="gloss-item"><dt>Trim</dt><dd>Shorten a clip by dragging its start/end handles.</dd></div></dl>
+        </div>
+      </section>
+
+      
+<article class="exercise" id="mp01" data-mp="01">
+  <header class="exercise-header">
+    <div class="exercise-number">MP01</div>
+    <div class="exercise-titles">
+      <h2>Your Adobe Express Identity Card</h2>
+      <div class="exercise-meta">
+        <span class="meta-pill lesson">L01</span>
+        <span class="meta-pill time">⏱ 10 min</span>
+      </div>
+    </div>
+    <button class="complete-btn" data-mp="01" type="button">
+      <span class="btn-unchecked">Mark complete</span>
+      <span class="btn-checked">✓ Done</span>
+    </button>
+  </header>
+
+  <p class="exercise-intro">First Adobe Express project — get logged in, look around, and make something you can share with the class.</p>
+
+  <div class="callout callout-goal">
+    <div class="callout-label">🎯 Goal</div>
+    <div class="callout-body">A 1080 × 1080 square graphic introducing yourself (name + one fun fact + your favourite colour palette).</div>
+  </div>
+
+  <h3 class="section-head">Steps</h3>
+  <ol class="steps">
+    <li><span class="step-num">1</span><span class="step-text">Go to express.adobe.com and sign in with your school Adobe ID.</span></li>
+<li><span class="step-num">2</span><span class="step-text">Click the big &#x27;+ Create new&#x27; button.</span></li>
+<li><span class="step-num">3</span><span class="step-text">Choose &#x27;Instagram post (Square)&#x27;.</span></li>
+<li><span class="step-num">4</span><span class="step-text">Click &#x27;Text&#x27; in the left panel. Add your name as big bold text.</span></li>
+<li><span class="step-num">5</span><span class="step-text">Add a second text line: &#x27;One thing about me: ____&#x27;.</span></li>
+<li><span class="step-num">6</span><span class="step-text">Click &#x27;Design assets&#x27; → pick any background colour or image you like.</span></li>
+<li><span class="step-num">7</span><span class="step-text">Use the &#x27;Colour&#x27; tool to choose 3 colours that represent YOU.</span></li>
+<li><span class="step-num">8</span><span class="step-text">Click &#x27;Download&#x27; in the top right. Save as PNG.</span></li>
+<li><span class="step-num">9</span><span class="step-text">Upload to Google Classroom under &#x27;MP01 — Identity Card&#x27;.</span></li>
+  </ol>
+
+  <div class="callout callout-tip">
+    <div class="callout-label">💡 Pro tip</div>
+    <div class="callout-body">Fast &gt; perfect. You&#x27;ll tweak it later. The goal today is to know where the buttons are.</div>
+  </div>
+
+  <div class="callout callout-stuck">
+    <div class="callout-label">🧭 If you're stuck</div>
+    <div class="callout-body">Can&#x27;t log in? Your account is firstname.lastname@education.nsw.gov.au + your school password. Still stuck? Pair up with a neighbour.</div>
+  </div>
+
+  <div class="callout callout-output">
+    <div class="callout-label">✅ What you'll hand in</div>
+    <div class="callout-body">One 1080 × 1080 PNG image uploaded to Classroom.</div>
+  </div>
+
+  
+  <h3 class="section-head">Check yourself</h3>
+  <div class="check-wrap">
+    
+      <details class="check-item">
+        <summary class="check-q">What 2 clicks take you from the Adobe Express home page to a blank Instagram Post canvas?</summary>
+        <div class="check-a">1) Click &#x27;+ Create new&#x27;  2) Click &#x27;Instagram post (Square)&#x27;.</div>
+      </details>
+
+      <details class="check-item">
+        <summary class="check-q">Where in the UI do you find the colour palette tool?</summary>
+        <div class="check-a">Top toolbar (when text or shape is selected) OR &#x27;Design Assets&#x27; → &#x27;Colour palettes&#x27; in the left panel.</div>
+      </details>
+  </div>
+
+  <div class="exercise-nav">
+    <a href="#mp01" class="nav-prev">← MP01</a>
+    <a href="#reference" class="nav-top">↑ Reference</a>
+    <a href="#mp02" class="nav-next">MP02 →</a>
+  </div>
+</article>
+
+<article class="exercise" id="mp02" data-mp="02">
+  <header class="exercise-header">
+    <div class="exercise-number">MP02</div>
+    <div class="exercise-titles">
+      <h2>Genre Mood Board</h2>
+      <div class="exercise-meta">
+        <span class="meta-pill lesson">L02</span>
+        <span class="meta-pill time">⏱ 15 min</span>
+      </div>
+    </div>
+    <button class="complete-btn" data-mp="02" type="button">
+      <span class="btn-unchecked">Mark complete</span>
+      <span class="btn-checked">✓ Done</span>
+    </button>
+  </header>
+
+  <p class="exercise-intro">Every genre has a VIBE. Today you capture that vibe visually using Adobe Express stock images.</p>
+
+  <div class="callout callout-goal">
+    <div class="callout-label">🎯 Goal</div>
+    <div class="callout-body">A collage of 5 stock images + 3 power words that capture your chosen genre (Inform / Persuade / Entertain).</div>
+  </div>
+
+  <h3 class="section-head">Steps</h3>
+  <ol class="steps">
+    <li><span class="step-num">1</span><span class="step-text">Create new → search &#x27;Mood board&#x27; template → pick any.</span></li>
+<li><span class="step-num">2</span><span class="step-text">Delete the placeholder content.</span></li>
+<li><span class="step-num">3</span><span class="step-text">Click &#x27;Photos&#x27; in the left panel. Search a word related to your genre (e.g. &#x27;classroom&#x27;, &#x27;adventure&#x27;, &#x27;product&#x27;).</span></li>
+<li><span class="step-num">4</span><span class="step-text">Drag 5 images onto your canvas. Arrange them however feels right.</span></li>
+<li><span class="step-num">5</span><span class="step-text">Add 3 text layers with power words — one word each. (e.g. for Entertain: &#x27;chaotic&#x27;, &#x27;joyful&#x27;, &#x27;loud&#x27;).</span></li>
+<li><span class="step-num">6</span><span class="step-text">Pick a colour palette (top toolbar → Colour swatches) that matches the mood.</span></li>
+<li><span class="step-num">7</span><span class="step-text">Download as PNG. Upload to Classroom.</span></li>
+  </ol>
+
+  <div class="callout callout-tip">
+    <div class="callout-label">💡 Pro tip</div>
+    <div class="callout-body">Mood boards aren&#x27;t a drawing exercise — they&#x27;re a feeling exercise. If it looks scrappy but FEELS right, you&#x27;ve nailed it.</div>
+  </div>
+
+  <div class="callout callout-stuck">
+    <div class="callout-label">🧭 If you're stuck</div>
+    <div class="callout-body">Too many image choices? Use these search words: INFORM → &#x27;textbook&#x27;, &#x27;diagram&#x27;. PERSUADE → &#x27;product&#x27;, &#x27;hands&#x27;. ENTERTAIN → &#x27;party&#x27;, &#x27;motion&#x27;.</div>
+  </div>
+
+  <div class="callout callout-output">
+    <div class="callout-label">✅ What you'll hand in</div>
+    <div class="callout-body">A Genre Mood Board PNG uploaded to Classroom.</div>
+  </div>
+
+  
+  <h3 class="section-head">Check yourself</h3>
+  <div class="check-wrap">
+    
+      <details class="check-item">
+        <summary class="check-q">What&#x27;s the purpose of a mood board (in 1 sentence)?</summary>
+        <div class="check-a">To capture the feeling / vibe of your project visually before you start making decisions about specific scenes.</div>
+      </details>
+
+      <details class="check-item">
+        <summary class="check-q">How do you add a stock image to your canvas?</summary>
+        <div class="check-a">Click &#x27;Photos&#x27; in the left panel → type a search word → drag the image onto the canvas.</div>
+      </details>
+  </div>
+
+  <div class="exercise-nav">
+    <a href="#mp01" class="nav-prev">← MP01</a>
+    <a href="#reference" class="nav-top">↑ Reference</a>
+    <a href="#mp03" class="nav-next">MP03 →</a>
+  </div>
+</article>
+
+<article class="exercise" id="mp03" data-mp="03">
+  <header class="exercise-header">
+    <div class="exercise-number">MP03</div>
+    <div class="exercise-titles">
+      <h2>Hook Thumbnail A/B/C Test</h2>
+      <div class="exercise-meta">
+        <span class="meta-pill lesson">L03</span>
+        <span class="meta-pill time">⏱ 15 min</span>
+      </div>
+    </div>
+    <button class="complete-btn" data-mp="03" type="button">
+      <span class="btn-unchecked">Mark complete</span>
+      <span class="btn-checked">✓ Done</span>
+    </button>
+  </header>
+
+  <p class="exercise-intro">A thumbnail decides whether people click your video. Today you design THREE thumbnails and pick the winner.</p>
+
+  <div class="callout callout-goal">
+    <div class="callout-label">🎯 Goal</div>
+    <div class="callout-body">3 thumbnail designs for the same video, each using a different hook technique (question / shock / promise).</div>
+  </div>
+
+  <h3 class="section-head">Steps</h3>
+  <ol class="steps">
+    <li><span class="step-num">1</span><span class="step-text">Create new → YouTube Thumbnail (1280 × 720).</span></li>
+<li><span class="step-num">2</span><span class="step-text">Thumbnail 1 — QUESTION: Add text like &#x27;Why does X happen?&#x27; Big bold. Add one image.</span></li>
+<li><span class="step-num">3</span><span class="step-text">Click &#x27;Pages&#x27; at the bottom → Add new page. Name it &#x27;Shock&#x27;.</span></li>
+<li><span class="step-num">4</span><span class="step-text">Thumbnail 2 — SHOCK: Add a number or stat (&#x27;3,000,000 watched this&#x27;). Use bold arrows or circles.</span></li>
+<li><span class="step-num">5</span><span class="step-text">Add a third page. Name it &#x27;Promise&#x27;.</span></li>
+<li><span class="step-num">6</span><span class="step-text">Thumbnail 3 — PROMISE: Text like &#x27;Learn X in 60 seconds&#x27;. Simple, direct.</span></li>
+<li><span class="step-num">7</span><span class="step-text">Download ALL pages as PNG.</span></li>
+<li><span class="step-num">8</span><span class="step-text">Upload all 3 to Classroom. In the comment, tell me which one YOU would click and why.</span></li>
+  </ol>
+
+  <div class="callout callout-tip">
+    <div class="callout-label">💡 Pro tip</div>
+    <div class="callout-body">High-contrast text on simple backgrounds out-performs fancy designs every time. Keep it readable at thumbnail size (tiny!).</div>
+  </div>
+
+  <div class="callout callout-stuck">
+    <div class="callout-label">🧭 If you're stuck</div>
+    <div class="callout-body">Can&#x27;t fit 3 on one canvas? Use PAGES. Click &#x27;Pages&#x27; at the bottom — each page is a new thumbnail.</div>
+  </div>
+
+  <div class="callout callout-output">
+    <div class="callout-label">✅ What you'll hand in</div>
+    <div class="callout-body">3 YouTube thumbnail PNGs uploaded to Classroom.</div>
+  </div>
+
+  
+  <h3 class="section-head">Check yourself</h3>
+  <div class="check-wrap">
+    
+      <details class="check-item">
+        <summary class="check-q">Name 3 types of hooks used in short-form video.</summary>
+        <div class="check-a">Question, Shock (stat or surprise), Promise (what you&#x27;ll learn), Pattern break. Any 3 are correct.</div>
+      </details>
+
+      <details class="check-item">
+        <summary class="check-q">How do you add a second design page (for thumbnail variant B) to the same project?</summary>
+        <div class="check-a">Click &#x27;Pages&#x27; at the bottom of the editor → &#x27;Add page&#x27; (or right-click existing page → Duplicate).</div>
+      </details>
+  </div>
+
+  <div class="exercise-nav">
+    <a href="#mp02" class="nav-prev">← MP02</a>
+    <a href="#reference" class="nav-top">↑ Reference</a>
+    <a href="#mp04" class="nav-next">MP04 →</a>
+  </div>
+</article>
+
+<article class="exercise" id="mp04" data-mp="04">
+  <header class="exercise-header">
+    <div class="exercise-number">MP04</div>
+    <div class="exercise-titles">
+      <h2>Pre-Production Project Dashboard</h2>
+      <div class="exercise-meta">
+        <span class="meta-pill lesson">L04</span>
+        <span class="meta-pill time">⏱ 15 min</span>
+      </div>
+    </div>
+    <button class="complete-btn" data-mp="04" type="button">
+      <span class="btn-unchecked">Mark complete</span>
+      <span class="btn-checked">✓ Done</span>
+    </button>
+  </header>
+
+  <p class="exercise-intro">Pros keep their plans in one place. Today you build YOUR project HQ in Adobe Express.</p>
+
+  <div class="callout callout-goal">
+    <div class="callout-label">🎯 Goal</div>
+    <div class="callout-body">A 1-page dashboard that will become the cover of your Task 2a folio.</div>
+  </div>
+
+  <h3 class="section-head">Steps</h3>
+  <ol class="steps">
+    <li><span class="step-num">1</span><span class="step-text">Create new → Flyer (A4 portrait).</span></li>
+<li><span class="step-num">2</span><span class="step-text">Title at top: &#x27;Task 2a Pre-Production — [Your Name]&#x27;.</span></li>
+<li><span class="step-num">3</span><span class="step-text">Divide the page into 4 boxes using rectangles (Shape tool).</span></li>
+<li><span class="step-num">4</span><span class="step-text">Label the boxes: (1) Topic &amp; Genre, (2) Target Audience, (3) Hook Idea, (4) Timeline.</span></li>
+<li><span class="step-num">5</span><span class="step-text">Fill each box with your own text based on what you planned today.</span></li>
+<li><span class="step-num">6</span><span class="step-text">Pick ONE colour palette that matches your genre.</span></li>
+<li><span class="step-num">7</span><span class="step-text">Download as PDF. Upload to Classroom.</span></li>
+  </ol>
+
+  <div class="callout callout-tip">
+    <div class="callout-label">💡 Pro tip</div>
+    <div class="callout-body">Keep this dashboard open in another tab during every lesson. You&#x27;ll refer back to it constantly.</div>
+  </div>
+
+  <div class="callout callout-stuck">
+    <div class="callout-label">🧭 If you're stuck</div>
+    <div class="callout-body">Not sure what to put in the boxes? That&#x27;s fine — add placeholder text like &#x27;TBD Week 3&#x27; and update as you go.</div>
+  </div>
+
+  <div class="callout callout-output">
+    <div class="callout-label">✅ What you'll hand in</div>
+    <div class="callout-body">A Pre-Production Dashboard PDF uploaded to Classroom.</div>
+  </div>
+
+  
+  <h3 class="section-head">Check yourself</h3>
+  <div class="check-wrap">
+    
+      <details class="check-item">
+        <summary class="check-q">Why should your pre-production dashboard stay open during every lesson?</summary>
+        <div class="check-a">So you can refer back to your plan, update decisions, and stay aligned with your topic/audience/timeline.</div>
+      </details>
+
+      <details class="check-item">
+        <summary class="check-q">What 4 sections should your dashboard include?</summary>
+        <div class="check-a">Topic &amp; Genre, Target Audience, Hook Idea, Timeline.</div>
+      </details>
+  </div>
+
+  <div class="exercise-nav">
+    <a href="#mp03" class="nav-prev">← MP03</a>
+    <a href="#reference" class="nav-top">↑ Reference</a>
+    <a href="#mp05" class="nav-next">MP05 →</a>
+  </div>
+</article>
+
+<article class="exercise" id="mp05" data-mp="05">
+  <header class="exercise-header">
+    <div class="exercise-number">MP05</div>
+    <div class="exercise-titles">
+      <h2>Storyboard Template Hunt</h2>
+      <div class="exercise-meta">
+        <span class="meta-pill lesson">L05</span>
+        <span class="meta-pill time">⏱ 10 min</span>
+      </div>
+    </div>
+    <button class="complete-btn" data-mp="05" type="button">
+      <span class="btn-unchecked">Mark complete</span>
+      <span class="btn-checked">✓ Done</span>
+    </button>
+  </header>
+
+  <p class="exercise-intro">Adobe Express has hundreds of storyboard templates. Your job today: find the ONE that fits your project.</p>
+
+  <div class="callout callout-goal">
+    <div class="callout-label">🎯 Goal</div>
+    <div class="callout-body">A shortlist of 3 storyboard templates with notes on what you like about each.</div>
+  </div>
+
+  <h3 class="section-head">Steps</h3>
+  <ol class="steps">
+    <li><span class="step-num">1</span><span class="step-text">Go to Adobe Express home → search bar → type &#x27;storyboard&#x27;.</span></li>
+<li><span class="step-num">2</span><span class="step-text">Browse for 3 minutes. Keep scrolling until something catches your eye.</span></li>
+<li><span class="step-num">3</span><span class="step-text">Shortlist 3 templates. Open each in a new tab.</span></li>
+<li><span class="step-num">4</span><span class="step-text">Create a new &#x27;Document&#x27; in Adobe Express.</span></li>
+<li><span class="step-num">5</span><span class="step-text">Screenshot each of your 3 favourites. Paste into the doc.</span></li>
+<li><span class="step-num">6</span><span class="step-text">Under each one, write 2 sentences: &#x27;I like this because...&#x27; and &#x27;I&#x27;d change...&#x27;</span></li>
+<li><span class="step-num">7</span><span class="step-text">Pick your winner. Highlight it.</span></li>
+<li><span class="step-num">8</span><span class="step-text">Download as PDF. Upload to Classroom.</span></li>
+  </ol>
+
+  <div class="callout callout-tip">
+    <div class="callout-label">💡 Pro tip</div>
+    <div class="callout-body">Don&#x27;t marry a template. You can switch later. Today is just about exposing yourself to options.</div>
+  </div>
+
+  <div class="callout callout-stuck">
+    <div class="callout-label">🧭 If you're stuck</div>
+    <div class="callout-body">Too many similar templates? Filter by &#x27;Free&#x27; + &#x27;Simple&#x27;. Avoid anything that looks overdone.</div>
+  </div>
+
+  <div class="callout callout-output">
+    <div class="callout-label">✅ What you'll hand in</div>
+    <div class="callout-body">A 1-page template comparison PDF uploaded to Classroom.</div>
+  </div>
+
+  
+  <h3 class="section-head">Check yourself</h3>
+  <div class="check-wrap">
+    
+      <details class="check-item">
+        <summary class="check-q">Why is picking a storyboard template NOT a permanent decision?</summary>
+        <div class="check-a">You can always change templates later. Today&#x27;s choice is about exposing yourself to options, not committing.</div>
+      </details>
+
+      <details class="check-item">
+        <summary class="check-q">What should you write under each shortlisted template?</summary>
+        <div class="check-a">&#x27;I like this because...&#x27; and &#x27;I&#x27;d change...&#x27;</div>
+      </details>
+  </div>
+
+  <div class="exercise-nav">
+    <a href="#mp04" class="nav-prev">← MP04</a>
+    <a href="#reference" class="nav-top">↑ Reference</a>
+    <a href="#mp06" class="nav-next">MP06 →</a>
+  </div>
+</article>
+
+<article class="exercise" id="mp06" data-mp="06">
+  <header class="exercise-header">
+    <div class="exercise-number">MP06</div>
+    <div class="exercise-titles">
+      <h2>Your 8-Frame Storyboard (Task 2a MAIN WORK)</h2>
+      <div class="exercise-meta">
+        <span class="meta-pill lesson">L06</span>
+        <span class="meta-pill time">⏱ 45 min</span>
+      </div>
+    </div>
+    <button class="complete-btn" data-mp="06" type="button">
+      <span class="btn-unchecked">Mark complete</span>
+      <span class="btn-checked">✓ Done</span>
+    </button>
+  </header>
+
+  <p class="exercise-intro">The big one. Today you build the storyboard that&#x27;ll guide your entire video.</p>
+
+  <div class="callout callout-goal">
+    <div class="callout-label">🎯 Goal</div>
+    <div class="callout-body">A complete 8-frame storyboard in Adobe Express, ready for submission.</div>
+  </div>
+
+  <h3 class="section-head">Steps</h3>
+  <ol class="steps">
+    <li><span class="step-num">1</span><span class="step-text">Open your chosen template from MP05.</span></li>
+<li><span class="step-num">2</span><span class="step-text">Rename the project: &#x27;T2a Storyboard — [Your Name]&#x27;.</span></li>
+<li><span class="step-num">3</span><span class="step-text">For EACH of the 8 frames:</span></li>
+<li><span class="step-num">4</span><span class="step-text">   • Add a simple sketch or placeholder image (stock photo is fine).</span></li>
+<li><span class="step-num">5</span><span class="step-text">   • Add a caption in the frame: &#x27;Scene X — description&#x27;.</span></li>
+<li><span class="step-num">6</span><span class="step-text">   • Add timing below: &#x27;Duration: Xs&#x27;.</span></li>
+<li><span class="step-num">7</span><span class="step-text">Ensure the TOTAL timing adds up to 60–90 seconds.</span></li>
+<li><span class="step-num">8</span><span class="step-text">Check narrative flow: does frame 1 hook? Does frame 8 close? Does the middle make sense?</span></li>
+<li><span class="step-num">9</span><span class="step-text">Save + share link in Google Classroom for teacher feedback.</span></li>
+  </ol>
+
+  <div class="callout callout-tip">
+    <div class="callout-label">💡 Pro tip</div>
+    <div class="callout-body">Don&#x27;t get fancy on the visuals. A stick-figure storyboard that tells a clear story beats a pretty one that confuses.</div>
+  </div>
+
+  <div class="callout callout-stuck">
+    <div class="callout-label">🧭 If you're stuck</div>
+    <div class="callout-body">Got fewer than 8 ideas? That&#x27;s a sign your script/topic needs more depth. Add B-roll moments (hands, objects, transitions) to fill frames.</div>
+  </div>
+
+  <div class="callout callout-output">
+    <div class="callout-label">✅ What you'll hand in</div>
+    <div class="callout-body">Complete 8-frame storyboard shared via Adobe Express link in Classroom.</div>
+  </div>
+
+  
+  <h3 class="section-head">Check yourself</h3>
+  <div class="check-wrap">
+    
+      <details class="check-item">
+        <summary class="check-q">How many seconds should your 8-frame storyboard total?</summary>
+        <div class="check-a">60–90 seconds. Add up each frame&#x27;s duration.</div>
+      </details>
+
+      <details class="check-item">
+        <summary class="check-q">What&#x27;s more important: visually pretty frames OR clear narrative?</summary>
+        <div class="check-a">Clear narrative. Stick figures are fine — your storyboard exists to communicate the story, not to win an art prize.</div>
+      </details>
+  </div>
+
+  <div class="exercise-nav">
+    <a href="#mp05" class="nav-prev">← MP05</a>
+    <a href="#reference" class="nav-top">↑ Reference</a>
+    <a href="#mp07" class="nav-next">MP07 →</a>
+  </div>
+</article>
+
+<article class="exercise" id="mp07" data-mp="07">
+  <header class="exercise-header">
+    <div class="exercise-number">MP07</div>
+    <div class="exercise-titles">
+      <h2>Title Card Design Sprint</h2>
+      <div class="exercise-meta">
+        <span class="meta-pill lesson">L07</span>
+        <span class="meta-pill time">⏱ 15 min</span>
+      </div>
+    </div>
+    <button class="complete-btn" data-mp="07" type="button">
+      <span class="btn-unchecked">Mark complete</span>
+      <span class="btn-checked">✓ Done</span>
+    </button>
+  </header>
+
+  <p class="exercise-intro">Your video&#x27;s title card is its first handshake with the viewer. Let&#x27;s make it count.</p>
+
+  <div class="callout callout-goal">
+    <div class="callout-label">🎯 Goal</div>
+    <div class="callout-body">3 title card variants for your video, each in a different style.</div>
+  </div>
+
+  <h3 class="section-head">Steps</h3>
+  <ol class="steps">
+    <li><span class="step-num">1</span><span class="step-text">Create new → Instagram Post OR video-sized (TikTok vertical 1080 × 1920).</span></li>
+<li><span class="step-num">2</span><span class="step-text">Title Card 1 — BOLD: Big text, solid background, single accent colour. Looks like a newspaper headline.</span></li>
+<li><span class="step-num">3</span><span class="step-text">Duplicate page — Title Card 2 — MINIMAL: Small text, lots of white space, elegant.</span></li>
+<li><span class="step-num">4</span><span class="step-text">Duplicate page — Title Card 3 — PLAYFUL: Animated-style font, emoji, vibrant colours.</span></li>
+<li><span class="step-num">5</span><span class="step-text">Export all 3.</span></li>
+<li><span class="step-num">6</span><span class="step-text">Post to Classroom. Ask 2 classmates which they&#x27;d click.</span></li>
+  </ol>
+
+  <div class="callout callout-tip">
+    <div class="callout-label">💡 Pro tip</div>
+    <div class="callout-body">Your title card should match the ENERGY of your hook. If your hook is chill, don&#x27;t slap a neon &#x27;EXPLOSIVE&#x27; title on it.</div>
+  </div>
+
+  <div class="callout callout-stuck">
+    <div class="callout-label">🧭 If you're stuck</div>
+    <div class="callout-body">Fonts overwhelming you? Stick to ONE typeface per card, max 2. &#x27;Bebas Neue&#x27; + &#x27;Inter&#x27; is a safe combo.</div>
+  </div>
+
+  <div class="callout callout-output">
+    <div class="callout-label">✅ What you'll hand in</div>
+    <div class="callout-body">3 title card PNGs + 2 classmate responses in Classroom.</div>
+  </div>
+
+  
+  <h3 class="section-head">Check yourself</h3>
+  <div class="check-wrap">
+    
+      <details class="check-item">
+        <summary class="check-q">Why use 3 different title card styles (bold / minimal / playful)?</summary>
+        <div class="check-a">To see which style matches your genre&#x27;s energy. You test options rather than guess.</div>
+      </details>
+
+      <details class="check-item">
+        <summary class="check-q">Max how many font styles should appear in one title card?</summary>
+        <div class="check-a">Two. Any more and it feels cluttered.</div>
+      </details>
+  </div>
+
+  <div class="exercise-nav">
+    <a href="#mp06" class="nav-prev">← MP06</a>
+    <a href="#reference" class="nav-top">↑ Reference</a>
+    <a href="#mp08" class="nav-next">MP08 →</a>
+  </div>
+</article>
+
+<article class="exercise" id="mp08" data-mp="08">
+  <header class="exercise-header">
+    <div class="exercise-number">MP08</div>
+    <div class="exercise-titles">
+      <h2>Script Formatted for Filming</h2>
+      <div class="exercise-meta">
+        <span class="meta-pill lesson">L08</span>
+        <span class="meta-pill time">⏱ 20 min</span>
+      </div>
+    </div>
+    <button class="complete-btn" data-mp="08" type="button">
+      <span class="btn-unchecked">Mark complete</span>
+      <span class="btn-checked">✓ Done</span>
+    </button>
+  </header>
+
+  <p class="exercise-intro">Your script needs to be READABLE on set. Today you format it properly.</p>
+
+  <div class="callout callout-goal">
+    <div class="callout-label">🎯 Goal</div>
+    <div class="callout-body">A clean 2-page script PDF you can print and hold while filming.</div>
+  </div>
+
+  <h3 class="section-head">Steps</h3>
+  <ol class="steps">
+    <li><span class="step-num">1</span><span class="step-text">Create new → Document (A4).</span></li>
+<li><span class="step-num">2</span><span class="step-text">Page 1: Your full script in a large readable font (14pt minimum).</span></li>
+<li><span class="step-num">3</span><span class="step-text">Use bold for NARRATOR lines, italics for (stage directions).</span></li>
+<li><span class="step-num">4</span><span class="step-text">Add timing markers every 10 seconds: [00:10], [00:20], etc.</span></li>
+<li><span class="step-num">5</span><span class="step-text">Page 2: Add a quick checklist at the top — &#x27;Props needed, Locations, People on camera&#x27;.</span></li>
+<li><span class="step-num">6</span><span class="step-text">Download as PDF. Print if possible (or save to phone).</span></li>
+<li><span class="step-num">7</span><span class="step-text">Upload PDF to Classroom.</span></li>
+  </ol>
+
+  <div class="callout callout-tip">
+    <div class="callout-label">💡 Pro tip</div>
+    <div class="callout-body">Reading a script off a phone on set SUCKS. Print if you can. Your future-self on shoot day will thank you.</div>
+  </div>
+
+  <div class="callout callout-stuck">
+    <div class="callout-label">🧭 If you're stuck</div>
+    <div class="callout-body">Script won&#x27;t fit on 1 page? That&#x27;s fine — go to 2 pages. Don&#x27;t shrink the font below 14pt.</div>
+  </div>
+
+  <div class="callout callout-output">
+    <div class="callout-label">✅ What you'll hand in</div>
+    <div class="callout-body">A 2-page script PDF uploaded to Classroom.</div>
+  </div>
+
+  
+  <h3 class="section-head">Check yourself</h3>
+  <div class="check-wrap">
+    
+      <details class="check-item">
+        <summary class="check-q">What&#x27;s the minimum body font size for a printed shot-day script?</summary>
+        <div class="check-a">14pt. Anything smaller is hard to read on set.</div>
+      </details>
+
+      <details class="check-item">
+        <summary class="check-q">What goes on Page 2 of the formatted script?</summary>
+        <div class="check-a">A quick checklist: Props needed, Locations, People on camera.</div>
+      </details>
+  </div>
+
+  <div class="exercise-nav">
+    <a href="#mp07" class="nav-prev">← MP07</a>
+    <a href="#reference" class="nav-top">↑ Reference</a>
+    <a href="#mp09" class="nav-next">MP09 →</a>
+  </div>
+</article>
+
+<article class="exercise" id="mp09" data-mp="09">
+  <header class="exercise-header">
+    <div class="exercise-number">MP09</div>
+    <div class="exercise-titles">
+      <h2>Visual Shot List with Reference Images</h2>
+      <div class="exercise-meta">
+        <span class="meta-pill lesson">L09</span>
+        <span class="meta-pill time">⏱ 20 min</span>
+      </div>
+    </div>
+    <button class="complete-btn" data-mp="09" type="button">
+      <span class="btn-unchecked">Mark complete</span>
+      <span class="btn-checked">✓ Done</span>
+    </button>
+  </header>
+
+  <p class="exercise-intro">A text shot list is OK. A visual one is WAY better. Let&#x27;s build the better version.</p>
+
+  <div class="callout callout-goal">
+    <div class="callout-label">🎯 Goal</div>
+    <div class="callout-body">A shot list where each row has a reference image showing what you want.</div>
+  </div>
+
+  <h3 class="section-head">Steps</h3>
+  <ol class="steps">
+    <li><span class="step-num">1</span><span class="step-text">Create new → Document (A4 Landscape).</span></li>
+<li><span class="step-num">2</span><span class="step-text">Create a table with 5 columns: # | Shot Type | Angle | Movement | Reference Image.</span></li>
+<li><span class="step-num">3</span><span class="step-text">For each of your 6+ shots, fill in the row.</span></li>
+<li><span class="step-num">4</span><span class="step-text">In the last column, drag a reference image from Adobe Express stock that LOOKS LIKE what you want.</span></li>
+<li><span class="step-num">5</span><span class="step-text">These don&#x27;t have to be perfect — they&#x27;re inspiration, not the actual shot.</span></li>
+<li><span class="step-num">6</span><span class="step-text">Download as PDF. Print OR save to phone for shoot day.</span></li>
+<li><span class="step-num">7</span><span class="step-text">Upload to Classroom.</span></li>
+  </ol>
+
+  <div class="callout callout-tip">
+    <div class="callout-label">💡 Pro tip</div>
+    <div class="callout-body">On location, you&#x27;ll forget what you meant by &#x27;close-up of hands&#x27;. A reference image brings the memory back instantly.</div>
+  </div>
+
+  <div class="callout callout-stuck">
+    <div class="callout-label">🧭 If you're stuck</div>
+    <div class="callout-body">Can&#x27;t find reference images? Screenshot similar shots from reels/videos you like — as long as you don&#x27;t use them in your final video, that&#x27;s fine for planning.</div>
+  </div>
+
+  <div class="callout callout-output">
+    <div class="callout-label">✅ What you'll hand in</div>
+    <div class="callout-body">A visual shot list PDF uploaded to Classroom.</div>
+  </div>
+
+  
+  <h3 class="section-head">Check yourself</h3>
+  <div class="check-wrap">
+    
+      <details class="check-item">
+        <summary class="check-q">Name the 3 shot types you should plan in your shot list.</summary>
+        <div class="check-a">Wide, Medium, Close-up (bonus: Extreme Close-up).</div>
+      </details>
+
+      <details class="check-item">
+        <summary class="check-q">Why include reference images in a shot list?</summary>
+        <div class="check-a">So that on location you remember what you meant by each shot description — memory prompt at speed.</div>
+      </details>
+  </div>
+
+  <div class="exercise-nav">
+    <a href="#mp08" class="nav-prev">← MP08</a>
+    <a href="#reference" class="nav-top">↑ Reference</a>
+    <a href="#mp10" class="nav-next">MP10 →</a>
+  </div>
+</article>
+
+<article class="exercise" id="mp10" data-mp="10">
+  <header class="exercise-header">
+    <div class="exercise-number">MP10</div>
+    <div class="exercise-titles">
+      <h2>Task 2a Pitch Reel — Record &amp; Edit</h2>
+      <div class="exercise-meta">
+        <span class="meta-pill lesson">L10</span>
+        <span class="meta-pill time">⏱ 40 min</span>
+      </div>
+    </div>
+    <button class="complete-btn" data-mp="10" type="button">
+      <span class="btn-unchecked">Mark complete</span>
+      <span class="btn-checked">✓ Done</span>
+    </button>
+  </header>
+
+  <p class="exercise-intro">The big day for Task 2a. Record a 30-second pitch reel that gives your audience a taste of your full video.</p>
+
+  <div class="callout callout-goal">
+    <div class="callout-label">🎯 Goal</div>
+    <div class="callout-body">A 30-second edited Pitch Reel, exported as MP4, uploaded to Classroom.</div>
+  </div>
+
+  <h3 class="section-head">Steps</h3>
+  <ol class="steps">
+    <li><span class="step-num">1</span><span class="step-text">Check your script, storyboard, and shot list are in front of you.</span></li>
+<li><span class="step-num">2</span><span class="step-text">Record 3–4 short clips on your phone (6–8 seconds each). Follow your shot list.</span></li>
+<li><span class="step-num">3</span><span class="step-text">Open Adobe Express → Create new → Video (TikTok or YouTube Short size).</span></li>
+<li><span class="step-num">4</span><span class="step-text">Import your clips: click &#x27;Upload&#x27; → select files from your phone.</span></li>
+<li><span class="step-num">5</span><span class="step-text">Drag clips onto the timeline in story order.</span></li>
+<li><span class="step-num">6</span><span class="step-text">Trim each clip to its best 2–4 seconds (select clip → trim handles).</span></li>
+<li><span class="step-num">7</span><span class="step-text">Add a title card (from MP07) at the start.</span></li>
+<li><span class="step-num">8</span><span class="step-text">Add ONE transition between clips (don&#x27;t go transition-crazy).</span></li>
+<li><span class="step-num">9</span><span class="step-text">Add background music from the music library (click &#x27;Music&#x27; in the left panel).</span></li>
+<li><span class="step-num">10</span><span class="step-text">Preview. Export at 1080p.</span></li>
+<li><span class="step-num">11</span><span class="step-text">Upload final MP4 to Classroom under &#x27;Task 2a — Pitch Reel&#x27;. Due 11:59pm TONIGHT.</span></li>
+  </ol>
+
+  <div class="callout callout-tip">
+    <div class="callout-label">💡 Pro tip</div>
+    <div class="callout-body">Film more than you think you need. Editing is 80% selection — you need options.</div>
+  </div>
+
+  <div class="callout callout-stuck">
+    <div class="callout-label">🧭 If you're stuck</div>
+    <div class="callout-body">Audio bad? Record again in a quieter spot. Can&#x27;t upload? Export first, then upload.</div>
+  </div>
+
+  <div class="callout callout-output">
+    <div class="callout-label">✅ What you'll hand in</div>
+    <div class="callout-body">30-second Pitch Reel MP4 + full Task 2a folio submitted. ⭐ TASK 2a DUE.</div>
+  </div>
+
+  
+  <h3 class="section-head">Check yourself</h3>
+  <div class="check-wrap">
+    
+      <details class="check-item">
+        <summary class="check-q">How long should your Pitch Reel be?</summary>
+        <div class="check-a">At least 25 seconds, target 30 seconds, max 30s (requirement).</div>
+      </details>
+
+      <details class="check-item">
+        <summary class="check-q">Before exporting, what one check do you do on audio?</summary>
+        <div class="check-a">Listen back: is the audio clear? Is background noise too high? Re-record if needed.</div>
+      </details>
+  </div>
+
+  <div class="exercise-nav">
+    <a href="#mp09" class="nav-prev">← MP09</a>
+    <a href="#reference" class="nav-top">↑ Reference</a>
+    <a href="#mp11" class="nav-next">MP11 →</a>
+  </div>
+</article>
+
+<article class="exercise" id="mp11" data-mp="11">
+  <header class="exercise-header">
+    <div class="exercise-number">MP11</div>
+    <div class="exercise-titles">
+      <h2>Phone Capabilities Infographic</h2>
+      <div class="exercise-meta">
+        <span class="meta-pill lesson">L11</span>
+        <span class="meta-pill time">⏱ 15 min</span>
+      </div>
+    </div>
+    <button class="complete-btn" data-mp="11" type="button">
+      <span class="btn-unchecked">Mark complete</span>
+      <span class="btn-checked">✓ Done</span>
+    </button>
+  </header>
+
+  <p class="exercise-intro">Your phone audit results from today — turn them into a shareable infographic.</p>
+
+  <div class="callout callout-goal">
+    <div class="callout-label">🎯 Goal</div>
+    <div class="callout-body">A 1080 × 1920 vertical infographic showing your phone&#x27;s video specs.</div>
+  </div>
+
+  <h3 class="section-head">Steps</h3>
+  <ol class="steps">
+    <li><span class="step-num">1</span><span class="step-text">Create new → Infographic template (search &#x27;infographic&#x27;).</span></li>
+<li><span class="step-num">2</span><span class="step-text">Pick a vertical one. Rename: &#x27;My Phone — Video Specs&#x27;.</span></li>
+<li><span class="step-num">3</span><span class="step-text">Replace placeholder stats with YOUR data from the phone audit worksheet.</span></li>
+<li><span class="step-num">4</span><span class="step-text">Stats to include: resolution, frame rate, stabilisation yes/no, mic quality.</span></li>
+<li><span class="step-num">5</span><span class="step-text">Add your phone model at the top.</span></li>
+<li><span class="step-num">6</span><span class="step-text">Add one &#x27;Pro tip&#x27; section: &#x27;I&#x27;ll work around X by doing Y&#x27;.</span></li>
+<li><span class="step-num">7</span><span class="step-text">Download as PNG. Upload to Classroom.</span></li>
+  </ol>
+
+  <div class="callout callout-tip">
+    <div class="callout-label">💡 Pro tip</div>
+    <div class="callout-body">Infographics are great resumes for your phone. You&#x27;ll refer to this when planning shoots.</div>
+  </div>
+
+  <div class="callout callout-stuck">
+    <div class="callout-label">🧭 If you're stuck</div>
+    <div class="callout-body">Too many infographic templates? Pick a simple one with icons + numbers. Avoid anything with complex charts.</div>
+  </div>
+
+  <div class="callout callout-output">
+    <div class="callout-label">✅ What you'll hand in</div>
+    <div class="callout-body">Phone specs infographic PNG uploaded to Classroom.</div>
+  </div>
+
+  
+  <h3 class="section-head">Check yourself</h3>
+  <div class="check-wrap">
+    
+      <details class="check-item">
+        <summary class="check-q">Name 3 things you audit on your phone for video work.</summary>
+        <div class="check-a">Resolution (1080p / 4K), frame rate (30 / 60fps), stabilisation, audio quality, lens options. Any 3.</div>
+      </details>
+
+      <details class="check-item">
+        <summary class="check-q">Why put your phone audit into an infographic?</summary>
+        <div class="check-a">A visual summary is easier to remember. Plus you&#x27;ll share/reuse it when planning future shoots.</div>
+      </details>
+  </div>
+
+  <div class="exercise-nav">
+    <a href="#mp10" class="nav-prev">← MP10</a>
+    <a href="#reference" class="nav-top">↑ Reference</a>
+    <a href="#mp12" class="nav-next">MP12 →</a>
+  </div>
+</article>
+
+<article class="exercise" id="mp12" data-mp="12">
+  <header class="exercise-header">
+    <div class="exercise-number">MP12</div>
+    <div class="exercise-titles">
+      <h2>Before/After Lighting Demo</h2>
+      <div class="exercise-meta">
+        <span class="meta-pill lesson">L12</span>
+        <span class="meta-pill time">⏱ 20 min</span>
+      </div>
+    </div>
+    <button class="complete-btn" data-mp="12" type="button">
+      <span class="btn-unchecked">Mark complete</span>
+      <span class="btn-checked">✓ Done</span>
+    </button>
+  </header>
+
+  <p class="exercise-intro">Show the POWER of good lighting with your own mini-demo.</p>
+
+  <div class="callout callout-goal">
+    <div class="callout-label">🎯 Goal</div>
+    <div class="callout-body">A 10-second video showing the same subject in bad lighting then good lighting.</div>
+  </div>
+
+  <h3 class="section-head">Steps</h3>
+  <ol class="steps">
+    <li><span class="step-num">1</span><span class="step-text">Record a friend (or yourself) in BAD lighting (back to window, overhead fluorescent, etc.) — 5 seconds.</span></li>
+<li><span class="step-num">2</span><span class="step-text">Change the lighting: face towards window OR add a lamp. Record again — 5 seconds.</span></li>
+<li><span class="step-num">3</span><span class="step-text">Create new Adobe Express Video → drag both clips to timeline.</span></li>
+<li><span class="step-num">4</span><span class="step-text">Add text overlay: &#x27;BEFORE&#x27; on clip 1, &#x27;AFTER&#x27; on clip 2.</span></li>
+<li><span class="step-num">5</span><span class="step-text">Add a snappy transition between them.</span></li>
+<li><span class="step-num">6</span><span class="step-text">Export MP4. Upload to Classroom.</span></li>
+  </ol>
+
+  <div class="callout callout-tip">
+    <div class="callout-label">💡 Pro tip</div>
+    <div class="callout-body">Lighting changes feel tiny but on camera they&#x27;re enormous. Your mates will go &#x27;whoa that&#x27;s a huge difference&#x27;.</div>
+  </div>
+
+  <div class="callout callout-stuck">
+    <div class="callout-label">🧭 If you're stuck</div>
+    <div class="callout-body">Can&#x27;t see the difference on your phone preview? Compare at full screen in Adobe Express — phone screens are too small to judge.</div>
+  </div>
+
+  <div class="callout callout-output">
+    <div class="callout-label">✅ What you'll hand in</div>
+    <div class="callout-body">10-second before/after lighting demo MP4 uploaded to Classroom.</div>
+  </div>
+
+  
+  <h3 class="section-head">Check yourself</h3>
+  <div class="check-wrap">
+    
+      <details class="check-item">
+        <summary class="check-q">What&#x27;s the single biggest lighting change you can make with zero budget?</summary>
+        <div class="check-a">Face TOWARDS a natural light source (window) instead of away from it.</div>
+      </details>
+
+      <details class="check-item">
+        <summary class="check-q">Why put &#x27;BEFORE&#x27; and &#x27;AFTER&#x27; text overlays on your demo?</summary>
+        <div class="check-a">So viewers instantly understand the comparison without needing you to explain it.</div>
+      </details>
+  </div>
+
+  <div class="exercise-nav">
+    <a href="#mp11" class="nav-prev">← MP11</a>
+    <a href="#reference" class="nav-top">↑ Reference</a>
+    <a href="#mp13" class="nav-next">MP13 →</a>
+  </div>
+</article>
+
+<article class="exercise" id="mp13" data-mp="13">
+  <header class="exercise-header">
+    <div class="exercise-number">MP13</div>
+    <div class="exercise-titles">
+      <h2>Location Shoot — Import &amp; Organise</h2>
+      <div class="exercise-meta">
+        <span class="meta-pill lesson">L13</span>
+        <span class="meta-pill time">⏱ Last 15 min of lesson</span>
+      </div>
+    </div>
+    <button class="complete-btn" data-mp="13" type="button">
+      <span class="btn-unchecked">Mark complete</span>
+      <span class="btn-checked">✓ Done</span>
+    </button>
+  </header>
+
+  <p class="exercise-intro">You&#x27;ve just filmed on location. Now organise the chaos before you forget which clip is what.</p>
+
+  <div class="callout callout-goal">
+    <div class="callout-label">🎯 Goal</div>
+    <div class="callout-body">Clips imported, renamed, and tagged by shot type in Adobe Express.</div>
+  </div>
+
+  <h3 class="section-head">Steps</h3>
+  <ol class="steps">
+    <li><span class="step-num">1</span><span class="step-text">Open Adobe Express → Create new → Video.</span></li>
+<li><span class="step-num">2</span><span class="step-text">Name it: &#x27;Task 2b Footage — [Your Name]&#x27;.</span></li>
+<li><span class="step-num">3</span><span class="step-text">Click &#x27;Upload&#x27; → select ALL clips from today&#x27;s shoot.</span></li>
+<li><span class="step-num">4</span><span class="step-text">Watch each clip briefly. For each, add a clear label: &#x27;Wide — school gate&#x27; / &#x27;Close-up — hands&#x27; / etc.</span></li>
+<li><span class="step-num">5</span><span class="step-text">Delete any unusable clips now (shaky, too dark, wrong subject). Don&#x27;t hoard bad footage.</span></li>
+<li><span class="step-num">6</span><span class="step-text">Arrange usable clips in ROUGH narrative order.</span></li>
+<li><span class="step-num">7</span><span class="step-text">Save. This becomes your Task 2b working project.</span></li>
+  </ol>
+
+  <div class="callout callout-tip">
+    <div class="callout-label">💡 Pro tip</div>
+    <div class="callout-body">Labelling clips on the same day you shot them is the single biggest time-saver in editing. Tomorrow you won&#x27;t remember.</div>
+  </div>
+
+  <div class="callout callout-stuck">
+    <div class="callout-label">🧭 If you're stuck</div>
+    <div class="callout-body">Too many similar clips? Keep the best 1–2 of each, delete the rest. Quality &gt; quantity.</div>
+  </div>
+
+  <div class="callout callout-output">
+    <div class="callout-label">✅ What you'll hand in</div>
+    <div class="callout-body">A Task 2b working project in Adobe Express with organised, labelled footage.</div>
+  </div>
+
+  
+  <h3 class="section-head">Check yourself</h3>
+  <div class="check-wrap">
+    
+      <details class="check-item">
+        <summary class="check-q">When should you label your clips in Adobe Express?</summary>
+        <div class="check-a">On the SAME DAY you shot them. Tomorrow you will have forgotten what each clip is.</div>
+      </details>
+
+      <details class="check-item">
+        <summary class="check-q">What do you do with unusable clips (shaky / too dark)?</summary>
+        <div class="check-a">Delete them now. Don&#x27;t hoard bad footage — it just makes editing slower later.</div>
+      </details>
+  </div>
+
+  <div class="exercise-nav">
+    <a href="#mp12" class="nav-prev">← MP12</a>
+    <a href="#reference" class="nav-top">↑ Reference</a>
+    <a href="#mp14" class="nav-next">MP14 →</a>
+  </div>
+</article>
+
+<article class="exercise" id="mp14" data-mp="14">
+  <header class="exercise-header">
+    <div class="exercise-number">MP14</div>
+    <div class="exercise-titles">
+      <h2>B-Roll Catalogue Page</h2>
+      <div class="exercise-meta">
+        <span class="meta-pill lesson">L14</span>
+        <span class="meta-pill time">⏱ 15 min</span>
+      </div>
+    </div>
+    <button class="complete-btn" data-mp="14" type="button">
+      <span class="btn-unchecked">Mark complete</span>
+      <span class="btn-checked">✓ Done</span>
+    </button>
+  </header>
+
+  <p class="exercise-intro">B-roll is the secret sauce. Build a visual catalogue so you remember what you have.</p>
+
+  <div class="callout callout-goal">
+    <div class="callout-label">🎯 Goal</div>
+    <div class="callout-body">A 1-page Adobe Express doc thumbnailing all your B-roll clips with their purpose.</div>
+  </div>
+
+  <h3 class="section-head">Steps</h3>
+  <ol class="steps">
+    <li><span class="step-num">1</span><span class="step-text">Create new → Document (A4 Landscape).</span></li>
+<li><span class="step-num">2</span><span class="step-text">Title: &#x27;My B-Roll Library&#x27;.</span></li>
+<li><span class="step-num">3</span><span class="step-text">Create a 4-column grid (use Shape tool or a table template).</span></li>
+<li><span class="step-num">4</span><span class="step-text">For each B-roll clip: drag a screenshot (or key frame) into a cell.</span></li>
+<li><span class="step-num">5</span><span class="step-text">Caption each: &#x27;hands typing — use for 0:20&#x27;, &#x27;leaves — transition cover&#x27;, etc.</span></li>
+<li><span class="step-num">6</span><span class="step-text">Save + export as PDF.</span></li>
+<li><span class="step-num">7</span><span class="step-text">Upload to Classroom.</span></li>
+  </ol>
+
+  <div class="callout callout-tip">
+    <div class="callout-label">💡 Pro tip</div>
+    <div class="callout-body">You&#x27;ll forget clips exist unless you catalogue them. This doc is your secret weapon at edit time.</div>
+  </div>
+
+  <div class="callout callout-stuck">
+    <div class="callout-label">🧭 If you're stuck</div>
+    <div class="callout-body">Don&#x27;t know what B-roll is &#x27;for&#x27;? That&#x27;s fine — label it &#x27;transition material&#x27; and decide later.</div>
+  </div>
+
+  <div class="callout callout-output">
+    <div class="callout-label">✅ What you'll hand in</div>
+    <div class="callout-body">A B-Roll Catalogue PDF uploaded to Classroom.</div>
+  </div>
+
+  
+  <h3 class="section-head">Check yourself</h3>
+  <div class="check-wrap">
+    
+      <details class="check-item">
+        <summary class="check-q">What is B-roll and why does it matter?</summary>
+        <div class="check-a">Supporting footage (hands, objects, establishing shots) that covers edit cuts and extends narrative. Makes cuts feel natural.</div>
+      </details>
+
+      <details class="check-item">
+        <summary class="check-q">How should each B-roll clip be labelled in your catalogue?</summary>
+        <div class="check-a">With its intended purpose, e.g. &#x27;hands typing — use for 0:20&#x27; or &#x27;leaves — transition cover&#x27;.</div>
+      </details>
+  </div>
+
+  <div class="exercise-nav">
+    <a href="#mp13" class="nav-prev">← MP13</a>
+    <a href="#reference" class="nav-top">↑ Reference</a>
+    <a href="#mp15" class="nav-next">MP15 →</a>
+  </div>
+</article>
+
+<article class="exercise" id="mp15" data-mp="15">
+  <header class="exercise-header">
+    <div class="exercise-number">MP15</div>
+    <div class="exercise-titles">
+      <h2>Cut Order Experiment</h2>
+      <div class="exercise-meta">
+        <span class="meta-pill lesson">L15</span>
+        <span class="meta-pill time">⏱ 20 min</span>
+      </div>
+    </div>
+    <button class="complete-btn" data-mp="15" type="button">
+      <span class="btn-unchecked">Mark complete</span>
+      <span class="btn-checked">✓ Done</span>
+    </button>
+  </header>
+
+  <p class="exercise-intro">Editing is storytelling. Today you try TWO different orders for the same footage and see how they feel.</p>
+
+  <div class="callout callout-goal">
+    <div class="callout-label">🎯 Goal</div>
+    <div class="callout-body">Two versions of a rough sequence (Order A vs Order B) to compare.</div>
+  </div>
+
+  <h3 class="section-head">Steps</h3>
+  <ol class="steps">
+    <li><span class="step-num">1</span><span class="step-text">Open your Task 2b Adobe Express project.</span></li>
+<li><span class="step-num">2</span><span class="step-text">Duplicate the page (bottom of screen → Pages → Duplicate).</span></li>
+<li><span class="step-num">3</span><span class="step-text">ORDER A: arrange clips chronologically (the order they happened).</span></li>
+<li><span class="step-num">4</span><span class="step-text">ORDER B (on the duplicated page): arrange clips for IMPACT — strongest clip first, reveal/twist last.</span></li>
+<li><span class="step-num">5</span><span class="step-text">Preview each. Write down which feels stronger and why.</span></li>
+<li><span class="step-num">6</span><span class="step-text">Keep the winning order. Delete or archive the other page.</span></li>
+<li><span class="step-num">7</span><span class="step-text">Save your project.</span></li>
+  </ol>
+
+  <div class="callout callout-tip">
+    <div class="callout-label">💡 Pro tip</div>
+    <div class="callout-body">The order you FILMED clips is almost never the order you should USE them. Editing breaks chronology on purpose.</div>
+  </div>
+
+  <div class="callout callout-stuck">
+    <div class="callout-label">🧭 If you're stuck</div>
+    <div class="callout-body">Both orders feel the same? Try a wilder Order C — put the ending first. Most editing breakthroughs come from &#x27;what if I just tried...&#x27;</div>
+  </div>
+
+  <div class="callout callout-output">
+    <div class="callout-label">✅ What you'll hand in</div>
+    <div class="callout-body">Decision noted in your project: &#x27;Final order = A / B / other&#x27;, one sentence rationale.</div>
+  </div>
+
+  
+  <h3 class="section-head">Check yourself</h3>
+  <div class="check-wrap">
+    
+      <details class="check-item">
+        <summary class="check-q">Why try TWO different cut orders for your footage?</summary>
+        <div class="check-a">To feel how editing reshapes meaning. The filmed order is almost never the strongest told order.</div>
+      </details>
+
+      <details class="check-item">
+        <summary class="check-q">In Order B (impact order), what goes first?</summary>
+        <div class="check-a">Your strongest / most hooking clip — not the chronological first moment.</div>
+      </details>
+  </div>
+
+  <div class="exercise-nav">
+    <a href="#mp14" class="nav-prev">← MP14</a>
+    <a href="#reference" class="nav-top">↑ Reference</a>
+    <a href="#mp16" class="nav-next">MP16 →</a>
+  </div>
+</article>
+
+<article class="exercise" id="mp16" data-mp="16">
+  <header class="exercise-header">
+    <div class="exercise-number">MP16</div>
+    <div class="exercise-titles">
+      <h2>Task 2b Rough Cut Assembly</h2>
+      <div class="exercise-meta">
+        <span class="meta-pill lesson">L16</span>
+        <span class="meta-pill time">⏱ 40 min</span>
+      </div>
+    </div>
+    <button class="complete-btn" data-mp="16" type="button">
+      <span class="btn-unchecked">Mark complete</span>
+      <span class="btn-checked">✓ Done</span>
+    </button>
+  </header>
+
+  <p class="exercise-intro">Build the skeleton of your final video. Don&#x27;t polish. Just get clips in order.</p>
+
+  <div class="callout callout-goal">
+    <div class="callout-label">🎯 Goal</div>
+    <div class="callout-body">A rough cut in Adobe Express, 60–120 seconds total, all clips in narrative order.</div>
+  </div>
+
+  <h3 class="section-head">Steps</h3>
+  <ol class="steps">
+    <li><span class="step-num">1</span><span class="step-text">Open your Task 2b project.</span></li>
+<li><span class="step-num">2</span><span class="step-text">Based on your cut order decision from MP15, arrange all clips.</span></li>
+<li><span class="step-num">3</span><span class="step-text">Trim each clip to its best section (don&#x27;t worry about frame-perfect cuts — rough is fine).</span></li>
+<li><span class="step-num">4</span><span class="step-text">Add placeholder text where your title card and captions will go.</span></li>
+<li><span class="step-num">5</span><span class="step-text">Preview — does the story arc hold?</span></li>
+<li><span class="step-num">6</span><span class="step-text">Total time: check it&#x27;s between 60 and 120 seconds.</span></li>
+<li><span class="step-num">7</span><span class="step-text">Save. Upload a preview (MP4 export at low resolution is fine for rough cut) to Classroom.</span></li>
+  </ol>
+
+  <div class="callout callout-tip">
+    <div class="callout-label">💡 Pro tip</div>
+    <div class="callout-body">Rough = rough. Don&#x27;t get trapped polishing one transition while the story is still broken. Structure first, polish later.</div>
+  </div>
+
+  <div class="callout callout-stuck">
+    <div class="callout-label">🧭 If you're stuck</div>
+    <div class="callout-body">Too long? Ruthlessly cut. Every clip needs to earn its place. If you don&#x27;t need it, remove it.</div>
+  </div>
+
+  <div class="callout callout-output">
+    <div class="callout-label">✅ What you'll hand in</div>
+    <div class="callout-body">A rough cut MP4 uploaded to Classroom.</div>
+  </div>
+
+  
+  <h3 class="section-head">Check yourself</h3>
+  <div class="check-wrap">
+    
+      <details class="check-item">
+        <summary class="check-q">What&#x27;s the target length range for your final short-form video?</summary>
+        <div class="check-a">60–120 seconds.</div>
+      </details>
+
+      <details class="check-item">
+        <summary class="check-q">Should a rough cut be polished?</summary>
+        <div class="check-a">No. Rough = rough. Structure first, polish later. Don&#x27;t trap yourself on one transition while the story is still broken.</div>
+      </details>
+  </div>
+
+  <div class="exercise-nav">
+    <a href="#mp15" class="nav-prev">← MP15</a>
+    <a href="#reference" class="nav-top">↑ Reference</a>
+    <a href="#mp17" class="nav-next">MP17 →</a>
+  </div>
+</article>
+
+<article class="exercise" id="mp17" data-mp="17">
+  <header class="exercise-header">
+    <div class="exercise-number">MP17</div>
+    <div class="exercise-titles">
+      <h2>Transition Pacing Pass</h2>
+      <div class="exercise-meta">
+        <span class="meta-pill lesson">L17</span>
+        <span class="meta-pill time">⏱ 25 min</span>
+      </div>
+    </div>
+    <button class="complete-btn" data-mp="17" type="button">
+      <span class="btn-unchecked">Mark complete</span>
+      <span class="btn-checked">✓ Done</span>
+    </button>
+  </header>
+
+  <p class="exercise-intro">Transitions should feel INVISIBLE. Today we apply them with intent.</p>
+
+  <div class="callout callout-goal">
+    <div class="callout-label">🎯 Goal</div>
+    <div class="callout-body">Your rough cut refined with purposeful transitions.</div>
+  </div>
+
+  <h3 class="section-head">Steps</h3>
+  <ol class="steps">
+    <li><span class="step-num">1</span><span class="step-text">Open your rough cut.</span></li>
+<li><span class="step-num">2</span><span class="step-text">Identify the TWO transition points that matter most (usually story beats).</span></li>
+<li><span class="step-num">3</span><span class="step-text">Apply a transition there — usually &#x27;Fade&#x27; or &#x27;Cross dissolve&#x27; is safest.</span></li>
+<li><span class="step-num">4</span><span class="step-text">Everywhere else: use hard cuts (no transition). Hard cuts are a choice, not laziness.</span></li>
+<li><span class="step-num">5</span><span class="step-text">NO ZOOM transitions. NO spin transitions. NO glitch. (Trust me.)</span></li>
+<li><span class="step-num">6</span><span class="step-text">Preview at full screen — do the transitions serve the story or distract?</span></li>
+<li><span class="step-num">7</span><span class="step-text">Remove any that feel gimmicky.</span></li>
+<li><span class="step-num">8</span><span class="step-text">Save + export preview. Upload to Classroom.</span></li>
+  </ol>
+
+  <div class="callout callout-tip">
+    <div class="callout-label">💡 Pro tip</div>
+    <div class="callout-body">Amateur = lots of transitions. Pro = mostly hard cuts, with 1–2 well-placed soft transitions for emphasis.</div>
+  </div>
+
+  <div class="callout callout-stuck">
+    <div class="callout-label">🧭 If you're stuck</div>
+    <div class="callout-body">Want to use a fancy transition? Ask yourself: &#x27;Would this be in a real ad/film?&#x27; If no, kill it.</div>
+  </div>
+
+  <div class="callout callout-output">
+    <div class="callout-label">✅ What you'll hand in</div>
+    <div class="callout-body">Refined video v2 MP4 uploaded to Classroom.</div>
+  </div>
+
+  
+  <h3 class="section-head">Check yourself</h3>
+  <div class="check-wrap">
+    
+      <details class="check-item">
+        <summary class="check-q">Should you use fancy zoom / spin / glitch transitions?</summary>
+        <div class="check-a">No. Hard cuts + the occasional &#x27;Fade&#x27; or &#x27;Cross dissolve&#x27; beat fancy transitions every time in short-form.</div>
+      </details>
+
+      <details class="check-item">
+        <summary class="check-q">What&#x27;s the &#x27;test&#x27; for any transition you add?</summary>
+        <div class="check-a">&#x27;Would this be in a real ad or film?&#x27; If no, delete it.</div>
+      </details>
+  </div>
+
+  <div class="exercise-nav">
+    <a href="#mp16" class="nav-prev">← MP16</a>
+    <a href="#reference" class="nav-top">↑ Reference</a>
+    <a href="#mp18" class="nav-next">MP18 →</a>
+  </div>
+</article>
+
+<article class="exercise" id="mp18" data-mp="18">
+  <header class="exercise-header">
+    <div class="exercise-number">MP18</div>
+    <div class="exercise-titles">
+      <h2>Text Overlay + Music Bed</h2>
+      <div class="exercise-meta">
+        <span class="meta-pill lesson">L18</span>
+        <span class="meta-pill time">⏱ 30 min</span>
+      </div>
+    </div>
+    <button class="complete-btn" data-mp="18" type="button">
+      <span class="btn-unchecked">Mark complete</span>
+      <span class="btn-checked">✓ Done</span>
+    </button>
+  </header>
+
+  <p class="exercise-intro">Now your video gets its voice. Text where it counts. Music that breathes under the words.</p>
+
+  <div class="callout callout-goal">
+    <div class="callout-label">🎯 Goal</div>
+    <div class="callout-body">Your video v3 with professional text overlays and royalty-free music.</div>
+  </div>
+
+  <h3 class="section-head">Steps</h3>
+  <ol class="steps">
+    <li><span class="step-num">1</span><span class="step-text">Open your project. Make sure you&#x27;re on your latest cut.</span></li>
+<li><span class="step-num">2</span><span class="step-text">Click &#x27;Music&#x27; in the left panel. Browse the royalty-free library.</span></li>
+<li><span class="step-num">3</span><span class="step-text">Pick ONE track that matches your genre&#x27;s mood.</span></li>
+<li><span class="step-num">4</span><span class="step-text">Drag it onto the music timeline. Adjust volume so it sits UNDER your voice (around 20–30%).</span></li>
+<li><span class="step-num">5</span><span class="step-text">Add text overlays for: title (first 3s), any key stat or quote, call-to-action (last 3s).</span></li>
+<li><span class="step-num">6</span><span class="step-text">Keep text on screen for at least 2 seconds — viewers need time to read.</span></li>
+<li><span class="step-num">7</span><span class="step-text">Use bold sans-serif font. High contrast. No more than 2 font styles in the whole video.</span></li>
+<li><span class="step-num">8</span><span class="step-text">Save + export v3. Upload to Classroom.</span></li>
+  </ol>
+
+  <div class="callout callout-tip">
+    <div class="callout-label">💡 Pro tip</div>
+    <div class="callout-body">Music should support, not lead. If you notice the music, it&#x27;s too loud.</div>
+  </div>
+
+  <div class="callout callout-stuck">
+    <div class="callout-label">🧭 If you're stuck</div>
+    <div class="callout-body">Can&#x27;t find the right music? Search by mood: &#x27;calm&#x27;, &#x27;upbeat&#x27;, &#x27;cinematic&#x27;. Avoid anything with lyrics — lyrics fight narration.</div>
+  </div>
+
+  <div class="callout callout-output">
+    <div class="callout-label">✅ What you'll hand in</div>
+    <div class="callout-body">Video v3 MP4 with music + text overlays uploaded to Classroom.</div>
+  </div>
+
+  
+  <h3 class="section-head">Check yourself</h3>
+  <div class="check-wrap">
+    
+      <details class="check-item">
+        <summary class="check-q">At what approximate volume level should your music track sit relative to narration?</summary>
+        <div class="check-a">20–30%. If you notice the music, it&#x27;s too loud.</div>
+      </details>
+
+      <details class="check-item">
+        <summary class="check-q">Why avoid lyric-heavy music?</summary>
+        <div class="check-a">Lyrics compete with your narration. Listeners can&#x27;t focus on both — choose instrumental or minimal-lyric tracks.</div>
+      </details>
+  </div>
+
+  <div class="exercise-nav">
+    <a href="#mp17" class="nav-prev">← MP17</a>
+    <a href="#reference" class="nav-top">↑ Reference</a>
+    <a href="#mp19" class="nav-next">MP19 →</a>
+  </div>
+</article>
+
+<article class="exercise" id="mp19" data-mp="19">
+  <header class="exercise-header">
+    <div class="exercise-number">MP19</div>
+    <div class="exercise-titles">
+      <h2>Accessibility Caption Pass</h2>
+      <div class="exercise-meta">
+        <span class="meta-pill lesson">L19</span>
+        <span class="meta-pill time">⏱ 20 min</span>
+      </div>
+    </div>
+    <button class="complete-btn" data-mp="19" type="button">
+      <span class="btn-unchecked">Mark complete</span>
+      <span class="btn-checked">✓ Done</span>
+    </button>
+  </header>
+
+  <p class="exercise-intro">Captions aren&#x27;t optional. They make your video watchable for 15% of viewers with hearing loss AND for the 80%+ who watch with sound off.</p>
+
+  <div class="callout callout-goal">
+    <div class="callout-label">🎯 Goal</div>
+    <div class="callout-body">Your video with accurate, well-timed captions across every spoken moment.</div>
+  </div>
+
+  <h3 class="section-head">Steps</h3>
+  <ol class="steps">
+    <li><span class="step-num">1</span><span class="step-text">Open your project.</span></li>
+<li><span class="step-num">2</span><span class="step-text">Click &#x27;Captions&#x27; → &#x27;Auto-caption&#x27;. Wait ~30 seconds for Adobe Express to transcribe.</span></li>
+<li><span class="step-num">3</span><span class="step-text">CRITICAL: review EVERY caption. Auto-captions make errors, especially with names / slang / Australian accents.</span></li>
+<li><span class="step-num">4</span><span class="step-text">Fix timing — captions should appear slightly BEFORE the word is spoken, disappear slightly AFTER.</span></li>
+<li><span class="step-num">5</span><span class="step-text">Styling: white text, black background box, bottom-third of screen. Readable on phone.</span></li>
+<li><span class="step-num">6</span><span class="step-text">Export final version.</span></li>
+<li><span class="step-num">7</span><span class="step-text">Upload MP4 + a note confirming: &#x27;I checked every caption. Found X errors and fixed them.&#x27;</span></li>
+  </ol>
+
+  <div class="callout callout-tip">
+    <div class="callout-label">💡 Pro tip</div>
+    <div class="callout-body">Muted autoplay on social is the default. Captions aren&#x27;t a nice-to-have — they&#x27;re how most people watch.</div>
+  </div>
+
+  <div class="callout callout-stuck">
+    <div class="callout-label">🧭 If you're stuck</div>
+    <div class="callout-body">Captions are wildly wrong? That happens with strong accents. Delete and retype manually — faster than fixing 30 errors.</div>
+  </div>
+
+  <div class="callout callout-output">
+    <div class="callout-label">✅ What you'll hand in</div>
+    <div class="callout-body">Captioned video v4 MP4 uploaded to Classroom.</div>
+  </div>
+
+  
+  <h3 class="section-head">Check yourself</h3>
+  <div class="check-wrap">
+    
+      <details class="check-item">
+        <summary class="check-q">What percent of social video is watched with sound OFF?</summary>
+        <div class="check-a">~80%. Captions are NOT optional — they&#x27;re how most people watch.</div>
+      </details>
+
+      <details class="check-item">
+        <summary class="check-q">What 2 things must you check on auto-generated captions?</summary>
+        <div class="check-a">1) Accuracy (auto-caption makes errors, especially with names/slang/accents).  2) Timing (captions should appear slightly before the spoken word).</div>
+      </details>
+  </div>
+
+  <div class="exercise-nav">
+    <a href="#mp18" class="nav-prev">← MP18</a>
+    <a href="#reference" class="nav-top">↑ Reference</a>
+    <a href="#mp20" class="nav-next">MP20 →</a>
+  </div>
+</article>
+
+<article class="exercise" id="mp20" data-mp="20">
+  <header class="exercise-header">
+    <div class="exercise-number">MP20</div>
+    <div class="exercise-titles">
+      <h2>Thumbnail + Design Polish</h2>
+      <div class="exercise-meta">
+        <span class="meta-pill lesson">L20</span>
+        <span class="meta-pill time">⏱ 25 min</span>
+      </div>
+    </div>
+    <button class="complete-btn" data-mp="20" type="button">
+      <span class="btn-unchecked">Mark complete</span>
+      <span class="btn-checked">✓ Done</span>
+    </button>
+  </header>
+
+  <p class="exercise-intro">Your video needs a thumbnail. And your overall design needs a consistency check.</p>
+
+  <div class="callout callout-goal">
+    <div class="callout-label">🎯 Goal</div>
+    <div class="callout-body">One polished thumbnail + a design audit of your video&#x27;s type/colour choices.</div>
+  </div>
+
+  <h3 class="section-head">Steps</h3>
+  <ol class="steps">
+    <li><span class="step-num">1</span><span class="step-text">Create a new YouTube thumbnail (1280 × 720).</span></li>
+<li><span class="step-num">2</span><span class="step-text">Use the same colour palette as your video — consistency matters.</span></li>
+<li><span class="step-num">3</span><span class="step-text">Text: one big hook word or question. Face-visible image (yours or stock) if it suits your genre.</span></li>
+<li><span class="step-num">4</span><span class="step-text">Back in your video project: audit the text overlays. Are fonts consistent? Colours matching the palette?</span></li>
+<li><span class="step-num">5</span><span class="step-text">Fix any inconsistencies. Swap fonts if more than 2 are used.</span></li>
+<li><span class="step-num">6</span><span class="step-text">Export thumbnail PNG + video v5 MP4.</span></li>
+<li><span class="step-num">7</span><span class="step-text">Upload both to Classroom.</span></li>
+  </ol>
+
+  <div class="callout callout-tip">
+    <div class="callout-label">💡 Pro tip</div>
+    <div class="callout-body">Your thumbnail + first title card should feel like siblings. Same family, same palette, same vibe.</div>
+  </div>
+
+  <div class="callout callout-stuck">
+    <div class="callout-label">🧭 If you're stuck</div>
+    <div class="callout-body">Your video is missing a &#x27;look&#x27;? Pick ONE accent colour from your mood board (MP02) and use it everywhere. Instant consistency.</div>
+  </div>
+
+  <div class="callout callout-output">
+    <div class="callout-label">✅ What you'll hand in</div>
+    <div class="callout-body">Thumbnail PNG + video v5 MP4 uploaded to Classroom.</div>
+  </div>
+
+  
+  <h3 class="section-head">Check yourself</h3>
+  <div class="check-wrap">
+    
+      <details class="check-item">
+        <summary class="check-q">Why should your thumbnail + first title card feel like &#x27;siblings&#x27;?</summary>
+        <div class="check-a">Design consistency. Same palette + vibe signals professionalism and helps your content feel cohesive.</div>
+      </details>
+
+      <details class="check-item">
+        <summary class="check-q">What&#x27;s the fastest way to fix a &#x27;missing look&#x27; in your video?</summary>
+        <div class="check-a">Pick ONE accent colour from your mood board (MP02) and use it for all text overlays and highlights.</div>
+      </details>
+  </div>
+
+  <div class="exercise-nav">
+    <a href="#mp19" class="nav-prev">← MP19</a>
+    <a href="#reference" class="nav-top">↑ Reference</a>
+    <a href="#mp21" class="nav-next">MP21 →</a>
+  </div>
+</article>
+
+<article class="exercise" id="mp21" data-mp="21">
+  <header class="exercise-header">
+    <div class="exercise-number">MP21</div>
+    <div class="exercise-titles">
+      <h2>Peer Review Version — Annotated Export</h2>
+      <div class="exercise-meta">
+        <span class="meta-pill lesson">L21</span>
+        <span class="meta-pill time">⏱ 20 min</span>
+      </div>
+    </div>
+    <button class="complete-btn" data-mp="21" type="button">
+      <span class="btn-unchecked">Mark complete</span>
+      <span class="btn-checked">✓ Done</span>
+    </button>
+  </header>
+
+  <p class="exercise-intro">You&#x27;re giving peers a version to review. Make it easy for them to give good feedback.</p>
+
+  <div class="callout callout-goal">
+    <div class="callout-label">🎯 Goal</div>
+    <div class="callout-body">A version of your video with markers at 3 moments where you want specific feedback.</div>
+  </div>
+
+  <h3 class="section-head">Steps</h3>
+  <ol class="steps">
+    <li><span class="step-num">1</span><span class="step-text">Open your latest video version.</span></li>
+<li><span class="step-num">2</span><span class="step-text">Identify 3 moments you&#x27;re unsure about (e.g. &#x27;is 0:20 too slow?&#x27;, &#x27;does 0:45 work as a transition?&#x27;).</span></li>
+<li><span class="step-num">3</span><span class="step-text">Add a small text overlay at each of those 3 timestamps: &#x27;Feedback please — [specific question]&#x27;.</span></li>
+<li><span class="step-num">4</span><span class="step-text">Export this annotated version as MP4.</span></li>
+<li><span class="step-num">5</span><span class="step-text">Upload to Classroom with the title &#x27;v5 FEEDBACK — [Your Name]&#x27;.</span></li>
+<li><span class="step-num">6</span><span class="step-text">Watch 2 classmates&#x27; feedback versions. Use the Peer Feedback Proforma to give 2 glows + 2 grows each.</span></li>
+  </ol>
+
+  <div class="callout callout-tip">
+    <div class="callout-label">💡 Pro tip</div>
+    <div class="callout-body">The specific the feedback ask, the better the feedback. &#x27;Is this good?&#x27; gets you nothing. &#x27;Does the 0:30 transition feel abrupt?&#x27; gets you gold.</div>
+  </div>
+
+  <div class="callout callout-stuck">
+    <div class="callout-label">🧭 If you're stuck</div>
+    <div class="callout-body">Can&#x27;t think of 3 moments to ask about? Ask generically: &#x27;Hook at 0:00 — strong?&#x27;, &#x27;Middle at 0:30 — clear?&#x27;, &#x27;Ending at 0:55 — memorable?&#x27;</div>
+  </div>
+
+  <div class="callout callout-output">
+    <div class="callout-label">✅ What you'll hand in</div>
+    <div class="callout-body">Annotated v5 MP4 uploaded + peer feedback given to 2 classmates.</div>
+  </div>
+
+  
+  <h3 class="section-head">Check yourself</h3>
+  <div class="check-wrap">
+    
+      <details class="check-item">
+        <summary class="check-q">Which feedback question gets you better input: &#x27;Is this good?&#x27; or &#x27;Does the 0:30 transition feel abrupt?&#x27;</summary>
+        <div class="check-a">The specific one. Vague questions get vague feedback. Specific questions get gold.</div>
+      </details>
+
+      <details class="check-item">
+        <summary class="check-q">Why add &#x27;Feedback please — [question]&#x27; overlays to your review version?</summary>
+        <div class="check-a">You guide the reviewer to the exact moments you want input on, so you get actionable feedback not just vibes.</div>
+      </details>
+  </div>
+
+  <div class="exercise-nav">
+    <a href="#mp20" class="nav-prev">← MP20</a>
+    <a href="#reference" class="nav-top">↑ Reference</a>
+    <a href="#mp22" class="nav-next">MP22 →</a>
+  </div>
+</article>
+
+<article class="exercise" id="mp22" data-mp="22">
+  <header class="exercise-header">
+    <div class="exercise-number">MP22</div>
+    <div class="exercise-titles">
+      <h2>Final Export + Task 2b Submission</h2>
+      <div class="exercise-meta">
+        <span class="meta-pill lesson">L22</span>
+        <span class="meta-pill time">⏱ Double period (80+ min)</span>
+      </div>
+    </div>
+    <button class="complete-btn" data-mp="22" type="button">
+      <span class="btn-unchecked">Mark complete</span>
+      <span class="btn-checked">✓ Done</span>
+    </button>
+  </header>
+
+  <p class="exercise-intro">Last lesson. Final polish. Export. Submit. Celebrate.</p>
+
+  <div class="callout callout-goal">
+    <div class="callout-label">🎯 Goal</div>
+    <div class="callout-body">Your final Task 2b short-form video (MP4) + 150-word reflection uploaded to Classroom by 11:59pm Fri 31 July.</div>
+  </div>
+
+  <h3 class="section-head">Steps</h3>
+  <ol class="steps">
+    <li><span class="step-num">1</span><span class="step-text">Review ALL peer feedback from MP21. Pick 2–3 actions to action.</span></li>
+<li><span class="step-num">2</span><span class="step-text">Apply those changes to your video.</span></li>
+<li><span class="step-num">3</span><span class="step-text">Do a final accessibility pass: captions correct? Text readable? Contrast OK?</span></li>
+<li><span class="step-num">4</span><span class="step-text">Export at HIGHEST quality: 1080p, MP4, high bitrate.</span></li>
+<li><span class="step-num">5</span><span class="step-text">Open a new Adobe Express Document (A4) — write your 150-word reflection using the Reflection Template prompts.</span></li>
+<li><span class="step-num">6</span><span class="step-text">Export reflection as PDF.</span></li>
+<li><span class="step-num">7</span><span class="step-text">Upload BOTH (MP4 + PDF) to Classroom under &#x27;Task 2b — Final Submission&#x27;.</span></li>
+<li><span class="step-num">8</span><span class="step-text">Attend the Friday class showcase. Give one verbal piece of feedback to a peer.</span></li>
+  </ol>
+
+  <div class="callout callout-tip">
+    <div class="callout-label">💡 Pro tip</div>
+    <div class="callout-body">The person who submits 15 minutes before the deadline has a polished video. The person who submits 1 minute before is always sweating.</div>
+  </div>
+
+  <div class="callout callout-stuck">
+    <div class="callout-label">🧭 If you're stuck</div>
+    <div class="callout-body">Export failing? Try lower quality (720p) — you can always re-export later if the higher version fails. Don&#x27;t lose your submission.</div>
+  </div>
+
+  <div class="callout callout-output">
+    <div class="callout-label">✅ What you'll hand in</div>
+    <div class="callout-body">FINAL — Task 2b MP4 + 150-word reflection PDF uploaded. Showcase attended. ⭐ UNIT COMPLETE.</div>
+  </div>
+
+  
+  <h3 class="section-head">Check yourself</h3>
+  <div class="check-wrap">
+    
+      <details class="check-item">
+        <summary class="check-q">Should you submit 15 min before deadline or 1 min before?</summary>
+        <div class="check-a">15 min. Late uploads fail. Early submissions are polished. Your future-self thanks you for the 15-min buffer.</div>
+      </details>
+
+      <details class="check-item">
+        <summary class="check-q">What TWO files do you upload for Task 2b?</summary>
+        <div class="check-a">1) Your final video MP4.  2) Your 150-word reflection PDF.</div>
+      </details>
+  </div>
+
+  <div class="exercise-nav">
+    <a href="#mp21" class="nav-prev">← MP21</a>
+    <a href="#reference" class="nav-top">↑ Reference</a>
+    <a href="#mp22" class="nav-next">MP22 →</a>
+  </div>
+</article>
+
+      <div class="footer">
+        <p><strong>Done!</strong> You've built 22 Adobe Express projects — more practice than most uni students get in a semester.</p>
+        <p style="margin-top:0.5rem; opacity:0.7;">Made with care by Ms Gao • Year 10 Multimedia • Arthur Phillip High School</p>
+      </div>
+    </main>
+  </div>
+
+  <script>
+(function() {
+  const STORAGE_KEY = 'y10-multi-ae-progress-v2';
+  const navLinks = document.querySelectorAll('.nav-link');
+  const completeBtns = document.querySelectorAll('.complete-btn');
+  const progressBar = document.getElementById('progress-bar');
+  const progressText = document.getElementById('progress-text');
+  const exercises = document.querySelectorAll('.exercise');
+  const refTabs = document.querySelectorAll('.ref-tab');
+  const refPanes = document.querySelectorAll('.ref-pane');
+
+  function loadProgress() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); }
+    catch { return {}; }
+  }
+  function saveProgress(d) {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(d)); } catch {}
+  }
+  function updateUI() {
+    const data = loadProgress();
+    let done = 0;
+    completeBtns.forEach(btn => {
+      const mp = btn.getAttribute('data-mp');
+      if (data[mp]) { btn.classList.add('done'); done++; }
+      else btn.classList.remove('done');
+    });
+    navLinks.forEach(link => {
+      const mp = link.getAttribute('data-mp');
+      if (data[mp]) link.classList.add('done');
+      else link.classList.remove('done');
+    });
+    const pct = (done / 22) * 100;
+    if (progressBar) progressBar.style.width = pct + '%';
+    if (progressText) progressText.textContent = `${done} of 22 complete`;
+  }
+  completeBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const mp = btn.getAttribute('data-mp');
+      const d = loadProgress(); d[mp] = !d[mp]; saveProgress(d); updateUI();
+    });
+  });
+
+  // Active nav highlight on scroll
+  function highlightNav() {
+    const scrollY = window.scrollY + 120;
+    let active = null;
+    exercises.forEach(ex => { if (ex.offsetTop <= scrollY) active = ex.id; });
+    navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + active));
+  }
+  window.addEventListener('scroll', highlightNav, { passive: true });
+
+  // Reference tabs
+  refTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      refTabs.forEach(t => t.classList.remove('active'));
+      refPanes.forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      const target = tab.getAttribute('data-pane');
+      const pane = document.getElementById('pane-' + target);
+      if (pane) pane.classList.add('active');
+    });
+  });
+
+  // Keyboard nav: Left/Right arrow to jump between exercises
+  document.addEventListener('keydown', (e) => {
+    // ignore if user is typing in an input
+    if (e.target.matches('input, textarea, [contenteditable]')) return;
+    const currentHash = window.location.hash || '#mp01';
+    const m = currentHash.match(/#mp(\d+)/);
+    if (!m) return;
+    let n = parseInt(m[1], 10);
+    if (e.key === 'ArrowRight' && n < 22) {
+      n++;
+      const id = 'mp' + String(n).padStart(2, '0');
+      const el = document.getElementById(id);
+      if (el) { el.scrollIntoView({ behavior: 'smooth' }); window.location.hash = id; }
+    } else if (e.key === 'ArrowLeft' && n > 1) {
+      n--;
+      const id = 'mp' + String(n).padStart(2, '0');
+      const el = document.getElementById(id);
+      if (el) { el.scrollIntoView({ behavior: 'smooth' }); window.location.hash = id; }
+    }
+  });
+
+  updateUI();
+  highlightNav();
+})();
+</script>
+</body>
+</html>
