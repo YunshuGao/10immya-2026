@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Camera Fundamentals — Why Cameras Work | Y10 Multimedia · Video Production L01</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  /* ============================================================
+     Worksheet-specific styles (additions to the hub stylesheet)
+     ============================================================ */
+  .topbar {
+    position: sticky; top: 0; z-index: 50;
+    background: var(--c-navy); color: white;
+    padding: .75rem 1rem; display: flex; flex-wrap: wrap;
+    gap: .75rem; align-items: center; box-shadow: var(--shadow-md);
+  }
+  .topbar .tb-label { font-size: .8rem; color: #a3b8d8; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; }
+  .topbar input, .topbar select {
+    padding: .45rem .65rem; border: 1px solid #3a5380; border-radius: 6px;
+    background: #14274a; color: white; font-size: .9rem; font-family: inherit;
+    min-width: 12rem;
+  }
+  .topbar input:focus, .topbar select:focus { outline: 2px solid var(--c-teal); }
+  .topbar .save-pill {
+    background: rgba(255,255,255,.1); padding: .35rem .6rem;
+    border-radius: 999px; font-size: .75rem; color: #a3b8d8;
+  }
+  .topbar .save-pill.saved { color: var(--c-success); background: rgba(16,185,129,.15); }
+  .topbar .topbar-spacer { flex: 1; }
+  .topbar button {
+    border: none; padding: .55rem 1rem; border-radius: 6px;
+    font-weight: 600; cursor: pointer; font-size: .9rem; font-family: inherit;
+  }
+  .topbar .btn-submit { background: var(--c-teal); color: white; }
+  .topbar .btn-submit:hover { background: var(--c-teal-dark); }
+  .topbar .btn-secondary { background: rgba(255,255,255,.1); color: white; }
+  .topbar .btn-secondary:hover { background: rgba(255,255,255,.2); }
+
+  /* Progress bar under topbar */
+  .progress-wrap { background: var(--c-bg); padding: .5rem 1rem; border-bottom: 1px solid var(--c-border); }
+  .progress-track { background: var(--c-border); height: 6px; border-radius: 3px; overflow: hidden; }
+  .progress-fill { background: linear-gradient(90deg, var(--c-teal) 0%, var(--c-navy-light) 100%); height: 100%; width: 0; transition: width .3s; }
+  .progress-text { font-size: .75rem; color: var(--c-text-soft); margin-top: .25rem; }
+
+  /* Video player block */
+  .video-block {
+    background: #0d1117; border-radius: var(--radius-md); padding: 1rem;
+    margin: 1rem 0; box-shadow: var(--shadow-md);
+  }
+  .video-block video {
+    width: 100%; max-width: 800px; display: block; margin: 0 auto;
+    border-radius: var(--radius-sm); background: black;
+  }
+  .video-block .chapter-row {
+    display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .75rem;
+    max-width: 800px; margin-left: auto; margin-right: auto;
+  }
+  .video-block .chip {
+    background: rgba(255,255,255,.1); color: #e6edf3; border: 1px solid #2a3550;
+    padding: .35rem .7rem; border-radius: 999px; font-size: .8rem;
+    cursor: pointer; transition: all .15s; font-family: inherit;
+  }
+  .video-block .chip:hover { background: var(--c-teal); border-color: var(--c-teal); }
+  .video-block .chip.active { background: var(--c-teal); border-color: var(--c-teal); }
+  .video-block .video-caption {
+    color: #94a3b8; font-size: .8rem; margin-top: .5rem; text-align: center;
+  }
+
+  /* Q&A blocks */
+  .q-block {
+    background: white; border: 1px solid var(--c-border); border-radius: var(--radius-md);
+    padding: 1.25rem 1.4rem; margin: 1rem 0; box-shadow: var(--shadow-sm);
+  }
+  .q-block .q-num {
+    display: inline-block; background: var(--c-teal); color: white;
+    font-weight: 700; font-size: .75rem; padding: .15rem .55rem;
+    border-radius: 4px; margin-right: .6rem; vertical-align: middle;
+  }
+  .q-block .q-prompt { font-weight: 600; color: var(--c-text); margin-bottom: .5rem; }
+  .q-block .q-hint { font-size: .85rem; color: var(--c-text-soft); margin-bottom: .5rem; font-style: italic; }
+  .q-block textarea, .q-block input[type="text"] {
+    width: 100%; padding: .65rem .75rem; font-size: .95rem; font-family: inherit;
+    border: 1px solid var(--c-border); border-radius: 6px;
+    resize: vertical; min-height: 3rem; box-sizing: border-box;
+  }
+  .q-block textarea:focus, .q-block input[type="text"]:focus {
+    outline: 2px solid var(--c-teal); border-color: var(--c-teal);
+  }
+  .q-block .options { display: flex; flex-direction: column; gap: .4rem; margin-top: .25rem; }
+  .q-block .options label {
+    display: flex; align-items: center; gap: .6rem; padding: .55rem .75rem;
+    border: 1px solid var(--c-border); border-radius: 6px; cursor: pointer;
+    transition: all .15s; background: var(--c-surface);
+  }
+  .q-block .options label:hover { border-color: var(--c-teal); background: #f0fdfa; }
+  .q-block .options label.selected { border-color: var(--c-teal); background: #f0fdfa; color: var(--c-teal-dark); font-weight: 600; }
+  .q-block .options input[type="radio"] { accent-color: var(--c-teal); }
+
+  /* Match-pair table */
+  .match-table {
+    width: 100%; border-collapse: collapse; margin-top: .5rem;
+    background: white; border-radius: 8px; overflow: hidden;
+    box-shadow: var(--shadow-sm);
+  }
+  .match-table th, .match-table td { padding: .65rem .8rem; border-bottom: 1px solid var(--c-border); text-align: left; }
+  .match-table th { background: var(--c-navy); color: white; font-size: .85rem; }
+  .match-table td:first-child { font-weight: 600; color: var(--c-navy); white-space: nowrap; }
+  .match-table select {
+    padding: .35rem .5rem; border: 1px solid var(--c-border); border-radius: 4px;
+    font-family: inherit; font-size: .9rem; min-width: 14rem;
+  }
+  .match-table select:focus { outline: 2px solid var(--c-teal); border-color: var(--c-teal); }
+
+  /* Extension card */
+  .extension-zone {
+    background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
+    border: 2px dashed #8b5cf6; padding: 1.25rem 1.5rem;
+    border-radius: var(--radius-md); margin: 2rem 0;
+  }
+  .extension-zone h2 { color: #6d28d9; margin-top: 0; }
+  .extension-zone .ext-badge {
+    display: inline-block; background: #8b5cf6; color: white;
+    padding: .2rem .6rem; border-radius: 4px; font-size: .75rem;
+    font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
+  }
+
+  /* Confidence slider */
+  .slider-row {
+    display: flex; align-items: center; gap: 1rem; padding: .5rem 0;
+  }
+  .slider-row input[type="range"] {
+    flex: 1; accent-color: var(--c-teal);
+  }
+  .slider-row .slider-val {
+    font-weight: 700; color: var(--c-teal-dark); font-size: 1.1rem;
+    min-width: 2rem; text-align: center;
+  }
+
+  /* Submit zone (bottom) */
+  .submit-zone {
+    background: linear-gradient(135deg, var(--c-navy) 0%, var(--c-navy-light) 100%);
+    color: white; padding: 2rem; border-radius: var(--radius-lg);
+    margin: 3rem 0 2rem; text-align: center;
+  }
+  .submit-zone h2 { color: white; margin-top: 0; }
+  .submit-zone p { color: #cbd5e0; margin: 1rem 0; }
+  .submit-zone button.big-submit {
+    background: var(--c-teal); color: white; border: none;
+    padding: .85rem 2rem; font-size: 1.05rem; font-weight: 700;
+    border-radius: 8px; cursor: pointer; box-shadow: var(--shadow-md);
+    font-family: inherit;
+  }
+  .submit-zone button.big-submit:hover { background: var(--c-teal-dark); transform: translateY(-1px); }
+  .submit-zone .submit-status {
+    margin-top: 1rem; font-size: .9rem; color: #a3b8d8; min-height: 1.2em;
+  }
+
+  /* Small helpers */
+  .time-pill {
+    display: inline-block; background: var(--c-teal); color: white;
+    padding: .15rem .55rem; border-radius: 4px; font-size: .75rem;
+    font-weight: 600; margin-left: .5rem;
+  }
+  .video-pill {
+    display: inline-block; background: #1e293b; color: #94a3b8;
+    padding: .15rem .55rem; border-radius: 4px; font-size: .7rem;
+    font-weight: 600; margin-left: .25rem; letter-spacing: .03em;
+  }
+  .kbd {
+    background: #1e293b; color: #e6edf3; padding: .1rem .45rem;
+    border-radius: 3px; font-family: var(--font-mono); font-size: .85em;
+  }
+  details.tip {
+    background: #f0fdfa; border-left: 4px solid var(--c-teal);
+    padding: .75rem 1rem; margin: .75rem 0; border-radius: 6px;
+  }
+  details.tip summary { font-weight: 600; cursor: pointer; color: var(--c-teal-dark); }
+  details.tip p { margin: .5rem 0 0; }
+
+  /* Print-friendly tweaks */
+  @media print {
+    .topbar, .progress-wrap, .submit-zone, .site-header { display: none; }
+    .video-block { background: white; border: 1px solid #ccc; }
+    video { display: none; }
+    .video-block::after { content: '[Video played in class]'; color: #888; font-style: italic; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <a href="../index.html" class="site-brand">10 Multimedia · 2026</a>
+    <nav class="site-nav">
+      <a href="../term1.html">Term 1</a>
+      <a href="../term2.html">Term 2</a>
+      <a href="index.html">Video Production</a>
+      <a href="../references.html">References</a>
+    </nav>
+  </div>
+</header>
+
+<!-- Persistent topbar with student name, class, save status, and submit -->
+<div class="topbar">
+  <span class="tb-label">Worksheet</span>
+  <input type="text" id="studentName" placeholder="Your full name" onchange="saveAll()" oninput="markDirty()">
+  <select id="studentClass" onchange="saveAll()">
+    <option value="">Class…</option>
+    <option value="10IMMYA">10IMMYA</option>
+  </select>
+  <span class="save-pill" id="saveStatus">Not started</span>
+  <span class="topbar-spacer"></span>
+  <button class="btn-secondary" onclick="resetAll()" title="Clear all your answers">Reset</button>
+  <button class="btn-submit" onclick="submitWork()">Submit to teacher</button>
+</div>
+
+<div class="progress-wrap">
+  <div class="progress-track"><div class="progress-fill" id="progressBar"></div></div>
+  <div class="progress-text"><span id="progressText">0 of 0 questions answered</span></div>
+</div>
+
+<!-- ============================================================ -->
+<!-- LESSON HEAD -->
+<!-- ============================================================ -->
+<section class="lesson-head">
+  <div class="container">
+    <span class="lesson-pill">Video Production · Lesson 01</span>
+    <h1>Camera Fundamentals — Why Cameras Work</h1>
+    <p class="lesson-meta">75 minutes · Year 10 Industrial Technology — Multimedia · Term 2</p>
+    <div class="outcomes">
+      <span class="outcome-tag">IND5-2</span>
+      <span class="outcome-tag">IND5-3</span>
+      <span class="outcome-tag">IND5-5</span>
+      <span class="outcome-tag">IND5-9</span>
+      <span class="outcome-tag">IND5-10</span>
+    </div>
+    <p>Before you film your group video next week, you need to understand what your camera is actually <em>doing</em>. This worksheet teaches you the four big ideas every videographer needs: <strong>focal length</strong>, <strong>sensor</strong>, <strong>shutter speed</strong> and <strong>aperture</strong>. Source: Adobe Premiere Pro for Beginners (Michigan State University) by Peter Glendinning.</p>
+  </div>
+</section>
+
+<main class="container">
+
+  <!-- Learning intentions / Success criteria -->
+  <div class="grid grid-2">
+    <div class="card">
+      <h3 style="color:#0f766e;margin-top:0;">Learning intentions</h3>
+      <ul>
+        <li>I can explain how a lens forms an image on a sensor.</li>
+        <li>I can identify wide-angle, normal and telephoto framing and when to use each.</li>
+        <li>I can explain how shutter speed and aperture work together to control exposure.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3 style="color:#1f3a68;margin-top:0;">Success criteria</h3>
+      <ul>
+        <li>I can match four focal lengths to their angle of view.</li>
+        <li>I can predict whether a picture will be too dark or too bright when shutter or aperture changes.</li>
+        <li>I can pick a sensible camera setting for a shot in <em>my own</em> group video.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout info">
+    <strong>How to use this worksheet:</strong> Type your answers in the boxes. Your work auto-saves to this browser tab. When you finish, click <strong>“Submit to teacher”</strong> in the top bar — that downloads a file you upload to Google Classroom. <strong>Headphones in</strong> for the videos.
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- DO NOW · 5 min -->
+  <!-- ============================================================ -->
+  <section class="lesson-section">
+    <h2><span class="section-badge" style="background:#8b5cf6;">Do Now</span> <span class="time-pill" style="background:#8b5cf6;">5 min</span></h2>
+    <p>Before we start. Without looking anything up, write what you think these mean. There are no wrong answers here — this is a starting point.</p>
+
+    <div class="q-block">
+      <div class="q-prompt"><span class="q-num">Q1</span> When you take a photo with your phone in a dark room and it comes out grainy and dark, what do you think the camera is struggling with?</div>
+      <textarea data-save="q1" rows="2" placeholder="Your guess…"></textarea>
+    </div>
+
+    <div class="q-block">
+      <div class="q-prompt"><span class="q-num">Q2</span> Why do photographers use bigger, heavier cameras (DSLRs) instead of just their phones?</div>
+      <textarea data-save="q2" rows="2" placeholder="Your guess…"></textarea>
+    </div>
+
+    <div class="q-block">
+      <div class="q-prompt"><span class="q-num">Q3</span> What does the word <em>“photograph”</em> actually mean? Break the word apart.</div>
+      <div class="q-hint">Hint: it's two Greek words stuck together.</div>
+      <input type="text" data-save="q3" placeholder="photo + graph = …">
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- PART 1 · Camera & Light (Video 1, 0:00–5:00) -->
+  <!-- ============================================================ -->
+  <section class="lesson-section">
+    <h2><span class="section-badge">Part 1 · Camera &amp; Light</span> <span class="time-pill">10 min</span> <span class="video-pill">Video 1 · 0:00–5:00</span></h2>
+    <p>Watch the first <strong>5 minutes</strong> of Video 1. The presenter (Peter Glendinning, Michigan State University) explains what a camera actually <em>is</em>.</p>
+
+    <div class="video-block">
+      <video id="v1" controls preload="metadata" data-vid="1">
+        <source src="videos/01-lens-and-focal-length.mp4" type="video/mp4">
+        Your browser does not support video. Open the file directly: <a href="videos/01-lens-and-focal-length.mp4">01-lens-and-focal-length.mp4</a>
+      </video>
+      <div class="chapter-row">
+        <button class="chip" onclick="jumpTo('v1', 0)">▶ 0:00 Start</button>
+        <button class="chip" onclick="jumpTo('v1', 60)">▶ 1:00 Camera obscura</button>
+        <button class="chip" onclick="jumpTo('v1', 180)">▶ 3:00 Pinhole physics</button>
+        <button class="chip" onclick="jumpTo('v1', 240)">▶ 4:00 Why we use lenses</button>
+        <button class="chip" onclick="pauseAll()">⏸ Pause all</button>
+      </div>
+      <p class="video-caption">After 5:00 you'll see lots of camera shots — but Peter is just starting Focal Length. Pause and answer below.</p>
+    </div>
+
+    <div class="q-block">
+      <div class="q-prompt"><span class="q-num">Q4</span> Peter explained that <em>“camera”</em> originally just meant one thing. What was it?</div>
+      <div class="options">
+        <label><input type="radio" name="q4" value="a" data-save="q4"> A box</label>
+        <label><input type="radio" name="q4" value="b" data-save="q4"> A room</label>
+        <label><input type="radio" name="q4" value="c" data-save="q4"> A lens</label>
+        <label><input type="radio" name="q4" value="d" data-save="q4"> A painting</label>
+      </div>
+    </div>
+
+    <div class="q-block">
+      <div class="q-prompt"><span class="q-num">Q5</span> A pinhole camera <em>can</em> make an image without a lens. So why do we use lenses instead of pinholes? Give the <strong>main</strong> reason.</div>
+      <textarea data-save="q5" rows="2" placeholder="Lenses let us…"></textarea>
+    </div>
+
+    <div class="q-block">
+      <div class="q-prompt"><span class="q-num">Q6</span> When a lens forms an image on the sensor, the image is <strong>upside down and backwards</strong>. The camera flips it before you see it. Why doesn't this matter to you when you're filming?</div>
+      <textarea data-save="q6" rows="2" placeholder="Your thought…"></textarea>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- PART 2 · Focal Length & Framing (Video 1, 5:00–end) -->
+  <!-- ============================================================ -->
+  <section class="lesson-section">
+    <h2><span class="section-badge">Part 2 · Focal Length &amp; Framing</span> <span class="time-pill">15 min</span> <span class="video-pill">Video 1 · 5:00–15:00</span></h2>
+    <p>This is the part that <strong>matters most</strong> for your group video. Focal length controls whether your shot is wide (lots of scene visible) or telephoto (narrow, zoomed in).</p>
+
+    <div class="video-block">
+      <video id="v1b" controls preload="metadata" data-vid="1b">
+        <source src="videos/01-lens-and-focal-length.mp4" type="video/mp4">
+      </video>
+      <div class="chapter-row">
+        <button class="chip" onclick="jumpTo('v1b', 300)">▶ 5:00 Focal length basics</button>
+        <button class="chip" onclick="jumpTo('v1b', 460)">▶ 7:40 Wide vs telephoto</button>
+        <button class="chip" onclick="jumpTo('v1b', 540)">▶ 9:00 Angles of view</button>
+        <button class="chip" onclick="jumpTo('v1b', 660)">▶ 11:00 Normal lens</button>
+        <button class="chip" onclick="jumpTo('v1b', 760)">▶ 12:40 Crop factor</button>
+      </div>
+      <p class="video-caption">Two video boxes show the same video — use this second one for Part 2 chapters.</p>
+    </div>
+
+    <div class="q-block">
+      <div class="q-prompt"><span class="q-num">Q7</span> <strong>Match each focal length to its angle of view.</strong> (Use the dropdowns. Peter gave the exact numbers around 9:00.)</div>
+      <table class="match-table">
+        <thead><tr><th>Lens</th><th>Angle of view (your answer)</th></tr></thead>
+        <tbody>
+          <tr><td>15 mm (very wide)</td><td>
+            <select data-save="q7a">
+              <option value="">Pick one…</option>
+              <option value="180">about 180°</option>
+              <option value="60">about 60°</option>
+              <option value="34">about 34°</option>
+              <option value="12">about 12°</option>
+            </select>
+          </td></tr>
+          <tr><td>35 mm</td><td>
+            <select data-save="q7b">
+              <option value="">Pick one…</option>
+              <option value="180">about 180°</option>
+              <option value="60">about 60°</option>
+              <option value="34">about 34°</option>
+              <option value="12">about 12°</option>
+            </select>
+          </td></tr>
+          <tr><td>70 mm</td><td>
+            <select data-save="q7c">
+              <option value="">Pick one…</option>
+              <option value="180">about 180°</option>
+              <option value="60">about 60°</option>
+              <option value="34">about 34°</option>
+              <option value="12">about 12°</option>
+            </select>
+          </td></tr>
+          <tr><td>200 mm (telephoto)</td><td>
+            <select data-save="q7d">
+              <option value="">Pick one…</option>
+              <option value="180">about 180°</option>
+              <option value="60">about 60°</option>
+              <option value="34">about 34°</option>
+              <option value="12">about 12°</option>
+            </select>
+          </td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="q-block">
+      <div class="q-prompt"><span class="q-num">Q8</span> You're filming a <strong>wide establishing shot</strong> of the whole APHS quad. Should you use a <strong>short</strong> focal length or a <strong>long</strong> one?</div>
+      <div class="options">
+        <label><input type="radio" name="q8" value="short" data-save="q8"> Short (e.g. 15–35 mm) — wide angle</label>
+        <label><input type="radio" name="q8" value="long" data-save="q8"> Long (e.g. 100–200 mm) — telephoto</label>
+      </div>
+    </div>
+
+    <div class="q-block">
+      <div class="q-prompt"><span class="q-num">Q9</span> You're filming a teacher's face from across the room and you want the background blurry so the teacher pops. Short or long focal length?</div>
+      <div class="options">
+        <label><input type="radio" name="q9" value="short" data-save="q9"> Short / wide angle</label>
+        <label><input type="radio" name="q9" value="long" data-save="q9"> Long / telephoto</label>
+      </div>
+    </div>
+
+    <div class="q-block">
+      <div class="q-prompt"><span class="q-num">Q10</span> Why does Peter say the <em>same</em> 50 mm lens can look “normal” on one camera but “telephoto” on a smaller camera? (One sentence.)</div>
+      <div class="q-hint">Hint: it's about the size of the <em>sensor</em>, not the lens.</div>
+      <textarea data-save="q10" rows="2" placeholder="Because…"></textarea>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- PART 3 · Sensor in 60 seconds (Video 2, 0:00–3:00) -->
+  <!-- ============================================================ -->
+  <section class="lesson-section">
+    <h2><span class="section-badge">Part 3 · How a Sensor Works</span> <span class="time-pill">5 min</span> <span class="video-pill">Video 2 · 0:00–3:00</span></h2>
+    <p>This is the short one. Watch just the <strong>first 3 minutes</strong> of Video 2 — that's enough to know what a sensor is. (Deep theory continues afterwards — see the Extension below if you're curious.)</p>
+
+    <div class="video-block">
+      <video id="v2" controls preload="metadata" data-vid="2">
+        <source src="videos/02-sensor-and-shutter.mp4" type="video/mp4">
+      </video>
+      <div class="chapter-row">
+        <button class="chip" onclick="jumpTo('v2', 0)">▶ 0:00 What is a sensor?</button>
+        <button class="chip" onclick="jumpTo('v2', 130)">▶ 2:10 Sensor sizes</button>
+        <button class="chip" onclick="pauseAll()">⏸ Stop here at 3:00</button>
+      </div>
+    </div>
+
+    <div class="q-block">
+      <div class="q-prompt"><span class="q-num">Q11</span> In one sentence: what does a camera sensor actually <em>do</em>?</div>
+      <textarea data-save="q11" rows="2" placeholder="A sensor…"></textarea>
+    </div>
+
+    <div class="q-block">
+      <div class="q-prompt"><span class="q-num">Q12</span> Name the <strong>three</strong> standard sensor sizes Peter mentioned (largest to smallest).</div>
+      <input type="text" data-save="q12" placeholder="1: ___    2: ___    3: ___">
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- EXTENSION (optional, deep theory) -->
+  <!-- ============================================================ -->
+  <section class="extension-zone">
+    <span class="ext-badge">Extension · Optional</span>
+    <h2 style="margin-top:.5rem;">If you want to know how cameras <em>really</em> work…</h2>
+    <p>Don't worry about these if you're keeping up with the main work — none of this is needed to film your group video. But if camera tech fascinates you, watch:</p>
+    <ul>
+      <li><strong>Video 2 from 3:00–end</strong> — the Bayer Array (how red, green, blue filters over each pixel make a colour image) and the focal-plane shutter (the two curtains that move across the sensor).</li>
+      <li><strong>Video 3 from 0:00–2:00</strong> — the maths of why shutter speed doubles or halves at each step.</li>
+    </ul>
+
+    <div class="q-block">
+      <div class="q-prompt"><span class="q-num">EX1</span> The Bayer Array uses <strong>twice as much green</strong> as red or blue. Why?</div>
+      <textarea data-save="ex1" rows="2" placeholder="Because the human eye…"></textarea>
+    </div>
+
+    <div class="q-block">
+      <div class="q-prompt"><span class="q-num">EX2</span> A focal-plane shutter has <strong>two curtains</strong>, not one. What does the second curtain do?</div>
+      <textarea data-save="ex2" rows="2" placeholder="The second curtain…"></textarea>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- PART 4 · Exposure Triangle (Video 3) -->
+  <!-- ============================================================ -->
+  <section class="lesson-section">
+    <h2><span class="section-badge">Part 4 · Exposure Triangle</span> <span class="time-pill">15 min</span> <span class="video-pill">Video 3 · all 8 min</span></h2>
+    <p>Watch <strong>all of Video 3</strong> (it's only 8 minutes). It's the most important one for filmmakers — it explains how three settings (shutter speed, aperture, ISO) work together to control how bright or dark your shot looks.</p>
+
+    <div class="video-block">
+      <video id="v3" controls preload="metadata" data-vid="3">
+        <source src="videos/03-shutter-aperture-exposure.mp4" type="video/mp4">
+      </video>
+      <div class="chapter-row">
+        <button class="chip" onclick="jumpTo('v3', 0)">▶ 0:00 Shutter speed</button>
+        <button class="chip" onclick="jumpTo('v3', 170)">▶ 2:50 Aperture &amp; f-stops</button>
+        <button class="chip" onclick="jumpTo('v3', 330)">▶ 5:30 Putting it together</button>
+        <button class="chip" onclick="jumpTo('v3', 410)">▶ 6:50 Same exposure, different look</button>
+      </div>
+    </div>
+
+    <div class="q-block">
+      <div class="q-prompt"><span class="q-num">Q13</span> <strong>Shutter speed.</strong> If I change the shutter from 1/125 sec to 1/250 sec, am I letting in <em>more</em> or <em>less</em> light? By how much?</div>
+      <div class="options">
+        <label><input type="radio" name="q13" value="more2" data-save="q13"> Twice as much light</label>
+        <label><input type="radio" name="q13" value="less2" data-save="q13"> Half as much light</label>
+        <label><input type="radio" name="q13" value="same" data-save="q13"> About the same</label>
+      </div>
+    </div>
+
+    <div class="q-block">
+      <div class="q-prompt"><span class="q-num">Q14</span> <strong>Aperture.</strong> Which lets <em>more</em> light onto the sensor: <span class="kbd">f/2.8</span> or <span class="kbd">f/16</span>?</div>
+      <div class="q-hint">Trick question warning! Bigger f-number = smaller hole.</div>
+      <div class="options">
+        <label><input type="radio" name="q14" value="f28" data-save="q14"> f/2.8 — because it's a smaller number</label>
+        <label><input type="radio" name="q14" value="f16" data-save="q14"> f/16 — because it's a bigger number</label>
+        <label><input type="radio" name="q14" value="same" data-save="q14"> Same amount — the f-number doesn't affect light</label>
+      </div>
+    </div>
+
+    <div class="q-block">
+      <div class="q-prompt"><span class="q-num">Q15</span> Peter showed two pictures of the same flower, both <em>correctly exposed</em>:</div>
+      <ul>
+        <li>Left: f/4 at 1/60 sec — sharp and clean</li>
+        <li>Right: f/16 at 1/4 sec — flower blurred slightly</li>
+      </ul>
+      <div class="q-prompt">Both got the <em>same total amount of light</em>. So why does the right photo look blurry?</div>
+      <textarea data-save="q15" rows="3" placeholder="Because the right photo had a slower shutter speed, so…"></textarea>
+    </div>
+
+    <div class="q-block">
+      <div class="q-prompt"><span class="q-num">Q16</span> <strong>The big idea.</strong> Peter says “the easy part is getting the right amount of light. The hard part is choosing the <em>combination</em> that creates the picture you want.” In your own words, what does he mean?</div>
+      <textarea data-save="q16" rows="3" placeholder="He means that…"></textarea>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- PART 5 · Apply It (no video) -->
+  <!-- ============================================================ -->
+  <section class="lesson-section">
+    <h2><span class="section-badge">Apply It · Your Group Video</span> <span class="time-pill">5 min</span></h2>
+    <p>Think about <strong>your group's Task 3 video</strong>. Pick <em>one specific shot</em> you'll film next week and answer these.</p>
+
+    <div class="q-block">
+      <div class="q-prompt"><span class="q-num">Q17</span> Describe the shot. (Where, what's happening, who's in it?)</div>
+      <textarea data-save="q17" rows="2" placeholder="My shot: …"></textarea>
+    </div>
+
+    <div class="q-block">
+      <div class="q-prompt"><span class="q-num">Q18</span> Will this shot be wide angle, normal or telephoto? <strong>Why?</strong></div>
+      <textarea data-save="q18" rows="2" placeholder="I'll use ___ because…"></textarea>
+    </div>
+
+    <div class="q-block">
+      <div class="q-prompt"><span class="q-num">Q19</span> Will you be filming somewhere bright or dim? If dim, what's <em>one</em> thing you can change on the camera to help let more light in?</div>
+      <textarea data-save="q19" rows="2" placeholder="It will be ___ . If dim, I could…"></textarea>
+    </div>
+
+    <div class="q-block">
+      <div class="q-prompt"><span class="q-num">Q20</span> Will there be fast movement in this shot (running, sports, a car)? If yes, what shutter speed setting should you pick to <em>freeze</em> the movement vs <em>blur</em> it?</div>
+      <textarea data-save="q20" rows="2" placeholder="There ___ fast movement. To freeze it I'd use…"></textarea>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- EXIT TICKET -->
+  <!-- ============================================================ -->
+  <section class="lesson-section">
+    <h2><span class="section-badge" style="background:#f59e0b;">Exit Ticket</span> <span class="time-pill" style="background:#f59e0b;">2 min</span></h2>
+
+    <div class="q-block">
+      <div class="q-prompt"><span class="q-num">E1</span> In one sentence, what's the <strong>most useful thing</strong> you learned today?</div>
+      <textarea data-save="exit1" rows="2" placeholder="The most useful thing was…"></textarea>
+    </div>
+
+    <div class="q-block">
+      <div class="q-prompt"><span class="q-num">E2</span> What's <em>one</em> thing you're still confused about?</div>
+      <textarea data-save="exit2" rows="2" placeholder="I'm still unclear about…"></textarea>
+    </div>
+
+    <div class="q-block">
+      <div class="q-prompt"><span class="q-num">E3</span> How confident do you feel about using camera settings on your phone for next week's filming? (1 = no clue, 5 = ready)</div>
+      <div class="slider-row">
+        <span style="color:#94a3b8;">1</span>
+        <input type="range" min="1" max="5" step="1" value="3" data-save="confidence" id="confidenceSlider" oninput="document.getElementById('confidenceVal').textContent = this.value">
+        <span style="color:#94a3b8;">5</span>
+        <span class="slider-val" id="confidenceVal">3</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SUBMIT ZONE -->
+  <!-- ============================================================ -->
+  <div class="submit-zone">
+    <h2>Finished? Submit to Mrs Gao</h2>
+    <p>Clicking the button below downloads a small file. <strong>Upload that file to today's Google Classroom assignment.</strong> Mrs Gao will open it in the teacher dashboard.</p>
+    <button class="big-submit" onclick="submitWork()">📥 Download my submission</button>
+    <div class="submit-status" id="submitStatus"></div>
+  </div>
+
+  <details class="tip">
+    <summary>Need help? Click for tips.</summary>
+    <p>• Your answers auto-save in this browser tab — refresh and they'll still be there.<br>
+       • If you close the tab before submitting, your work is safe (in this browser only).<br>
+       • If you submit and need to redo, just click submit again — it overwrites the file.<br>
+       • If a video won't play, check Wi-Fi or ask Mrs Gao.</p>
+  </details>
+
+</main>
+
+<footer class="container" style="padding:2rem 0 4rem; color:var(--c-text-soft); font-size:.85rem;">
+  <p>Camera Fundamentals · Year 10 Industrial Technology — Multimedia · Mrs Y. Gao · Term 2 2026<br>
+  Videos courtesy of Peter Glendinning, Michigan State University (Coursera “Photography Basics &amp; Beyond”).</p>
+</footer>
+
+<!-- ============================================================ -->
+<!-- JAVASCRIPT -->
+<!-- ============================================================ -->
+<script>
+  const STORAGE_KEY = 'y10-cam-fundamentals-data';
+  const WORKSHEET_TITLE = 'Camera Fundamentals — Why Cameras Work';
+  const WORKSHEET_ID = 'y10-cam-fundamentals';
+
+  let appData = {
+    studentName: '',
+    studentClass: '',
+    answers: {},
+    confidence: 3,
+    startedAt: null,
+    lastSavedAt: null,
+    submissionCount: 0
+  };
+
+  /* ---------- Save / load ---------- */
+  function saveAll() {
+    appData.studentName = document.getElementById('studentName').value;
+    appData.studentClass = document.getElementById('studentClass').value;
+    // Collect every data-save field
+    document.querySelectorAll('[data-save]').forEach(el => {
+      const key = el.dataset.save;
+      if (el.type === 'radio') {
+        if (el.checked) appData.answers[key] = el.value;
+      } else if (el.type === 'range') {
+        appData.confidence = parseInt(el.value);
+      } else {
+        appData.answers[key] = el.value;
+      }
+    });
+    if (!appData.startedAt) appData.startedAt = new Date().toISOString();
+    appData.lastSavedAt = new Date().toISOString();
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(appData));
+      document.getElementById('saveStatus').textContent = '✓ Auto-saved';
+      document.getElementById('saveStatus').classList.add('saved');
+    } catch(e) {
+      document.getElementById('saveStatus').textContent = '⚠ Save failed';
+    }
+    updateProgress();
+  }
+
+  function loadAll() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) appData = Object.assign(appData, JSON.parse(raw));
+    } catch(e) {}
+    document.getElementById('studentName').value = appData.studentName || '';
+    document.getElementById('studentClass').value = appData.studentClass || '';
+    Object.entries(appData.answers || {}).forEach(([key, val]) => {
+      const els = document.querySelectorAll('[data-save="'+key+'"]');
+      els.forEach(el => {
+        if (el.type === 'radio') {
+          if (el.value === val) el.checked = true;
+        } else {
+          el.value = val;
+        }
+      });
+    });
+    if (appData.confidence) {
+      document.getElementById('confidenceSlider').value = appData.confidence;
+      document.getElementById('confidenceVal').textContent = appData.confidence;
+    }
+    if (appData.lastSavedAt) {
+      document.getElementById('saveStatus').textContent = '✓ Restored';
+      document.getElementById('saveStatus').classList.add('saved');
+    }
+    updateProgress();
+  }
+
+  function markDirty() {
+    document.getElementById('saveStatus').textContent = '… saving';
+    document.getElementById('saveStatus').classList.remove('saved');
+  }
+
+  /* ---------- Progress bar ---------- */
+  function updateProgress() {
+    const all = document.querySelectorAll('[data-save]');
+    // For radios, count one per name group
+    const seen = new Set();
+    let total = 0, done = 0;
+    all.forEach(el => {
+      if (el.type === 'radio') {
+        if (seen.has(el.name)) return;
+        seen.add(el.name); total++;
+        const checked = document.querySelector('input[name="'+el.name+'"]:checked');
+        if (checked) done++;
+      } else if (el.type === 'range') {
+        // confidence always has a value, count if user has moved it
+        total++;
+        if (appData.confidence !== 3 || appData.lastSavedAt) done++;
+      } else {
+        total++;
+        if (el.value && el.value.trim()) done++;
+      }
+    });
+    const pct = total > 0 ? Math.round(done/total*100) : 0;
+    document.getElementById('progressBar').style.width = pct + '%';
+    document.getElementById('progressText').textContent = done + ' of ' + total + ' questions answered (' + pct + '%)';
+  }
+
+  /* ---------- Video chapter jumps ---------- */
+  function jumpTo(videoId, sec) {
+    const v = document.getElementById(videoId);
+    if (!v) return;
+    v.currentTime = sec;
+    v.play();
+  }
+  function pauseAll() {
+    document.querySelectorAll('video').forEach(v => v.pause());
+  }
+
+  /* ---------- Submit ---------- */
+  function submitWork() {
+    saveAll();
+    if (!appData.studentName || !appData.studentClass) {
+      document.getElementById('submitStatus').textContent = '⚠ Please fill in your name and class at the top first.';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+    appData.submissionCount = (appData.submissionCount || 0) + 1;
+    const payload = {
+      worksheetId: WORKSHEET_ID,
+      worksheetTitle: WORKSHEET_TITLE,
+      submittedAt: new Date().toISOString(),
+      studentName: appData.studentName,
+      studentClass: appData.studentClass,
+      submissionCount: appData.submissionCount,
+      answers: appData.answers,
+      confidence: appData.confidence,
+      startedAt: appData.startedAt,
+      lastSavedAt: appData.lastSavedAt,
+      progress: getProgressData()
+    };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(appData));
+
+    const fname = WORKSHEET_ID + '__' + sanitiseFilename(appData.studentName) + '__' + appData.studentClass + '.json';
+    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = fname;
+    document.body.appendChild(a); a.click();
+    document.body.removeChild(a); URL.revokeObjectURL(url);
+
+    document.getElementById('submitStatus').innerHTML =
+      '✅ Downloaded <strong>' + fname + '</strong>. Now upload that file to Google Classroom.';
+  }
+
+  function getProgressData() {
+    const all = document.querySelectorAll('[data-save]');
+    const seen = new Set();
+    let total = 0, done = 0;
+    all.forEach(el => {
+      if (el.type === 'radio') {
+        if (seen.has(el.name)) return;
+        seen.add(el.name); total++;
+        if (document.querySelector('input[name="'+el.name+'"]:checked')) done++;
+      } else if (el.type === 'range') {
+        total++; done++;
+      } else {
+        total++;
+        if (el.value && el.value.trim()) done++;
+      }
+    });
+    return { total, done, percent: total>0 ? Math.round(done/total*100) : 0 };
+  }
+
+  function sanitiseFilename(s) {
+    return (s||'unnamed').replace(/[^A-Za-z0-9_-]/g, '_').slice(0, 50);
+  }
+
+  /* ---------- Reset ---------- */
+  function resetAll() {
+    if (!confirm('Clear ALL your answers? This cannot be undone.')) return;
+    localStorage.removeItem(STORAGE_KEY);
+    location.reload();
+  }
+
+  /* ---------- Radio selected styling ---------- */
+  function refreshRadioStyles() {
+    document.querySelectorAll('.options label').forEach(lbl => {
+      const radio = lbl.querySelector('input[type="radio"]');
+      if (radio && radio.checked) lbl.classList.add('selected');
+      else if (radio) lbl.classList.remove('selected');
+    });
+  }
+
+  /* ---------- Wire it all up ---------- */
+  document.addEventListener('DOMContentLoaded', () => {
+    loadAll();
+    refreshRadioStyles();
+
+    document.querySelectorAll('[data-save]').forEach(el => {
+      const evt = (el.type === 'radio' || el.type === 'range' || el.tagName === 'SELECT') ? 'change' : 'input';
+      el.addEventListener(evt, () => {
+        markDirty();
+        // debounce save for text fields
+        clearTimeout(window.__saveTimer);
+        window.__saveTimer = setTimeout(() => { saveAll(); refreshRadioStyles(); }, 350);
+      });
+    });
+
+    // Track video play events into appData
+    document.querySelectorAll('video').forEach(v => {
+      v.addEventListener('play', () => {
+        appData.answers['__videoPlayed_'+v.dataset.vid] = true;
+        saveAll();
+      });
+    });
+
+    updateProgress();
+  });
+
+  // Save on tab close just in case
+  window.addEventListener('beforeunload', saveAll);
+</script>
+
+</body>
+</html>
