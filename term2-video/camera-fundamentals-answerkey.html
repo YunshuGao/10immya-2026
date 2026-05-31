@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🔑 Answer Key · Camera Fundamentals · Y10 Multimedia</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  .teacher-banner {
+    background: #7c2d12; color: #fef3c7;
+    padding: .65rem 1.5rem; text-align: center;
+    font-weight: 700; font-size: .9rem; letter-spacing: .04em;
+    position: sticky; top: 0; z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,.2);
+  }
+  .teacher-banner a { color: #fde68a; text-decoration: underline; }
+
+  .key-toolbar {
+    background: var(--c-navy); color: white;
+    padding: .75rem 1.5rem; display: flex; gap: 1rem;
+    align-items: center; flex-wrap: wrap;
+    border-bottom: 1px solid var(--c-border);
+  }
+  .key-toolbar input {
+    flex: 1; min-width: 12rem; max-width: 28rem;
+    padding: .5rem .75rem; border-radius: 6px;
+    border: 1px solid #3a5380; background: #14274a;
+    color: white; font-family: inherit; font-size: .9rem;
+  }
+  .key-toolbar button {
+    padding: .5rem 1rem; border: none; border-radius: 6px;
+    background: var(--c-teal); color: white;
+    font-weight: 600; cursor: pointer; font-family: inherit;
+  }
+  .key-toolbar button:hover { background: var(--c-teal-dark); }
+  .key-toolbar .small { color: #a3b8d8; font-size: .8rem; }
+
+  .key-section {
+    background: white; padding: 1.5rem;
+    margin-bottom: 1rem; border-radius: var(--radius-md);
+    border-left: 4px solid var(--c-teal); box-shadow: var(--shadow-sm);
+  }
+  .key-section h2 {
+    margin-top: 0; color: var(--c-navy);
+    display: flex; align-items: center; gap: .75rem;
+    font-size: 1.15rem;
+  }
+  .key-section .sec-badge {
+    background: var(--c-teal); color: white;
+    padding: .15rem .6rem; border-radius: 4px;
+    font-size: .75rem; letter-spacing: .04em;
+  }
+  .key-section.do-now { border-left-color: #8b5cf6; }
+  .key-section.do-now .sec-badge { background: #8b5cf6; }
+  .key-section.extension { border-left-color: #6d28d9; background: #faf5ff; }
+  .key-section.extension .sec-badge { background: #6d28d9; }
+  .key-section.exit { border-left-color: #f59e0b; }
+  .key-section.exit .sec-badge { background: #f59e0b; }
+
+  .qkey {
+    display: grid; grid-template-columns: 1.4fr 1fr;
+    gap: 1.5rem; padding: 1rem 1.25rem;
+    border: 1px solid var(--c-border);
+    border-radius: 8px; margin: .8rem 0;
+    background: var(--c-bg);
+  }
+  .qkey .left { color: var(--c-text); }
+  .qkey .right { color: var(--c-text); }
+  .qkey .qid {
+    display: inline-block; background: var(--c-navy);
+    color: white; font-weight: 700; font-size: .75rem;
+    padding: .15rem .55rem; border-radius: 4px;
+    margin-right: .5rem;
+  }
+  .qkey .mark-chip {
+    display: inline-block; background: #ecfdf5;
+    color: #047857; padding: .1rem .55rem;
+    border-radius: 999px; font-size: .75rem;
+    font-weight: 700; border: 1px solid #6ee7b7;
+    margin-left: .4rem;
+  }
+  .qkey .mark-chip.easy { background:#ecfdf5; color:#047857; border-color:#6ee7b7; }
+  .qkey .mark-chip.medium { background:#fef3c7; color:#92400e; border-color:#fcd34d; }
+  .qkey .mark-chip.hard { background:#fee2e2; color:#b91c1c; border-color:#fca5a5; }
+  .qkey .qtext { font-weight: 600; margin: .25rem 0 .5rem; }
+  .qkey .qmeta { font-size: .8rem; color: var(--c-text-soft); margin-bottom: .5rem; font-style: italic; }
+  .qkey .answer-label {
+    display: inline-block; background: var(--c-teal);
+    color: white; font-size: .7rem; font-weight: 700;
+    padding: .1rem .5rem; border-radius: 3px;
+    letter-spacing: .04em; margin-bottom: .35rem;
+  }
+  .qkey .model {
+    background: #f0fdfa; padding: .65rem .9rem;
+    border-radius: 6px; font-size: .9rem; line-height: 1.5;
+    border-left: 3px solid var(--c-teal);
+  }
+  .qkey .look-for {
+    margin-top: .6rem; font-size: .85rem;
+    color: var(--c-text); padding: .4rem 0;
+  }
+  .qkey .look-for b { color: var(--c-navy); }
+  .qkey .miscon {
+    font-size: .82rem; color: #b91c1c;
+    background: #fef2f2; padding: .4rem .7rem;
+    border-radius: 4px; margin-top: .5rem;
+    border-left: 3px solid #ef4444;
+  }
+  .qkey .miscon b { color: #7f1d1d; }
+
+  .quick-shortcut-key {
+    background: var(--c-navy-light); color: white;
+    padding: 1rem 1.5rem; border-radius: var(--radius-md);
+    margin: 1rem 0 2rem; font-size: .9rem;
+  }
+  .quick-shortcut-key code {
+    background: rgba(255,255,255,.15); color: white;
+    padding: .15rem .45rem; border-radius: 3px;
+    font-family: var(--font-mono); font-size: .85em;
+  }
+
+  .summary-stats {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem; margin: 1.5rem 0;
+  }
+  .stat-card {
+    background: white; padding: 1rem;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--c-border);
+    text-align: center; box-shadow: var(--shadow-sm);
+  }
+  .stat-card .val {
+    font-size: 1.5rem; font-weight: 800;
+    color: var(--c-teal-dark);
+  }
+  .stat-card .lbl {
+    font-size: .75rem; color: var(--c-text-soft);
+    text-transform: uppercase; letter-spacing: .05em;
+  }
+
+  @media print {
+    .teacher-banner, .key-toolbar { display: none; }
+    .key-section { page-break-inside: avoid; }
+    body { background: white; font-size: 10pt; }
+    .qkey { background: white; border: 1px solid #ccc; }
+  }
+
+  /* highlighted question (search/anchor) */
+  .qkey.match { box-shadow: 0 0 0 3px var(--c-teal); }
+</style>
+</head>
+<body>
+
+<div class="teacher-banner">
+  🔑 TEACHER ANSWER KEY · Do NOT share this URL with students · <a href="camera-fundamentals.html">Student worksheet ↗</a>
+</div>
+
+<div class="key-toolbar">
+  <strong>Camera Fundamentals · Answer Key</strong>
+  <span class="small">25 items · ~10 min to mark per student</span>
+  <input type="search" id="search" placeholder="🔍 Find a question by keyword (e.g. focal length)…" oninput="filterQs(this.value)">
+  <button onclick="window.print()">🖨 Print</button>
+</div>
+
+<main class="container" style="padding-top:1.5rem;">
+
+  <div class="quick-shortcut-key">
+    <strong>How to use this page:</strong> Open it side-by-side with <a href="../teacher-dashboard.html" style="color:#fde68a;">teacher-dashboard.html</a>. As you scroll the student's answers in the dashboard, scan the model answers here. <span style="color:#fbbf24;">Yellow boxes</span> show the model answer; <span style="color:#fca5a5;">red boxes</span> flag common wrong answers to watch for.<br>
+    <span class="small" style="color:#a3b8d8;">Difficulty badges: <span class="mark-chip easy" style="background:rgba(110,231,183,.3);color:#a7f3d0;border-color:#6ee7b7;">easy</span> <span class="mark-chip medium" style="background:rgba(252,211,77,.3);color:#fde68a;border-color:#fcd34d;">medium</span> <span class="mark-chip hard" style="background:rgba(252,165,165,.3);color:#fecaca;border-color:#fca5a5;">stretch</span> &nbsp;·&nbsp; Use to weight your marking.</span>
+  </div>
+
+  <div class="summary-stats">
+    <div class="stat-card"><div class="val">25</div><div class="lbl">Total items</div></div>
+    <div class="stat-card"><div class="val">3</div><div class="lbl">Pre-test (no marks)</div></div>
+    <div class="stat-card"><div class="val">17</div><div class="lbl">Core (assess)</div></div>
+    <div class="stat-card"><div class="val">2</div><div class="lbl">Extension</div></div>
+    <div class="stat-card"><div class="val">3</div><div class="lbl">Exit ticket</div></div>
+  </div>
+
+  <!-- ===================== DO NOW ===================== -->
+  <div class="key-section do-now">
+    <h2><span class="sec-badge">DO NOW</span> Pre-test (no wrong answers)</h2>
+    <p style="color:var(--c-text-soft);font-size:.9rem;">Don't mark these. They're a baseline. Skim them to spot misconceptions you'll fix during the lesson.</p>
+
+    <div class="qkey" id="q1">
+      <div class="left">
+        <div><span class="qid">Q1</span> When you take a photo with your phone in a dark room and it comes out grainy and dark, what is the camera struggling with?</div>
+        <div class="qmeta">No marks — pre-test only</div>
+      </div>
+      <div class="right">
+        <div class="answer-label">What they should sense</div>
+        <div class="model">Light. The sensor doesn't have enough light to record a clean image, so the phone amplifies the signal (creating <em>noise</em> = the grain).</div>
+        <div class="look-for"><b>Common answers:</b> "not enough light", "the camera can't see", "grainy because dark" — all fine. They'll learn the proper term (<em>exposure</em>) in Part 4.</div>
+      </div>
+    </div>
+
+    <div class="qkey" id="q2">
+      <div class="left">
+        <div><span class="qid">Q2</span> Why do photographers use bigger, heavier cameras (DSLRs) instead of just their phones?</div>
+        <div class="qmeta">No marks — pre-test only</div>
+      </div>
+      <div class="right">
+        <div class="answer-label">What they should sense</div>
+        <div class="model">Bigger sensors, interchangeable lenses, manual control of shutter/aperture/ISO, more light gathered = better picture in tricky conditions.</div>
+        <div class="look-for"><b>Common (fine):</b> "better quality", "more zoom", "looks more professional". Leave it — Part 2 + 3 will validate this.</div>
+      </div>
+    </div>
+
+    <div class="qkey" id="q3">
+      <div class="left">
+        <div><span class="qid">Q3</span> What does <em>“photograph”</em> actually mean? Break the word apart.</div>
+        <div class="qmeta">Hint given: "two Greek words"</div>
+      </div>
+      <div class="right">
+        <div class="answer-label">Model answer</div>
+        <div class="model"><strong>Photo</strong> = light · <strong>graph</strong> = writing  →  "<strong>light writing</strong>" or "writing with light".</div>
+        <div class="miscon"><b>Watch:</b> "photo = picture" — wrong etymology. Gently correct in class.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== PART 1 ===================== -->
+  <div class="key-section">
+    <h2><span class="sec-badge">PART 1</span> Camera &amp; Light (Q4–Q6) · ~3 marks</h2>
+
+    <div class="qkey" id="q4">
+      <div class="left">
+        <div><span class="qid">Q4</span> What did <em>“camera”</em> originally mean? (Multiple choice)<span class="mark-chip easy">easy · /1</span></div>
+        <div class="qmeta">Recall — direct from video</div>
+      </div>
+      <div class="right">
+        <div class="answer-label">Model answer</div>
+        <div class="model"><strong>B — A room</strong> (from Latin <em>camera obscura</em> = dark room).</div>
+        <div class="miscon"><b>Distractor "A box" is tempting</b> — they may pick it because cameras look like boxes today. Mark wrong.</div>
+      </div>
+    </div>
+
+    <div class="qkey" id="q5">
+      <div class="left">
+        <div><span class="qid">Q5</span> Why do we use lenses instead of pinholes? Main reason. <span class="mark-chip easy">easy · /1</span></div>
+      </div>
+      <div class="right">
+        <div class="answer-label">Model answer</div>
+        <div class="model">Pinholes let through very little light, so exposures take far too long. Lenses gather <strong>much more light</strong> and focus it onto the sensor — letting us take pictures in a fraction of a second.</div>
+        <div class="look-for"><b>Look for:</b> mention of <em>more light</em> OR <em>faster exposure</em>. Either is enough for full mark.</div>
+        <div class="miscon"><b>Wrong:</b> "lenses make it sharper" — partly true but misses the real reason (light).</div>
+      </div>
+    </div>
+
+    <div class="qkey" id="q6">
+      <div class="left">
+        <div><span class="qid">Q6</span> The image on the sensor is upside-down. Why doesn't this matter to you when filming? <span class="mark-chip easy">easy · /1</span></div>
+      </div>
+      <div class="right">
+        <div class="answer-label">Model answer</div>
+        <div class="model">The camera <strong>flips the image right-side-up</strong> before showing it on the screen / saving the file. We never see the upside-down version.</div>
+        <div class="look-for"><b>Accept:</b> "the camera flips it", "the software/computer corrects it", "I only see the final image". All correct.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== PART 2 ===================== -->
+  <div class="key-section">
+    <h2><span class="sec-badge">PART 2</span> Focal Length &amp; Framing (Q7–Q10) · ~6 marks</h2>
+
+    <div class="qkey" id="q7">
+      <div class="left">
+        <div><span class="qid">Q7</span> Match focal length → angle of view (dropdown table). <span class="mark-chip medium">medium · /4</span></div>
+        <div class="qmeta">Direct from Peter's diagram at 9:00</div>
+      </div>
+      <div class="right">
+        <div class="answer-label">Model answers (all four)</div>
+        <div class="model">
+          • <strong>15 mm</strong> = about <strong>180°</strong> (super wide)<br>
+          • <strong>35 mm</strong> = about <strong>60°</strong> (standard)<br>
+          • <strong>70 mm</strong> = about <strong>34°</strong> (light telephoto)<br>
+          • <strong>200 mm</strong> = about <strong>12°</strong> (heavy telephoto)
+        </div>
+        <div class="look-for"><b>Marking:</b> 1 mark per correct row. The relationship — smaller mm = wider angle — is the real concept; if they get the pattern but mix up two numbers, give half marks.</div>
+      </div>
+    </div>
+
+    <div class="qkey" id="q8">
+      <div class="left">
+        <div><span class="qid">Q8</span> Wide establishing shot of the quad — short or long focal length? <span class="mark-chip easy">easy · /1</span></div>
+      </div>
+      <div class="right">
+        <div class="answer-label">Model answer</div>
+        <div class="model"><strong>Short (wide angle, ~15–35 mm)</strong> — to fit the whole quad in frame.</div>
+      </div>
+    </div>
+
+    <div class="qkey" id="q9">
+      <div class="left">
+        <div><span class="qid">Q9</span> Teacher's face across the room, blurry background — short or long? <span class="mark-chip medium">medium · /1</span></div>
+        <div class="qmeta">This bridges to Part 4 (aperture/depth of field)</div>
+      </div>
+      <div class="right">
+        <div class="answer-label">Model answer</div>
+        <div class="model"><strong>Long (telephoto, ~100–200 mm)</strong> — telephoto lenses compress depth, making backgrounds blur more easily.</div>
+        <div class="miscon"><b>Watch for:</b> students picking "short" because they think wide = closer to the subject. Wide does NOT mean close-up.</div>
+      </div>
+    </div>
+
+    <div class="qkey" id="q10">
+      <div class="left">
+        <div><span class="qid">Q10</span> Why does the same 50 mm lens look "normal" on one camera but "telephoto" on a smaller one? <span class="mark-chip hard">stretch · /2</span></div>
+        <div class="qmeta">Crop factor — the trickiest concept in Video 1</div>
+      </div>
+      <div class="right">
+        <div class="answer-label">Model answer</div>
+        <div class="model">A smaller sensor only captures the <strong>middle part</strong> of the image the lens projects, so it looks like a zoom (telephoto). The lens didn't change — the sensor cropped what it could see. (This is the "crop factor".)</div>
+        <div class="look-for"><b>Full marks:</b> mentions sensor size AND cropping/zoom effect.<br><b>Half marks:</b> says "because of the sensor" without the cropping logic.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== PART 3 ===================== -->
+  <div class="key-section">
+    <h2><span class="sec-badge">PART 3</span> Sensor in 60 seconds (Q11–Q12) · ~2 marks</h2>
+
+    <div class="qkey" id="q11">
+      <div class="left">
+        <div><span class="qid">Q11</span> In one sentence: what does a sensor do? <span class="mark-chip easy">easy · /1</span></div>
+      </div>
+      <div class="right">
+        <div class="answer-label">Model answer</div>
+        <div class="model">A sensor <strong>converts light into electrical signals</strong> that the camera/computer reads as a picture.</div>
+        <div class="look-for"><b>Accept:</b> "turns light into data/electricity", "records the light", "captures light as info". <br><b>Half mark:</b> "takes a picture" (too vague).</div>
+      </div>
+    </div>
+
+    <div class="qkey" id="q12">
+      <div class="left">
+        <div><span class="qid">Q12</span> Three standard sensor sizes (largest to smallest). <span class="mark-chip easy">easy · /1</span></div>
+      </div>
+      <div class="right">
+        <div class="answer-label">Model answer</div>
+        <div class="model">1. <strong>Full Frame</strong> (36 × 24 mm)  →  2. <strong>APS-C</strong> (27 × 23 mm)  →  3. <strong>Four Thirds</strong> (21 × 17 mm)</div>
+        <div class="look-for"><b>Accept:</b> just the names (Full Frame · APS-C · Four Thirds) in correct order. Dimensions optional. <br>Wrong order = half mark.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== EXTENSION ===================== -->
+  <div class="key-section extension">
+    <h2><span class="sec-badge">EXTENSION</span> Optional bonus (EX1–EX2)</h2>
+    <p style="color:#6d28d9;font-size:.9rem;font-style:italic;">Only mark if attempted. Don't penalise students who skipped.</p>
+
+    <div class="qkey" id="ex1">
+      <div class="left">
+        <div><span class="qid">EX1</span> Why is the Bayer Array <strong>twice as much green</strong> as red or blue? <span class="mark-chip hard">stretch · bonus</span></div>
+      </div>
+      <div class="right">
+        <div class="answer-label">Model answer</div>
+        <div class="model">Because the <strong>human eye is most sensitive to green light</strong> — we see more detail in greens. The sensor is designed to mimic our eye, so the extra green pixels give it the same colour bias we have.</div>
+      </div>
+    </div>
+
+    <div class="qkey" id="ex2">
+      <div class="left">
+        <div><span class="qid">EX2</span> What does the second curtain of a focal-plane shutter do? <span class="mark-chip hard">stretch · bonus</span></div>
+      </div>
+      <div class="right">
+        <div class="answer-label">Model answer</div>
+        <div class="model">It <strong>chases</strong> the first curtain to cover the sensor again and <strong>end the exposure</strong>. The gap between the two curtains controls how long each pixel is exposed — that's the shutter speed.</div>
+        <div class="look-for"><b>Half mark:</b> mentions "closes" or "ends exposure" without explaining the gap.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== PART 4 ===================== -->
+  <div class="key-section">
+    <h2><span class="sec-badge">PART 4</span> Exposure Triangle (Q13–Q16) · ~5 marks</h2>
+
+    <div class="qkey" id="q13">
+      <div class="left">
+        <div><span class="qid">Q13</span> 1/125 → 1/250 sec: more, less or same light? <span class="mark-chip easy">easy · /1</span></div>
+      </div>
+      <div class="right">
+        <div class="answer-label">Model answer</div>
+        <div class="model"><strong>Half as much light.</strong> Faster shutter = sensor exposed for half the time. Each stop on the shutter-speed scale doubles or halves the light.</div>
+        <div class="miscon"><b>Common error:</b> "more light because the number is bigger" — wrong, the number is a denominator (1/<em>250</em> is shorter than 1/<em>125</em>).</div>
+      </div>
+    </div>
+
+    <div class="qkey" id="q14">
+      <div class="left">
+        <div><span class="qid">Q14</span> Which lets more light: <code>f/2.8</code> or <code>f/16</code>? <span class="mark-chip medium">medium · /1</span></div>
+        <div class="qmeta">The famous trick question</div>
+      </div>
+      <div class="right">
+        <div class="answer-label">Model answer</div>
+        <div class="model"><strong>f/2.8 — because it's a smaller number</strong>. Counter-intuitive: bigger f-number = smaller aperture hole = less light. (f-number = focal length ÷ aperture diameter.)</div>
+        <div class="miscon"><b>Very common error:</b> "f/16 because bigger number". Mark wrong but explain the f-number maths in feedback.</div>
+      </div>
+    </div>
+
+    <div class="qkey" id="q15">
+      <div class="left">
+        <div><span class="qid">Q15</span> f/4 at 1/60 (sharp) vs f/16 at ¼ (blurry) — same exposure, why is right one blurry? <span class="mark-chip medium">medium · /1</span></div>
+      </div>
+      <div class="right">
+        <div class="answer-label">Model answer</div>
+        <div class="model">Because the right photo had a <strong>much slower shutter speed (¼ sec vs 1/60)</strong>. During that quarter-second, the flower or camera moved — creating motion blur. Same total light reached the sensor, but the shutter was open long enough to record movement.</div>
+        <div class="look-for"><b>Full mark:</b> identifies slow shutter as cause. <br><b>Half:</b> mentions aperture but not shutter (some get confused which is which).</div>
+      </div>
+    </div>
+
+    <div class="qkey" id="q16">
+      <div class="left">
+        <div><span class="qid">Q16</span> "The easy part is getting right light. The hard part is choosing the COMBINATION that creates the picture you want." Explain. <span class="mark-chip hard">stretch · /2</span></div>
+        <div class="qmeta">This is the BIG IDEA — concept check</div>
+      </div>
+      <div class="right">
+        <div class="answer-label">Model answer (in their own words)</div>
+        <div class="model">Lots of shutter+aperture combinations give the same overall brightness, but each one looks <em>different</em>. Fast shutter + wide aperture = frozen, sharp, blurry background. Slow shutter + narrow aperture = motion blur, everything in focus. The photographer's job is picking the combo that matches the <strong>story</strong> they want to tell.</div>
+        <div class="look-for"><b>Full marks:</b> mentions <em>different combos can give same exposure but different look</em>. <br><b>Half:</b> only says "you have a choice" without explaining the trade-off.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== APPLY IT ===================== -->
+  <div class="key-section">
+    <h2><span class="sec-badge">APPLY IT</span> To their group video (Q17–Q20) · ~4 marks</h2>
+    <p style="color:var(--c-text-soft);font-size:.9rem;">Personal answers — mark on <em>sensible reasoning</em>, not specific values.</p>
+
+    <div class="qkey" id="q17">
+      <div class="left">
+        <div><span class="qid">Q17</span> Describe a shot from their Task 3 video. <span class="mark-chip easy">easy · /1</span></div>
+      </div>
+      <div class="right">
+        <div class="answer-label">Look for</div>
+        <div class="model"><strong>Specific:</strong> location, action, who's in it. (One concrete sentence is enough.) <br>If they wrote "an interview" — push back to add <em>where</em> and <em>who</em>.</div>
+      </div>
+    </div>
+
+    <div class="qkey" id="q18">
+      <div class="left">
+        <div><span class="qid">Q18</span> Wide / normal / telephoto — and WHY? <span class="mark-chip medium">medium · /1</span></div>
+      </div>
+      <div class="right">
+        <div class="answer-label">Look for</div>
+        <div class="model">Choice <strong>matched to the shot</strong>:<br>• Wide quad/landscape → short focal length<br>• Two people talking → normal (~35–50 mm)<br>• Close emotion / blurry background → telephoto<br>Justification matters more than the specific value.</div>
+      </div>
+    </div>
+
+    <div class="qkey" id="q19">
+      <div class="left">
+        <div><span class="qid">Q19</span> Bright or dim location, and what to change if dim. <span class="mark-chip medium">medium · /1</span></div>
+      </div>
+      <div class="right">
+        <div class="answer-label">Look for</div>
+        <div class="model"><strong>If dim, any ONE of:</strong><br>• Slow the shutter (allows more light, but risks motion blur)<br>• Open the aperture (lower f-number)<br>• Raise ISO (more sensitive sensor)<br>• Add light (lamp, reflector, window)</div>
+        <div class="miscon"><b>Wrong:</b> "use flash" alone — most phones can't run continuous flash for video, and direct flash looks ugly. Accept if they mention <em>continuous</em> light source.</div>
+      </div>
+    </div>
+
+    <div class="qkey" id="q20">
+      <div class="left">
+        <div><span class="qid">Q20</span> Fast movement — freeze or blur? Which shutter speed? <span class="mark-chip medium">medium · /1</span></div>
+      </div>
+      <div class="right">
+        <div class="answer-label">Look for</div>
+        <div class="model"><strong>To freeze:</strong> fast shutter — 1/500 sec or faster. <br><strong>To blur creatively:</strong> slow shutter — 1/30 or slower (with tripod).<br>Acceptable values vary; reasoning is the mark.</div>
+        <div class="look-for"><b>Bonus:</b> mentions <em>180° shutter rule</em> for video (1/double-the-frame-rate) — that's pro-level.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== EXIT TICKET ===================== -->
+  <div class="key-section exit">
+    <h2><span class="sec-badge">EXIT TICKET</span> Quick read (E1–E3 + confidence)</h2>
+    <p style="color:var(--c-text-soft);font-size:.9rem;">Use these for <em>next lesson's hook</em> — don't grade, just gather signal.</p>
+
+    <div class="qkey" id="e1">
+      <div class="left">
+        <div><span class="qid">E1</span> Most useful thing learned today?</div>
+        <div class="qmeta">Reflection — formative only</div>
+      </div>
+      <div class="right">
+        <div class="answer-label">What to do with these</div>
+        <div class="model">Read 3–4 aloud at the start of Lesson 2 as a recap hook. Class hears their own voices reflected back — strong consolidation move.</div>
+      </div>
+    </div>
+
+    <div class="qkey" id="e2">
+      <div class="left">
+        <div><span class="qid">E2</span> Still confused about…?</div>
+        <div class="qmeta">Reflection — formative only</div>
+      </div>
+      <div class="right">
+        <div class="answer-label">What to do with these</div>
+        <div class="model"><strong>Cluster the responses.</strong> Common confusions go in your Lesson 2 opening 5-min re-teach. <br>Watch for: f-number direction (Q14), crop factor (Q10), shutter speed direction (Q13). These are the predictable sticking points.</div>
+      </div>
+    </div>
+
+    <div class="qkey" id="e3">
+      <div class="left">
+        <div><span class="qid">E3</span> Confidence 1–5 (slider).</div>
+        <div class="qmeta">Affective — formative only</div>
+      </div>
+      <div class="right">
+        <div class="answer-label">Triage by score</div>
+        <div class="model">
+          <strong>1–2:</strong> Pair with a 4–5 in Lesson 2.<br>
+          <strong>3:</strong> Standard programme.<br>
+          <strong>4–5:</strong> Suggest the Extension section + Coursera bonus content.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:var(--c-navy);color:white;padding:1.25rem 1.5rem;border-radius:var(--radius-md);margin:2rem 0;">
+    <strong>Total assessable marks: ~22 (Core 17 + Extension 2 + Exit-ticket bonus 3)</strong><br>
+    <span style="color:#a3b8d8;font-size:.9rem;">Suggested grade bands: A 19+ · B 15–18 · C 11–14 · D 7–10 · E ≤ 6 — but this is formative, not assessment task. Use feedback over numeric grades.</span>
+  </div>
+
+</main>
+
+<footer class="container" style="padding:1rem 0 3rem;color:var(--c-text-soft);font-size:.85rem;">
+  <p>Camera Fundamentals · Answer Key · Y10 Multimedia · Teacher use only · Mrs Y. Gao · Term 2 2026</p>
+</footer>
+
+<script>
+  function filterQs(q) {
+    q = (q||'').toLowerCase().trim();
+    document.querySelectorAll('.qkey').forEach(el => {
+      const text = el.textContent.toLowerCase();
+      const match = !q || text.includes(q);
+      el.style.display = match ? '' : 'none';
+      el.classList.toggle('match', q && match);
+    });
+    // hide empty sections
+    document.querySelectorAll('.key-section').forEach(sec => {
+      const visible = sec.querySelectorAll('.qkey:not([style*="none"])').length;
+      sec.style.display = visible ? '' : 'none';
+    });
+  }
+</script>
+
+</body>
+</html>
