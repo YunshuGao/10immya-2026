@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
+<title>DSLR Cameras Explained — From Mirror to Pro | Y10 Multimedia · Video Production L02</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  .topbar {
+    position: sticky; top: 0; z-index: 50;
+    background: var(--c-navy); color: white;
+    padding: .75rem 1rem; display: flex; flex-wrap: wrap;
+    gap: .75rem; align-items: center; box-shadow: var(--shadow-md);
+  }
+  .topbar .tb-label { font-size: .8rem; color: #a3b8d8; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; }
+  .topbar input, .topbar select {
+    padding: .45rem .65rem; border: 1px solid #3a5380; border-radius: 6px;
+    background: #14274a; color: white; font-size: .9rem; font-family: inherit;
+    min-width: 12rem;
+  }
+  .topbar .save-pill { background: rgba(255,255,255,.1); padding: .35rem .6rem; border-radius: 999px; font-size: .75rem; color: #a3b8d8; }
+  .topbar .save-pill.saved { color: var(--c-success); background: rgba(16,185,129,.15); }
+  .topbar .topbar-spacer { flex: 1; }
+  .topbar button { border: none; padding: .55rem 1rem; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: .9rem; font-family: inherit; }
+  .topbar .btn-submit { background: var(--c-teal); color: white; }
+  .topbar .btn-submit:hover { background: var(--c-teal-dark); }
+  .topbar .btn-secondary { background: rgba(255,255,255,.1); color: white; }
+
+  .progress-wrap { background: var(--c-bg); padding: .5rem 1rem; border-bottom: 1px solid var(--c-border); }
+  .progress-track { background: var(--c-border); height: 6px; border-radius: 3px; overflow: hidden; }
+  .progress-fill { background: linear-gradient(90deg, var(--c-teal) 0%, var(--c-navy-light) 100%); height: 100%; width: 0; transition: width .3s; }
+  .progress-text { font-size: .75rem; color: var(--c-text-soft); margin-top: .25rem; }
+
+  .video-block { background: #0d1117; border-radius: var(--radius-md); padding: 1rem; margin: 1rem 0; box-shadow: var(--shadow-md); }
+  .video-block video { width: 100%; max-width: 800px; display: block; margin: 0 auto; border-radius: var(--radius-sm); background: black; }
+  .video-block .chapter-row { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .75rem; max-width: 800px; margin-left: auto; margin-right: auto; }
+  .video-block .chip { background: rgba(255,255,255,.1); color: #e6edf3; border: 1px solid #2a3550; padding: .35rem .7rem; border-radius: 999px; font-size: .8rem; cursor: pointer; transition: all .15s; font-family: inherit; }
+  .video-block .chip:hover { background: var(--c-teal); border-color: var(--c-teal); }
+  .video-block .video-caption { color: #94a3b8; font-size: .8rem; margin-top: .5rem; text-align: center; }
+
+  .q-block {
+    background: white; border: 1px solid var(--c-border); border-radius: var(--radius-md);
+    padding: 1.25rem 1.4rem; margin: 1rem 0; box-shadow: var(--shadow-sm);
+  }
+  .q-block .q-num {
+    display: inline-block; background: var(--c-teal); color: white;
+    font-weight: 700; font-size: .75rem; padding: .15rem .55rem;
+    border-radius: 4px; margin-right: .6rem; vertical-align: middle;
+  }
+  .q-block .q-prompt { font-weight: 600; color: var(--c-text); margin-bottom: .5rem; }
+  .q-block .q-hint { font-size: .85rem; color: var(--c-text-soft); margin-bottom: .5rem; font-style: italic; }
+  .q-block textarea, .q-block input[type="text"] {
+    width: 100%; padding: .65rem .75rem; font-size: .95rem; font-family: inherit;
+    border: 1px solid var(--c-border); border-radius: 6px;
+    resize: vertical; min-height: 3rem; box-sizing: border-box;
+  }
+  .q-block textarea:focus, .q-block input[type="text"]:focus { outline: 2px solid var(--c-teal); border-color: var(--c-teal); }
+  .q-block .options { display: flex; flex-direction: column; gap: .4rem; margin-top: .25rem; }
+  .q-block .options label {
+    display: flex; align-items: center; gap: .6rem; padding: .55rem .75rem;
+    border: 1px solid var(--c-border); border-radius: 6px; cursor: pointer;
+    transition: all .15s; background: var(--c-surface);
+  }
+  .q-block .options label:hover { border-color: var(--c-teal); background: #f0fdfa; }
+  .q-block .options label.selected { border-color: var(--c-teal); background: #f0fdfa; color: var(--c-teal-dark); font-weight: 600; }
+
+  /* DSLR diagram (CSS-drawn) */
+  .dslr-diagram {
+    background: linear-gradient(135deg, #1e3a8a 0%, #312e81 100%);
+    color: white; padding: 1.5rem; border-radius: var(--radius-md);
+    text-align: center; margin: 1rem 0;
+  }
+  .dslr-diagram h4 { color: #fbbf24; margin-top: 0; }
+  .dslr-flow {
+    display: flex; justify-content: center; align-items: center;
+    gap: .75rem; flex-wrap: wrap; margin: 1rem 0;
+  }
+  .dslr-flow .step {
+    background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2);
+    padding: .55rem 1rem; border-radius: 6px; min-width: 7rem;
+    font-size: .85rem;
+  }
+  .dslr-flow .arrow { color: #fbbf24; font-weight: 700; }
+
+  .slider-row { display: flex; align-items: center; gap: 1rem; padding: .5rem 0; }
+  .slider-row input[type="range"] { flex: 1; accent-color: var(--c-teal); }
+  .slider-row .slider-val { font-weight: 700; color: var(--c-teal-dark); font-size: 1.1rem; min-width: 2rem; text-align: center; }
+
+  .submit-zone {
+    background: linear-gradient(135deg, var(--c-navy) 0%, var(--c-navy-light) 100%);
+    color: white; padding: 2rem; border-radius: var(--radius-lg);
+    margin: 3rem 0 2rem; text-align: center;
+  }
+  .submit-zone h2 { color: white; margin-top: 0; }
+  .submit-zone p { color: #cbd5e0; margin: 1rem 0; }
+  .submit-zone button.big-submit { background: var(--c-teal); color: white; border: none; padding: .85rem 2rem; font-size: 1.05rem; font-weight: 700; border-radius: 8px; cursor: pointer; font-family: inherit; box-shadow: var(--shadow-md); }
+  .submit-zone button.big-submit:hover { background: var(--c-teal-dark); transform: translateY(-1px); }
+  .submit-zone .submit-status { margin-top: 1rem; font-size: .9rem; color: #a3b8d8; min-height: 1.2em; }
+
+  .time-pill { display: inline-block; background: var(--c-teal); color: white; padding: .15rem .55rem; border-radius: 4px; font-size: .75rem; font-weight: 600; margin-left: .5rem; }
+  .video-pill { display: inline-block; background: #1e293b; color: #94a3b8; padding: .15rem .55rem; border-radius: 4px; font-size: .7rem; font-weight: 600; margin-left: .25rem; letter-spacing: .03em; }
+
+  details.tip { background: #f0fdfa; border-left: 4px solid var(--c-teal); padding: .75rem 1rem; margin: .75rem 0; border-radius: 6px; }
+  details.tip summary { font-weight: 600; cursor: pointer; color: var(--c-teal-dark); }
+  details.tip p { margin: .5rem 0 0; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <a href="../index.html" class="site-brand">10 Multimedia · 2026</a>
+    <nav class="site-nav">
+      <a href="../term1.html">Term 1</a>
+      <a href="../term2.html">Term 2</a>
+      <a href="camera-fundamentals.html">L01 · Fundamentals</a>
+      <a href="../references.html">References</a>
+    </nav>
+  </div>
+</header>
+
+<div class="topbar">
+  <span class="tb-label">L02 worksheet</span>
+  <input type="text" id="studentName" placeholder="Your full name" onchange="saveAll()" oninput="markDirty()">
+  <select id="studentClass" onchange="saveAll()">
+    <option value="">Class…</option>
+    <option value="10IMMYA">10IMMYA</option>
+  </select>
+  <span class="save-pill" id="saveStatus">Not started</span>
+  <span class="topbar-spacer"></span>
+  <button class="btn-secondary" onclick="resetAll()">Reset</button>
+  <button class="btn-submit" onclick="submitWork()">Submit to teacher</button>
+</div>
+
+<div class="progress-wrap">
+  <div class="progress-track"><div class="progress-fill" id="progressBar"></div></div>
+  <div class="progress-text"><span id="progressText">0 of 0 questions answered</span></div>
+</div>
+
+<section class="lesson-head">
+  <div class="container">
+    <span class="lesson-pill">Video Production · Lesson 02</span>
+    <h1>DSLR Cameras Explained — From Mirror to Pro</h1>
+    <p class="lesson-meta">75 minutes · Year 10 Industrial Technology — Multimedia · Term 2</p>
+    <div class="outcomes">
+      <span class="outcome-tag">IND5-2</span>
+      <span class="outcome-tag">IND5-3</span>
+      <span class="outcome-tag">IND5-9</span>
+    </div>
+    <p>Yesterday you learnt how cameras turn light into pictures. Today we look at the special tool you'll use in future lessons: the <strong>DSLR</strong>. What does the “SLR” mean? What's the difference between a $300 camera and a $3000 one? And — most importantly — how do you actually pick up the school's DSLR and start using it?</p>
+  </div>
+</section>
+
+<main class="container">
+
+  <div class="grid grid-2">
+    <div class="card">
+      <h3 style="color:#0f766e;margin-top:0;">Learning intentions</h3>
+      <ul>
+        <li>I can explain what makes a DSLR a “Single Lens Reflex” camera.</li>
+        <li>I can describe what happens inside the camera when I press the shutter.</li>
+        <li>I can name the three DSLR tiers and what each is best for.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3 style="color:#1f3a68;margin-top:0;">Success criteria</h3>
+      <ul>
+        <li>I can label the mirror system in a DSLR diagram.</li>
+        <li>I can identify the school's DSLR and find its mode dial.</li>
+        <li>I can pick a sensible DSLR tier for a given filming job.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout info">
+    <strong>How to use this worksheet:</strong> Slower pace today — only one video (~16 min) and 12 questions. Take your time. Your work auto-saves to this browser tab. When done, click <strong>“Submit to teacher”</strong>. <strong>Headphones in.</strong>
+  </div>
+
+  <!-- ===== Video credits & educational use ===== -->
+  <div class="callout" style="border-left-color:#9333ea;background:#faf5ff;font-size:.88rem;margin:1rem 0 1.5rem;">
+    <strong style="color:#6d28d9;">📚 Video credits &amp; educational use — please read</strong><br>
+    The video embedded below is an excerpt from <em>Photography Basics &amp; Beyond</em> by <strong>Peter Glendinning, Michigan State University</strong>, originally published on Coursera. <strong>Copyright © Michigan State University</strong>. The full course is free to audit at <a href="https://www.coursera.org/specializations/photography-basics" target="_blank" rel="noopener" style="color:#6d28d9;">coursera.org/specializations/photography-basics</a>.<br>
+    It appears here for the educational use of students enrolled in <strong>Year 10 Multimedia (10IMMYA), Arthur Phillip High School</strong> only, under the Australian Education Statutory Licence (Smartcopying / Copyright Agency).<br>
+    <span style="color:#6d28d9;font-style:italic;">Please do not download, re-share or re-post this video file outside our class.</span>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- DO NOW · Quick recap from L01 (5 min) -->
+  <!-- ============================================================ -->
+  <section class="lesson-section">
+    <h2><span class="section-badge" style="background:#8b5cf6;">Do Now · Recap</span> <span class="time-pill" style="background:#8b5cf6;">5 min</span></h2>
+    <p>Before we start something new — three quick checks from yesterday's lesson:</p>
+
+    <div class="q-block">
+      <div class="q-prompt"><span class="q-num">Q1</span> Which f-stop lets <em>more</em> light through the lens: <code>f/2.8</code> or <code>f/16</code>?</div>
+      <div class="options">
+        <label><input type="radio" name="q1" value="f28" data-save="q1"> f/2.8 — smaller number = bigger hole</label>
+        <label><input type="radio" name="q1" value="f16" data-save="q1"> f/16 — bigger number = more light</label>
+      </div>
+    </div>
+
+    <div class="q-block">
+      <div class="q-prompt"><span class="q-num">Q2</span> You want to <em>freeze</em> a basketball player mid-jump. Fast shutter or slow shutter?</div>
+      <div class="options">
+        <label><input type="radio" name="q2" value="fast" data-save="q2"> Fast shutter (e.g. 1/500 sec)</label>
+        <label><input type="radio" name="q2" value="slow" data-save="q2"> Slow shutter (e.g. 1/8 sec)</label>
+      </div>
+    </div>
+
+    <div class="q-block">
+      <div class="q-prompt"><span class="q-num">Q3</span> A <strong>wide-angle</strong> lens has a <em>shorter</em> or <em>longer</em> focal length?</div>
+      <div class="options">
+        <label><input type="radio" name="q3" value="short" data-save="q3"> Shorter focal length (e.g. 15–35 mm)</label>
+        <label><input type="radio" name="q3" value="long" data-save="q3"> Longer focal length (e.g. 70–200 mm)</label>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- PART 1: What is a DSLR? -->
+  <!-- ============================================================ -->
+  <section class="lesson-section">
+    <h2><span class="section-badge">Part 1 · What IS a DSLR?</span> <span class="time-pill">20 min</span> <span class="video-pill">video 0:00–6:00</span></h2>
+    <p>Watch from the start to about <strong>6 minutes in</strong>. Peter explains how light gets from the lens to your eye — and what the mirror has to do with it.</p>
+
+    <div class="video-block">
+      <video id="v" controls preload="metadata" data-vid="dslr">
+        <source src="videos/04-basic-dslr-cameras.mp4" type="video/mp4">
+        Your browser does not support video. <a href="videos/04-basic-dslr-cameras.mp4">Open the file directly</a>.
+      </video>
+      <div class="chapter-row">
+        <button class="chip" onclick="jumpTo(0)">▶ 0:00 Start</button>
+        <button class="chip" onclick="jumpTo(60)">▶ 1:00 SLR origins</button>
+        <button class="chip" onclick="jumpTo(180)">▶ 3:00 First DSLR</button>
+        <button class="chip" onclick="jumpTo(300)">▶ 5:00 Three tiers</button>
+        <button class="chip" onclick="jumpTo(540)">▶ 9:00 Mid-range Canon</button>
+        <button class="chip" onclick="jumpTo(780)">▶ 13:00 Pro Nikon D810</button>
+        <button class="chip" onclick="pauseV()">⏸ Pause</button>
+      </div>
+      <p class="video-caption">One video today — about 16 minutes total. Use the chapter buttons to jump between sections.</p>
+    </div>
+
+    <div class="dslr-diagram">
+      <h4>📐 The DSLR light path</h4>
+      <p style="color:#cbd5e0;font-size:.9rem;">When you look through the viewfinder of a DSLR:</p>
+      <div class="dslr-flow">
+        <div class="step">🌅 Light enters lens</div>
+        <span class="arrow">→</span>
+        <div class="step">🪞 Hits mirror</div>
+        <span class="arrow">→</span>
+        <div class="step">↑ Bounces up</div>
+        <span class="arrow">→</span>
+        <div class="step">👁️ Reaches your eye</div>
+      </div>
+      <p style="color:#fbbf24;font-size:.85rem;margin-top:.5rem;">When you press the shutter, the mirror <strong>flips up</strong> so light reaches the sensor instead.</p>
+    </div>
+
+    <div class="q-block">
+      <div class="q-prompt"><span class="q-num">Q4</span> <strong>DSLR</strong> stands for four words. Fill them in:</div>
+      <div class="q-hint">D-S-L-R</div>
+      <input type="text" data-save="q4" placeholder="D___ S___ L___ R___">
+    </div>
+
+    <div class="q-block">
+      <div class="q-prompt"><span class="q-num">Q5</span> Why is it called <strong>“Single Lens”</strong>? (Hint: older cameras had more than one lens for different jobs.)</div>
+      <textarea data-save="q5" rows="2" placeholder="Single lens means…"></textarea>
+    </div>
+
+    <div class="q-block">
+      <div class="q-prompt"><span class="q-num">Q6</span> What is the role of the <strong>mirror</strong> inside a DSLR?</div>
+      <div class="options">
+        <label><input type="radio" name="q6" value="record" data-save="q6"> It records the image</label>
+        <label><input type="radio" name="q6" value="bounce" data-save="q6"> It bounces light from the lens up to the viewfinder</label>
+        <label><input type="radio" name="q6" value="protect" data-save="q6"> It protects the sensor from dust</label>
+        <label><input type="radio" name="q6" value="zoom" data-save="q6"> It zooms in on the subject</label>
+      </div>
+    </div>
+
+    <div class="q-block">
+      <div class="q-prompt"><span class="q-num">Q7</span> When you press the shutter button, the mirror has to do something <em>first</em> — before the photo can be taken. What?</div>
+      <textarea data-save="q7" rows="2" placeholder="The mirror has to…"></textarea>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- PART 2: Three DSLR Tiers -->
+  <!-- ============================================================ -->
+  <section class="lesson-section">
+    <h2><span class="section-badge">Part 2 · Three DSLR Tiers</span> <span class="time-pill">15 min</span> <span class="video-pill">video 6:00–14:00</span></h2>
+    <p>Keep watching from about <strong>6 minutes</strong> to <strong>14 minutes</strong>. Peter walks through three price tiers of DSLR cameras and what each is for.</p>
+
+    <div class="q-block">
+      <div class="q-prompt"><span class="q-num">Q8</span> Match the rough <em>price point</em> Peter gave to each DSLR tier.</div>
+      <div style="display:grid;gap:.5rem;margin-top:.5rem;">
+        <label style="display:flex;align-items:center;gap:.75rem;">
+          <strong style="min-width:9rem;color:var(--c-navy);">Basic DSLR:</strong>
+          <select data-save="q8a" style="flex:1;padding:.4rem;border:1px solid var(--c-border);border-radius:4px;">
+            <option value="">Pick one…</option>
+            <option value="500">about $500</option>
+            <option value="1000">about $1,000</option>
+            <option value="3000">about $3,000+</option>
+          </select>
+        </label>
+        <label style="display:flex;align-items:center;gap:.75rem;">
+          <strong style="min-width:9rem;color:var(--c-navy);">Mid-range DSLR:</strong>
+          <select data-save="q8b" style="flex:1;padding:.4rem;border:1px solid var(--c-border);border-radius:4px;">
+            <option value="">Pick one…</option>
+            <option value="500">about $500</option>
+            <option value="1000">about $1,000</option>
+            <option value="3000">about $3,000+</option>
+          </select>
+        </label>
+        <label style="display:flex;align-items:center;gap:.75rem;">
+          <strong style="min-width:9rem;color:var(--c-navy);">Pro-level DSLR:</strong>
+          <select data-save="q8c" style="flex:1;padding:.4rem;border:1px solid var(--c-border);border-radius:4px;">
+            <option value="">Pick one…</option>
+            <option value="500">about $500</option>
+            <option value="1000">about $1,000</option>
+            <option value="3000">about $3,000+</option>
+          </select>
+        </label>
+      </div>
+    </div>
+
+    <div class="q-block">
+      <div class="q-prompt"><span class="q-num">Q9</span> Name <strong>one feature</strong> Peter mentioned that a Pro DSLR (like the Nikon D810) has — but a basic DSLR doesn't.</div>
+      <div class="q-hint">Hint: think sensor size, weather sealing, autofocus points, frames per second, weight…</div>
+      <textarea data-save="q9" rows="2" placeholder="A Pro DSLR has…"></textarea>
+    </div>
+
+    <div class="q-block">
+      <div class="q-prompt"><span class="q-num">Q10</span> For your <strong>group video</strong> in Task 3, which tier would actually be enough? Why?</div>
+      <div class="options">
+        <label><input type="radio" name="q10" value="basic" data-save="q10"> Basic DSLR — enough for our school project</label>
+        <label><input type="radio" name="q10" value="mid" data-save="q10"> Mid-range — we'd notice the difference for some shots</label>
+        <label><input type="radio" name="q10" value="pro" data-save="q10"> Pro-level — we really need top quality</label>
+      </div>
+      <textarea data-save="q10_why" rows="2" placeholder="Because…" style="margin-top:.5rem;"></textarea>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- PART 3: Apply It — the school's DSLR -->
+  <!-- ============================================================ -->
+  <section class="lesson-section">
+    <h2><span class="section-badge">Part 3 · The School's DSLR</span> <span class="time-pill">10 min</span></h2>
+    <p>Ms Gao will bring out the camera from the multimedia cupboard. Find a partner and have a closer look — answer these together. <strong>Be gentle with the cameras.</strong> No straps off-shoulder, no buttons mashed.</p>
+
+    <div class="q-block">
+      <div class="q-prompt"><span class="q-num">Q11</span> What is the <strong>brand and model</strong> of the school's DSLR? (Look for the brand name on the front and the model number near the lens mount or top.)</div>
+      <input type="text" data-save="q11" placeholder="e.g. Canon EOS 1300D">
+    </div>
+
+    <div class="q-block">
+      <div class="q-prompt"><span class="q-num">Q12</span> Find the <strong>mode dial</strong> on top of the camera. Write down <strong>three settings</strong> you can see on it.</div>
+      <div class="q-hint">You might see: Auto · P · Av/A · Tv/S · M · Scene icons (portrait/landscape/sport) · video icon</div>
+      <input type="text" data-save="q12" placeholder="Setting 1: ___    Setting 2: ___    Setting 3: ___">
+    </div>
+
+    <details class="tip">
+      <summary>What do those dial letters mean?</summary>
+      <p style="font-size:.9rem;line-height:1.6;">
+        <strong>Auto</strong> · the camera picks everything (good for beginners)<br>
+        <strong>P (Program)</strong> · camera picks shutter + aperture, you can still tweak<br>
+        <strong>Av / A (Aperture priority)</strong> · YOU pick aperture, camera picks shutter — best for controlling depth of field<br>
+        <strong>Tv / S (Shutter priority)</strong> · YOU pick shutter speed, camera picks aperture — best for freezing/blurring motion<br>
+        <strong>M (Manual)</strong> · YOU pick everything — pro mode<br>
+        <strong>Scene icons</strong> · presets for portrait, sport, night, landscape
+      </p>
+    </details>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- EXIT TICKET -->
+  <!-- ============================================================ -->
+  <section class="lesson-section">
+    <h2><span class="section-badge" style="background:#f59e0b;">Exit Ticket</span> <span class="time-pill" style="background:#f59e0b;">5 min</span></h2>
+
+    <div class="q-block">
+      <div class="q-prompt"><span class="q-num">E1</span> <strong>One thing</strong> about DSLRs you didn't know before today.</div>
+      <textarea data-save="exit1" rows="2" placeholder="I didn't know…"></textarea>
+    </div>
+
+    <div class="q-block">
+      <div class="q-prompt"><span class="q-num">E2</span> Are you ready to pick up the school's DSLR and try a few shots? (1 = no clue, 5 = ready)</div>
+      <div class="slider-row">
+        <span style="color:#94a3b8;">1</span>
+        <input type="range" min="1" max="5" step="1" value="3" data-save="confidence" id="confidenceSlider" oninput="document.getElementById('confidenceVal').textContent = this.value">
+        <span style="color:#94a3b8;">5</span>
+        <span class="slider-val" id="confidenceVal">3</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="submit-zone">
+    <h2>Finished? Submit to Ms Gao</h2>
+    <p>Click below to download a small file. <strong>Upload that file to today's Google Classroom assignment.</strong></p>
+    <button class="big-submit" onclick="submitWork()">📥 Download my submission</button>
+    <div class="submit-status" id="submitStatus"></div>
+  </div>
+
+</main>
+
+<footer class="container" style="padding:2rem 0 4rem; color:var(--c-text-soft); font-size:.8rem; line-height:1.6;">
+  <p><strong>DSLR Cameras Explained</strong> · Year 10 Industrial Technology — Multimedia · Ms Y. Gao · Term 2 2026 · <a href="CREDITS.md" style="color:var(--c-teal);">credits &amp; copyright</a></p>
+  <p style="margin-top:.5rem;">Worksheet © Ms Y. Gao 2026. Embedded video excerpt © Peter Glendinning / Michigan State University, originally published in the Coursera specialization “Photography Basics and Beyond: From Smartphone to DSLR” (<a href="https://www.coursera.org/specializations/photography-basics" target="_blank" rel="noopener" style="color:var(--c-teal);">free to audit</a>). All rights reserved by the original copyright holders. Made available to enrolled 10IMMYA students for educational purposes only, under the Australian Education Statutory Licence (Smartcopying).</p>
+</footer>
+
+<script>
+  const STORAGE_KEY = 'y10-cam-dslr-data';
+  const WORKSHEET_TITLE = 'DSLR Cameras Explained — From Mirror to Pro';
+  const WORKSHEET_ID = 'y10-cam-dslr';
+
+  let appData = {
+    studentName: '', studentClass: '',
+    answers: {}, confidence: 3,
+    startedAt: null, lastSavedAt: null, submissionCount: 0
+  };
+
+  function saveAll() {
+    appData.studentName = document.getElementById('studentName').value;
+    appData.studentClass = document.getElementById('studentClass').value;
+    document.querySelectorAll('[data-save]').forEach(el => {
+      const key = el.dataset.save;
+      if (el.type === 'radio') {
+        if (el.checked) appData.answers[key] = el.value;
+      } else if (el.type === 'range') {
+        appData.confidence = parseInt(el.value);
+      } else {
+        appData.answers[key] = el.value;
+      }
+    });
+    if (!appData.startedAt) appData.startedAt = new Date().toISOString();
+    appData.lastSavedAt = new Date().toISOString();
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(appData));
+      document.getElementById('saveStatus').textContent = '✓ Auto-saved';
+      document.getElementById('saveStatus').classList.add('saved');
+    } catch(e) {
+      document.getElementById('saveStatus').textContent = '⚠ Save failed';
+    }
+    updateProgress();
+  }
+
+  function loadAll() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) appData = Object.assign(appData, JSON.parse(raw));
+    } catch(e) {}
+    document.getElementById('studentName').value = appData.studentName || '';
+    document.getElementById('studentClass').value = appData.studentClass || '';
+    Object.entries(appData.answers || {}).forEach(([key, val]) => {
+      const els = document.querySelectorAll('[data-save="'+key+'"]');
+      els.forEach(el => {
+        if (el.type === 'radio') {
+          if (el.value === val) el.checked = true;
+        } else {
+          el.value = val;
+        }
+      });
+    });
+    if (appData.confidence) {
+      document.getElementById('confidenceSlider').value = appData.confidence;
+      document.getElementById('confidenceVal').textContent = appData.confidence;
+    }
+    if (appData.lastSavedAt) {
+      document.getElementById('saveStatus').textContent = '✓ Restored';
+      document.getElementById('saveStatus').classList.add('saved');
+    }
+    updateProgress();
+  }
+
+  function markDirty() {
+    document.getElementById('saveStatus').textContent = '… saving';
+    document.getElementById('saveStatus').classList.remove('saved');
+  }
+
+  function updateProgress() {
+    const all = document.querySelectorAll('[data-save]');
+    const seen = new Set();
+    let total = 0, done = 0;
+    all.forEach(el => {
+      if (el.type === 'radio') {
+        if (seen.has(el.name)) return;
+        seen.add(el.name); total++;
+        if (document.querySelector('input[name="'+el.name+'"]:checked')) done++;
+      } else if (el.type === 'range') {
+        total++; done++;
+      } else {
+        total++;
+        if (el.value && el.value.trim()) done++;
+      }
+    });
+    const pct = total > 0 ? Math.round(done/total*100) : 0;
+    document.getElementById('progressBar').style.width = pct + '%';
+    document.getElementById('progressText').textContent = done + ' of ' + total + ' questions answered (' + pct + '%)';
+  }
+
+  function jumpTo(sec) {
+    const v = document.getElementById('v');
+    if (!v) return;
+    v.currentTime = sec;
+    v.play();
+  }
+  function pauseV() {
+    const v = document.getElementById('v');
+    if (v) v.pause();
+  }
+
+  function submitWork() {
+    saveAll();
+    if (!appData.studentName || !appData.studentClass) {
+      document.getElementById('submitStatus').textContent = '⚠ Please fill in your name and class at the top first.';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+    appData.submissionCount = (appData.submissionCount || 0) + 1;
+    const payload = {
+      worksheetId: WORKSHEET_ID,
+      worksheetTitle: WORKSHEET_TITLE,
+      submittedAt: new Date().toISOString(),
+      studentName: appData.studentName,
+      studentClass: appData.studentClass,
+      submissionCount: appData.submissionCount,
+      answers: appData.answers,
+      confidence: appData.confidence,
+      startedAt: appData.startedAt,
+      lastSavedAt: appData.lastSavedAt
+    };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(appData));
+
+    const fname = WORKSHEET_ID + '__' + sanitiseFilename(appData.studentName) + '__' + appData.studentClass + '.json';
+    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = fname;
+    document.body.appendChild(a); a.click();
+    document.body.removeChild(a); URL.revokeObjectURL(url);
+
+    document.getElementById('submitStatus').innerHTML = '✅ Downloaded <strong>' + fname + '</strong>. Now upload that file to Google Classroom.';
+  }
+
+  function sanitiseFilename(s) {
+    return (s||'unnamed').replace(/[^A-Za-z0-9_-]/g, '_').slice(0, 50);
+  }
+
+  function resetAll() {
+    if (!confirm('Clear ALL your answers? This cannot be undone.')) return;
+    localStorage.removeItem(STORAGE_KEY);
+    location.reload();
+  }
+
+  function refreshRadioStyles() {
+    document.querySelectorAll('.options label').forEach(lbl => {
+      const radio = lbl.querySelector('input[type="radio"]');
+      if (radio && radio.checked) lbl.classList.add('selected');
+      else if (radio) lbl.classList.remove('selected');
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    loadAll();
+    refreshRadioStyles();
+    document.querySelectorAll('[data-save]').forEach(el => {
+      const evt = (el.type === 'radio' || el.type === 'range' || el.tagName === 'SELECT') ? 'change' : 'input';
+      el.addEventListener(evt, () => {
+        markDirty();
+        clearTimeout(window.__saveTimer);
+        window.__saveTimer = setTimeout(() => { saveAll(); refreshRadioStyles(); }, 350);
+      });
+    });
+    updateProgress();
+  });
+
+  window.addEventListener('beforeunload', saveAll);
+</script>
+
+</body>
+</html>

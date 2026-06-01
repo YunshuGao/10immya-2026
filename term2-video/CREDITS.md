@@ -26,6 +26,7 @@ The three MP4 files inside `videos/` are excerpts of lectures from the following
 | `videos/01-lens-and-focal-length.mp4` | Light, Lens, Focal Length & Sensors | ~15 min |
 | `videos/02-sensor-and-shutter.mp4` | Sensor & Shutter | ~9 min |
 | `videos/03-shutter-aperture-exposure.mp4` | Shutter Speed, Aperture & Exposure | ~8 min |
+| `videos/04-basic-dslr-cameras.mp4` | Basic DSLR Cameras (SLR mirror, tiers) | ~16 min |
 
 ---
 
