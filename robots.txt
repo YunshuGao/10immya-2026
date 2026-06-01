@@ -1,0 +1,13 @@
+# 10 Multimedia 2026 GitHub Pages site
+# Most of the site is public teaching material that we WANT search engines to find.
+# However, the term2-video/videos/ directory contains video excerpts used under the
+# Australian Education Statutory Licence for enrolled students only — these must NOT
+# be indexed or shown in search results.
+
+User-agent: *
+Disallow: /term2-video/videos/
+Disallow: /term2-video/camera-fundamentals-answerkey.html
+Disallow: /teacher-dashboard.html
+
+# Be polite — slow crawler down to one request every 5 seconds
+Crawl-delay: 5
