@@ -104,6 +104,56 @@
   details.tip { background: #f0fdfa; border-left: 4px solid var(--c-teal); padding: .75rem 1rem; margin: .75rem 0; border-radius: 6px; }
   details.tip summary { font-weight: 600; cursor: pointer; color: var(--c-teal-dark); }
   details.tip p { margin: .5rem 0 0; }
+
+  /* ===== Camera Simulator (new) ===== */
+  .cam-sim { display: grid; grid-template-columns: 1.5fr 1fr; gap: 1.25rem; margin: 1rem 0; align-items: start; }
+  .cam-svg-wrap { background: #f5f5f7; border: 2px solid var(--c-border); border-radius: 8px; padding: 1rem; }
+  .cam-svg { width: 100%; height: auto; max-height: 360px; }
+  .cam-svg .hotspot { fill: #fbbf24; stroke: white; stroke-width: 2.5; cursor: pointer; transition: all .2s; animation: hotPulse 2s ease-in-out infinite; }
+  .cam-svg .hotspot:hover, .cam-svg .hotspot:focus { fill: var(--c-teal); outline: none; animation: none; stroke-width: 3.5; }
+  .cam-svg .hotspot.active { fill: var(--c-teal); animation: none; stroke-width: 3.5; }
+  @keyframes hotPulse { 0%,100% { opacity: 1; } 50% { opacity: 0.45; } }
+  .cam-info { background: var(--c-navy); color: white; border-radius: var(--radius-md); padding: 1.25rem 1.4rem; box-shadow: var(--shadow-sm); min-height: 280px; }
+  .cam-info h4 { color: #fbbf24; margin-top: 0; font-size: 1rem; }
+  .cam-info p { margin: .5rem 0; font-size: .9rem; line-height: 1.55; }
+  .cam-info strong { color: var(--c-teal); }
+
+  /* Mode dial */
+  .mode-sim { display: grid; grid-template-columns: 320px 1fr; gap: 1.5rem; margin: 1rem 0; align-items: center; }
+  .mode-dial { position: relative; width: 280px; height: 280px; border-radius: 50%; background: radial-gradient(circle at 50% 30%, #2a2a2a, #000); border: 8px solid #444; box-shadow: var(--shadow-md); margin: 0 auto; }
+  .mode-dial::after { content: '▾'; position: absolute; top: -22px; left: 50%; transform: translateX(-50%); color: #fbbf24; font-size: 1.5rem; }
+  .mode-btn { position: absolute; top: 50%; left: 50%; width: 56px; height: 56px; margin: -28px; border-radius: 50%; border: 2px solid #666; cursor: pointer; background: rgba(40,40,40,.9); color: white; font-weight: 700; font-family: inherit; font-size: .8rem; transform: rotate(var(--rot)) translateY(-105px) rotate(calc(-1 * var(--rot))); transition: all .2s; }
+  .mode-btn:hover { background: var(--c-teal-dark); border-color: var(--c-teal); }
+  .mode-btn.active { background: var(--c-teal); border-color: white; box-shadow: 0 0 0 4px rgba(20,184,166,.4); transform: rotate(var(--rot)) translateY(-105px) rotate(calc(-1 * var(--rot))) scale(1.15); }
+  .mode-info { background: #f0fdfa; border-left: 4px solid var(--c-teal); padding: 1.1rem 1.3rem; border-radius: 6px; min-height: 220px; }
+  .mode-info h4 { color: var(--c-teal-dark); margin-top: 0; font-size: 1.05rem; }
+  .mode-info p { margin: .5rem 0; font-size: .9rem; line-height: 1.55; }
+  .mode-info strong { color: var(--c-navy); }
+
+  /* Exposure simulator */
+  .exp-sim { display: grid; grid-template-columns: 1.4fr 1fr; gap: 1.25rem; margin: 1rem 0; align-items: start; }
+  .exp-preview { background: white; border: 2px solid var(--c-border); border-radius: 8px; padding: 1rem; }
+  .exp-scene { position: relative; height: 260px; border-radius: 6px; overflow: hidden; background: linear-gradient(180deg, #87ceeb 0%, #b5e0f7 55%, #8fbc8f 55%, #6b8e60 100%); }
+  .exp-sun { position: absolute; top: 18px; right: 28px; font-size: 2.4rem; transition: filter .2s; }
+  .exp-tree { position: absolute; bottom: 28px; left: 28px; font-size: 4.5rem; line-height: 1; transition: filter .2s; }
+  .exp-bg-mountain { position: absolute; bottom: 0; left: 30%; width: 50%; height: 38%; background: #4a6a3a; clip-path: polygon(0 100%, 25% 50%, 50% 80%, 75% 30%, 100% 100%); opacity: 0.6; transition: filter .2s; }
+  .exp-subject { position: absolute; bottom: 35px; left: 50%; transform: translateX(-50%); font-size: 3.5rem; line-height: 1; transition: filter .2s; }
+  .exp-overlay { position: absolute; inset: 0; pointer-events: none; background: black; opacity: 0; transition: opacity .25s, background .25s; }
+  .exp-stats { margin-top: .9rem; display: flex; gap: .6rem; flex-wrap: wrap; font-size: .85rem; }
+  .exp-stats > span { background: #f5f5f7; padding: .4rem .8rem; border-radius: 999px; border: 1px solid var(--c-border); }
+  .exp-stats strong { color: var(--c-teal-dark); }
+  .exp-controls { display: flex; flex-direction: column; gap: 1.2rem; padding: 1.1rem 1.3rem; background: #f8fafc; border-radius: var(--radius-md); border: 1px solid var(--c-border); }
+  .exp-controls label { display: flex; flex-direction: column; gap: .3rem; }
+  .exp-controls .ctrl-row { display: flex; justify-content: space-between; align-items: baseline; }
+  .exp-controls .ctrl-row strong { color: var(--c-teal-dark); font-size: 1rem; }
+  .exp-controls input[type="range"] { width: 100%; accent-color: var(--c-teal); }
+  .exp-controls .exp-hint { font-size: .72rem; color: var(--c-text-soft); display: flex; justify-content: space-between; }
+
+  @media (max-width: 720px) {
+    .cam-sim, .mode-sim, .exp-sim { grid-template-columns: 1fr; }
+    .mode-dial { width: 240px; height: 240px; }
+    .mode-btn { transform: rotate(var(--rot)) translateY(-90px) rotate(calc(-1 * var(--rot))); width: 50px; height: 50px; margin: -25px; font-size: .72rem; }
+  }
 </style>
 </head>
 <body>
@@ -340,23 +390,158 @@
     </div>
   </section>
 
-  <!-- Hands-on with the school's DSLR has moved to Friday's lesson -->
-  <div class="callout success" style="margin:1.5rem 0;">
-    <strong>🗓️ Hands-on with the school's DSLR — moved to Friday.</strong>
-    Today is theory only. On Friday Ms Gao will bring out the cameras from the multimedia cupboard so you can hold one, find the mode dial, and try a few settings yourselves.
-  </div>
+  <!-- ============================================================ -->
+  <!-- 🎮 INTERACTIVE CAMERA SIMULATOR -->
+  <!-- ============================================================ -->
+  <section class="lesson-section">
+    <h2><span class="section-badge" style="background:#10b981;">🎮 Try It · Camera Simulator</span> <span class="time-pill" style="background:#10b981;">10 min · explore</span></h2>
+    <p>This is your virtual DSLR. <strong>Click the glowing yellow dots</strong> to learn what each part does. Then try the <strong>mode dial</strong> and the <strong>exposure sliders</strong>. No questions to answer — this is for play and demonstration. Ms Gao will also use this on the projector.</p>
 
-  <details class="tip">
-    <summary>Preview: what the mode-dial letters mean (you'll use these on Friday)</summary>
-    <p style="font-size:.9rem;line-height:1.6;">
-      <strong>Auto</strong> · the camera picks everything (good for beginners)<br>
-      <strong>P (Program)</strong> · camera picks shutter + aperture, you can still tweak<br>
-      <strong>Av / A (Aperture priority)</strong> · YOU pick aperture, camera picks shutter — best for controlling depth of field<br>
-      <strong>Tv / S (Shutter priority)</strong> · YOU pick shutter speed, camera picks aperture — best for freezing/blurring motion<br>
-      <strong>M (Manual)</strong> · YOU pick everything — pro mode<br>
-      <strong>Scene icons</strong> · presets for portrait, sport, night, landscape
-    </p>
-  </details>
+    <!-- ===== 1. Camera anatomy ===== -->
+    <h3 style="margin-top:1.25rem;color:var(--c-navy);font-size:1.05rem;">📷 Click the parts of the camera</h3>
+    <div class="cam-sim">
+      <div class="cam-svg-wrap">
+        <svg viewBox="0 0 500 380" class="cam-svg" aria-label="DSLR camera back view">
+          <!-- Camera body -->
+          <rect x="40" y="100" width="420" height="240" rx="18" fill="#1f1f1f" stroke="#555" stroke-width="2"/>
+          <!-- Pentaprism viewfinder hump -->
+          <path d="M180 100 L320 100 L308 50 L192 50 Z" fill="#1f1f1f" stroke="#555" stroke-width="2"/>
+          <!-- Hot shoe slot (top of hump) -->
+          <rect x="220" y="42" width="60" height="14" rx="2" fill="#444" stroke="#666"/>
+          <line x1="232" y1="49" x2="268" y2="49" stroke="#888" stroke-width="2"/>
+          <!-- Viewfinder eyepiece -->
+          <rect x="215" y="75" width="70" height="22" rx="4" fill="#0a0a0a" stroke="#333"/>
+          <rect x="222" y="79" width="56" height="14" rx="2" fill="#000"/>
+          <!-- Brand text -->
+          <text x="80" y="135" fill="#888" font-size="13" font-family="Inter,sans-serif" font-weight="700">DSLR</text>
+          <!-- LCD screen -->
+          <rect x="100" y="150" width="240" height="160" rx="6" fill="#0a1a2a" stroke="#000" stroke-width="2"/>
+          <rect x="105" y="155" width="230" height="150" fill="url(#lcdG)"/>
+          <text x="220" y="230" text-anchor="middle" fill="#fff" font-size="11" font-family="Inter,sans-serif" opacity="0.65">LIVE VIEW</text>
+          <text x="220" y="248" text-anchor="middle" fill="#fbbf24" font-size="10" font-family="ui-monospace,monospace" opacity="0.85">1/125 · f/5.6 · ISO 400</text>
+          <!-- Shutter button (top-left, partially visible) -->
+          <ellipse cx="85" cy="100" rx="22" ry="11" fill="#888" stroke="#222" stroke-width="1.5"/>
+          <ellipse cx="85" cy="98" rx="18" ry="8" fill="#aaa"/>
+          <!-- Mode dial (top-right, partially visible) -->
+          <circle cx="425" cy="100" r="32" fill="#1a1a1a" stroke="#666" stroke-width="2"/>
+          <text x="425" y="93" text-anchor="middle" fill="#fbbf24" font-size="9" font-family="Inter,sans-serif" font-weight="700">M</text>
+          <text x="409" y="103" text-anchor="middle" fill="#fff" font-size="8" font-family="Inter,sans-serif">Av</text>
+          <text x="425" y="113" text-anchor="middle" fill="#fff" font-size="8" font-family="Inter,sans-serif">Tv</text>
+          <text x="441" y="103" text-anchor="middle" fill="#fff" font-size="8" font-family="Inter,sans-serif">P</text>
+          <!-- Rear control dial -->
+          <circle cx="380" cy="135" r="14" fill="#1a1a1a" stroke="#555" stroke-width="2"/>
+          <line x1="372" y1="135" x2="388" y2="135" stroke="#666" stroke-width="1.5"/>
+          <line x1="380" y1="127" x2="380" y2="143" stroke="#666" stroke-width="1.5"/>
+          <!-- Right-side button column -->
+          <circle cx="380" cy="180" r="9" fill="#333" stroke="#555"/>
+          <text x="380" y="184" text-anchor="middle" fill="#888" font-size="7" font-family="Inter,sans-serif">i</text>
+          <circle cx="380" cy="210" r="9" fill="#333" stroke="#555"/>
+          <text x="380" y="214" text-anchor="middle" fill="#888" font-size="7" font-family="Inter,sans-serif">M</text>
+          <circle cx="380" cy="240" r="9" fill="#333" stroke="#555"/>
+          <text x="380" y="244" text-anchor="middle" fill="#888" font-size="9" font-family="Inter,sans-serif">▶</text>
+          <circle cx="380" cy="270" r="9" fill="#333" stroke="#555"/>
+          <text x="380" y="274" text-anchor="middle" fill="#888" font-size="8" font-family="Inter,sans-serif">🗑</text>
+          <!-- AF point selector (left side) -->
+          <circle cx="70" cy="200" r="13" fill="#222" stroke="#555" stroke-width="2"/>
+          <circle cx="70" cy="200" r="4" fill="#444"/>
+          <circle cx="63" cy="200" r="2" fill="#666"/>
+          <circle cx="77" cy="200" r="2" fill="#666"/>
+          <circle cx="70" cy="193" r="2" fill="#666"/>
+          <circle cx="70" cy="207" r="2" fill="#666"/>
+          <!-- Strap lugs -->
+          <circle cx="40" cy="120" r="5" fill="#555"/>
+          <circle cx="460" cy="120" r="5" fill="#555"/>
+          <!-- LCD gradient definition -->
+          <defs>
+            <linearGradient id="lcdG" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#4a8"/>
+              <stop offset="55%" stop-color="#386"/>
+              <stop offset="100%" stop-color="#152"/>
+            </linearGradient>
+          </defs>
+          <!-- Clickable hotspots (glowing yellow dots) -->
+          <g class="hotspots">
+            <circle class="hotspot" cx="250" cy="86" r="8" data-part="viewfinder" tabindex="0"><title>Viewfinder</title></circle>
+            <circle class="hotspot" cx="250" cy="49" r="7" data-part="hotshoe" tabindex="0"><title>Hot shoe</title></circle>
+            <circle class="hotspot" cx="425" cy="100" r="9" data-part="modedial" tabindex="0"><title>Mode dial</title></circle>
+            <circle class="hotspot" cx="85" cy="98" r="9" data-part="shutter" tabindex="0"><title>Shutter button</title></circle>
+            <circle class="hotspot" cx="220" cy="230" r="9" data-part="lcd" tabindex="0"><title>LCD screen</title></circle>
+            <circle class="hotspot" cx="380" cy="225" r="8" data-part="buttons" tabindex="0"><title>Control buttons</title></circle>
+            <circle class="hotspot" cx="380" cy="135" r="8" data-part="reardial" tabindex="0"><title>Rear control dial</title></circle>
+            <circle class="hotspot" cx="70" cy="200" r="8" data-part="afpoint" tabindex="0"><title>AF point selector</title></circle>
+          </g>
+        </svg>
+      </div>
+      <div class="cam-info" id="camInfo">
+        <h4 id="camInfoTitle">👈 Click a glowing dot</h4>
+        <p id="camInfoText">Each part of the DSLR has a job. Click one of the glowing yellow dots to learn what it does and how to use it.</p>
+      </div>
+    </div>
+
+    <!-- ===== 2. Mode dial ===== -->
+    <h3 style="margin-top:2rem;color:var(--c-navy);font-size:1.05rem;">🎛 Try the mode dial</h3>
+    <p style="font-size:.95rem;color:var(--c-text-soft);">Click any setting. The dial is a real Canon-style layout — most DSLRs look very similar.</p>
+    <div class="mode-sim">
+      <div class="mode-dial" role="group" aria-label="DSLR mode dial">
+        <button class="mode-btn" data-mode="auto" style="--rot:-135deg" aria-label="Auto mode">AUTO</button>
+        <button class="mode-btn" data-mode="p"     style="--rot:-90deg"  aria-label="Program mode">P</button>
+        <button class="mode-btn" data-mode="av"    style="--rot:-45deg"  aria-label="Aperture priority mode">Av</button>
+        <button class="mode-btn" data-mode="tv"    style="--rot:0deg"    aria-label="Shutter priority mode">Tv</button>
+        <button class="mode-btn" data-mode="m"     style="--rot:45deg"   aria-label="Manual mode">M</button>
+        <button class="mode-btn" data-mode="scene" style="--rot:90deg"   aria-label="Scene presets">SCN</button>
+        <button class="mode-btn" data-mode="movie" style="--rot:135deg"  aria-label="Movie mode">🎬</button>
+        <button class="mode-btn" data-mode="off"   style="--rot:180deg"  aria-label="Off">OFF</button>
+      </div>
+      <div class="mode-info" id="modeInfo">
+        <h4 id="modeTitle">👈 Click any mode on the dial</h4>
+        <p id="modeWhat">Each mode decides how much the camera does for you, vs. how much you decide.</p>
+        <p id="modeWhen"></p>
+      </div>
+    </div>
+
+    <!-- ===== 3. Exposure triangle ===== -->
+    <h3 style="margin-top:2rem;color:var(--c-navy);font-size:1.05rem;">🌅 Try the exposure triangle</h3>
+    <p style="font-size:.95rem;color:var(--c-text-soft);">Move the three sliders and watch the picture change. This is exactly what happens on a real camera — bright/dark, blurry background, motion blur.</p>
+    <div class="exp-sim">
+      <div class="exp-preview">
+        <div class="exp-scene">
+          <div class="exp-sun">☀</div>
+          <div class="exp-bg-mountain"></div>
+          <div class="exp-tree">🌳</div>
+          <div class="exp-subject" id="expSubject">🚶</div>
+          <div class="exp-overlay" id="expOverlay"></div>
+        </div>
+        <div class="exp-stats">
+          <span>Brightness: <strong id="expBrightness">Good</strong></span>
+          <span>Background: <strong id="expDof">Medium blur</strong></span>
+          <span>Motion: <strong id="expMotion">Sharp</strong></span>
+        </div>
+      </div>
+      <div class="exp-controls">
+        <label>
+          <span class="ctrl-row"><span>📐 Aperture</span><strong id="apVal">f/5.6</strong></span>
+          <input type="range" id="ap" min="0" max="6" step="1" value="3" oninput="updateExposure()">
+          <span class="exp-hint"><span>f/1.8 (blurry bg)</span><span>f/22 (all sharp)</span></span>
+        </label>
+        <label>
+          <span class="ctrl-row"><span>⏱️ Shutter</span><strong id="shVal">1/125 s</strong></span>
+          <input type="range" id="sh" min="0" max="10" step="1" value="6" oninput="updateExposure()">
+          <span class="exp-hint"><span>1/2000 (freeze)</span><span>1/2 (blur)</span></span>
+        </label>
+        <label>
+          <span class="ctrl-row"><span>📊 ISO</span><strong id="isoVal">400</strong></span>
+          <input type="range" id="iso" min="0" max="6" step="1" value="2" oninput="updateExposure()">
+          <span class="exp-hint"><span>100 (clean)</span><span>6400 (grainy)</span></span>
+        </label>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hands-on with the real DSLR has moved to Friday's lesson -->
+  <div class="callout success" style="margin:1.5rem 0;">
+    <strong>🗓️ Hands-on with the REAL DSLR — moved to Friday.</strong>
+    The simulator above is for today. On Friday Ms Gao will bring out the actual cameras from the multimedia cupboard so you can hold one, find the mode dial, and try a few settings yourselves.
+  </div>
 
   <!-- ============================================================ -->
   <!-- EXIT TICKET -->
@@ -561,6 +746,182 @@
   });
 
   window.addEventListener('beforeunload', saveAll);
+
+  /* ============================================================
+     CAMERA SIMULATOR — anatomy hotspots, mode dial, exposure
+     ============================================================ */
+  const PARTS = {
+    viewfinder: {
+      title: '🔭 Viewfinder (Pentaprism)',
+      text: 'What you look through to see your shot. Light from the lens bounces off the mirror, through a triangular glass <strong>pentaprism</strong>, and into your eye — that\'s the SLR magic. You see exactly what the lens sees, in real time.',
+      use: 'Hold the camera up to your eye and look through it to compose your shot.'
+    },
+    hotshoe: {
+      title: '🔥 Hot Shoe',
+      text: 'A metal slot on top of the camera with electrical contacts. You attach extras here: external <strong>flash</strong>, wireless trigger, microphone, or a small video light.',
+      use: 'Slide a compatible accessory in until it clicks. Some DSLRs need a small dial twisted to lock it.'
+    },
+    modedial: {
+      title: '🎛 Mode Dial',
+      text: 'The big dial on top of the camera — the most important control on a DSLR. It decides how much the camera will decide for you, versus how much you decide.',
+      use: 'Try the interactive mode dial below to see what each setting does.'
+    },
+    shutter: {
+      title: '📷 Shutter Button',
+      text: 'The button you press to take a photo. It has <strong>two stages</strong>: half-press to focus, full-press to capture.',
+      use: 'Compose your shot → half-press until you hear a beep (focus locked) → push all the way down to take the photo.'
+    },
+    lcd: {
+      title: '📺 LCD Screen',
+      text: 'The big screen on the back. Shows photos you\'ve already taken (Playback), and in <strong>Live View</strong> mode it shows what the lens sees right now — useful for video and awkward angles.',
+      use: 'Press the Live View / Movie button (usually marked with a movie camera icon) to flip the mirror up so the sensor feeds the LCD.'
+    },
+    buttons: {
+      title: '🔘 Control Buttons',
+      text: 'The small buttons around the LCD. Most DSLRs have <strong>MENU</strong> (settings), <strong>INFO</strong> (display info), <strong>▶ PLAY</strong> (review), <strong>🗑 DELETE</strong>. Exact layout varies by brand.',
+      use: 'MENU for camera settings, INFO to cycle display options, PLAY to review your shots, DELETE to remove a bad one.'
+    },
+    reardial: {
+      title: '↩ Rear Control Dial',
+      text: 'A smaller wheel on the back of the camera. Used to <strong>quickly change settings</strong> without going into the menu.',
+      use: 'In Manual mode, this usually controls aperture (the front dial near the shutter button controls shutter speed).'
+    },
+    afpoint: {
+      title: '🎯 AF Point Selector',
+      text: 'Controls <strong>WHERE the camera focuses</strong>. Most DSLRs have a button to enter AF point mode, then arrow keys or a joystick to pick the point.',
+      use: 'Use this for precise focus — for example, making sure the eye of your subject is sharp instead of the background.'
+    }
+  };
+
+  const MODES = {
+    auto: {
+      title: '🤖 Auto Mode',
+      what: '<strong>The camera decides everything.</strong> Aperture, shutter, ISO, focus, flash — all picked for you.',
+      when: '<strong>When to use:</strong> When you just want to grab a photo quickly and don\'t want to think. Trade-off: very little creative control.'
+    },
+    p: {
+      title: '🅿 Program (P) Mode',
+      what: '<strong>The camera picks shutter + aperture, but you can shift them around.</strong> ISO and other settings are still up to you.',
+      when: '<strong>When to use:</strong> General-purpose shooting where you want auto-exposure but still want to tweak ISO, white balance or flash.'
+    },
+    av: {
+      title: '🅰 Aperture Priority (Av / A)',
+      what: '<strong>YOU pick aperture; the camera picks shutter to match.</strong> Aperture controls depth of field — how blurry the background is.',
+      when: '<strong>When to use:</strong> Portraits (wide aperture f/2.8 = blurry background). Landscapes (narrow aperture f/11 = everything sharp). Most photographers live in this mode.'
+    },
+    tv: {
+      title: '⏱ Shutter Priority (Tv / S)',
+      what: '<strong>YOU pick shutter speed; the camera picks aperture to match.</strong> Shutter controls how motion looks — frozen or blurred.',
+      when: '<strong>When to use:</strong> Sport (1/1000 sec = freeze the ball). Waterfalls (1/2 sec = silky water). Anything moving.'
+    },
+    m: {
+      title: 'Ⓜ Manual (M)',
+      what: '<strong>YOU pick everything.</strong> Aperture, shutter, ISO — total control over the exposure.',
+      when: '<strong>When to use:</strong> Tricky lighting (concerts, fireworks), studio work, or any time you know what you want and the camera\'s auto-meter would get it wrong.'
+    },
+    scene: {
+      title: '🎨 Scene Modes (SCN)',
+      what: '<strong>Pre-set combinations for specific situations.</strong> Like Auto, but tailored — Portrait, Landscape, Sport, Night, Macro.',
+      when: '<strong>When to use:</strong> Quick fix when you want better than Auto but don\'t want to deal with manual controls.'
+    },
+    movie: {
+      title: '🎬 Movie Mode',
+      what: '<strong>Switches the camera into video recording.</strong> The mirror flips up so the sensor feeds video to the LCD. You set frame rate, resolution, audio levels.',
+      when: '<strong>When to use:</strong> Filming video! This is the mode you\'ll use for your Task 3 group video project.'
+    },
+    off: {
+      title: '⚪ Off',
+      what: '<strong>Camera is off.</strong> No power use.',
+      when: '<strong>When to use:</strong> When you\'re done. <strong>Always turn off before changing lenses</strong> — protects the sensor from dust.'
+    }
+  };
+
+  // Wire up camera hotspots
+  document.querySelectorAll('.hotspot').forEach(h => {
+    h.addEventListener('click', () => showPart(h.dataset.part, h));
+    h.addEventListener('keypress', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); showPart(h.dataset.part, h); }
+    });
+  });
+  function showPart(p, el) {
+    const info = PARTS[p]; if (!info) return;
+    document.getElementById('camInfoTitle').innerHTML = info.title;
+    document.getElementById('camInfoText').innerHTML = info.text + '<br><br><strong>How to use:</strong> ' + info.use;
+    document.querySelectorAll('.hotspot.active').forEach(e => e.classList.remove('active'));
+    if (el) el.classList.add('active');
+  }
+
+  // Wire up mode dial
+  document.querySelectorAll('.mode-btn').forEach(b => {
+    b.addEventListener('click', () => showMode(b.dataset.mode, b));
+  });
+  function showMode(m, el) {
+    const info = MODES[m]; if (!info) return;
+    document.getElementById('modeTitle').innerHTML = info.title;
+    document.getElementById('modeWhat').innerHTML = info.what;
+    document.getElementById('modeWhen').innerHTML = info.when;
+    document.querySelectorAll('.mode-btn.active').forEach(e => e.classList.remove('active'));
+    if (el) el.classList.add('active');
+  }
+
+  // Exposure simulator — values + live preview filters
+  const AP_VALS  = ['1.8','2.8','4','5.6','8','11','22'];
+  const SH_VALS  = ['1/2000','1/1000','1/500','1/250','1/125','1/60','1/30','1/15','1/8','1/4','1/2'];
+  const ISO_VALS = ['100','200','400','800','1600','3200','6400'];
+
+  function updateExposure() {
+    const apIdx  = parseInt(document.getElementById('ap').value);
+    const shIdx  = parseInt(document.getElementById('sh').value);
+    const isoIdx = parseInt(document.getElementById('iso').value);
+
+    document.getElementById('apVal').textContent  = 'f/' + AP_VALS[apIdx];
+    document.getElementById('shVal').textContent  = SH_VALS[shIdx] + ' s';
+    document.getElementById('isoVal').textContent = ISO_VALS[isoIdx];
+
+    // Each step = 1 stop. Compute deviation from "good" exposure.
+    // Wider aperture (lower idx) = more light → +stops. Slower shutter (higher idx) = more light.
+    // Higher ISO = more sensitivity. Centre values: ap=3, sh=6, iso=2.
+    const apStops  = 3 - apIdx;
+    const shStops  = shIdx - 6;
+    const isoStops = isoIdx - 2;
+    const total    = apStops + shStops + isoStops;
+
+    // Brightness label + overlay
+    const overlay = document.getElementById('expOverlay');
+    let label;
+    if (total <= -3) label = 'Very dark';
+    else if (total <= -1) label = 'Dark';
+    else if (total >= 3)  label = 'Very bright';
+    else if (total >= 1)  label = 'Bright';
+    else                  label = 'Good';
+    document.getElementById('expBrightness').textContent = label;
+
+    if (total < 0) {
+      overlay.style.background = 'black';
+      overlay.style.opacity = Math.min(0.75, Math.abs(total) * 0.22);
+    } else if (total > 0) {
+      overlay.style.background = 'white';
+      overlay.style.opacity = Math.min(0.7, total * 0.17);
+    } else {
+      overlay.style.opacity = 0;
+    }
+
+    // Depth of field (aperture) — wider aperture (low idx) blurs background more
+    const dofBlurMap   = [4, 3, 2, 1, 0, 0, 0];
+    const dofLabelMap  = ['Very blurry', 'Blurry', 'Slight blur', 'Medium blur', 'All sharp', 'All sharp', 'All sharp'];
+    document.getElementById('expDof').textContent = dofLabelMap[apIdx];
+    document.querySelectorAll('.exp-tree, .exp-bg-mountain, .exp-sun').forEach(el =>
+      el.style.filter = `blur(${dofBlurMap[apIdx]}px)`
+    );
+
+    // Motion (shutter) — slower shutter (high idx) blurs moving subject
+    const motionBlurMap = [0, 0, 0, 0, 0, 1, 2, 4, 6, 8, 12];
+    const motionLabelMap = ['Sharp','Sharp','Sharp','Sharp','Sharp','Slight blur','Some blur','Motion blur','Heavy blur','Very blurry','Streaks'];
+    document.getElementById('expMotion').textContent = motionLabelMap[shIdx];
+    document.getElementById('expSubject').style.filter = `blur(${motionBlurMap[shIdx]}px)`;
+  }
+  // Initialise exposure simulator on load
+  document.addEventListener('DOMContentLoaded', updateExposure);
 </script>
 
 </body>
