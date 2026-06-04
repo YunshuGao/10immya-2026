@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
+<title>Camera Review Workshop — Remember Last Year? | Y10 Multimedia</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  .topbar { position: sticky; top: 0; z-index: 50; background: var(--c-navy); color: white; padding: .75rem 1rem; display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; box-shadow: var(--shadow-md); }
+  .topbar .tb-label { font-size: .8rem; color: #a3b8d8; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; }
+  .topbar input, .topbar select { padding: .45rem .65rem; border: 1px solid #3a5380; border-radius: 6px; background: #14274a; color: white; font-size: .9rem; font-family: inherit; min-width: 12rem; }
+  .topbar .save-pill { background: rgba(255,255,255,.1); padding: .35rem .6rem; border-radius: 999px; font-size: .75rem; color: #a3b8d8; }
+  .topbar .save-pill.saved { color: var(--c-success); background: rgba(16,185,129,.15); }
+  .topbar .topbar-spacer { flex: 1; }
+  .topbar button { border: none; padding: .55rem 1rem; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: .9rem; font-family: inherit; }
+  .topbar .btn-submit { background: var(--c-teal); color: white; }
+  .topbar .btn-submit:hover { background: var(--c-teal-dark); }
+  .topbar .btn-secondary { background: rgba(255,255,255,.1); color: white; }
+
+  .progress-wrap { background: var(--c-bg); padding: .5rem 1rem; border-bottom: 1px solid var(--c-border); }
+  .progress-track { background: var(--c-border); height: 6px; border-radius: 3px; overflow: hidden; }
+  .progress-fill { background: linear-gradient(90deg, var(--c-teal) 0%, var(--c-navy-light) 100%); height: 100%; width: 0; transition: width .3s; }
+  .progress-text { font-size: .75rem; color: var(--c-text-soft); margin-top: .25rem; }
+
+  .q-block { background: white; border: 1px solid var(--c-border); border-radius: var(--radius-md); padding: 1.25rem 1.4rem; margin: 1rem 0; box-shadow: var(--shadow-sm); }
+  .q-block .q-num { display: inline-block; background: var(--c-teal); color: white; font-weight: 700; font-size: .75rem; padding: .15rem .55rem; border-radius: 4px; margin-right: .6rem; vertical-align: middle; }
+  .q-block .q-prompt { font-weight: 600; color: var(--c-text); margin-bottom: .5rem; }
+  .q-block .q-hint { font-size: .85rem; color: var(--c-text-soft); margin-bottom: .5rem; font-style: italic; }
+  .q-block textarea, .q-block input[type="text"] { width: 100%; padding: .65rem .75rem; font-size: .95rem; font-family: inherit; border: 1px solid var(--c-border); border-radius: 6px; resize: vertical; min-height: 3rem; box-sizing: border-box; }
+  .q-block textarea:focus, .q-block input[type="text"]:focus { outline: 2px solid var(--c-teal); border-color: var(--c-teal); }
+  .q-block .options { display: flex; flex-direction: column; gap: .4rem; margin-top: .25rem; }
+  .q-block .options label { display: flex; align-items: center; gap: .6rem; padding: .55rem .75rem; border: 1px solid var(--c-border); border-radius: 6px; cursor: pointer; transition: all .15s; background: var(--c-surface); }
+  .q-block .options label:hover { border-color: var(--c-teal); background: #f0fdfa; }
+  .q-block .options label.selected { border-color: var(--c-teal); background: #f0fdfa; color: var(--c-teal-dark); font-weight: 600; }
+
+  /* Self-check reveal */
+  .reveal-btn { background: var(--c-navy); color: white; border: none; padding: .4rem .9rem; border-radius: 6px; font-size: .82rem; font-weight: 600; cursor: pointer; font-family: inherit; margin-top: .5rem; }
+  .reveal-btn:hover { background: var(--c-navy-light); }
+  .reveal-ans { display: none; margin-top: .6rem; padding: .65rem .9rem; background: #ecfdf5; border-left: 3px solid var(--c-success); border-radius: 6px; font-size: .9rem; }
+  .reveal-ans.show { display: block; }
+  .reveal-ans strong { color: #047857; }
+
+  /* Camera anatomy SVG */
+  .cam-sim { display: grid; grid-template-columns: 1.5fr 1fr; gap: 1.25rem; margin: 1rem 0; align-items: start; }
+  .cam-svg-wrap { background: #f5f5f7; border: 2px solid var(--c-border); border-radius: 8px; padding: 1rem; }
+  .cam-svg { width: 100%; height: auto; max-height: 360px; }
+  .cam-svg .hotspot { fill: #fbbf24; stroke: white; stroke-width: 2.5; cursor: pointer; transition: all .2s; animation: hotPulse 2s ease-in-out infinite; }
+  .cam-svg .hotspot:hover, .cam-svg .hotspot:focus { fill: var(--c-teal); outline: none; animation: none; stroke-width: 3.5; }
+  .cam-svg .hotspot.active { fill: var(--c-teal); animation: none; stroke-width: 3.5; }
+  @keyframes hotPulse { 0%,100% { opacity: 1; } 50% { opacity: 0.45; } }
+  .cam-info { background: var(--c-navy); color: white; border-radius: var(--radius-md); padding: 1.25rem 1.4rem; box-shadow: var(--shadow-sm); min-height: 260px; }
+  .cam-info h4 { color: #fbbf24; margin-top: 0; font-size: 1rem; }
+  .cam-info p { margin: .5rem 0; font-size: .9rem; line-height: 1.55; }
+  .cam-info strong { color: var(--c-teal); }
+
+  /* Exposure simulator */
+  .exp-sim { display: grid; grid-template-columns: 1.4fr 1fr; gap: 1.25rem; margin: 1rem 0; align-items: start; }
+  .exp-preview { background: white; border: 2px solid var(--c-border); border-radius: 8px; padding: 1rem; }
+  .exp-scene { position: relative; height: 240px; border-radius: 6px; overflow: hidden; background: linear-gradient(180deg, #87ceeb 0%, #b5e0f7 55%, #8fbc8f 55%, #6b8e60 100%); }
+  .exp-sun { position: absolute; top: 16px; right: 24px; font-size: 2.2rem; transition: filter .2s; }
+  .exp-tree { position: absolute; bottom: 24px; left: 24px; font-size: 4rem; line-height: 1; transition: filter .2s; }
+  .exp-bg-mountain { position: absolute; bottom: 0; left: 30%; width: 50%; height: 36%; background: #4a6a3a; clip-path: polygon(0 100%, 25% 50%, 50% 80%, 75% 30%, 100% 100%); opacity: 0.6; transition: filter .2s; }
+  .exp-subject { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); font-size: 3.2rem; line-height: 1; transition: filter .2s; }
+  .exp-overlay { position: absolute; inset: 0; pointer-events: none; background: black; opacity: 0; transition: opacity .25s, background .25s; }
+  .exp-stats { margin-top: .9rem; display: flex; gap: .6rem; flex-wrap: wrap; font-size: .85rem; }
+  .exp-stats > span { background: #f5f5f7; padding: .4rem .8rem; border-radius: 999px; border: 1px solid var(--c-border); }
+  .exp-stats strong { color: var(--c-teal-dark); }
+  .exp-controls { display: flex; flex-direction: column; gap: 1.2rem; padding: 1.1rem 1.3rem; background: #f8fafc; border-radius: var(--radius-md); border: 1px solid var(--c-border); }
+  .exp-controls label { display: flex; flex-direction: column; gap: .3rem; }
+  .exp-controls .ctrl-row { display: flex; justify-content: space-between; align-items: baseline; }
+  .exp-controls .ctrl-row strong { color: var(--c-teal-dark); font-size: 1rem; }
+  .exp-controls input[type="range"] { width: 100%; accent-color: var(--c-teal); }
+  .exp-controls .exp-hint { font-size: .72rem; color: var(--c-text-soft); display: flex; justify-content: space-between; }
+
+  /* Matching activity */
+  .match-table { width: 100%; border-collapse: collapse; margin-top: .5rem; background: white; border-radius: 8px; overflow: hidden; box-shadow: var(--shadow-sm); }
+  .match-table th, .match-table td { padding: .6rem .8rem; border-bottom: 1px solid var(--c-border); text-align: left; }
+  .match-table th { background: var(--c-navy); color: white; font-size: .85rem; }
+  .match-table td:first-child { font-weight: 700; color: var(--c-navy); white-space: nowrap; font-size: 1.1rem; }
+  .match-table select { padding: .35rem .5rem; border: 1px solid var(--c-border); border-radius: 4px; font-family: inherit; font-size: .9rem; min-width: 13rem; }
+  .match-table select:focus { outline: 2px solid var(--c-teal); border-color: var(--c-teal); }
+
+  .slider-row { display: flex; align-items: center; gap: 1rem; padding: .5rem 0; }
+  .slider-row input[type="range"] { flex: 1; accent-color: var(--c-teal); }
+  .slider-row .slider-val { font-weight: 700; color: var(--c-teal-dark); font-size: 1.1rem; min-width: 2rem; text-align: center; }
+
+  .submit-zone { background: linear-gradient(135deg, var(--c-navy) 0%, var(--c-navy-light) 100%); color: white; padding: 2rem; border-radius: var(--radius-lg); margin: 3rem 0 2rem; text-align: center; }
+  .submit-zone h2 { color: white; margin-top: 0; }
+  .submit-zone p { color: #cbd5e0; margin: 1rem 0; }
+  .submit-zone button.big-submit { background: var(--c-teal); color: white; border: none; padding: .85rem 2rem; font-size: 1.05rem; font-weight: 700; border-radius: 8px; cursor: pointer; font-family: inherit; box-shadow: var(--shadow-md); }
+  .submit-zone button.big-submit:hover { background: var(--c-teal-dark); transform: translateY(-1px); }
+  .submit-zone .submit-status { margin-top: 1rem; font-size: .9rem; color: #a3b8d8; min-height: 1.2em; }
+
+  .time-pill { display: inline-block; background: var(--c-teal); color: white; padding: .15rem .55rem; border-radius: 4px; font-size: .75rem; font-weight: 600; margin-left: .5rem; }
+
+  @media (max-width: 720px) { .cam-sim, .exp-sim { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <a href="../index.html" class="site-brand">10 Multimedia · 2026</a>
+    <nav class="site-nav">
+      <a href="../term1.html">Term 1</a>
+      <a href="../term2.html">Term 2</a>
+      <a href="camera-dslr.html">DSLR Lesson</a>
+      <a href="../references.html">References</a>
+    </nav>
+  </div>
+</header>
+
+<div class="topbar">
+  <span class="tb-label">Review workshop</span>
+  <input type="text" id="studentName" placeholder="Your full name" onchange="saveAll()" oninput="markDirty()">
+  <select id="studentClass" onchange="saveAll()">
+    <option value="">Class…</option>
+    <option value="10IMMYA">10IMMYA</option>
+  </select>
+  <span class="save-pill" id="saveStatus">Not started</span>
+  <span class="topbar-spacer"></span>
+  <button class="btn-secondary" onclick="resetAll()">Reset</button>
+  <button class="btn-submit" onclick="submitWork()">Submit to teacher</button>
+</div>
+
+<div class="progress-wrap">
+  <div class="progress-track"><div class="progress-fill" id="progressBar"></div></div>
+  <div class="progress-text"><span id="progressText">0 of 0 answered</span></div>
+</div>
+
+<section class="lesson-head">
+  <div class="container">
+    <span class="lesson-pill">Camera Unit · Review Workshop</span>
+    <h1>Remember Last Year? — Camera Review</h1>
+    <p class="lesson-meta">Year 10 Industrial Technology — Multimedia · Term 2</p>
+    <div class="outcomes">
+      <span class="outcome-tag">IND5-2</span>
+      <span class="outcome-tag">IND5-3</span>
+      <span class="outcome-tag">IND5-9</span>
+    </div>
+    <p>Last year you did a hands-on activity with the <strong>Canon EOS Rebel DSLR</strong> — camera parts, getting started, and basic shooting settings. This workshop is a quick refresher to wake those memories back up before we go further. Some of it you'll remember instantly; some will need a nudge. That's normal!</p>
+  </div>
+</section>
+
+<main class="container">
+
+  <div class="callout info">
+    <strong>How this works:</strong> This is a <em>review</em>, not a test — try each question from memory first, then click <strong>“Show answer”</strong> to check yourself. The interactive camera and exposure tools are here to jog your memory. Your work auto-saves and you can submit at the end.
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- WARM-UP -->
+  <!-- ============================================================ -->
+  <section class="lesson-section">
+    <h2><span class="section-badge" style="background:#8b5cf6;">Warm-Up</span> <span class="time-pill" style="background:#8b5cf6;">5 min</span></h2>
+    <p>Quick brain-jog. Don't overthink — just write what comes to mind.</p>
+
+    <div class="q-block">
+      <div class="q-prompt"><span class="q-num">W1</span> Last year you used a real Canon DSLR. Write down <strong>one thing you remember</strong> about using it.</div>
+      <textarea data-save="w1" rows="2" placeholder="I remember…"></textarea>
+    </div>
+
+    <div class="q-block">
+      <div class="q-prompt"><span class="q-num">W2</span> On a scale of 1–5, how confident do you feel about using a DSLR right now <em>before</em> this review?</div>
+      <div class="slider-row">
+        <span style="color:#94a3b8;">1</span>
+        <input type="range" min="1" max="5" step="1" value="3" data-save="conf_before" id="confBefore" oninput="document.getElementById('confBeforeVal').textContent=this.value">
+        <span style="color:#94a3b8;">5</span>
+        <span class="slider-val" id="confBeforeVal">3</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 1 — CAMERA ANATOMY -->
+  <!-- ============================================================ -->
+  <section class="lesson-section">
+    <h2><span class="section-badge">Section 1 · Camera Parts</span> <span class="time-pill">15 min</span></h2>
+    <p>Last year you labelled a diagram of the Canon DSLR. Let's see what you remember. <strong>Click the glowing yellow dots</strong> on the camera to refresh each part's name and job.</p>
+
+    <div class="cam-sim">
+      <div class="cam-svg-wrap">
+        <svg viewBox="0 0 500 380" class="cam-svg" aria-label="DSLR camera front view">
+          <!-- body -->
+          <rect x="55" y="120" width="390" height="200" rx="20" fill="#2a2a2a" stroke="#555" stroke-width="2"/>
+          <!-- pentaprism hump -->
+          <path d="M200 120 L300 120 L288 78 L212 78 Z" fill="#2a2a2a" stroke="#555" stroke-width="2"/>
+          <!-- hot shoe -->
+          <rect x="230" y="70" width="40" height="12" rx="2" fill="#444" stroke="#666"/>
+          <line x1="240" y1="76" x2="260" y2="76" stroke="#888" stroke-width="2"/>
+          <!-- lens mount -->
+          <circle cx="250" cy="220" r="78" fill="#1a1a1a" stroke="#666" stroke-width="3"/>
+          <circle cx="250" cy="220" r="60" fill="#0a0a0a" stroke="#333" stroke-width="2"/>
+          <circle cx="250" cy="220" r="40" fill="#151515"/>
+          <!-- mirror glimpse -->
+          <polygon points="220,200 280,200 270,245 230,245" fill="#3a3a4a" opacity="0.7"/>
+          <!-- lens release button -->
+          <circle cx="345" cy="200" r="11" fill="#333" stroke="#666" stroke-width="2"/>
+          <!-- grip -->
+          <path d="M55 140 Q35 150 38 230 Q40 300 70 310 L100 310 L100 130 Z" fill="#222" stroke="#555" stroke-width="2"/>
+          <!-- shutter button on grip top -->
+          <ellipse cx="78" cy="120" rx="20" ry="11" fill="#888" stroke="#222" stroke-width="1.5"/>
+          <ellipse cx="78" cy="118" rx="16" ry="8" fill="#aaa"/>
+          <!-- mode dial -->
+          <circle cx="390" cy="120" r="34" fill="#1a1a1a" stroke="#777" stroke-width="2"/>
+          <rect x="384" y="106" width="12" height="10" rx="2" fill="#2a7d4f"/>
+          <text x="390" y="115" text-anchor="middle" fill="#fff" font-size="8" font-family="Inter,sans-serif">A+</text>
+          <text x="372" y="125" text-anchor="middle" fill="#ccc" font-size="8" font-family="Inter,sans-serif">M</text>
+          <text x="408" y="125" text-anchor="middle" fill="#ccc" font-size="8" font-family="Inter,sans-serif">P</text>
+          <text x="390" y="148" text-anchor="middle" fill="#ccc" font-size="7" font-family="Inter,sans-serif">Av Tv</text>
+          <!-- brand -->
+          <text x="120" y="180" fill="#aaa" font-size="20" font-family="Georgia,serif" font-style="italic" font-weight="700">Canon</text>
+          <text x="370" y="270" fill="#888" font-size="14" font-family="Inter,sans-serif" font-weight="700">EOS</text>
+          <!-- built-in flash (up) -->
+          <rect x="225" y="58" width="50" height="14" rx="2" fill="#333" stroke="#666"/>
+          <!-- strap lugs -->
+          <circle cx="55" cy="135" r="5" fill="#555"/>
+          <circle cx="445" cy="135" r="5" fill="#555"/>
+          <!-- hotspots -->
+          <g class="hotspots">
+            <circle class="hotspot" cx="78" cy="118" r="9" data-part="shutter" tabindex="0"><title>Shutter button</title></circle>
+            <circle class="hotspot" cx="390" cy="120" r="10" data-part="modedial" tabindex="0"><title>Mode dial</title></circle>
+            <circle class="hotspot" cx="250" cy="220" r="10" data-part="lensmount" tabindex="0"><title>Lens mount</title></circle>
+            <circle class="hotspot" cx="250" cy="99" r="8" data-part="pentaprism" tabindex="0"><title>Pentaprism</title></circle>
+            <circle class="hotspot" cx="250" cy="65" r="7" data-part="flash" tabindex="0"><title>Built-in flash</title></circle>
+            <circle class="hotspot" cx="250" cy="76" r="6" data-part="hotshoe" tabindex="0"><title>Hot shoe</title></circle>
+            <circle class="hotspot" cx="345" cy="200" r="8" data-part="lensrelease" tabindex="0"><title>Lens release</title></circle>
+            <circle class="hotspot" cx="70" cy="250" r="9" data-part="grip" tabindex="0"><title>Hand grip</title></circle>
+          </g>
+        </svg>
+      </div>
+      <div class="cam-info" id="camInfo">
+        <h4 id="camInfoTitle">👈 Click a glowing dot</h4>
+        <p id="camInfoText">These are the same parts you labelled last year. Click any glowing yellow dot to refresh your memory of what it's called and what it does.</p>
+      </div>
+    </div>
+
+    <div class="q-block">
+      <div class="q-prompt"><span class="q-num">Q1</span> Which button do you press to <strong>take a photo</strong>?</div>
+      <input type="text" data-save="q1" placeholder="The…">
+      <button class="reveal-btn" onclick="toggleAns('a1')">Show answer</button>
+      <div class="reveal-ans" id="a1"><strong>Shutter button</strong> — on top of the hand grip. Half-press to focus, full-press to capture.</div>
+    </div>
+
+    <div class="q-block">
+      <div class="q-prompt"><span class="q-num">Q2</span> Which dial changes the shooting modes (like Auto or Manual)?</div>
+      <input type="text" data-save="q2" placeholder="The…">
+      <button class="reveal-btn" onclick="toggleAns('a2')">Show answer</button>
+      <div class="reveal-ans" id="a2"><strong>Mode dial</strong> — the round dial on top of the camera with letters and icons (A+, P, Av, Tv, M).</div>
+    </div>
+
+    <div class="q-block">
+      <div class="q-prompt"><span class="q-num">Q3</span> What part do you twist off to swap a different lens onto the camera?</div>
+      <input type="text" data-save="q3" placeholder="The…">
+      <button class="reveal-btn" onclick="toggleAns('a3')">Show answer</button>
+      <div class="reveal-ans" id="a3"><strong>The lens</strong> (released using the <strong>lens-release button</strong> next to the lens mount). Always turn the camera OFF before changing lenses, to protect the sensor from dust.</div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 2 — GETTING STARTED -->
+  <!-- ============================================================ -->
+  <section class="lesson-section">
+    <h2><span class="section-badge">Section 2 · Getting Started</span> <span class="time-pill">10 min</span></h2>
+    <p>Remember the steps to power up and take your first shots in Auto mode?</p>
+
+    <div class="q-block">
+      <div class="q-prompt"><span class="q-num">Q4</span> Put the <strong>start-up steps</strong> in the right order (1 = first):</div>
+      <div style="display:grid;gap:.5rem;margin-top:.5rem;">
+        <label style="display:flex;align-items:center;gap:.75rem;">
+          <select data-save="q4a" style="width:4rem;padding:.35rem;border:1px solid var(--c-border);border-radius:4px;">
+            <option value="">#</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
+          </select>
+          Turn the mode dial to <strong>Auto</strong> (green box / A+)
+        </label>
+        <label style="display:flex;align-items:center;gap:.75rem;">
+          <select data-save="q4b" style="width:4rem;padding:.35rem;border:1px solid var(--c-border);border-radius:4px;">
+            <option value="">#</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
+          </select>
+          Flip the <strong>power switch</strong> to ON
+        </label>
+        <label style="display:flex;align-items:center;gap:.75rem;">
+          <select data-save="q4c" style="width:4rem;padding:.35rem;border:1px solid var(--c-border);border-radius:4px;">
+            <option value="">#</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
+          </select>
+          <strong>Half-press</strong> the shutter to focus, then press fully to shoot
+        </label>
+        <label style="display:flex;align-items:center;gap:.75rem;">
+          <select data-save="q4d" style="width:4rem;padding:.35rem;border:1px solid var(--c-border);border-radius:4px;">
+            <option value="">#</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
+          </select>
+          Check the <strong>battery icon</strong> on the LCD screen
+        </label>
+      </div>
+      <button class="reveal-btn" onclick="toggleAns('a4')">Show answer</button>
+      <div class="reveal-ans" id="a4"><strong>1</strong> Power switch ON → <strong>2</strong> Check battery → <strong>3</strong> Mode dial to Auto → <strong>4</strong> Half-press to focus, full-press to shoot.</div>
+    </div>
+
+    <div class="q-block">
+      <div class="q-prompt"><span class="q-num">Q5</span> After taking a photo, which button lets you <strong>view</strong> the photos you've taken?</div>
+      <input type="text" data-save="q5" placeholder="The…">
+      <button class="reveal-btn" onclick="toggleAns('a5')">Show answer</button>
+      <div class="reveal-ans" id="a5"><strong>The Playback button</strong> — usually marked with a blue ▶ triangle. It shows your photos on the LCD screen.</div>
+    </div>
+
+    <div class="q-block">
+      <div class="q-prompt"><span class="q-num">Q6</span> In <strong>Auto mode</strong> (the green box), how much does the camera decide for you?</div>
+      <div class="options">
+        <label><input type="radio" name="q6" value="all" data-save="q6"> Everything — aperture, shutter, ISO, focus, flash</label>
+        <label><input type="radio" name="q6" value="some" data-save="q6"> Only the focus; you set the rest</label>
+        <label><input type="radio" name="q6" value="none" data-save="q6"> Nothing — you control it all</label>
+      </div>
+      <button class="reveal-btn" onclick="toggleAns('a6')">Show answer</button>
+      <div class="reveal-ans" id="a6"><strong>Everything.</strong> Auto mode is the camera doing all the thinking — great for a quick photo, but you get very little creative control.</div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 3 — SHOOTING MODES + EXPOSURE -->
+  <!-- ============================================================ -->
+  <section class="lesson-section">
+    <h2><span class="section-badge">Section 3 · Modes &amp; Exposure</span> <span class="time-pill">15 min</span></h2>
+    <p>The big one from last year — the shooting modes and the exposure triangle.</p>
+
+    <h3 style="color:var(--c-navy);font-size:1.05rem;">🎛 Match the mode dial letters to their names</h3>
+    <table class="match-table">
+      <thead><tr><th>On the dial</th><th>What it means (pick from the list)</th></tr></thead>
+      <tbody>
+        <tr><td>M</td><td>
+          <select data-save="q7m"><option value="">Choose…</option>
+            <option value="manual">Manual</option><option value="av">Aperture Priority</option>
+            <option value="tv">Shutter Priority</option><option value="p">Program Auto</option></select>
+        </td></tr>
+        <tr><td>Av</td><td>
+          <select data-save="q7av"><option value="">Choose…</option>
+            <option value="manual">Manual</option><option value="av">Aperture Priority</option>
+            <option value="tv">Shutter Priority</option><option value="p">Program Auto</option></select>
+        </td></tr>
+        <tr><td>Tv</td><td>
+          <select data-save="q7tv"><option value="">Choose…</option>
+            <option value="manual">Manual</option><option value="av">Aperture Priority</option>
+            <option value="tv">Shutter Priority</option><option value="p">Program Auto</option></select>
+        </td></tr>
+        <tr><td>P</td><td>
+          <select data-save="q7p"><option value="">Choose…</option>
+            <option value="manual">Manual</option><option value="av">Aperture Priority</option>
+            <option value="tv">Shutter Priority</option><option value="p">Program Auto</option></select>
+        </td></tr>
+      </tbody>
+    </table>
+    <button class="reveal-btn" onclick="toggleAns('a7')">Show answer</button>
+    <div class="reveal-ans" id="a7"><strong>M</strong> = Manual · <strong>Av</strong> = Aperture Priority · <strong>Tv</strong> = Shutter Priority (the "T" is for Time) · <strong>P</strong> = Program Auto. On Canon, "Av" = Aperture value, "Tv" = Time value.</div>
+
+    <h3 style="color:var(--c-navy);font-size:1.05rem;margin-top:1.5rem;">🌅 The Exposure Triangle — try it live</h3>
+    <p style="font-size:.95rem;color:var(--c-text-soft);">Move the sliders and watch the photo change. This is the exact relationship you learnt last year: three controls that work together to make a photo brighter, darker, sharper or blurrier.</p>
+    <div class="exp-sim">
+      <div class="exp-preview">
+        <div class="exp-scene">
+          <div class="exp-sun">☀</div>
+          <div class="exp-bg-mountain"></div>
+          <div class="exp-tree">🌳</div>
+          <div class="exp-subject" id="expSubject">🚶</div>
+          <div class="exp-overlay" id="expOverlay"></div>
+        </div>
+        <div class="exp-stats">
+          <span>Brightness: <strong id="expBrightness">Good</strong></span>
+          <span>Background: <strong id="expDof">Medium blur</strong></span>
+          <span>Motion: <strong id="expMotion">Sharp</strong></span>
+        </div>
+      </div>
+      <div class="exp-controls">
+        <label>
+          <span class="ctrl-row"><span>📐 Aperture</span><strong id="apVal">f/5.6</strong></span>
+          <input type="range" id="ap" min="0" max="6" step="1" value="3" oninput="updateExposure()">
+          <span class="exp-hint"><span>f/1.8 (blurry bg)</span><span>f/22 (all sharp)</span></span>
+        </label>
+        <label>
+          <span class="ctrl-row"><span>⏱️ Shutter</span><strong id="shVal">1/125 s</strong></span>
+          <input type="range" id="sh" min="0" max="10" step="1" value="6" oninput="updateExposure()">
+          <span class="exp-hint"><span>1/2000 (freeze)</span><span>1/2 (blur)</span></span>
+        </label>
+        <label>
+          <span class="ctrl-row"><span>📊 ISO</span><strong id="isoVal">400</strong></span>
+          <input type="range" id="iso" min="0" max="6" step="1" value="2" oninput="updateExposure()">
+          <span class="exp-hint"><span>100 (clean)</span><span>6400 (grainy)</span></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="q-block">
+      <div class="q-prompt"><span class="q-num">Q8</span> Fill in the exposure triangle (you did this exact activity last year):</div>
+      <p style="margin:.4rem 0;">Aperture controls how much <input type="text" data-save="q8a" style="width:8rem;display:inline-block;min-height:auto;padding:.3rem;" placeholder="?"> enters the lens.</p>
+      <p style="margin:.4rem 0;">Shutter Speed controls how long the shutter stays <input type="text" data-save="q8b" style="width:8rem;display:inline-block;min-height:auto;padding:.3rem;" placeholder="?">.</p>
+      <p style="margin:.4rem 0;">ISO controls the camera's <input type="text" data-save="q8c" style="width:8rem;display:inline-block;min-height:auto;padding:.3rem;" placeholder="?"> to light.</p>
+      <button class="reveal-btn" onclick="toggleAns('a8')">Show answer</button>
+      <div class="reveal-ans" id="a8">Aperture controls how much <strong>light</strong> enters the lens. Shutter Speed controls how long the shutter stays <strong>open</strong>. ISO controls the camera's <strong>sensitivity</strong> to light.</div>
+    </div>
+
+    <div class="q-block">
+      <div class="q-prompt"><span class="q-num">Q9</span> Last year's activity: you set the camera to <strong>Av mode at f/4.0</strong> and took one photo indoors, one outdoors. <strong>Which was brighter, and why?</strong></div>
+      <textarea data-save="q9" rows="3" placeholder="The ___ photo was brighter because…"></textarea>
+      <button class="reveal-btn" onclick="toggleAns('a9')">Show answer</button>
+      <div class="reveal-ans" id="a9">The <strong>outdoor</strong> photo is brighter because there's much more light outside. At the same aperture (f/4.0), the camera in Av mode picks a faster shutter speed outdoors and a slower one indoors — but outdoors still gathers more light overall, so it looks brighter and cleaner.</div>
+    </div>
+
+    <div class="q-block">
+      <div class="q-prompt"><span class="q-num">Q10</span> You want a <strong>blurry background</strong> behind a person (a portrait). Which mode is easiest, and what aperture?</div>
+      <div class="options">
+        <label><input type="radio" name="q10" value="av-wide" data-save="q10"> Av mode, wide aperture (low f-number like f/2.8)</label>
+        <label><input type="radio" name="q10" value="av-narrow" data-save="q10"> Av mode, narrow aperture (high f-number like f/22)</label>
+        <label><input type="radio" name="q10" value="tv-fast" data-save="q10"> Tv mode, fast shutter</label>
+      </div>
+      <button class="reveal-btn" onclick="toggleAns('a10')">Show answer</button>
+      <div class="reveal-ans" id="a10"><strong>Av mode, wide aperture (low f-number like f/2.8).</strong> A wide aperture creates shallow depth of field = blurry background. Try it on the exposure simulator above — slide aperture to f/1.8 and watch the tree blur!</div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- WRAP -->
+  <!-- ============================================================ -->
+  <section class="lesson-section">
+    <h2><span class="section-badge" style="background:#f59e0b;">Wrap-Up</span> <span class="time-pill" style="background:#f59e0b;">5 min</span></h2>
+
+    <div class="q-block">
+      <div class="q-prompt"><span class="q-num">Z1</span> What's <strong>one thing</strong> you'd forgotten that this review brought back?</div>
+      <textarea data-save="z1" rows="2" placeholder="I'd forgotten…"></textarea>
+    </div>
+
+    <div class="q-block">
+      <div class="q-prompt"><span class="q-num">Z2</span> Confidence with the DSLR <em>now</em>, after the review? (1–5)</div>
+      <div class="slider-row">
+        <span style="color:#94a3b8;">1</span>
+        <input type="range" min="1" max="5" step="1" value="3" data-save="conf_after" id="confAfter" oninput="document.getElementById('confAfterVal').textContent=this.value">
+        <span style="color:#94a3b8;">5</span>
+        <span class="slider-val" id="confAfterVal">3</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="submit-zone">
+    <h2>Finished? Submit to Ms Gao</h2>
+    <p>Click below to download a small file. <strong>Upload that file to today's Google Classroom assignment.</strong></p>
+    <button class="big-submit" onclick="submitWork()">📥 Download my submission</button>
+    <div class="submit-status" id="submitStatus"></div>
+  </div>
+
+</main>
+
+<footer class="container" style="padding:2rem 0 4rem; color:var(--c-text-soft); font-size:.8rem; line-height:1.6;">
+  <p><strong>Camera Review Workshop</strong> · Year 10 Industrial Technology — Multimedia · Ms Y. Gao · Term 2 2026</p>
+  <p style="margin-top:.5rem;">Reviews content from the Canon EOS Rebel XSi (450D) Beginner's Activity studied in Year 9. Camera diagrams drawn in-house (SVG). © Ms Y. Gao 2026.</p>
+</footer>
+
+<script>
+  const STORAGE_KEY = 'y10-cam-review-data';
+  const WORKSHEET_TITLE = 'Camera Review Workshop — Remember Last Year?';
+  const WORKSHEET_ID = 'y10-cam-review';
+
+  let appData = { studentName:'', studentClass:'', answers:{}, confBefore:3, confAfter:3, startedAt:null, lastSavedAt:null, submissionCount:0 };
+
+  function saveAll() {
+    appData.studentName = document.getElementById('studentName').value;
+    appData.studentClass = document.getElementById('studentClass').value;
+    document.querySelectorAll('[data-save]').forEach(el => {
+      const key = el.dataset.save;
+      if (el.type === 'radio') { if (el.checked) appData.answers[key] = el.value; }
+      else if (el.type === 'range') {
+        if (key === 'conf_before') appData.confBefore = parseInt(el.value);
+        else if (key === 'conf_after') appData.confAfter = parseInt(el.value);
+      }
+      else { appData.answers[key] = el.value; }
+    });
+    if (!appData.startedAt) appData.startedAt = new Date().toISOString();
+    appData.lastSavedAt = new Date().toISOString();
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(appData));
+      document.getElementById('saveStatus').textContent = '✓ Auto-saved';
+      document.getElementById('saveStatus').classList.add('saved');
+    } catch(e) { document.getElementById('saveStatus').textContent = '⚠ Save failed'; }
+    updateProgress();
+  }
+
+  function loadAll() {
+    try { const raw = localStorage.getItem(STORAGE_KEY); if (raw) appData = Object.assign(appData, JSON.parse(raw)); } catch(e){}
+    document.getElementById('studentName').value = appData.studentName || '';
+    document.getElementById('studentClass').value = appData.studentClass || '';
+    Object.entries(appData.answers || {}).forEach(([key, val]) => {
+      document.querySelectorAll('[data-save="'+key+'"]').forEach(el => {
+        if (el.type === 'radio') { if (el.value === val) el.checked = true; }
+        else el.value = val;
+      });
+    });
+    if (appData.confBefore) { document.getElementById('confBefore').value = appData.confBefore; document.getElementById('confBeforeVal').textContent = appData.confBefore; }
+    if (appData.confAfter) { document.getElementById('confAfter').value = appData.confAfter; document.getElementById('confAfterVal').textContent = appData.confAfter; }
+    if (appData.lastSavedAt) { document.getElementById('saveStatus').textContent = '✓ Restored'; document.getElementById('saveStatus').classList.add('saved'); }
+    updateProgress();
+  }
+
+  function markDirty() { document.getElementById('saveStatus').textContent = '… saving'; document.getElementById('saveStatus').classList.remove('saved'); }
+
+  function updateProgress() {
+    const all = document.querySelectorAll('[data-save]'); const seen = new Set();
+    let total = 0, done = 0;
+    all.forEach(el => {
+      if (el.type === 'radio') { if (seen.has(el.name)) return; seen.add(el.name); total++; if (document.querySelector('input[name="'+el.name+'"]:checked')) done++; }
+      else if (el.type === 'range') { total++; done++; }
+      else { total++; if (el.value && el.value.trim()) done++; }
+    });
+    const pct = total>0 ? Math.round(done/total*100) : 0;
+    document.getElementById('progressBar').style.width = pct + '%';
+    document.getElementById('progressText').textContent = done + ' of ' + total + ' answered (' + pct + '%)';
+  }
+
+  function toggleAns(id) { document.getElementById(id).classList.toggle('show'); }
+
+  function submitWork() {
+    saveAll();
+    if (!appData.studentName || !appData.studentClass) {
+      document.getElementById('submitStatus').textContent = '⚠ Please fill in your name and class at the top first.';
+      window.scrollTo({ top: 0, behavior: 'smooth' }); return;
+    }
+    appData.submissionCount = (appData.submissionCount || 0) + 1;
+    const payload = { worksheetId:WORKSHEET_ID, worksheetTitle:WORKSHEET_TITLE, submittedAt:new Date().toISOString(),
+      studentName:appData.studentName, studentClass:appData.studentClass, submissionCount:appData.submissionCount,
+      answers:appData.answers, confBefore:appData.confBefore, confAfter:appData.confAfter, startedAt:appData.startedAt, lastSavedAt:appData.lastSavedAt };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(appData));
+    const fname = WORKSHEET_ID + '__' + sanitiseFilename(appData.studentName) + '__' + appData.studentClass + '.json';
+    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a'); a.href = url; a.download = fname;
+    document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
+    document.getElementById('submitStatus').innerHTML = '✅ Downloaded <strong>' + fname + '</strong>. Now upload that file to Google Classroom.';
+  }
+
+  function sanitiseFilename(s) { return (s||'unnamed').replace(/[^A-Za-z0-9_-]/g, '_').slice(0, 50); }
+  function resetAll() { if (!confirm('Clear ALL your answers?')) return; localStorage.removeItem(STORAGE_KEY); location.reload(); }
+  function refreshRadioStyles() { document.querySelectorAll('.options label').forEach(lbl => { const r = lbl.querySelector('input[type="radio"]'); if (r && r.checked) lbl.classList.add('selected'); else if (r) lbl.classList.remove('selected'); }); }
+
+  /* Camera anatomy hotspots */
+  const PARTS = {
+    shutter: { title:'📷 Shutter Button', text:'The button you press to take a photo. <strong>Half-press</strong> to focus (you\'ll hear a beep), <strong>full-press</strong> to capture. Sits on top of the hand grip.' },
+    modedial: { title:'🎛 Mode Dial', text:'The round dial that picks your shooting mode: <strong>A+</strong> (Auto), <strong>P</strong>, <strong>Av</strong>, <strong>Tv</strong>, <strong>M</strong>. Decides how much the camera does vs. you.' },
+    lensmount: { title:'🔘 Lens Mount', text:'Where the lens attaches to the body. Behind it is the mirror and sensor. <strong>Turn the camera off before changing lenses</strong> to keep dust off the sensor.' },
+    pentaprism: { title:'🔺 Pentaprism', text:'The triangular hump on top. It flips the image right-way-up and sends it to the viewfinder — this is the "Reflex" in DSLR.' },
+    flash: { title:'⚡ Built-in Flash', text:'Pops up to add light in dark scenes. Useful indoors, but direct flash can look harsh — natural light is usually nicer for video.' },
+    hotshoe: { title:'🔥 Hot Shoe', text:'The metal slot on top for attaching an external flash, microphone, or light. Has electrical contacts to power the accessory.' },
+    lensrelease: { title:'⏏ Lens Release Button', text:'Press and hold this while twisting the lens to remove it. Always support the lens with your other hand so it doesn\'t drop.' },
+    grip: { title:'✊ Hand Grip', text:'The chunky moulded part you hold. Houses the battery and gives you a firm, steady hold — important for sharp, shake-free shots.' }
+  };
+  document.querySelectorAll('.hotspot').forEach(h => {
+    h.addEventListener('click', () => showPart(h.dataset.part, h));
+    h.addEventListener('keypress', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); showPart(h.dataset.part, h); } });
+  });
+  function showPart(p, el) {
+    const info = PARTS[p]; if (!info) return;
+    document.getElementById('camInfoTitle').innerHTML = info.title;
+    document.getElementById('camInfoText').innerHTML = info.text;
+    document.querySelectorAll('.hotspot.active').forEach(e => e.classList.remove('active'));
+    if (el) el.classList.add('active');
+  }
+
+  /* Exposure simulator */
+  const AP_VALS = ['1.8','2.8','4','5.6','8','11','22'];
+  const SH_VALS = ['1/2000','1/1000','1/500','1/250','1/125','1/60','1/30','1/15','1/8','1/4','1/2'];
+  const ISO_VALS = ['100','200','400','800','1600','3200','6400'];
+  function updateExposure() {
+    const apIdx = parseInt(document.getElementById('ap').value);
+    const shIdx = parseInt(document.getElementById('sh').value);
+    const isoIdx = parseInt(document.getElementById('iso').value);
+    document.getElementById('apVal').textContent = 'f/' + AP_VALS[apIdx];
+    document.getElementById('shVal').textContent = SH_VALS[shIdx] + ' s';
+    document.getElementById('isoVal').textContent = ISO_VALS[isoIdx];
+    const total = (3 - apIdx) + (shIdx - 6) + (isoIdx - 2);
+    const overlay = document.getElementById('expOverlay');
+    let label;
+    if (total <= -3) label = 'Very dark'; else if (total <= -1) label = 'Dark';
+    else if (total >= 3) label = 'Very bright'; else if (total >= 1) label = 'Bright'; else label = 'Good';
+    document.getElementById('expBrightness').textContent = label;
+    if (total < 0) { overlay.style.background = 'black'; overlay.style.opacity = Math.min(0.75, Math.abs(total)*0.22); }
+    else if (total > 0) { overlay.style.background = 'white'; overlay.style.opacity = Math.min(0.7, total*0.17); }
+    else overlay.style.opacity = 0;
+    const dofBlur = [4,3,2,1,0,0,0], dofLabel = ['Very blurry','Blurry','Slight blur','Medium blur','All sharp','All sharp','All sharp'];
+    document.getElementById('expDof').textContent = dofLabel[apIdx];
+    document.querySelectorAll('.exp-tree, .exp-bg-mountain, .exp-sun').forEach(el => el.style.filter = `blur(${dofBlur[apIdx]}px)`);
+    const motionBlur = [0,0,0,0,0,1,2,4,6,8,12], motionLabel = ['Sharp','Sharp','Sharp','Sharp','Sharp','Slight blur','Some blur','Motion blur','Heavy blur','Very blurry','Streaks'];
+    document.getElementById('expMotion').textContent = motionLabel[shIdx];
+    document.getElementById('expSubject').style.filter = `blur(${motionBlur[shIdx]}px)`;
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    loadAll(); refreshRadioStyles(); updateExposure();
+    document.querySelectorAll('[data-save]').forEach(el => {
+      const evt = (el.type === 'radio' || el.type === 'range' || el.tagName === 'SELECT') ? 'change' : 'input';
+      el.addEventListener(evt, () => { markDirty(); clearTimeout(window.__t); window.__t = setTimeout(() => { saveAll(); refreshRadioStyles(); }, 350); });
+    });
+    updateProgress();
+  });
+  window.addEventListener('beforeunload', saveAll);
+</script>
+
+</body>
+</html>
