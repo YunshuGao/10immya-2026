@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
+<title>Video Production — Pre-Production Folio | Y10 Multimedia</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  .topbar { position: sticky; top: 0; z-index: 50; background: var(--c-navy); color: white; padding: .75rem 1rem; display: flex; flex-wrap: wrap; gap: .6rem; align-items: center; box-shadow: var(--shadow-md); }
+  .topbar .tb-label { font-size: .8rem; color: #a3b8d8; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; }
+  .topbar input, .topbar select { padding: .45rem .6rem; border: 1px solid #3a5380; border-radius: 6px; background: #14274a; color: white; font-size: .85rem; font-family: inherit; }
+  .topbar .save-pill { background: rgba(255,255,255,.1); padding: .35rem .6rem; border-radius: 999px; font-size: .75rem; color: #a3b8d8; }
+  .topbar .save-pill.saved { color: var(--c-success); background: rgba(16,185,129,.15); }
+  .topbar .topbar-spacer { flex: 1; }
+  .topbar button { border: none; padding: .55rem 1rem; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: .9rem; font-family: inherit; }
+  .topbar .btn-submit { background: var(--c-teal); color: white; }
+  .topbar .btn-submit:hover { background: var(--c-teal-dark); }
+  .topbar .btn-secondary { background: rgba(255,255,255,.1); color: white; }
+
+  .progress-wrap { background: var(--c-bg); padding: .5rem 1rem; border-bottom: 1px solid var(--c-border); }
+  .progress-track { background: var(--c-border); height: 6px; border-radius: 3px; overflow: hidden; }
+  .progress-fill { background: linear-gradient(90deg, var(--c-teal) 0%, var(--c-navy-light) 100%); height: 100%; width: 0; transition: width .3s; }
+  .progress-text { font-size: .75rem; color: var(--c-text-soft); margin-top: .25rem; }
+
+  .folio-section { background: white; border: 1px solid var(--c-border); border-radius: var(--radius-md); padding: 1.4rem 1.5rem; margin: 1.25rem 0; box-shadow: var(--shadow-sm); }
+  .folio-section > h2 { margin-top: 0; color: var(--c-navy); display: flex; align-items: center; gap: .6rem; font-size: 1.25rem; }
+  .folio-section .sec-no { background: var(--c-teal); color: white; font-size: .8rem; font-weight: 700; padding: .2rem .6rem; border-radius: 6px; }
+  .folio-section .sec-help { font-size: .9rem; color: var(--c-text-soft); margin: .25rem 0 1rem; font-style: italic; }
+  .folio-field { margin: .9rem 0; }
+  .folio-field > label { display: block; font-weight: 600; color: var(--c-text); margin-bottom: .35rem; font-size: .95rem; }
+  .folio-field .hint { font-weight: 400; color: var(--c-text-soft); font-size: .85rem; font-style: italic; }
+  .folio-field textarea, .folio-field input[type="text"] { width: 100%; padding: .65rem .75rem; font-size: .95rem; font-family: inherit; border: 1px solid var(--c-border); border-radius: 6px; resize: vertical; box-sizing: border-box; }
+  .folio-field textarea { min-height: 4rem; }
+  .folio-field textarea:focus, .folio-field input:focus { outline: 2px solid var(--c-teal); border-color: var(--c-teal); }
+
+  .member-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: .75rem; }
+  .member-card { background: var(--c-bg); border: 1px solid var(--c-border); border-radius: 8px; padding: .9rem; }
+  .member-card h4 { margin: 0 0 .5rem; color: var(--c-teal-dark); font-size: .9rem; }
+  .member-card input, .member-card select { width: 100%; margin-bottom: .5rem; padding: .45rem; border: 1px solid var(--c-border); border-radius: 5px; font-family: inherit; font-size: .85rem; box-sizing: border-box; }
+
+  table.folio-table { width: 100%; border-collapse: collapse; margin-top: .5rem; background: white; border-radius: 8px; overflow: hidden; box-shadow: var(--shadow-sm); }
+  table.folio-table th, table.folio-table td { padding: .5rem .6rem; border: 1px solid var(--c-border); text-align: left; vertical-align: top; }
+  table.folio-table th { background: var(--c-navy); color: white; font-size: .82rem; }
+  table.folio-table td { font-size: .85rem; }
+  table.folio-table input, table.folio-table textarea, table.folio-table select { width: 100%; border: none; font-family: inherit; font-size: .85rem; padding: .3rem; box-sizing: border-box; resize: vertical; background: transparent; }
+  table.folio-table input:focus, table.folio-table textarea:focus, table.folio-table select:focus { outline: 2px solid var(--c-teal); border-radius: 4px; }
+  table.folio-table td.rownum { background: var(--c-bg); font-weight: 700; color: var(--c-navy); text-align: center; width: 2.2rem; }
+
+  .pmi-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: .5rem; margin-top: .4rem; }
+  .pmi-grid .pmi-box { border: 1px solid var(--c-border); border-radius: 6px; overflow: hidden; }
+  .pmi-grid .pmi-box .pmi-head { padding: .35rem .6rem; font-weight: 700; font-size: .8rem; color: white; }
+  .pmi-grid .pmi-box.plus .pmi-head { background: #15803d; }
+  .pmi-grid .pmi-box.minus .pmi-head { background: #b91c1c; }
+  .pmi-grid .pmi-box.interesting .pmi-head { background: #b45309; }
+  .pmi-grid .pmi-box textarea { width: 100%; border: none; padding: .5rem; font-family: inherit; font-size: .85rem; min-height: 3.5rem; box-sizing: border-box; resize: vertical; }
+
+  .storyboard-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: .9rem; }
+  .sb-frame { border: 2px solid var(--c-border); border-radius: 8px; overflow: hidden; }
+  .sb-frame .sb-head { background: var(--c-navy); color: white; padding: .35rem .7rem; font-weight: 700; font-size: .85rem; display: flex; justify-content: space-between; }
+  .sb-frame .sb-sketch { background: repeating-linear-gradient(45deg, #fafafa, #fafafa 10px, #f0f0f0 10px, #f0f0f0 20px); height: 80px; display: flex; align-items: center; justify-content: center; color: #aaa; font-size: .78rem; font-style: italic; border-bottom: 1px solid var(--c-border); }
+  .sb-frame textarea { width: 100%; border: none; padding: .5rem; font-family: inherit; font-size: .82rem; min-height: 2.5rem; box-sizing: border-box; resize: vertical; }
+
+  .add-row-btn { background: var(--c-teal); color: white; border: none; padding: .45rem .9rem; border-radius: 6px; font-weight: 600; cursor: pointer; font-family: inherit; font-size: .85rem; margin-top: .5rem; }
+  .add-row-btn:hover { background: var(--c-teal-dark); }
+
+  .submit-zone { background: linear-gradient(135deg, var(--c-navy) 0%, var(--c-navy-light) 100%); color: white; padding: 2rem; border-radius: var(--radius-lg); margin: 3rem 0 2rem; text-align: center; }
+  .submit-zone h2 { color: white; margin-top: 0; }
+  .submit-zone p { color: #cbd5e0; margin: 1rem 0; }
+  .submit-zone button.big-submit { background: var(--c-teal); color: white; border: none; padding: .85rem 2rem; font-size: 1.05rem; font-weight: 700; border-radius: 8px; cursor: pointer; font-family: inherit; box-shadow: var(--shadow-md); }
+  .submit-zone button.big-submit:hover { background: var(--c-teal-dark); transform: translateY(-1px); }
+  .submit-zone .submit-status { margin-top: 1rem; font-size: .9rem; color: #a3b8d8; min-height: 1.2em; }
+
+  .gate-banner { background: #fffbeb; border: 2px solid var(--c-warn); border-radius: var(--radius-md); padding: 1rem 1.25rem; margin: 1.5rem 0; }
+  .gate-banner strong { color: #92400e; }
+
+  @media (max-width: 720px) { .member-grid, .pmi-grid, .storyboard-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <a href="../index.html" class="site-brand">10 Multimedia · 2026</a>
+    <nav class="site-nav">
+      <a href="../term1.html">Term 1</a>
+      <a href="../term2.html">Term 2</a>
+      <a href="camera-dslr.html">DSLR Lesson</a>
+      <a href="../references.html">References</a>
+    </nav>
+  </div>
+</header>
+
+<div class="topbar">
+  <span class="tb-label">Pre-Production Folio</span>
+  <input type="text" id="groupName" placeholder="Group name / number" oninput="markDirty()" data-save="groupName" style="min-width:11rem;">
+  <select id="studentClass" data-save="studentClass" onchange="saveAll()">
+    <option value="">Class…</option>
+    <option value="10IMMYA">10IMMYA</option>
+  </select>
+  <input type="text" id="submitterName" placeholder="Who is submitting?" oninput="markDirty()" data-save="submitterName" style="min-width:11rem;">
+  <span class="save-pill" id="saveStatus">Not started</span>
+  <span class="topbar-spacer"></span>
+  <button class="btn-secondary" onclick="resetAll()">Reset</button>
+  <button class="btn-submit" onclick="submitWork()">Submit folio</button>
+</div>
+
+<div class="progress-wrap">
+  <div class="progress-track"><div class="progress-fill" id="progressBar"></div></div>
+  <div class="progress-text"><span id="progressText">0 of 0 fields complete</span></div>
+</div>
+
+<section class="lesson-head">
+  <div class="container">
+    <span class="lesson-pill">Video Production · Task 3 (25%)</span>
+    <h1>Pre-Production Folio</h1>
+    <p class="lesson-meta">Year 10 Industrial Technology — Multimedia · Group of 3 · Due Friday 7 August 2026</p>
+    <div class="outcomes">
+      <span class="outcome-tag">IND5-1</span><span class="outcome-tag">IND5-2</span>
+      <span class="outcome-tag">IND5-5</span><span class="outcome-tag">IND5-9</span>
+      <span class="outcome-tag">IND5-10</span>
+    </div>
+    <p>This is the <strong>planning</strong> part of your video project — you complete it <em>before</em> you film. Work on it together as a group. One person fills it in and submits for the whole group (but make sure everyone contributes the ideas!). It auto-saves as you type.</p>
+  </div>
+</section>
+
+<main class="container">
+
+  <div class="gate-banner">
+    <strong>★ APPROVAL GATE:</strong> Your group may not start filming until Sections 1–7 are complete and Ms Gao has signed off your storyboard and shot list. Plan first, film second!
+  </div>
+
+  <!-- 1. GROUP & TOPIC -->
+  <div class="folio-section">
+    <h2><span class="sec-no">1</span> Group, Roles &amp; Topic</h2>
+    <p class="sec-help">Who's in your group, what each person's main role is, and what your video is about.</p>
+    <div class="member-grid">
+      <div class="member-card">
+        <h4>Member 1</h4>
+        <input type="text" placeholder="Full name" data-save="m1_name">
+        <select data-save="m1_role"><option value="">Main role…</option><option>Director / Producer</option><option>Camera / Cinematographer</option><option>Editor</option></select>
+      </div>
+      <div class="member-card">
+        <h4>Member 2</h4>
+        <input type="text" placeholder="Full name" data-save="m2_name">
+        <select data-save="m2_role"><option value="">Main role…</option><option>Director / Producer</option><option>Camera / Cinematographer</option><option>Editor</option></select>
+      </div>
+      <div class="member-card">
+        <h4>Member 3</h4>
+        <input type="text" placeholder="Full name" data-save="m3_name">
+        <select data-save="m3_role"><option value="">Main role…</option><option>Director / Producer</option><option>Camera / Cinematographer</option><option>Editor</option></select>
+      </div>
+    </div>
+    <div class="folio-field" style="margin-top:1rem;">
+      <label>Our video topic <span class="hint">(pick one from the task sheet, or your own with teacher approval)</span></label>
+      <input type="text" data-save="topic" placeholder="e.g. A day in the life of an APHS student">
+    </div>
+  </div>
+
+  <!-- 2. STATEMENT OF INTENT -->
+  <div class="folio-section">
+    <h2><span class="sec-no">2</span> Statement of Intent</h2>
+    <p class="sec-help">In a short paragraph: WHAT are you making, WHY, and WHO is it for?</p>
+    <div class="folio-field">
+      <label>What is your video about, and what do you want it to achieve?</label>
+      <textarea data-save="intent_what" rows="3" placeholder="Our video is a … about … . We want it to …"></textarea>
+    </div>
+    <div class="folio-field">
+      <label>Who is your target audience? <span class="hint">(Be specific — who will watch this?)</span></label>
+      <textarea data-save="intent_who" rows="2" placeholder="Our audience is …"></textarea>
+    </div>
+  </div>
+
+  <!-- 3. SUCCESS CRITERIA -->
+  <div class="folio-section">
+    <h2><span class="sec-no">3</span> Success Criteria</h2>
+    <p class="sec-help">List 3–4 things that will make your video successful. Start each with "Our video will be successful if…"</p>
+    <div class="folio-field"><label>1.</label><input type="text" data-save="sc1" placeholder="Our video will be successful if…"></div>
+    <div class="folio-field"><label>2.</label><input type="text" data-save="sc2" placeholder="Our video will be successful if…"></div>
+    <div class="folio-field"><label>3.</label><input type="text" data-save="sc3" placeholder="Our video will be successful if…"></div>
+    <div class="folio-field"><label>4. <span class="hint">(optional)</span></label><input type="text" data-save="sc4" placeholder="Our video will be successful if…"></div>
+  </div>
+
+  <!-- 4. RESEARCH + EXISTING DESIGN -->
+  <div class="folio-section">
+    <h2><span class="sec-no">4</span> Research &amp; Existing Design</h2>
+    <p class="sec-help">Find 2 existing promo / school videos. For each, note the link and analyse it using PMI (Plus / Minus / Interesting).</p>
+
+    <div class="folio-field">
+      <label>Existing video 1 — title &amp; link</label>
+      <input type="text" data-save="res1_link" placeholder="Title + URL">
+      <div class="pmi-grid">
+        <div class="pmi-box plus"><div class="pmi-head">Plus (+)</div><textarea data-save="res1_p" placeholder="What works well…"></textarea></div>
+        <div class="pmi-box minus"><div class="pmi-head">Minus (−)</div><textarea data-save="res1_m" placeholder="What doesn't work…"></textarea></div>
+        <div class="pmi-box interesting"><div class="pmi-head">Interesting (?)</div><textarea data-save="res1_i" placeholder="Something interesting…"></textarea></div>
+      </div>
+    </div>
+
+    <div class="folio-field" style="margin-top:1.2rem;">
+      <label>Existing video 2 — title &amp; link</label>
+      <input type="text" data-save="res2_link" placeholder="Title + URL">
+      <div class="pmi-grid">
+        <div class="pmi-box plus"><div class="pmi-head">Plus (+)</div><textarea data-save="res2_p" placeholder="What works well…"></textarea></div>
+        <div class="pmi-box minus"><div class="pmi-head">Minus (−)</div><textarea data-save="res2_m" placeholder="What doesn't work…"></textarea></div>
+        <div class="pmi-box interesting"><div class="pmi-head">Interesting (?)</div><textarea data-save="res2_i" placeholder="Something interesting…"></textarea></div>
+      </div>
+    </div>
+
+    <div class="folio-field" style="margin-top:1.2rem;">
+      <label>What ideas will you borrow from these for your own video?</label>
+      <textarea data-save="res_borrow" rows="2" placeholder="From these examples we will…"></textarea>
+    </div>
+  </div>
+
+  <!-- 5. SOFTWARE & HARDWARE -->
+  <div class="folio-section">
+    <h2><span class="sec-no">5</span> Software &amp; Hardware</h2>
+    <p class="sec-help">List the technology your group will use to make this video.</p>
+    <div class="folio-field">
+      <label>Software <span class="hint">(e.g. Adobe Premiere Pro, After Effects, Adobe Express)</span></label>
+      <textarea data-save="software" rows="2" placeholder="We will use…"></textarea>
+    </div>
+    <div class="folio-field">
+      <label>Hardware <span class="hint">(e.g. Canon DSLR, tripod, microphone, SD card, computer)</span></label>
+      <textarea data-save="hardware" rows="2" placeholder="We will use…"></textarea>
+    </div>
+  </div>
+
+  <!-- 6. WHS + RISK ASSESSMENT -->
+  <div class="folio-section">
+    <h2><span class="sec-no">6</span> WHS &amp; Risk Assessment</h2>
+    <p class="sec-help">Filming around school has hazards. List each one, how likely/serious it is, and what you'll do to control it.</p>
+    <table class="folio-table">
+      <thead><tr><th style="width:2.2rem;">#</th><th>Possible hazard</th><th style="width:7rem;">Risk (L/M/H)</th><th>Control measure (what you'll do)</th></tr></thead>
+      <tbody id="whsBody">
+        <tr><td class="rownum">e.g.</td><td>Tripod legs in a walkway</td><td>M</td><td>Set up away from foot traffic; one person watches</td></tr>
+        <tr><td class="rownum">1</td><td><input type="text" data-save="whs1_h"></td><td><input type="text" data-save="whs1_r" placeholder="L/M/H"></td><td><input type="text" data-save="whs1_c"></td></tr>
+        <tr><td class="rownum">2</td><td><input type="text" data-save="whs2_h"></td><td><input type="text" data-save="whs2_r" placeholder="L/M/H"></td><td><input type="text" data-save="whs2_c"></td></tr>
+        <tr><td class="rownum">3</td><td><input type="text" data-save="whs3_h"></td><td><input type="text" data-save="whs3_r" placeholder="L/M/H"></td><td><input type="text" data-save="whs3_c"></td></tr>
+        <tr><td class="rownum">4</td><td><input type="text" data-save="whs4_h"></td><td><input type="text" data-save="whs4_r" placeholder="L/M/H"></td><td><input type="text" data-save="whs4_c"></td></tr>
+      </tbody>
+    </table>
+    <div class="folio-field" style="margin-top:1rem;">
+      <label>Permission check <span class="hint">(who do you need to ask before filming people or places?)</span></label>
+      <textarea data-save="permission" rows="2" placeholder="We need to ask… before we film…"></textarea>
+    </div>
+  </div>
+
+  <!-- 7. STORYBOARD -->
+  <div class="folio-section">
+    <h2><span class="sec-no">7</span> Storyboard</h2>
+    <p class="sec-help">Plan your video shot by shot. Describe what happens in each frame. (Sketch the picture on paper too — keep it in your folder.)</p>
+    <div class="storyboard-grid" id="storyboardGrid">
+      <!-- 6 frames generated by JS -->
+    </div>
+    <button class="add-row-btn" onclick="addStoryboardFrame()">+ Add another frame</button>
+  </div>
+
+  <!-- 8. SHOT LIST -->
+  <div class="folio-section">
+    <h2><span class="sec-no">8</span> Shot List <span style="font-size:.8rem;color:var(--c-text-soft);font-weight:400;">(your filming checklist)</span></h2>
+    <p class="sec-help">Turn your storyboard into a filming checklist. This is what you'll tick off lesson by lesson while filming.</p>
+    <table class="folio-table">
+      <thead><tr>
+        <th style="width:2.2rem;">#</th><th style="width:6rem;">Shot type</th><th>What's happening</th><th style="width:7rem;">Location</th><th style="width:6rem;">Who's in it</th>
+      </tr></thead>
+      <tbody id="shotBody">
+        <tr><td class="rownum">e.g.</td><td>Wide (WS)</td><td>Establishing shot of school front gate</td><td>Front gate</td><td>—</td></tr>
+      </tbody>
+    </table>
+    <button class="add-row-btn" onclick="addShotRow()">+ Add a shot</button>
+  </div>
+
+  <div class="submit-zone">
+    <h2>Folio ready? Submit for your group</h2>
+    <p>One person clicks below to download your group's folio file, then <strong>uploads it to Google Classroom</strong>. Get Ms Gao to sign off before you start filming!</p>
+    <button class="big-submit" onclick="submitWork()">📥 Download our folio</button>
+    <div class="submit-status" id="submitStatus"></div>
+  </div>
+
+</main>
+
+<footer class="container" style="padding:2rem 0 4rem; color:var(--c-text-soft); font-size:.8rem;">
+  <p><strong>Pre-Production Folio</strong> · Year 10 Industrial Technology — Multimedia · Task 3 Video Production · Ms Y. Gao · Term 2–3 2026 · © Ms Y. Gao 2026</p>
+</footer>
+
+<script>
+  const STORAGE_KEY = 'y10-video-folio-data';
+  const WORKSHEET_TITLE = 'Video Production — Pre-Production Folio';
+  const WORKSHEET_ID = 'y10-video-folio';
+  const SB_START = 6;   // initial storyboard frames
+  const SHOT_START = 6; // initial blank shot rows
+
+  let appData = { groupName:'', studentClass:'', submitterName:'', answers:{}, sbCount:SB_START, shotCount:SHOT_START, startedAt:null, lastSavedAt:null, submissionCount:0 };
+
+  // ---- Build dynamic storyboard frames ----
+  function makeStoryboardFrame(n) {
+    const div = document.createElement('div');
+    div.className = 'sb-frame';
+    div.innerHTML =
+      '<div class="sb-head"><span>Frame ' + n + '</span><span>shot type:</span></div>' +
+      '<div class="sb-sketch">✏ sketch this frame on paper</div>' +
+      '<textarea data-save="sb' + n + '_desc" placeholder="What happens in this shot? (action, who, shot type)"></textarea>';
+    return div;
+  }
+  function addStoryboardFrame() {
+    appData.sbCount = (appData.sbCount || SB_START) + 1;
+    document.getElementById('storyboardGrid').appendChild(makeStoryboardFrame(appData.sbCount));
+    wireField(document.querySelector('[data-save="sb'+appData.sbCount+'_desc"]'));
+    saveAll();
+  }
+  function buildStoryboard(count) {
+    const grid = document.getElementById('storyboardGrid'); grid.innerHTML = '';
+    for (let i=1;i<=count;i++) grid.appendChild(makeStoryboardFrame(i));
+  }
+
+  // ---- Build dynamic shot-list rows ----
+  function makeShotRow(n) {
+    const tr = document.createElement('tr');
+    tr.innerHTML =
+      '<td class="rownum">' + n + '</td>' +
+      '<td><select data-save="shot'+n+'_type"><option value="">—</option><option>Wide (WS)</option><option>Long (LS)</option><option>Medium (MS)</option><option>Medium close-up (MCU)</option><option>Close-up (CU)</option><option>Extreme CU (ECU)</option><option>Over-the-shoulder</option><option>Overhead</option><option>B-roll</option></select></td>' +
+      '<td><input type="text" data-save="shot'+n+'_what"></td>' +
+      '<td><input type="text" data-save="shot'+n+'_loc"></td>' +
+      '<td><input type="text" data-save="shot'+n+'_who"></td>';
+    return tr;
+  }
+  function addShotRow() {
+    appData.shotCount = (appData.shotCount || SHOT_START) + 1;
+    const tr = makeShotRow(appData.shotCount);
+    document.getElementById('shotBody').appendChild(tr);
+    tr.querySelectorAll('[data-save]').forEach(wireField);
+    saveAll();
+  }
+  function buildShotRows(count) {
+    const body = document.getElementById('shotBody');
+    // keep the example row (first), remove any generated rows
+    body.querySelectorAll('tr.gen').forEach(r => r.remove());
+    for (let i=1;i<=count;i++) { const tr = makeShotRow(i); tr.className='gen'; body.appendChild(tr); }
+  }
+
+  function wireField(el) {
+    if (!el) return;
+    const evt = (el.tagName === 'SELECT') ? 'change' : 'input';
+    el.addEventListener(evt, () => { markDirty(); clearTimeout(window.__t); window.__t = setTimeout(saveAll, 350); });
+  }
+
+  function saveAll() {
+    appData.groupName = document.getElementById('groupName').value;
+    appData.studentClass = document.getElementById('studentClass').value;
+    appData.submitterName = document.getElementById('submitterName').value;
+    document.querySelectorAll('[data-save]').forEach(el => {
+      const key = el.dataset.save;
+      if (['groupName','studentClass','submitterName'].includes(key)) return;
+      appData.answers[key] = el.value;
+    });
+    if (!appData.startedAt) appData.startedAt = new Date().toISOString();
+    appData.lastSavedAt = new Date().toISOString();
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(appData));
+      document.getElementById('saveStatus').textContent = '✓ Auto-saved';
+      document.getElementById('saveStatus').classList.add('saved');
+    } catch(e) { document.getElementById('saveStatus').textContent = '⚠ Save failed'; }
+    updateProgress();
+  }
+
+  function loadAll() {
+    try { const raw = localStorage.getItem(STORAGE_KEY); if (raw) appData = Object.assign(appData, JSON.parse(raw)); } catch(e){}
+    buildStoryboard(appData.sbCount || SB_START);
+    buildShotRows(appData.shotCount || SHOT_START);
+    document.getElementById('groupName').value = appData.groupName || '';
+    document.getElementById('studentClass').value = appData.studentClass || '';
+    document.getElementById('submitterName').value = appData.submitterName || '';
+    Object.entries(appData.answers || {}).forEach(([key, val]) => {
+      document.querySelectorAll('[data-save="'+key+'"]').forEach(el => { el.value = val; });
+    });
+    if (appData.lastSavedAt) { document.getElementById('saveStatus').textContent = '✓ Restored'; document.getElementById('saveStatus').classList.add('saved'); }
+    document.querySelectorAll('[data-save]').forEach(wireField);
+    updateProgress();
+  }
+
+  function markDirty() { document.getElementById('saveStatus').textContent = '… saving'; document.getElementById('saveStatus').classList.remove('saved'); }
+
+  function updateProgress() {
+    const all = document.querySelectorAll('[data-save]');
+    let total = 0, done = 0;
+    all.forEach(el => { total++; if (el.value && el.value.trim()) done++; });
+    const pct = total>0 ? Math.round(done/total*100) : 0;
+    document.getElementById('progressBar').style.width = pct + '%';
+    document.getElementById('progressText').textContent = done + ' of ' + total + ' fields complete (' + pct + '%)';
+  }
+
+  function submitWork() {
+    saveAll();
+    if (!appData.groupName || !appData.studentClass) {
+      document.getElementById('submitStatus').textContent = '⚠ Please fill in your group name and class at the top first.';
+      window.scrollTo({ top: 0, behavior: 'smooth' }); return;
+    }
+    appData.submissionCount = (appData.submissionCount || 0) + 1;
+    const payload = { worksheetId:WORKSHEET_ID, worksheetTitle:WORKSHEET_TITLE, submittedAt:new Date().toISOString(),
+      groupName:appData.groupName, studentClass:appData.studentClass, submitterName:appData.submitterName,
+      studentName:appData.submitterName, submissionCount:appData.submissionCount,
+      sbCount:appData.sbCount, shotCount:appData.shotCount, answers:appData.answers, startedAt:appData.startedAt, lastSavedAt:appData.lastSavedAt };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(appData));
+    const safeGroup = (appData.groupName||'group').replace(/[^A-Za-z0-9_-]/g,'_').slice(0,40);
+    const fname = WORKSHEET_ID + '__' + safeGroup + '__' + appData.studentClass + '.json';
+    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a'); a.href = url; a.download = fname;
+    document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
+    document.getElementById('submitStatus').innerHTML = '✅ Downloaded <strong>' + fname + '</strong>. Now upload it to Google Classroom — and get Ms Gao to sign off before filming!';
+  }
+
+  function resetAll() { if (!confirm('Clear the WHOLE folio? This cannot be undone.')) return; localStorage.removeItem(STORAGE_KEY); location.reload(); }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    loadAll();
+    ['groupName','studentClass','submitterName'].forEach(id => { const el=document.getElementById(id); if(el){ el.addEventListener('input', ()=>{markDirty(); clearTimeout(window.__t); window.__t=setTimeout(saveAll,350);}); el.addEventListener('change', saveAll);} });
+  });
+  window.addEventListener('beforeunload', saveAll);
+</script>
+
+</body>
+</html>
